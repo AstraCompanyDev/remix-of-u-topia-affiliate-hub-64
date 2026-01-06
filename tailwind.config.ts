@@ -96,12 +96,22 @@ export default {
           "50%": { transform: "translateY(-20px) scale(1.05)" },
         },
         "pulse-glow": {
-          "0%, 100%": { opacity: "0.3" },
-          "50%": { opacity: "0.6" },
+          "0%, 100%": { opacity: "0.4" },
+          "50%": { opacity: "0.8" },
         },
         "shimmer": {
           "0%": { backgroundPosition: "-200% 0" },
           "100%": { backgroundPosition: "200% 0" },
+        },
+        "card-float": {
+          "0%, 100%": { transform: "translateY(0) rotateX(0deg) rotateY(0deg)" },
+          "25%": { transform: "translateY(-10px) rotateX(2deg) rotateY(-2deg)" },
+          "50%": { transform: "translateY(-15px) rotateX(0deg) rotateY(2deg)" },
+          "75%": { transform: "translateY(-8px) rotateX(-2deg) rotateY(0deg)" },
+        },
+        "shine": {
+          "0%": { transform: "translateX(-100%) rotate(15deg)" },
+          "50%, 100%": { transform: "translateX(100%) rotate(15deg)" },
         },
       },
       animation: {
@@ -110,8 +120,10 @@ export default {
         "fade-in-up": "fade-in-up 0.6s ease-out forwards",
         "fade-in": "fade-in 0.4s ease-out forwards",
         "float": "float 8s ease-in-out infinite",
-        "pulse-glow": "pulse-glow 4s ease-in-out infinite",
+        "pulse-glow": "pulse-glow 3s ease-in-out infinite",
         "shimmer": "shimmer 2s linear infinite",
+        "card-float": "card-float 6s ease-in-out infinite",
+        "shine": "shine 3s ease-in-out infinite",
       },
       backgroundImage: {
         'gradient-radial': 'radial-gradient(var(--tw-gradient-stops))',
