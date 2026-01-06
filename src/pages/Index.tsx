@@ -692,6 +692,208 @@ const Index = () => {
           </div>
         </section>
 
+        {/* FAQ Section */}
+        <section className="container mx-auto px-6 py-24">
+          <div className="max-w-4xl mx-auto">
+            {/* Header */}
+            <div className="text-center mb-16">
+              <span 
+                className="inline-block px-4 py-2 rounded-full bg-primary/10 border border-primary/20 text-primary text-sm font-medium mb-6 opacity-0 animate-fade-in-up"
+                style={{ animationDelay: '100ms' }}
+              >
+                Got Questions?
+              </span>
+              <h2 
+                className="text-3xl md:text-5xl font-bold text-foreground mb-6 opacity-0 animate-fade-in-up"
+                style={{ animationDelay: '150ms' }}
+              >
+                Frequently Asked <span className="gradient-text">Questions</span>
+              </h2>
+              <p 
+                className="text-lg text-muted-foreground max-w-2xl mx-auto opacity-0 animate-fade-in-up"
+                style={{ animationDelay: '200ms' }}
+              >
+                Everything you need to know about the U-topia Affiliate Program
+              </p>
+            </div>
+
+            {/* FAQ Accordion */}
+            <div 
+              className="space-y-4 opacity-0 animate-fade-in-up"
+              style={{ animationDelay: '250ms' }}
+            >
+              {/* FAQ Item 1 */}
+              <div className="group glass-card overflow-hidden transition-all duration-300 hover:border-primary/30">
+                <details className="group/details">
+                  <summary className="flex items-center justify-between p-6 cursor-pointer list-none">
+                    <div className="flex items-center gap-4">
+                      <div className="w-10 h-10 rounded-xl bg-primary/10 flex items-center justify-center flex-shrink-0 group-hover:bg-primary/20 transition-colors">
+                        <span className="text-primary font-bold">1</span>
+                      </div>
+                      <h3 className="text-lg font-semibold text-foreground pr-4">
+                        Is this an investment or guaranteed income program?
+                      </h3>
+                    </div>
+                    <svg 
+                      className="w-5 h-5 text-muted-foreground transition-transform duration-300 group-open/details:rotate-180 flex-shrink-0" 
+                      fill="none" 
+                      stroke="currentColor" 
+                      viewBox="0 0 24 24"
+                    >
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+                    </svg>
+                  </summary>
+                  <div className="px-6 pb-6 pt-0">
+                    <div className="pl-14">
+                      <p className="text-muted-foreground leading-relaxed">
+                        No. The U-topia Affiliate Program is not an investment, and it does not offer guaranteed income. Rewards are performance-based and depend on real platform activity, eligibility, and compliance checks.
+                      </p>
+                    </div>
+                  </div>
+                </details>
+              </div>
+
+              {/* FAQ Item 2 */}
+              <div className="group glass-card overflow-hidden transition-all duration-300 hover:border-primary/30">
+                <details className="group/details">
+                  <summary className="flex items-center justify-between p-6 cursor-pointer list-none">
+                    <div className="flex items-center gap-4">
+                      <div className="w-10 h-10 rounded-xl bg-primary/10 flex items-center justify-center flex-shrink-0 group-hover:bg-primary/20 transition-colors">
+                        <span className="text-primary font-bold">2</span>
+                      </div>
+                      <h3 className="text-lg font-semibold text-foreground pr-4">
+                        How are rewards generated?
+                      </h3>
+                    </div>
+                    <svg 
+                      className="w-5 h-5 text-muted-foreground transition-transform duration-300 group-open/details:rotate-180 flex-shrink-0" 
+                      fill="none" 
+                      stroke="currentColor" 
+                      viewBox="0 0 24 24"
+                    >
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+                    </svg>
+                  </summary>
+                  <div className="px-6 pb-6 pt-0">
+                    <div className="pl-14">
+                      <p className="text-muted-foreground leading-relaxed">
+                        Rewards are generated from verified activity on U-topia's platform, such as account usage, payments, subscriptions, and card activity. There are no rewards for sign-ups alone or inactive users.
+                      </p>
+                    </div>
+                  </div>
+                </details>
+              </div>
+
+              {/* FAQ Item 3 */}
+              <div className="group glass-card overflow-hidden transition-all duration-300 hover:border-primary/30">
+                <details className="group/details">
+                  <summary className="flex items-center justify-between p-6 cursor-pointer list-none">
+                    <div className="flex items-center gap-4">
+                      <div className="w-10 h-10 rounded-xl bg-primary/10 flex items-center justify-center flex-shrink-0 group-hover:bg-primary/20 transition-colors">
+                        <span className="text-primary font-bold">3</span>
+                      </div>
+                      <h3 className="text-lg font-semibold text-foreground pr-4">
+                        Do I need to sell products or handle payments?
+                      </h3>
+                    </div>
+                    <svg 
+                      className="w-5 h-5 text-muted-foreground transition-transform duration-300 group-open/details:rotate-180 flex-shrink-0" 
+                      fill="none" 
+                      stroke="currentColor" 
+                      viewBox="0 0 24 24"
+                    >
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+                    </svg>
+                  </summary>
+                  <div className="px-6 pb-6 pt-0">
+                    <div className="pl-14">
+                      <p className="text-muted-foreground leading-relaxed">
+                        No. You do not process transactions or handle customer funds. U-topia's core products handle all financial activity. Affiliates focus on introductions and growth.
+                      </p>
+                    </div>
+                  </div>
+                </details>
+              </div>
+
+              {/* FAQ Item 4 */}
+              <div className="group glass-card overflow-hidden transition-all duration-300 hover:border-primary/30">
+                <details className="group/details">
+                  <summary className="flex items-center justify-between p-6 cursor-pointer list-none">
+                    <div className="flex items-center gap-4">
+                      <div className="w-10 h-10 rounded-xl bg-primary/10 flex items-center justify-center flex-shrink-0 group-hover:bg-primary/20 transition-colors">
+                        <span className="text-primary font-bold">4</span>
+                      </div>
+                      <h3 className="text-lg font-semibold text-foreground pr-4">
+                        Is there a limit to how much I can earn?
+                      </h3>
+                    </div>
+                    <svg 
+                      className="w-5 h-5 text-muted-foreground transition-transform duration-300 group-open/details:rotate-180 flex-shrink-0" 
+                      fill="none" 
+                      stroke="currentColor" 
+                      viewBox="0 0 24 24"
+                    >
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+                    </svg>
+                  </summary>
+                  <div className="px-6 pb-6 pt-0">
+                    <div className="pl-14">
+                      <p className="text-muted-foreground leading-relaxed">
+                        Yes. Earning capacity is defined by participation tiers, referral depth limits, and reward caps. This ensures the program remains fair, sustainable, and transparent.
+                      </p>
+                    </div>
+                  </div>
+                </details>
+              </div>
+
+              {/* FAQ Item 5 */}
+              <div className="group glass-card overflow-hidden transition-all duration-300 hover:border-primary/30">
+                <details className="group/details">
+                  <summary className="flex items-center justify-between p-6 cursor-pointer list-none">
+                    <div className="flex items-center gap-4">
+                      <div className="w-10 h-10 rounded-xl bg-primary/10 flex items-center justify-center flex-shrink-0 group-hover:bg-primary/20 transition-colors">
+                        <span className="text-primary font-bold">5</span>
+                      </div>
+                      <h3 className="text-lg font-semibold text-foreground pr-4">
+                        When and how are payouts made?
+                      </h3>
+                    </div>
+                    <svg 
+                      className="w-5 h-5 text-muted-foreground transition-transform duration-300 group-open/details:rotate-180 flex-shrink-0" 
+                      fill="none" 
+                      stroke="currentColor" 
+                      viewBox="0 0 24 24"
+                    >
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+                    </svg>
+                  </summary>
+                  <div className="px-6 pb-6 pt-0">
+                    <div className="pl-14">
+                      <p className="text-muted-foreground leading-relaxed">
+                        Payout timing depends on the reward type. Some commissions are processed quickly after validation, while bonuses and incentives may follow scheduled payout cycles. All payouts are subject to verification and compliance checks.
+                      </p>
+                    </div>
+                  </div>
+                </details>
+              </div>
+            </div>
+
+            {/* CTA Below FAQ */}
+            <div 
+              className="text-center mt-12 opacity-0 animate-fade-in-up"
+              style={{ animationDelay: '300ms' }}
+            >
+              <p className="text-muted-foreground mb-6">Still have questions?</p>
+              <Button variant="outline" size="lg" className="gap-2 rounded-full px-8 border-primary/30 hover:bg-primary/10 hover:border-primary/50 transition-all">
+                <svg className="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                  <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/>
+                </svg>
+                Contact Support
+              </Button>
+            </div>
+          </div>
+        </section>
+
         <footer className="container mx-auto px-6 py-12 border-t border-border">
           <div className="flex flex-col md:flex-row items-center justify-between gap-4">
             <div className="flex items-center gap-2">
