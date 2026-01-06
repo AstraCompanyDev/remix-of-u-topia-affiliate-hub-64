@@ -6,6 +6,7 @@ import membershipBadge from "@/assets/membership-badge.png";
 import badgeBronze from "@/assets/badge-bronze.png";
 import badgePlatinum from "@/assets/badge-platinum.png";
 import badgeSilver from "@/assets/badge-silver.png";
+import badgeGold from "@/assets/badge-gold.png";
 
 const Index = () => {
   return (
@@ -465,26 +466,17 @@ const Index = () => {
                 </div>
                 
                 <div className="relative flex flex-col items-center p-6 md:p-8 rounded-2xl bg-[#0d2847] border-2 border-primary/50 transition-all duration-300 hover:-translate-y-2 hover:shadow-2xl hover:shadow-primary/20 hover:border-primary">
-                  {/* Badge Circle */}
-                  <div className="relative w-16 h-16 md:w-20 md:h-20 mb-5 rounded-full bg-gradient-to-br from-amber-400 to-amber-600 flex items-center justify-center shadow-lg shadow-amber-500/40 group-hover:scale-110 transition-transform duration-300">
-                    <svg className="w-8 h-8 md:w-10 md:h-10 text-white" viewBox="0 0 24 24" fill="currentColor">
-                      <path d="M12 2l3 6 6.5 1-4.75 4.5L18 20l-6-3.5L6 20l1.25-6.5L2.5 9l6.5-1z"/>
-                    </svg>
-                    {/* Globe icon overlay */}
-                    <div className="absolute -bottom-1 -right-1 w-5 h-5 rounded-full bg-amber-500 flex items-center justify-center">
-                      <svg className="w-3 h-3 text-amber-900" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                        <circle cx="12" cy="12" r="10"/>
-                        <path d="M2 12h20M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/>
-                      </svg>
-                    </div>
+                  {/* Badge Image */}
+                  <div className="relative w-20 h-20 md:w-24 md:h-24 mb-4 group-hover:scale-110 transition-transform duration-300">
+                    <img src={badgeGold} alt="Gold Badge" className="w-full h-full object-contain drop-shadow-lg" />
                   </div>
                   
                   {/* Tier Name */}
                   <h3 className="text-lg md:text-xl font-bold text-white mb-1">Gold</h3>
-                  <p className="text-sm text-gray-500 mb-4">Depth 3</p>
+                  <p className="text-sm text-gray-500 mb-3">Depth 3</p>
                   
-                  {/* Decorative line */}
-                  <div className="w-12 h-0.5 bg-gradient-to-r from-transparent via-amber-500/50 to-transparent mb-4" />
+                  {/* Price */}
+                  <p className="text-2xl md:text-3xl font-bold text-primary">$500</p>
                 </div>
               </div>
 
