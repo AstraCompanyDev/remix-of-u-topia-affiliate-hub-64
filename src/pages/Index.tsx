@@ -7,6 +7,7 @@ import badgeBronze from "@/assets/badge-bronze.png";
 import badgePlatinum from "@/assets/badge-platinum.png";
 import badgeSilver from "@/assets/badge-silver.png";
 import badgeGold from "@/assets/badge-gold.png";
+import badgeDiamond from "@/assets/badge-diamond.png";
 
 const Index = () => {
   return (
@@ -500,23 +501,17 @@ const Index = () => {
               {/* Diamond */}
               <div className="group relative">
                 <div className="relative flex flex-col items-center p-6 md:p-8 rounded-2xl bg-[#0d1f3c] border border-white/5 transition-all duration-300 hover:border-cyan-400/30 hover:-translate-y-2 hover:shadow-xl hover:shadow-cyan-400/10">
-                  {/* Badge Circle */}
-                  <div className="relative w-16 h-16 md:w-20 md:h-20 mb-5 rounded-full bg-gradient-to-br from-cyan-400 to-blue-600 flex items-center justify-center shadow-lg shadow-cyan-500/30 group-hover:scale-110 transition-transform duration-300">
-                    <svg className="w-8 h-8 md:w-10 md:h-10 text-white" viewBox="0 0 24 24" fill="currentColor">
-                      <path d="M12 2L2 9l10 13 10-13-10-7zM12 5.5L18 10l-6 8-6-8 6-4.5z"/>
-                    </svg>
-                    {/* SU badge overlay */}
-                    <div className="absolute -top-1 -right-1 w-6 h-6 rounded-full bg-primary flex items-center justify-center">
-                      <span className="text-[8px] font-bold text-primary-foreground">SU</span>
-                    </div>
+                  {/* Badge Image */}
+                  <div className="relative w-20 h-20 md:w-24 md:h-24 mb-4 group-hover:scale-110 transition-transform duration-300">
+                    <img src={badgeDiamond} alt="Diamond Badge" className="w-full h-full object-contain drop-shadow-lg" />
                   </div>
                   
                   {/* Tier Name */}
                   <h3 className="text-lg md:text-xl font-bold text-white mb-1">Diamond</h3>
-                  <p className="text-sm text-gray-500 mb-4">Depth 5</p>
+                  <p className="text-sm text-gray-500 mb-3">Depth 5</p>
                   
-                  {/* Decorative line */}
-                  <div className="w-12 h-0.5 bg-gradient-to-r from-transparent via-cyan-400/50 to-transparent mb-4" />
+                  {/* Price */}
+                  <p className="text-2xl md:text-3xl font-bold text-primary">$2,500</p>
                 </div>
               </div>
             </div>
