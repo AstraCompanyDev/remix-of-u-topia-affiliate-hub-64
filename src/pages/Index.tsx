@@ -564,137 +564,128 @@ const Index = () => {
         </section>
 
         {/* Who This Is For Section */}
-        <section className="relative py-32 overflow-hidden bg-background">
+        <section className="relative py-28 overflow-hidden bg-background">
           {/* Subtle background elements */}
           <div className="absolute inset-0 pointer-events-none">
-            <div className="absolute w-[600px] h-[600px] -top-40 -right-40 rounded-full blur-[150px] opacity-30 bg-primary/20" />
-            <div className="absolute w-[400px] h-[400px] bottom-0 -left-20 rounded-full blur-[120px] opacity-20 bg-cyan-500/20" />
+            <div className="absolute w-[500px] h-[500px] top-0 right-1/4 rounded-full blur-[150px] opacity-20 bg-primary/20" />
+            <div className="absolute w-[400px] h-[400px] bottom-0 left-1/4 rounded-full blur-[120px] opacity-15 bg-cyan-500/15" />
           </div>
           
-          {/* Decorative grid pattern */}
-          <div className="absolute inset-0 opacity-[0.02]" style={{ backgroundImage: 'radial-gradient(circle at 1px 1px, currentColor 1px, transparent 0)', backgroundSize: '40px 40px' }} />
-          
           <div className="relative container mx-auto px-6">
-            <div className="grid lg:grid-cols-2 gap-16 items-center">
-              {/* Left Content */}
-              <div className="order-2 lg:order-1">
-                {/* Section Tag */}
-                <span 
-                  className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-gradient-to-r from-primary/10 to-cyan-500/10 border border-primary/20 text-primary text-sm font-semibold mb-8 opacity-0 animate-fade-in-up backdrop-blur-sm"
-                  style={{ animationDelay: '100ms' }}
-                >
-                  <svg className="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                    <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/>
-                    <circle cx="9" cy="7" r="4"/>
-                    <path d="M23 21v-2a4 4 0 0 0-3-3.87"/>
-                    <path d="M16 3.13a4 4 0 0 1 0 7.75"/>
+            {/* Header Content - Centered */}
+            <div className="text-center max-w-3xl mx-auto mb-16">
+              {/* Section Tag */}
+              <span 
+                className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-primary/10 border border-primary/20 text-primary text-sm font-semibold mb-8 opacity-0 animate-fade-in-up"
+                style={{ animationDelay: '100ms' }}
+              >
+                <svg className="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                  <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/>
+                  <circle cx="9" cy="7" r="4"/>
+                  <path d="M23 21v-2a4 4 0 0 0-3-3.87"/>
+                  <path d="M16 3.13a4 4 0 0 1 0 7.75"/>
+                </svg>
+                Perfect For You
+              </span>
+              
+              <h2 
+                className="text-4xl md:text-5xl lg:text-6xl font-bold text-foreground mb-6 opacity-0 animate-fade-in-up tracking-tight"
+                style={{ animationDelay: '150ms' }}
+              >
+                Who This <span className="bg-gradient-to-r from-primary via-orange-400 to-primary bg-clip-text text-transparent">Is For</span>
+              </h2>
+              
+              <p 
+                className="text-lg md:text-xl text-muted-foreground mb-10 opacity-0 animate-fade-in-up leading-relaxed"
+                style={{ animationDelay: '200ms' }}
+              >
+                If you believe in building networks around real products and genuine value creation, this program is designed for you.
+              </p>
+              
+              {/* CTA Button */}
+              <div 
+                className="opacity-0 animate-fade-in-up"
+                style={{ animationDelay: '250ms' }}
+              >
+                <Button size="lg" className="group gap-2 text-base px-8 py-6 rounded-full shadow-xl shadow-primary/25 hover:shadow-primary/40 transition-all duration-300">
+                  Start Your Journey
+                  <svg className="w-5 h-5 group-hover:translate-x-1 transition-transform" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                    <path d="M5 12h14M12 5l7 7-7 7"/>
                   </svg>
-                  Perfect For You
-                </span>
-                
-                <h2 
-                  className="text-4xl md:text-5xl lg:text-6xl font-bold text-foreground mb-6 opacity-0 animate-fade-in-up tracking-tight leading-tight"
-                  style={{ animationDelay: '150ms' }}
-                >
-                  Who This <span className="bg-gradient-to-r from-primary via-orange-400 to-primary bg-clip-text text-transparent">Is For</span>
-                </h2>
-                
-                <p 
-                  className="text-lg text-muted-foreground mb-10 opacity-0 animate-fade-in-up leading-relaxed max-w-lg"
-                  style={{ animationDelay: '200ms' }}
-                >
-                  If you believe in building networks around real products and genuine value creation, this program is designed for you.
-                </p>
-                
-                {/* CTA Button */}
-                <div 
-                  className="opacity-0 animate-fade-in-up"
-                  style={{ animationDelay: '250ms' }}
-                >
-                  <Button size="lg" className="group gap-2 text-base px-8 py-6 rounded-full shadow-xl shadow-primary/25 hover:shadow-primary/40 transition-all duration-300">
-                    Start Your Journey
-                    <svg className="w-5 h-5 group-hover:translate-x-1 transition-transform" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                      <path d="M5 12h14M12 5l7 7-7 7"/>
+                </Button>
+              </div>
+            </div>
+            
+            {/* Cards Grid - 2x2 */}
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-4xl mx-auto">
+              {/* Row 1 */}
+              {/* Card 1 - Entrepreneurs */}
+              <div 
+                className="group relative opacity-0 animate-fade-in-up"
+                style={{ animationDelay: '300ms' }}
+              >
+                <div className="relative p-8 rounded-2xl bg-card/50 border border-border/80 hover:border-primary/40 transition-all duration-400 hover:-translate-y-2 hover:shadow-2xl hover:shadow-primary/10 backdrop-blur-sm h-full">
+                  <div className="w-14 h-14 rounded-2xl bg-primary/10 flex items-center justify-center mb-6 group-hover:scale-110 group-hover:bg-primary/20 transition-all duration-300">
+                    <svg className="w-7 h-7 text-primary" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                      <path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/>
                     </svg>
-                  </Button>
+                  </div>
+                  <h3 className="text-xl font-bold text-foreground mb-3">Entrepreneurs & Creators</h3>
+                  <p className="text-muted-foreground leading-relaxed">Visionaries who turn ideas into income streams and build audiences that trust them.</p>
                 </div>
               </div>
               
-              {/* Right Content - Cards Grid */}
-              <div className="order-1 lg:order-2">
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
-                  {/* Card 1 - Entrepreneurs */}
-                  <div 
-                    className="group relative opacity-0 animate-fade-in-up"
-                    style={{ animationDelay: '150ms' }}
-                  >
-                    <div className="absolute inset-0 bg-gradient-to-br from-primary/20 to-transparent rounded-2xl blur-xl opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
-                    <div className="relative p-6 rounded-2xl bg-gradient-to-br from-card/80 to-card border border-border/50 hover:border-primary/30 transition-all duration-500 hover:-translate-y-2 hover:shadow-xl hover:shadow-primary/10 backdrop-blur-sm h-full">
-                      <div className="w-14 h-14 rounded-xl bg-gradient-to-br from-primary/20 to-primary/5 flex items-center justify-center mb-5 group-hover:scale-110 transition-transform duration-300">
-                        <svg className="w-7 h-7 text-primary" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                          <path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/>
-                        </svg>
-                      </div>
-                      <h3 className="text-xl font-bold text-foreground mb-2">Entrepreneurs & Creators</h3>
-                      <p className="text-muted-foreground text-sm leading-relaxed">Visionaries who turn ideas into income streams and build audiences that trust them.</p>
-                    </div>
+              {/* Card 2 - Business Owners */}
+              <div 
+                className="group relative opacity-0 animate-fade-in-up"
+                style={{ animationDelay: '350ms' }}
+              >
+                <div className="relative p-8 rounded-2xl bg-card/50 border border-border/80 hover:border-cyan-400/40 transition-all duration-400 hover:-translate-y-2 hover:shadow-2xl hover:shadow-cyan-400/10 backdrop-blur-sm h-full">
+                  <div className="w-14 h-14 rounded-2xl bg-cyan-500/10 flex items-center justify-center mb-6 group-hover:scale-110 group-hover:bg-cyan-500/20 transition-all duration-300">
+                    <svg className="w-7 h-7 text-cyan-500" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                      <rect x="2" y="7" width="20" height="14" rx="2" ry="2"/>
+                      <path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/>
+                    </svg>
                   </div>
-                  
-                  {/* Card 2 - Business Owners */}
-                  <div 
-                    className="group relative opacity-0 animate-fade-in-up sm:mt-8"
-                    style={{ animationDelay: '200ms' }}
-                  >
-                    <div className="absolute inset-0 bg-gradient-to-br from-cyan-500/20 to-transparent rounded-2xl blur-xl opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
-                    <div className="relative p-6 rounded-2xl bg-gradient-to-br from-card/80 to-card border border-border/50 hover:border-cyan-400/30 transition-all duration-500 hover:-translate-y-2 hover:shadow-xl hover:shadow-cyan-400/10 backdrop-blur-sm h-full">
-                      <div className="w-14 h-14 rounded-xl bg-gradient-to-br from-cyan-500/20 to-cyan-500/5 flex items-center justify-center mb-5 group-hover:scale-110 transition-transform duration-300">
-                        <svg className="w-7 h-7 text-cyan-500" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                          <rect x="2" y="7" width="20" height="14" rx="2" ry="2"/>
-                          <path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/>
-                        </svg>
-                      </div>
-                      <h3 className="text-xl font-bold text-foreground mb-2">Business Owners</h3>
-                      <p className="text-muted-foreground text-sm leading-relaxed">Leaders and consultants seeking new revenue channels aligned with their expertise.</p>
-                    </div>
+                  <h3 className="text-xl font-bold text-foreground mb-3">Business Owners</h3>
+                  <p className="text-muted-foreground leading-relaxed">Leaders and consultants seeking new revenue channels aligned with their expertise.</p>
+                </div>
+              </div>
+              
+              {/* Row 2 */}
+              {/* Card 3 - Community Builders */}
+              <div 
+                className="group relative opacity-0 animate-fade-in-up"
+                style={{ animationDelay: '400ms' }}
+              >
+                <div className="relative p-8 rounded-2xl bg-card/50 border border-border/80 hover:border-amber-400/40 transition-all duration-400 hover:-translate-y-2 hover:shadow-2xl hover:shadow-amber-400/10 backdrop-blur-sm h-full">
+                  <div className="w-14 h-14 rounded-2xl bg-amber-500/10 flex items-center justify-center mb-6 group-hover:scale-110 group-hover:bg-amber-500/20 transition-all duration-300">
+                    <svg className="w-7 h-7 text-amber-500" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                      <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/>
+                      <circle cx="9" cy="7" r="4"/>
+                      <path d="M23 21v-2a4 4 0 0 0-3-3.87"/>
+                      <path d="M16 3.13a4 4 0 0 1 0 7.75"/>
+                    </svg>
                   </div>
-                  
-                  {/* Card 3 - Community Builders */}
-                  <div 
-                    className="group relative opacity-0 animate-fade-in-up"
-                    style={{ animationDelay: '250ms' }}
-                  >
-                    <div className="absolute inset-0 bg-gradient-to-br from-amber-500/20 to-transparent rounded-2xl blur-xl opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
-                    <div className="relative p-6 rounded-2xl bg-gradient-to-br from-card/80 to-card border border-border/50 hover:border-amber-400/30 transition-all duration-500 hover:-translate-y-2 hover:shadow-xl hover:shadow-amber-400/10 backdrop-blur-sm h-full">
-                      <div className="w-14 h-14 rounded-xl bg-gradient-to-br from-amber-500/20 to-amber-500/5 flex items-center justify-center mb-5 group-hover:scale-110 transition-transform duration-300">
-                        <svg className="w-7 h-7 text-amber-500" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                          <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/>
-                          <circle cx="9" cy="7" r="4"/>
-                          <path d="M23 21v-2a4 4 0 0 0-3-3.87"/>
-                          <path d="M16 3.13a4 4 0 0 1 0 7.75"/>
-                        </svg>
-                      </div>
-                      <h3 className="text-xl font-bold text-foreground mb-2">Community Builders</h3>
-                      <p className="text-muted-foreground text-sm leading-relaxed">Connectors who nurture engaged communities and foster meaningful relationships.</p>
-                    </div>
+                  <h3 className="text-xl font-bold text-foreground mb-3">Community Builders</h3>
+                  <p className="text-muted-foreground leading-relaxed">Connectors who nurture engaged communities and foster meaningful relationships.</p>
+                </div>
+              </div>
+              
+              {/* Card 4 - Growth Partners */}
+              <div 
+                className="group relative opacity-0 animate-fade-in-up"
+                style={{ animationDelay: '450ms' }}
+              >
+                <div className="relative p-8 rounded-2xl bg-card/50 border border-border/80 hover:border-emerald-400/40 transition-all duration-400 hover:-translate-y-2 hover:shadow-2xl hover:shadow-emerald-400/10 backdrop-blur-sm h-full">
+                  <div className="w-14 h-14 rounded-2xl bg-emerald-500/10 flex items-center justify-center mb-6 group-hover:scale-110 group-hover:bg-emerald-500/20 transition-all duration-300">
+                    <svg className="w-7 h-7 text-emerald-500" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                      <polyline points="23 6 13.5 15.5 8.5 10.5 1 18"/>
+                      <polyline points="17 6 23 6 23 12"/>
+                    </svg>
                   </div>
-                  
-                  {/* Card 4 - Growth Partners */}
-                  <div 
-                    className="group relative opacity-0 animate-fade-in-up sm:mt-8"
-                    style={{ animationDelay: '300ms' }}
-                  >
-                    <div className="absolute inset-0 bg-gradient-to-br from-emerald-500/20 to-transparent rounded-2xl blur-xl opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
-                    <div className="relative p-6 rounded-2xl bg-gradient-to-br from-card/80 to-card border border-border/50 hover:border-emerald-400/30 transition-all duration-500 hover:-translate-y-2 hover:shadow-xl hover:shadow-emerald-400/10 backdrop-blur-sm h-full">
-                      <div className="w-14 h-14 rounded-xl bg-gradient-to-br from-emerald-500/20 to-emerald-500/5 flex items-center justify-center mb-5 group-hover:scale-110 transition-transform duration-300">
-                        <svg className="w-7 h-7 text-emerald-500" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                          <polyline points="23 6 13.5 15.5 8.5 10.5 1 18"/>
-                          <polyline points="17 6 23 6 23 12"/>
-                        </svg>
-                      </div>
-                      <h3 className="text-xl font-bold text-foreground mb-2">Growth-Focused Partners</h3>
-                      <p className="text-muted-foreground text-sm leading-relaxed">Ambitious individuals driven by results and long-term wealth building strategies.</p>
-                    </div>
-                  </div>
+                  <h3 className="text-xl font-bold text-foreground mb-3">Growth-Focused Partners</h3>
+                  <p className="text-muted-foreground leading-relaxed">Ambitious individuals driven by results and long-term wealth building strategies.</p>
                 </div>
               </div>
             </div>
