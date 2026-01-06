@@ -2,38 +2,38 @@ import { Button } from "@/components/ui/button";
 
 const Index = () => {
   return (
-    <div className="min-h-screen bg-background overflow-hidden">
-      {/* Animated background orbs */}
-      <div className="fixed inset-0 pointer-events-none overflow-hidden">
-        <div className="orb orb-primary w-[600px] h-[600px] -top-40 -left-40 animate-float" />
-        <div className="orb orb-accent w-[400px] h-[400px] top-1/3 -right-20 animate-float animation-delay-2000" />
-        <div className="orb orb-primary w-[300px] h-[300px] bottom-20 left-1/4 animate-float animation-delay-1000" />
-      </div>
+    <div className="min-h-screen overflow-hidden">
+      {/* Hero Section - Dark Background */}
+      <div className="relative bg-[#0a0f1a] overflow-hidden">
+        {/* Animated background orbs */}
+        <div className="absolute inset-0 pointer-events-none overflow-hidden">
+          <div className="absolute w-[600px] h-[600px] -top-40 -left-40 rounded-full blur-3xl opacity-20 bg-primary/30 animate-float" />
+          <div className="absolute w-[400px] h-[400px] top-1/3 -right-20 rounded-full blur-3xl opacity-15 bg-blue-500/30 animate-float animation-delay-2000" />
+          <div className="absolute w-[300px] h-[300px] bottom-20 left-1/4 rounded-full blur-3xl opacity-20 bg-primary/20 animate-float animation-delay-1000" />
+        </div>
 
-      {/* Hero gradient overlay */}
-      <div className="fixed inset-0 hero-gradient pointer-events-none" />
+        {/* Gradient overlay */}
+        <div className="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-[#0a0f1a] pointer-events-none" />
 
-      {/* Main content */}
-      <div className="relative z-10">
-        {/* Navigation placeholder */}
-        <header className="container mx-auto px-6 py-6">
+        {/* Navigation */}
+        <header className="relative z-20 container mx-auto px-6 py-6">
           <nav className="flex items-center justify-between">
             <div className="flex items-center gap-3">
               <div className="w-10 h-10 rounded-xl bg-primary/20 border border-primary/30 flex items-center justify-center">
                 <span className="text-primary font-bold text-lg">U+</span>
               </div>
-              <span className="text-xl font-bold text-foreground">
+              <span className="text-xl font-bold text-white">
                 U-topia <span className="text-primary">Affiliate Hub</span>
               </span>
             </div>
             <div className="hidden md:flex items-center gap-8">
-              <a href="#" className="text-muted-foreground hover:text-foreground transition-colors">
+              <a href="#" className="text-gray-400 hover:text-white transition-colors">
                 Home
               </a>
-              <a href="#" className="text-muted-foreground hover:text-foreground transition-colors">
+              <a href="#" className="text-gray-400 hover:text-white transition-colors">
                 About
               </a>
-              <a href="#" className="text-muted-foreground hover:text-foreground transition-colors">
+              <a href="#" className="text-gray-400 hover:text-white transition-colors">
                 Rewards
               </a>
               <Button variant="default" size="sm">
@@ -43,57 +43,90 @@ const Index = () => {
           </nav>
         </header>
 
-        {/* Hero Section - Placeholder */}
-        <section className="container mx-auto px-6 pt-20 pb-32">
-          <div className="max-w-4xl mx-auto text-center">
+        {/* Hero Content */}
+        <section className="relative z-10 container mx-auto px-6 pt-16 pb-24">
+          <div className="max-w-4xl">
+            {/* Badge */}
             <div 
               className="opacity-0 animate-fade-in-up"
               style={{ animationDelay: '100ms' }}
             >
-              <span className="inline-block px-4 py-2 rounded-full bg-primary/10 border border-primary/20 text-primary text-sm font-medium mb-8">
+              <span className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/5 border border-white/10 text-gray-300 text-sm font-medium mb-8">
+                <span className="w-2 h-2 rounded-full bg-primary animate-pulse"></span>
                 Earn through real platform activity
               </span>
             </div>
             
+            {/* Headline */}
             <h1 
-              className="text-5xl md:text-7xl font-bold mb-6 opacity-0 animate-fade-in-up"
+              className="text-5xl md:text-7xl font-bold mb-6 opacity-0 animate-fade-in-up leading-tight"
               style={{ animationDelay: '200ms' }}
             >
-              <span className="text-foreground">Build with </span>
-              <span className="gradient-text text-glow">U-topia</span>
+              <span className="text-white">Build with </span>
+              <span className="gradient-text">U-topia</span>
             </h1>
             
+            {/* Subheadline */}
             <p 
-              className="text-lg md:text-xl text-muted-foreground mb-6 max-w-2xl mx-auto opacity-0 animate-fade-in-up"
+              className="text-lg md:text-xl text-gray-400 mb-8 max-w-xl opacity-0 animate-fade-in-up"
               style={{ animationDelay: '300ms' }}
             >
               A digital financial ecosystem that rewards growth, usage, and contribution. 
               Incentives aligned with real economic activity, not hype.
             </p>
 
+            {/* Tagline */}
             <p 
-              className="text-xl md:text-2xl font-semibold text-foreground mb-12 opacity-0 animate-fade-in-up"
+              className="text-xl md:text-2xl font-semibold text-white mb-10 opacity-0 animate-fade-in-up"
               style={{ animationDelay: '350ms' }}
             >
               Real products. Real users. <span className="text-primary">Real rewards.</span>
             </p>
 
+            {/* CTAs */}
             <div 
-              className="flex flex-col sm:flex-row gap-4 justify-center opacity-0 animate-fade-in-up"
+              className="flex flex-col sm:flex-row gap-4 opacity-0 animate-fade-in-up"
               style={{ animationDelay: '400ms' }}
             >
-              <Button variant="hero" size="xl">
+              <Button className="bg-primary hover:bg-primary/90 text-white font-semibold px-8 py-6 text-base rounded-full shadow-lg shadow-primary/25 hover:shadow-xl hover:shadow-primary/30 transition-all">
                 Get Started
+                <svg className="w-5 h-5 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
+                </svg>
               </Button>
-              <Button variant="glass" size="xl">
+              <Button variant="outline" className="border-white/20 text-white hover:bg-white/10 hover:border-white/30 px-8 py-6 text-base rounded-full transition-all">
                 Learn How It Works
               </Button>
             </div>
+
+            {/* Stats */}
+            <div 
+              className="flex flex-wrap gap-8 md:gap-12 mt-16 pt-8 border-t border-white/10 opacity-0 animate-fade-in-up"
+              style={{ animationDelay: '500ms' }}
+            >
+              <div>
+                <p className="text-3xl md:text-4xl font-bold text-white">100%</p>
+                <p className="text-gray-500 text-sm mt-1">Real Activity</p>
+              </div>
+              <div className="w-px bg-white/10 hidden md:block"></div>
+              <div>
+                <p className="text-3xl md:text-4xl font-bold text-white">Verified</p>
+                <p className="text-gray-500 text-sm mt-1">Transactions</p>
+              </div>
+              <div className="w-px bg-white/10 hidden md:block"></div>
+              <div>
+                <p className="text-3xl md:text-4xl font-bold text-white">Global</p>
+                <p className="text-gray-500 text-sm mt-1">Rewards Network</p>
+              </div>
+            </div>
           </div>
         </section>
+      </div>
 
+      {/* Light sections below */}
+      <div className="bg-background">
         {/* Features Section */}
-        <section className="container mx-auto px-6 pb-32">
+        <section className="container mx-auto px-6 py-24">
           <div className="max-w-3xl mx-auto text-center mb-10">
             <h2 
               className="text-3xl md:text-4xl font-bold text-foreground mb-6 opacity-0 animate-fade-in-up"
@@ -171,7 +204,7 @@ const Index = () => {
         </section>
 
         {/* How It Works Section */}
-        <section className="container mx-auto px-6 pb-32">
+        <section className="container mx-auto px-6 pb-24">
           <div className="max-w-6xl mx-auto">
             <div className="text-center mb-20">
               <span 
@@ -197,14 +230,12 @@ const Index = () => {
                   style={{ animationDelay: '200ms' }}
                 >
                   <div className="relative glass-card p-6 h-full transition-all duration-300 hover:border-primary/40 hover:-translate-y-1">
-                    {/* Step number badge */}
                     <div className="absolute -top-4 left-6">
                       <div className="w-8 h-8 rounded-lg bg-primary text-primary-foreground flex items-center justify-center text-sm font-bold shadow-lg shadow-primary/25">
                         1
                       </div>
                     </div>
                     
-                    {/* Icon */}
                     <div className="w-12 h-12 rounded-xl bg-primary/10 border border-primary/20 flex items-center justify-center mt-4 mb-5 group-hover:scale-110 transition-transform duration-300">
                       <svg className="w-6 h-6 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M18 9v3m0 0v3m0-3h3m-3 0h-3m-2-5a4 4 0 11-8 0 4 4 0 018 0zM3 20a6 6 0 0112 0v1H3v-1z" />
@@ -334,7 +365,7 @@ const Index = () => {
           </div>
         </section>
 
-        {/* Footer placeholder */}
+        {/* Footer */}
         <footer className="container mx-auto px-6 py-12 border-t border-border">
           <div className="flex flex-col md:flex-row items-center justify-between gap-4">
             <div className="flex items-center gap-2">
