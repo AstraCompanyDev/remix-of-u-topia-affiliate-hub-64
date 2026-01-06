@@ -170,6 +170,107 @@ const Index = () => {
           </p>
         </section>
 
+        {/* How It Works Section */}
+        <section className="container mx-auto px-6 pb-32">
+          <div className="max-w-5xl mx-auto">
+            <h2 
+              className="text-3xl md:text-4xl font-bold text-foreground text-center mb-16 opacity-0 animate-fade-in-up"
+              style={{ animationDelay: '100ms' }}
+            >
+              How It <span className="gradient-text">Works</span>
+            </h2>
+
+            <div className="relative">
+              {/* Connecting line */}
+              <div className="hidden md:block absolute left-1/2 top-8 bottom-8 w-px bg-gradient-to-b from-primary/50 via-primary/20 to-transparent -translate-x-1/2" />
+
+              <div className="space-y-8 md:space-y-0 md:grid md:grid-cols-5 md:gap-4">
+                {/* Step 1 */}
+                <div 
+                  className="relative opacity-0 animate-fade-in-up"
+                  style={{ animationDelay: '200ms' }}
+                >
+                  <div className="flex flex-col items-center text-center">
+                    <div className="w-16 h-16 rounded-full bg-primary/20 border-2 border-primary flex items-center justify-center mb-4 relative z-10">
+                      <span className="text-primary font-bold text-xl">1</span>
+                    </div>
+                    <h3 className="text-lg font-semibold text-foreground mb-2">Join the Program</h3>
+                    <p className="text-sm text-muted-foreground leading-relaxed">
+                      Activate your participation tier and gain access to referral and reward tools.
+                    </p>
+                  </div>
+                </div>
+
+                {/* Step 2 */}
+                <div 
+                  className="relative opacity-0 animate-fade-in-up"
+                  style={{ animationDelay: '300ms' }}
+                >
+                  <div className="flex flex-col items-center text-center">
+                    <div className="w-16 h-16 rounded-full bg-primary/20 border-2 border-primary flex items-center justify-center mb-4 relative z-10">
+                      <span className="text-primary font-bold text-xl">2</span>
+                    </div>
+                    <h3 className="text-lg font-semibold text-foreground mb-2">Introduce Users</h3>
+                    <p className="text-sm text-muted-foreground leading-relaxed">
+                      Share U-topia with individuals and merchants who benefit from our platform.
+                    </p>
+                  </div>
+                </div>
+
+                {/* Step 3 */}
+                <div 
+                  className="relative opacity-0 animate-fade-in-up"
+                  style={{ animationDelay: '400ms' }}
+                >
+                  <div className="flex flex-col items-center text-center">
+                    <div className="w-16 h-16 rounded-full bg-primary/20 border-2 border-primary flex items-center justify-center mb-4 relative z-10">
+                      <span className="text-primary font-bold text-xl">3</span>
+                    </div>
+                    <h3 className="text-lg font-semibold text-foreground mb-2">Activity Happens</h3>
+                    <p className="text-sm text-muted-foreground leading-relaxed">
+                      Users transact, subscribe, and use real financial products.
+                    </p>
+                  </div>
+                </div>
+
+                {/* Step 4 */}
+                <div 
+                  className="relative opacity-0 animate-fade-in-up"
+                  style={{ animationDelay: '500ms' }}
+                >
+                  <div className="flex flex-col items-center text-center">
+                    <div className="w-16 h-16 rounded-full bg-primary/20 border-2 border-primary flex items-center justify-center mb-4 relative z-10">
+                      <span className="text-primary font-bold text-xl">4</span>
+                    </div>
+                    <h3 className="text-lg font-semibold text-foreground mb-2">Rewards Calculated</h3>
+                    <p className="text-sm text-muted-foreground leading-relaxed">
+                      Commissions and bonuses are calculated from completed and verified activity.
+                    </p>
+                  </div>
+                </div>
+
+                {/* Step 5 */}
+                <div 
+                  className="relative opacity-0 animate-fade-in-up"
+                  style={{ animationDelay: '600ms' }}
+                >
+                  <div className="flex flex-col items-center text-center">
+                    <div className="w-16 h-16 rounded-full bg-accent/20 border-2 border-accent flex items-center justify-center mb-4 relative z-10">
+                      <svg className="w-7 h-7 text-accent" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+                      </svg>
+                    </div>
+                    <h3 className="text-lg font-semibold text-foreground mb-2">Get Paid</h3>
+                    <p className="text-sm text-muted-foreground leading-relaxed">
+                      Eligible rewards are distributed following validation and compliance checks.
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
         {/* Footer placeholder */}
         <footer className="container mx-auto px-6 py-12 border-t border-border">
           <div className="flex flex-col md:flex-row items-center justify-between gap-4">
