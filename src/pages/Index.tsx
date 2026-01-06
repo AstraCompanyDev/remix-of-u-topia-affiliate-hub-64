@@ -2,7 +2,7 @@ import { Button } from "@/components/ui/button";
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
 import logoLight from "@/assets/u-topia-logo-light.png";
 import logoDark from "@/assets/u-topia-logo-dark.png";
-import heroVisual from "@/assets/hero-visual.png";
+import heroCard from "@/assets/ucard-hero.png";
 import membershipBadge from "@/assets/membership-badge.png";
 import badgeBronze from "@/assets/badge-bronze.png";
 import badgePlatinum from "@/assets/badge-platinum.png";
@@ -128,19 +128,29 @@ const Index = () => {
               </div>
             </div>
 
-            {/* Right visual - Floating hero image */}
+            {/* Right visual - Animated Card */}
             <div 
               className="flex-1 flex justify-center lg:justify-end opacity-0 animate-fade-in-up"
               style={{ animationDelay: '300ms' }}
             >
-              <div className="relative">
-                <img 
-                  src={heroVisual} 
-                  alt="U-topia Virtual Card and Rewards" 
-                  className="w-full max-w-md lg:max-w-lg xl:max-w-xl animate-float-gentle drop-shadow-2xl"
-                />
-                {/* Glow effect behind image */}
-                <div className="absolute inset-0 -z-10 blur-3xl opacity-30 bg-primary/40 rounded-full scale-75" />
+              <div className="relative group perspective-1000">
+                {/* Animated glow ring */}
+                <div className="absolute -inset-4 bg-gradient-to-r from-cyan-500/40 via-primary/40 to-cyan-500/40 rounded-3xl blur-2xl opacity-60 group-hover:opacity-80 animate-pulse-glow transition-opacity duration-500" />
+                
+                {/* Card with 3D tilt animation */}
+                <div className="relative animate-card-float">
+                  <img 
+                    src={heroCard} 
+                    alt="U-topia Virtual Card" 
+                    className="w-full max-w-sm lg:max-w-md xl:max-w-lg drop-shadow-[0_25px_50px_rgba(0,180,216,0.3)] transition-transform duration-500 group-hover:scale-105"
+                  />
+                  
+                  {/* Shine effect overlay */}
+                  <div className="absolute inset-0 bg-gradient-to-tr from-transparent via-white/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-700 rounded-2xl pointer-events-none animate-shine" />
+                </div>
+                
+                {/* Secondary glow effect */}
+                <div className="absolute inset-0 -z-10 blur-3xl opacity-40 bg-gradient-to-br from-cyan-500/50 via-blue-600/30 to-primary/40 rounded-full scale-90" />
               </div>
             </div>
           </div>
