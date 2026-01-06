@@ -172,29 +172,53 @@ const Index = () => {
 
         {/* How It Works Section */}
         <section className="container mx-auto px-6 pb-32">
-          <div className="max-w-5xl mx-auto">
-            <h2 
-              className="text-3xl md:text-4xl font-bold text-foreground text-center mb-16 opacity-0 animate-fade-in-up"
-              style={{ animationDelay: '100ms' }}
-            >
-              How It <span className="gradient-text">Works</span>
-            </h2>
+          <div className="max-w-6xl mx-auto">
+            <div className="text-center mb-20">
+              <span 
+                className="inline-block px-4 py-2 rounded-full bg-primary/10 border border-primary/20 text-primary text-sm font-medium mb-6 opacity-0 animate-fade-in-up"
+                style={{ animationDelay: '100ms' }}
+              >
+                Simple Process
+              </span>
+              <h2 
+                className="text-3xl md:text-5xl font-bold text-foreground opacity-0 animate-fade-in-up"
+                style={{ animationDelay: '150ms' }}
+              >
+                How It <span className="gradient-text">Works</span>
+              </h2>
+            </div>
 
+            {/* Steps Container */}
             <div className="relative">
-              {/* Connecting line */}
-              <div className="hidden md:block absolute left-1/2 top-8 bottom-8 w-px bg-gradient-to-b from-primary/50 via-primary/20 to-transparent -translate-x-1/2" />
+              {/* Horizontal connecting line - desktop */}
+              <div className="hidden lg:block absolute top-[60px] left-[10%] right-[10%] h-px">
+                <div className="w-full h-full bg-gradient-to-r from-transparent via-primary/40 to-transparent" />
+              </div>
 
-              <div className="space-y-8 md:space-y-0 md:grid md:grid-cols-5 md:gap-4">
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-8 lg:gap-6">
                 {/* Step 1 */}
                 <div 
-                  className="relative opacity-0 animate-fade-in-up"
+                  className="group opacity-0 animate-fade-in-up"
                   style={{ animationDelay: '200ms' }}
                 >
-                  <div className="flex flex-col items-center text-center">
-                    <div className="w-16 h-16 rounded-full bg-primary/20 border-2 border-primary flex items-center justify-center mb-4 relative z-10">
-                      <span className="text-primary font-bold text-xl">1</span>
+                  <div className="relative glass-card p-6 h-full transition-all duration-300 hover:border-primary/40 hover:-translate-y-1">
+                    {/* Step number badge */}
+                    <div className="absolute -top-4 left-6">
+                      <div className="w-8 h-8 rounded-lg bg-primary text-primary-foreground flex items-center justify-center text-sm font-bold shadow-lg shadow-primary/25">
+                        1
+                      </div>
                     </div>
-                    <h3 className="text-lg font-semibold text-foreground mb-2">Join the Program</h3>
+                    
+                    {/* Icon */}
+                    <div className="w-12 h-12 rounded-xl bg-primary/10 border border-primary/20 flex items-center justify-center mt-4 mb-5 group-hover:scale-110 transition-transform duration-300">
+                      <svg className="w-6 h-6 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M18 9v3m0 0v3m0-3h3m-3 0h-3m-2-5a4 4 0 11-8 0 4 4 0 018 0zM3 20a6 6 0 0112 0v1H3v-1z" />
+                      </svg>
+                    </div>
+
+                    <h3 className="text-lg font-semibold text-foreground mb-3">
+                      Join the Program
+                    </h3>
                     <p className="text-sm text-muted-foreground leading-relaxed">
                       Activate your participation tier and gain access to referral and reward tools.
                     </p>
@@ -203,14 +227,25 @@ const Index = () => {
 
                 {/* Step 2 */}
                 <div 
-                  className="relative opacity-0 animate-fade-in-up"
+                  className="group opacity-0 animate-fade-in-up"
                   style={{ animationDelay: '300ms' }}
                 >
-                  <div className="flex flex-col items-center text-center">
-                    <div className="w-16 h-16 rounded-full bg-primary/20 border-2 border-primary flex items-center justify-center mb-4 relative z-10">
-                      <span className="text-primary font-bold text-xl">2</span>
+                  <div className="relative glass-card p-6 h-full transition-all duration-300 hover:border-primary/40 hover:-translate-y-1">
+                    <div className="absolute -top-4 left-6">
+                      <div className="w-8 h-8 rounded-lg bg-primary text-primary-foreground flex items-center justify-center text-sm font-bold shadow-lg shadow-primary/25">
+                        2
+                      </div>
                     </div>
-                    <h3 className="text-lg font-semibold text-foreground mb-2">Introduce Users</h3>
+                    
+                    <div className="w-12 h-12 rounded-xl bg-primary/10 border border-primary/20 flex items-center justify-center mt-4 mb-5 group-hover:scale-110 transition-transform duration-300">
+                      <svg className="w-6 h-6 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z" />
+                      </svg>
+                    </div>
+
+                    <h3 className="text-lg font-semibold text-foreground mb-3">
+                      Introduce Users
+                    </h3>
                     <p className="text-sm text-muted-foreground leading-relaxed">
                       Share U-topia with individuals and merchants who benefit from our platform.
                     </p>
@@ -219,14 +254,25 @@ const Index = () => {
 
                 {/* Step 3 */}
                 <div 
-                  className="relative opacity-0 animate-fade-in-up"
+                  className="group opacity-0 animate-fade-in-up"
                   style={{ animationDelay: '400ms' }}
                 >
-                  <div className="flex flex-col items-center text-center">
-                    <div className="w-16 h-16 rounded-full bg-primary/20 border-2 border-primary flex items-center justify-center mb-4 relative z-10">
-                      <span className="text-primary font-bold text-xl">3</span>
+                  <div className="relative glass-card p-6 h-full transition-all duration-300 hover:border-primary/40 hover:-translate-y-1">
+                    <div className="absolute -top-4 left-6">
+                      <div className="w-8 h-8 rounded-lg bg-primary text-primary-foreground flex items-center justify-center text-sm font-bold shadow-lg shadow-primary/25">
+                        3
+                      </div>
                     </div>
-                    <h3 className="text-lg font-semibold text-foreground mb-2">Activity Happens</h3>
+                    
+                    <div className="w-12 h-12 rounded-xl bg-primary/10 border border-primary/20 flex items-center justify-center mt-4 mb-5 group-hover:scale-110 transition-transform duration-300">
+                      <svg className="w-6 h-6 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M13 10V3L4 14h7v7l9-11h-7z" />
+                      </svg>
+                    </div>
+
+                    <h3 className="text-lg font-semibold text-foreground mb-3">
+                      Activity Happens
+                    </h3>
                     <p className="text-sm text-muted-foreground leading-relaxed">
                       Users transact, subscribe, and use real financial products.
                     </p>
@@ -235,32 +281,54 @@ const Index = () => {
 
                 {/* Step 4 */}
                 <div 
-                  className="relative opacity-0 animate-fade-in-up"
+                  className="group opacity-0 animate-fade-in-up"
                   style={{ animationDelay: '500ms' }}
                 >
-                  <div className="flex flex-col items-center text-center">
-                    <div className="w-16 h-16 rounded-full bg-primary/20 border-2 border-primary flex items-center justify-center mb-4 relative z-10">
-                      <span className="text-primary font-bold text-xl">4</span>
+                  <div className="relative glass-card p-6 h-full transition-all duration-300 hover:border-primary/40 hover:-translate-y-1">
+                    <div className="absolute -top-4 left-6">
+                      <div className="w-8 h-8 rounded-lg bg-primary text-primary-foreground flex items-center justify-center text-sm font-bold shadow-lg shadow-primary/25">
+                        4
+                      </div>
                     </div>
-                    <h3 className="text-lg font-semibold text-foreground mb-2">Rewards Calculated</h3>
+                    
+                    <div className="w-12 h-12 rounded-xl bg-primary/10 border border-primary/20 flex items-center justify-center mt-4 mb-5 group-hover:scale-110 transition-transform duration-300">
+                      <svg className="w-6 h-6 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M9 7h6m0 10v-3m-3 3h.01M9 17h.01M9 14h.01M12 14h.01M15 11h.01M12 11h.01M9 11h.01M7 21h10a2 2 0 002-2V5a2 2 0 00-2-2H7a2 2 0 00-2 2v14a2 2 0 002 2z" />
+                      </svg>
+                    </div>
+
+                    <h3 className="text-lg font-semibold text-foreground mb-3">
+                      Rewards Calculated
+                    </h3>
                     <p className="text-sm text-muted-foreground leading-relaxed">
                       Commissions and bonuses are calculated from completed and verified activity.
                     </p>
                   </div>
                 </div>
 
-                {/* Step 5 */}
+                {/* Step 5 - Final/Success */}
                 <div 
-                  className="relative opacity-0 animate-fade-in-up"
+                  className="group opacity-0 animate-fade-in-up"
                   style={{ animationDelay: '600ms' }}
                 >
-                  <div className="flex flex-col items-center text-center">
-                    <div className="w-16 h-16 rounded-full bg-accent/20 border-2 border-accent flex items-center justify-center mb-4 relative z-10">
-                      <svg className="w-7 h-7 text-accent" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+                  <div className="relative glass-card p-6 h-full border-accent/30 bg-accent/5 transition-all duration-300 hover:border-accent/50 hover:-translate-y-1">
+                    <div className="absolute -top-4 left-6">
+                      <div className="w-8 h-8 rounded-lg bg-accent text-accent-foreground flex items-center justify-center shadow-lg shadow-accent/25">
+                        <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M5 13l4 4L19 7" />
+                        </svg>
+                      </div>
+                    </div>
+                    
+                    <div className="w-12 h-12 rounded-xl bg-accent/10 border border-accent/20 flex items-center justify-center mt-4 mb-5 group-hover:scale-110 transition-transform duration-300">
+                      <svg className="w-6 h-6 text-accent" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
                       </svg>
                     </div>
-                    <h3 className="text-lg font-semibold text-foreground mb-2">Get Paid</h3>
+
+                    <h3 className="text-lg font-semibold text-foreground mb-3">
+                      Get Paid
+                    </h3>
                     <p className="text-sm text-muted-foreground leading-relaxed">
                       Eligible rewards are distributed following validation and compliance checks.
                     </p>
