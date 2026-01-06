@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
 import logoLight from "@/assets/u-topia-logo-light.png";
@@ -95,12 +96,14 @@ const Index = () => {
                 className="flex flex-col sm:flex-row gap-4 opacity-0 animate-fade-in-up"
                 style={{ animationDelay: '400ms' }}
               >
-                <Button className="bg-primary hover:bg-primary/90 text-white font-semibold px-8 py-6 text-base rounded-full shadow-lg shadow-primary/25 hover:shadow-xl hover:shadow-primary/30 transition-all">
-                  Get Started
-                  <svg className="w-5 h-5 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
-                  </svg>
-                </Button>
+                <Link to="/auth">
+                  <Button className="bg-primary hover:bg-primary/90 text-white font-semibold px-8 py-6 text-base rounded-full shadow-lg shadow-primary/25 hover:shadow-xl hover:shadow-primary/30 transition-all">
+                    Get Started
+                    <svg className="w-5 h-5 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
+                    </svg>
+                  </Button>
+                </Link>
                 <a 
                   href="https://drive.google.com/file/d/1LGOKXC00DI94vpzfBhKNPhxGH0hmHNzj/view?usp=sharing" 
                   target="_blank" 
@@ -858,15 +861,17 @@ const Index = () => {
               </p>
               
               <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
-                <Button 
-                  variant="hero" 
-                  className="group gap-3 min-w-[200px]"
-                >
-                  Create Account
-                  <svg className="w-5 h-5 group-hover:translate-x-1 transition-transform" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                    <path d="M5 12h14M12 5l7 7-7 7"/>
-                  </svg>
-                </Button>
+                <Link to="/auth">
+                  <Button 
+                    variant="hero" 
+                    className="group gap-3 min-w-[200px]"
+                  >
+                    Create Account
+                    <svg className="w-5 h-5 group-hover:translate-x-1 transition-transform" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                      <path d="M5 12h14M12 5l7 7-7 7"/>
+                    </svg>
+                  </Button>
+                </Link>
                 
                 <a 
                   href="https://drive.google.com/file/d/1LGOKXC00DI94vpzfBhKNPhxGH0hmHNzj/view?usp=sharing" 
