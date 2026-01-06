@@ -68,7 +68,7 @@ const Index = () => {
               style={{ animationDelay: '300ms' }}
             >
               A digital financial ecosystem that rewards growth, usage, and contribution. 
-              Incentives aligned with real economic activity—not hype.
+              Incentives aligned with real economic activity, not hype.
             </p>
 
             <p 
