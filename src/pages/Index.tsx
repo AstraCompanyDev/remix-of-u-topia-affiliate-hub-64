@@ -428,13 +428,13 @@ const Index = () => {
               </p>
             </div>
 
-            {/* Tier Cards - Horizontal scroll on mobile, grid on desktop */}
+            {/* Tier Cards Grid */}
             <div 
-              className="flex overflow-x-auto pb-4 md:pb-0 md:grid md:grid-cols-5 gap-5 md:gap-6 snap-x snap-mandatory md:snap-none -mx-6 px-6 md:mx-0 md:px-0 opacity-0 animate-fade-in-up scrollbar-hide"
+              className="grid grid-cols-2 md:grid-cols-5 gap-5 md:gap-6 opacity-0 animate-fade-in-up pt-6"
               style={{ animationDelay: '250ms' }}
             >
               {/* Bronze */}
-              <div className="group relative flex-shrink-0 w-[260px] md:w-auto snap-center">
+              <div className="group relative">
                 <div className="absolute inset-0 bg-gradient-to-b from-orange-500/20 to-transparent rounded-3xl blur-xl opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
                 <div className="relative h-full flex flex-col items-center p-8 rounded-3xl bg-gradient-to-b from-[#0f1f35] to-[#0a1628] border border-white/[0.08] transition-all duration-500 hover:border-orange-500/40 hover:-translate-y-3 hover:shadow-2xl hover:shadow-orange-500/10 backdrop-blur-sm">
                   {/* Glow ring behind badge */}
@@ -458,7 +458,7 @@ const Index = () => {
               </div>
 
               {/* Silver */}
-              <div className="group relative flex-shrink-0 w-[260px] md:w-auto snap-center">
+              <div className="group relative">
                 <div className="absolute inset-0 bg-gradient-to-b from-gray-400/20 to-transparent rounded-3xl blur-xl opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
                 <div className="relative h-full flex flex-col items-center p-8 rounded-3xl bg-gradient-to-b from-[#0f1f35] to-[#0a1628] border border-white/[0.08] transition-all duration-500 hover:border-gray-400/40 hover:-translate-y-3 hover:shadow-2xl hover:shadow-gray-400/10 backdrop-blur-sm">
                   <div className="absolute top-12 w-28 h-28 rounded-full bg-gray-400/10 blur-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
@@ -477,7 +477,7 @@ const Index = () => {
               </div>
 
               {/* Gold - Featured */}
-              <div className="group relative flex-shrink-0 w-[280px] md:w-auto snap-center">
+              <div className="group relative col-span-2 md:col-span-1 overflow-visible">
                 {/* Premium glow effect */}
                 <div className="absolute -inset-1 bg-gradient-to-r from-primary via-amber-400 to-primary rounded-3xl blur-lg opacity-30 group-hover:opacity-50 transition-opacity duration-500 animate-pulse" />
                 
@@ -511,7 +511,7 @@ const Index = () => {
               </div>
 
               {/* Platinum */}
-              <div className="group relative flex-shrink-0 w-[260px] md:w-auto snap-center">
+              <div className="group relative">
                 <div className="absolute inset-0 bg-gradient-to-b from-slate-400/20 to-transparent rounded-3xl blur-xl opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
                 <div className="relative h-full flex flex-col items-center p-8 rounded-3xl bg-gradient-to-b from-[#0f1f35] to-[#0a1628] border border-white/[0.08] transition-all duration-500 hover:border-slate-400/40 hover:-translate-y-3 hover:shadow-2xl hover:shadow-slate-400/10 backdrop-blur-sm">
                   <div className="absolute top-12 w-28 h-28 rounded-full bg-slate-400/10 blur-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
@@ -530,7 +530,7 @@ const Index = () => {
               </div>
 
               {/* Diamond */}
-              <div className="group relative flex-shrink-0 w-[260px] md:w-auto snap-center">
+              <div className="group relative">
                 <div className="absolute inset-0 bg-gradient-to-b from-cyan-400/20 to-transparent rounded-3xl blur-xl opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
                 <div className="relative h-full flex flex-col items-center p-8 rounded-3xl bg-gradient-to-b from-[#0f1f35] to-[#0a1628] border border-white/[0.08] transition-all duration-500 hover:border-cyan-400/40 hover:-translate-y-3 hover:shadow-2xl hover:shadow-cyan-400/10 backdrop-blur-sm">
                   <div className="absolute top-12 w-28 h-28 rounded-full bg-cyan-400/10 blur-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
