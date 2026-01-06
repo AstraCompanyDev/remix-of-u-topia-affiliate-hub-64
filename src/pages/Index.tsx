@@ -190,12 +190,7 @@ const Index = () => {
 
             {/* Steps Container */}
             <div className="relative">
-              {/* Horizontal connecting line - desktop */}
-              <div className="hidden lg:block absolute top-[60px] left-[10%] right-[10%] h-px">
-                <div className="w-full h-full bg-gradient-to-r from-transparent via-primary/40 to-transparent" />
-              </div>
-
-              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-8 lg:gap-6">
+              <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-8">
                 {/* Step 1 */}
                 <div 
                   className="group opacity-0 animate-fade-in-up"
