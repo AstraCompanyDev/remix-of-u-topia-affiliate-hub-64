@@ -384,8 +384,14 @@ const Index = () => {
         </section>
 
         {/* Membership Tiers Section */}
-        <section className="container mx-auto px-6 pb-24">
-          <div className="max-w-5xl mx-auto">
+        <section className="relative py-24 overflow-hidden">
+          {/* Dark background for this section */}
+          <div className="absolute inset-0 bg-[#0a1628]" />
+          
+          {/* Subtle gradient overlays */}
+          <div className="absolute inset-0 bg-gradient-to-b from-transparent via-primary/5 to-transparent pointer-events-none" />
+          
+          <div className="relative container mx-auto px-6">
             <div className="text-center mb-16">
               <span 
                 className="inline-block px-4 py-2 rounded-full bg-primary/10 border border-primary/20 text-primary text-sm font-medium mb-6 opacity-0 animate-fade-in-up"
@@ -394,166 +400,159 @@ const Index = () => {
                 Participation Levels
               </span>
               <h2 
-                className="text-3xl md:text-5xl font-bold text-foreground mb-4 opacity-0 animate-fade-in-up"
+                className="text-3xl md:text-5xl font-bold text-white mb-4 opacity-0 animate-fade-in-up"
                 style={{ animationDelay: '150ms' }}
               >
                 Membership <span className="gradient-text">Tiers</span>
               </h2>
               <p 
-                className="text-lg text-muted-foreground max-w-2xl mx-auto opacity-0 animate-fade-in-up"
+                className="text-lg text-gray-400 max-w-2xl mx-auto opacity-0 animate-fade-in-up"
                 style={{ animationDelay: '200ms' }}
               >
                 Participation tiers define your earning capacity within the program.
               </p>
             </div>
 
-            {/* Leaderboard Container */}
+            {/* Tier Cards Grid */}
             <div 
-              className="relative opacity-0 animate-fade-in-up"
+              className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4 md:gap-6 opacity-0 animate-fade-in-up"
               style={{ animationDelay: '250ms' }}
             >
-              {/* Decorative badge */}
-              <div className="absolute -top-12 right-0 md:right-8 w-24 h-24 md:w-32 md:h-32 animate-float-gentle opacity-80">
-                <img src={membershipBadge} alt="Membership Badge" className="w-full h-full object-contain" />
+              {/* Bronze */}
+              <div className="group relative">
+                <div className="relative flex flex-col items-center p-6 md:p-8 rounded-2xl bg-[#0d1f3c] border border-white/5 transition-all duration-300 hover:border-orange-500/30 hover:-translate-y-2 hover:shadow-xl hover:shadow-orange-500/10">
+                  {/* Badge Circle */}
+                  <div className="relative w-16 h-16 md:w-20 md:h-20 mb-5 rounded-full bg-gradient-to-br from-orange-400 to-orange-600 flex items-center justify-center shadow-lg shadow-orange-500/30 group-hover:scale-110 transition-transform duration-300">
+                    <svg className="w-8 h-8 md:w-10 md:h-10 text-white" viewBox="0 0 24 24" fill="currentColor">
+                      <path d="M12 2l3 6 6.5 1-4.75 4.5L18 20l-6-3.5L6 20l1.25-6.5L2.5 9l6.5-1z"/>
+                    </svg>
+                  </div>
+                  
+                  {/* Tier Name */}
+                  <h3 className="text-lg md:text-xl font-bold text-white mb-1">Bronze</h3>
+                  <p className="text-sm text-gray-500 mb-4">Depth 1</p>
+                  
+                  {/* Decorative line */}
+                  <div className="w-12 h-0.5 bg-gradient-to-r from-transparent via-orange-500/50 to-transparent mb-4" />
+                </div>
               </div>
 
-              {/* Main leaderboard */}
-              <div className="relative overflow-hidden rounded-3xl border border-border/50 bg-gradient-to-b from-card to-background shadow-2xl">
-                {/* Header bar */}
-                <div className="bg-gradient-to-r from-primary/20 via-primary/10 to-primary/20 px-6 py-4 border-b border-border/50">
-                  <div className="flex items-center justify-between">
-                    <span className="text-sm font-semibold text-foreground/80 uppercase tracking-wider">Rank</span>
-                    <span className="text-sm font-semibold text-foreground/80 uppercase tracking-wider">Tier</span>
+              {/* Silver */}
+              <div className="group relative">
+                <div className="relative flex flex-col items-center p-6 md:p-8 rounded-2xl bg-[#0d1f3c] border border-white/5 transition-all duration-300 hover:border-gray-400/30 hover:-translate-y-2 hover:shadow-xl hover:shadow-gray-400/10">
+                  {/* Badge Circle */}
+                  <div className="relative w-16 h-16 md:w-20 md:h-20 mb-5 rounded-full bg-gradient-to-br from-gray-300 to-gray-500 flex items-center justify-center shadow-lg shadow-gray-400/30 group-hover:scale-110 transition-transform duration-300">
+                    <svg className="w-8 h-8 md:w-10 md:h-10 text-gray-800" viewBox="0 0 24 24" fill="currentColor">
+                      <path d="M12 2l3 6 6.5 1-4.75 4.5L18 20l-6-3.5L6 20l1.25-6.5L2.5 9l6.5-1z"/>
+                    </svg>
+                    {/* Globe icon overlay */}
+                    <div className="absolute -bottom-1 -right-1 w-5 h-5 rounded-full bg-gray-600 flex items-center justify-center">
+                      <svg className="w-3 h-3 text-gray-300" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                        <circle cx="12" cy="12" r="10"/>
+                        <path d="M2 12h20M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/>
+                      </svg>
+                    </div>
                   </div>
+                  
+                  {/* Tier Name */}
+                  <h3 className="text-lg md:text-xl font-bold text-white mb-1">Silver</h3>
+                  <p className="text-sm text-gray-500 mb-4">Depth 2</p>
+                  
+                  {/* Decorative line */}
+                  <div className="w-12 h-0.5 bg-gradient-to-r from-transparent via-gray-400/50 to-transparent mb-4" />
                 </div>
+              </div>
 
-                {/* Tier rows */}
-                <div className="divide-y divide-border/30">
-                  {/* Diamond - Top Tier */}
-                  <div className="group relative px-6 py-5 transition-all duration-300 hover:bg-gradient-to-r hover:from-cyan-500/10 hover:to-transparent">
-                    <div className="absolute inset-0 bg-gradient-to-r from-cyan-400/5 via-transparent to-cyan-400/5" />
-                    <div className="relative flex items-center gap-6">
-                      <div className="flex items-center justify-center w-12 h-12 rounded-2xl bg-gradient-to-br from-cyan-400 to-cyan-600 shadow-lg shadow-cyan-500/30 group-hover:scale-110 transition-transform">
-                        <span className="text-xl font-bold text-white">1</span>
-                      </div>
-                      <div className="flex-1">
-                        <div className="flex items-center gap-3">
-                          <span className="w-3 h-3 rounded-full bg-gradient-to-r from-cyan-400 to-cyan-300 animate-pulse" />
-                          <h3 className="text-xl md:text-2xl font-bold bg-gradient-to-r from-cyan-400 to-cyan-200 bg-clip-text text-transparent">
-                            Diamond
-                          </h3>
-                        </div>
-                      </div>
-                      <div className="hidden md:flex items-center gap-2">
-                        <svg className="w-5 h-5 text-cyan-400" fill="currentColor" viewBox="0 0 24 24">
-                          <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5" />
-                        </svg>
-                        <span className="text-sm text-cyan-400 font-medium">Elite</span>
-                      </div>
-                    </div>
-                  </div>
-
-                  {/* Platinum */}
-                  <div className="group relative px-6 py-5 transition-all duration-300 hover:bg-gradient-to-r hover:from-slate-400/10 hover:to-transparent">
-                    <div className="relative flex items-center gap-6">
-                      <div className="flex items-center justify-center w-12 h-12 rounded-2xl bg-gradient-to-br from-slate-300 to-slate-500 shadow-lg shadow-slate-400/30 group-hover:scale-110 transition-transform">
-                        <span className="text-xl font-bold text-slate-900">2</span>
-                      </div>
-                      <div className="flex-1">
-                        <div className="flex items-center gap-3">
-                          <span className="w-3 h-3 rounded-full bg-gradient-to-r from-slate-400 to-slate-300" />
-                          <h3 className="text-xl md:text-2xl font-bold bg-gradient-to-r from-slate-400 to-slate-200 bg-clip-text text-transparent">
-                            Platinum
-                          </h3>
-                        </div>
-                      </div>
-                      <div className="hidden md:flex items-center gap-2">
-                        <svg className="w-5 h-5 text-slate-400" fill="currentColor" viewBox="0 0 24 24">
-                          <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5" />
-                        </svg>
-                        <span className="text-sm text-slate-400 font-medium">Premium</span>
-                      </div>
-                    </div>
-                  </div>
-
-                  {/* Gold */}
-                  <div className="group relative px-6 py-5 transition-all duration-300 hover:bg-gradient-to-r hover:from-amber-500/10 hover:to-transparent">
-                    <div className="relative flex items-center gap-6">
-                      <div className="flex items-center justify-center w-12 h-12 rounded-2xl bg-gradient-to-br from-amber-400 to-amber-600 shadow-lg shadow-amber-500/30 group-hover:scale-110 transition-transform">
-                        <span className="text-xl font-bold text-amber-950">3</span>
-                      </div>
-                      <div className="flex-1">
-                        <div className="flex items-center gap-3">
-                          <span className="w-3 h-3 rounded-full bg-gradient-to-r from-amber-400 to-amber-300" />
-                          <h3 className="text-xl md:text-2xl font-bold bg-gradient-to-r from-amber-400 to-amber-200 bg-clip-text text-transparent">
-                            Gold
-                          </h3>
-                        </div>
-                      </div>
-                      <div className="hidden md:flex items-center gap-2">
-                        <svg className="w-5 h-5 text-amber-400" fill="currentColor" viewBox="0 0 24 24">
-                          <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5" />
-                        </svg>
-                        <span className="text-sm text-amber-400 font-medium">Advanced</span>
-                      </div>
-                    </div>
-                  </div>
-
-                  {/* Silver */}
-                  <div className="group relative px-6 py-5 transition-all duration-300 hover:bg-gradient-to-r hover:from-gray-400/10 hover:to-transparent">
-                    <div className="relative flex items-center gap-6">
-                      <div className="flex items-center justify-center w-12 h-12 rounded-2xl bg-gradient-to-br from-gray-300 to-gray-500 shadow-lg shadow-gray-400/20 group-hover:scale-110 transition-transform">
-                        <span className="text-xl font-bold text-gray-900">4</span>
-                      </div>
-                      <div className="flex-1">
-                        <div className="flex items-center gap-3">
-                          <span className="w-3 h-3 rounded-full bg-gradient-to-r from-gray-400 to-gray-300" />
-                          <h3 className="text-xl md:text-2xl font-bold bg-gradient-to-r from-gray-400 to-gray-300 bg-clip-text text-transparent">
-                            Silver
-                          </h3>
-                        </div>
-                      </div>
-                      <div className="hidden md:flex items-center gap-2">
-                        <svg className="w-5 h-5 text-gray-400" fill="currentColor" viewBox="0 0 24 24">
-                          <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5" />
-                        </svg>
-                        <span className="text-sm text-gray-400 font-medium">Standard</span>
-                      </div>
-                    </div>
-                  </div>
-
-                  {/* Bronze */}
-                  <div className="group relative px-6 py-5 transition-all duration-300 hover:bg-gradient-to-r hover:from-orange-600/10 hover:to-transparent">
-                    <div className="relative flex items-center gap-6">
-                      <div className="flex items-center justify-center w-12 h-12 rounded-2xl bg-gradient-to-br from-orange-400 to-orange-700 shadow-lg shadow-orange-600/20 group-hover:scale-110 transition-transform">
-                        <span className="text-xl font-bold text-orange-100">5</span>
-                      </div>
-                      <div className="flex-1">
-                        <div className="flex items-center gap-3">
-                          <span className="w-3 h-3 rounded-full bg-gradient-to-r from-orange-500 to-orange-400" />
-                          <h3 className="text-xl md:text-2xl font-bold bg-gradient-to-r from-orange-500 to-orange-300 bg-clip-text text-transparent">
-                            Bronze
-                          </h3>
-                        </div>
-                      </div>
-                      <div className="hidden md:flex items-center gap-2">
-                        <svg className="w-5 h-5 text-orange-500" fill="currentColor" viewBox="0 0 24 24">
-                          <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5" />
-                        </svg>
-                        <span className="text-sm text-orange-500 font-medium">Starter</span>
-                      </div>
-                    </div>
-                  </div>
+              {/* Gold - Featured */}
+              <div className="group relative col-span-2 md:col-span-1">
+                {/* Most Popular Tag */}
+                <div className="absolute -top-3 left-1/2 -translate-x-1/2 z-10">
+                  <span className="px-4 py-1.5 rounded-full bg-primary text-primary-foreground text-xs font-bold uppercase tracking-wide shadow-lg shadow-primary/30">
+                    Most Popular
+                  </span>
                 </div>
+                
+                <div className="relative flex flex-col items-center p-6 md:p-8 rounded-2xl bg-[#0d2847] border-2 border-primary/50 transition-all duration-300 hover:-translate-y-2 hover:shadow-2xl hover:shadow-primary/20 hover:border-primary">
+                  {/* Badge Circle */}
+                  <div className="relative w-16 h-16 md:w-20 md:h-20 mb-5 rounded-full bg-gradient-to-br from-amber-400 to-amber-600 flex items-center justify-center shadow-lg shadow-amber-500/40 group-hover:scale-110 transition-transform duration-300">
+                    <svg className="w-8 h-8 md:w-10 md:h-10 text-white" viewBox="0 0 24 24" fill="currentColor">
+                      <path d="M12 2l3 6 6.5 1-4.75 4.5L18 20l-6-3.5L6 20l1.25-6.5L2.5 9l6.5-1z"/>
+                    </svg>
+                    {/* Globe icon overlay */}
+                    <div className="absolute -bottom-1 -right-1 w-5 h-5 rounded-full bg-amber-500 flex items-center justify-center">
+                      <svg className="w-3 h-3 text-amber-900" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                        <circle cx="12" cy="12" r="10"/>
+                        <path d="M2 12h20M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/>
+                      </svg>
+                    </div>
+                  </div>
+                  
+                  {/* Tier Name */}
+                  <h3 className="text-lg md:text-xl font-bold text-white mb-1">Gold</h3>
+                  <p className="text-sm text-gray-500 mb-4">Depth 3</p>
+                  
+                  {/* Decorative line */}
+                  <div className="w-12 h-0.5 bg-gradient-to-r from-transparent via-amber-500/50 to-transparent mb-4" />
+                </div>
+              </div>
 
-                {/* Footer note */}
-                <div className="px-6 py-4 border-t border-border/50 bg-muted/30">
-                  <p className="text-center text-sm text-muted-foreground">
-                    Higher tiers unlock greater referral depth and reward limits.
-                  </p>
+              {/* Platinum */}
+              <div className="group relative">
+                <div className="relative flex flex-col items-center p-6 md:p-8 rounded-2xl bg-[#0d1f3c] border border-white/5 transition-all duration-300 hover:border-slate-400/30 hover:-translate-y-2 hover:shadow-xl hover:shadow-slate-400/10">
+                  {/* Badge Circle */}
+                  <div className="relative w-16 h-16 md:w-20 md:h-20 mb-5 rounded-full bg-gradient-to-br from-slate-400 to-slate-600 flex items-center justify-center shadow-lg shadow-slate-500/30 group-hover:scale-110 transition-transform duration-300">
+                    <svg className="w-8 h-8 md:w-10 md:h-10 text-white" viewBox="0 0 24 24" fill="currentColor">
+                      <rect x="4" y="8" width="16" height="10" rx="2"/>
+                      <path d="M8 6h8v2H8z"/>
+                    </svg>
+                    {/* Star icon overlay */}
+                    <div className="absolute -top-1 -right-1 w-5 h-5 rounded-full bg-amber-400 flex items-center justify-center">
+                      <svg className="w-3 h-3 text-amber-900" viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M12 2l2.4 7.4h7.6l-6 4.6 2.3 7-6.3-4.6-6.3 4.6 2.3-7-6-4.6h7.6z"/>
+                      </svg>
+                    </div>
+                  </div>
+                  
+                  {/* Tier Name */}
+                  <h3 className="text-lg md:text-xl font-bold text-white mb-1">Platinum</h3>
+                  <p className="text-sm text-gray-500 mb-4">Depth 4</p>
+                  
+                  {/* Decorative line */}
+                  <div className="w-12 h-0.5 bg-gradient-to-r from-transparent via-slate-400/50 to-transparent mb-4" />
+                </div>
+              </div>
+
+              {/* Diamond */}
+              <div className="group relative">
+                <div className="relative flex flex-col items-center p-6 md:p-8 rounded-2xl bg-[#0d1f3c] border border-white/5 transition-all duration-300 hover:border-cyan-400/30 hover:-translate-y-2 hover:shadow-xl hover:shadow-cyan-400/10">
+                  {/* Badge Circle */}
+                  <div className="relative w-16 h-16 md:w-20 md:h-20 mb-5 rounded-full bg-gradient-to-br from-cyan-400 to-blue-600 flex items-center justify-center shadow-lg shadow-cyan-500/30 group-hover:scale-110 transition-transform duration-300">
+                    <svg className="w-8 h-8 md:w-10 md:h-10 text-white" viewBox="0 0 24 24" fill="currentColor">
+                      <path d="M12 2L2 9l10 13 10-13-10-7zM12 5.5L18 10l-6 8-6-8 6-4.5z"/>
+                    </svg>
+                    {/* SU badge overlay */}
+                    <div className="absolute -top-1 -right-1 w-6 h-6 rounded-full bg-primary flex items-center justify-center">
+                      <span className="text-[8px] font-bold text-primary-foreground">SU</span>
+                    </div>
+                  </div>
+                  
+                  {/* Tier Name */}
+                  <h3 className="text-lg md:text-xl font-bold text-white mb-1">Diamond</h3>
+                  <p className="text-sm text-gray-500 mb-4">Depth 5</p>
+                  
+                  {/* Decorative line */}
+                  <div className="w-12 h-0.5 bg-gradient-to-r from-transparent via-cyan-400/50 to-transparent mb-4" />
                 </div>
               </div>
             </div>
+
+            {/* Footer note */}
+            <p 
+              className="text-center text-sm text-gray-500 mt-12 opacity-0 animate-fade-in-up"
+              style={{ animationDelay: '350ms' }}
+            >
+              Higher tiers unlock greater referral depth and reward limits.
+            </p>
           </div>
         </section>
 
