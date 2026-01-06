@@ -807,19 +807,6 @@ const Index = () => {
               </AccordionItem>
             </Accordion>
 
-            {/* CTA Below FAQ */}
-            <div 
-              className="text-center mt-12 opacity-0 animate-fade-in-up"
-              style={{ animationDelay: '300ms' }}
-            >
-              <p className="text-muted-foreground mb-6">Still have questions?</p>
-              <Button variant="outline" size="lg" className="gap-2 rounded-full px-8 border-primary/30 hover:bg-primary/10 hover:border-primary/50 transition-all">
-                <svg className="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                  <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/>
-                </svg>
-                Contact Support
-              </Button>
-            </div>
           </div>
         </section>
 
