@@ -886,11 +886,11 @@ const Index = () => {
               <div>
                 <h4 className="text-white font-semibold mb-5">Follow U-topia</h4>
                 <ul className="space-y-3">
-                  <li><a href="#" className="text-gray-400 hover:text-primary transition-colors text-sm">Telegram</a></li>
-                  <li><a href="#" className="text-gray-400 hover:text-primary transition-colors text-sm">X (Twitter)</a></li>
-                  <li><a href="#" className="text-gray-400 hover:text-primary transition-colors text-sm">LinkedIn</a></li>
-                  <li><a href="#" className="text-gray-400 hover:text-primary transition-colors text-sm">Instagram</a></li>
-                  <li><a href="#" className="text-gray-400 hover:text-primary transition-colors text-sm">Discord</a></li>
+                  <li><a href="https://t.me/+G6ntSwYCzjJkNzE0" target="_blank" rel="noopener noreferrer" className="text-gray-400 hover:text-primary transition-colors text-sm">Telegram</a></li>
+                  <li><a href="https://x.com/UCoinOfficial" target="_blank" rel="noopener noreferrer" className="text-gray-400 hover:text-primary transition-colors text-sm">X (Twitter)</a></li>
+                  <li><a href="https://www.linkedin.com/company/u-topia/" target="_blank" rel="noopener noreferrer" className="text-gray-400 hover:text-primary transition-colors text-sm">LinkedIn</a></li>
+                  <li><a href="https://www.instagram.com/ucoinofficial" target="_blank" rel="noopener noreferrer" className="text-gray-400 hover:text-primary transition-colors text-sm">Instagram</a></li>
+                  <li><a href="https://discord.gg/qZB83k5HmX" target="_blank" rel="noopener noreferrer" className="text-gray-400 hover:text-primary transition-colors text-sm">Discord</a></li>
                 </ul>
               </div>
 
