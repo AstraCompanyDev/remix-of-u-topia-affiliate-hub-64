@@ -1,4 +1,6 @@
 import { Button } from "@/components/ui/button";
+import logoLight from "@/assets/u-topia-logo-light.png";
+import logoDark from "@/assets/u-topia-logo-dark.png";
 
 const Index = () => {
   return (
@@ -18,13 +20,9 @@ const Index = () => {
         {/* Navigation */}
         <header className="relative z-20 container mx-auto px-6 py-6">
           <nav className="flex items-center justify-between">
-            <div className="flex items-center gap-3">
-              <div className="w-10 h-10 rounded-xl bg-primary/20 border border-primary/30 flex items-center justify-center">
-                <span className="text-primary font-bold text-lg">U+</span>
-              </div>
-              <span className="text-xl font-bold text-white">
-                U-topia <span className="text-primary">Affiliate Hub</span>
-              </span>
+            <div className="flex items-center gap-2">
+              <img src={logoLight} alt="U-topia" className="h-8 md:h-10" />
+              <span className="text-lg font-semibold text-primary">Affiliate Hub</span>
             </div>
             <div className="hidden md:flex items-center gap-8">
               <a href="#" className="text-gray-400 hover:text-white transition-colors">
@@ -369,8 +367,8 @@ const Index = () => {
         <footer className="container mx-auto px-6 py-12 border-t border-border">
           <div className="flex flex-col md:flex-row items-center justify-between gap-4">
             <div className="flex items-center gap-2">
-              <span className="text-primary font-bold">U+</span>
-              <span className="text-muted-foreground">U-topia Affiliate Hub</span>
+              <img src={logoDark} alt="U-topia" className="h-6" />
+              <span className="text-muted-foreground">Affiliate Hub</span>
             </div>
             <p className="text-sm text-muted-foreground">
               © 2024 U-topia. All rights reserved.
