@@ -2,6 +2,7 @@ import { Button } from "@/components/ui/button";
 import logoLight from "@/assets/u-topia-logo-light.png";
 import logoDark from "@/assets/u-topia-logo-dark.png";
 import heroVisual from "@/assets/hero-visual.png";
+import membershipBadge from "@/assets/membership-badge.png";
 
 const Index = () => {
   return (
@@ -376,6 +377,180 @@ const Index = () => {
                       Eligible rewards are distributed following validation and compliance checks.
                     </p>
                   </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        {/* Membership Tiers Section */}
+        <section className="container mx-auto px-6 pb-24">
+          <div className="max-w-5xl mx-auto">
+            <div className="text-center mb-16">
+              <span 
+                className="inline-block px-4 py-2 rounded-full bg-primary/10 border border-primary/20 text-primary text-sm font-medium mb-6 opacity-0 animate-fade-in-up"
+                style={{ animationDelay: '100ms' }}
+              >
+                Participation Levels
+              </span>
+              <h2 
+                className="text-3xl md:text-5xl font-bold text-foreground mb-4 opacity-0 animate-fade-in-up"
+                style={{ animationDelay: '150ms' }}
+              >
+                Membership <span className="gradient-text">Tiers</span>
+              </h2>
+              <p 
+                className="text-lg text-muted-foreground max-w-2xl mx-auto opacity-0 animate-fade-in-up"
+                style={{ animationDelay: '200ms' }}
+              >
+                Participation tiers define your earning capacity within the program.
+              </p>
+            </div>
+
+            {/* Leaderboard Container */}
+            <div 
+              className="relative opacity-0 animate-fade-in-up"
+              style={{ animationDelay: '250ms' }}
+            >
+              {/* Decorative badge */}
+              <div className="absolute -top-12 right-0 md:right-8 w-24 h-24 md:w-32 md:h-32 animate-float-gentle opacity-80">
+                <img src={membershipBadge} alt="Membership Badge" className="w-full h-full object-contain" />
+              </div>
+
+              {/* Main leaderboard */}
+              <div className="relative overflow-hidden rounded-3xl border border-border/50 bg-gradient-to-b from-card to-background shadow-2xl">
+                {/* Header bar */}
+                <div className="bg-gradient-to-r from-primary/20 via-primary/10 to-primary/20 px-6 py-4 border-b border-border/50">
+                  <div className="flex items-center justify-between">
+                    <span className="text-sm font-semibold text-foreground/80 uppercase tracking-wider">Rank</span>
+                    <span className="text-sm font-semibold text-foreground/80 uppercase tracking-wider">Tier</span>
+                  </div>
+                </div>
+
+                {/* Tier rows */}
+                <div className="divide-y divide-border/30">
+                  {/* Diamond - Top Tier */}
+                  <div className="group relative px-6 py-5 transition-all duration-300 hover:bg-gradient-to-r hover:from-cyan-500/10 hover:to-transparent">
+                    <div className="absolute inset-0 bg-gradient-to-r from-cyan-400/5 via-transparent to-cyan-400/5" />
+                    <div className="relative flex items-center gap-6">
+                      <div className="flex items-center justify-center w-12 h-12 rounded-2xl bg-gradient-to-br from-cyan-400 to-cyan-600 shadow-lg shadow-cyan-500/30 group-hover:scale-110 transition-transform">
+                        <span className="text-xl font-bold text-white">1</span>
+                      </div>
+                      <div className="flex-1">
+                        <div className="flex items-center gap-3">
+                          <span className="w-3 h-3 rounded-full bg-gradient-to-r from-cyan-400 to-cyan-300 animate-pulse" />
+                          <h3 className="text-xl md:text-2xl font-bold bg-gradient-to-r from-cyan-400 to-cyan-200 bg-clip-text text-transparent">
+                            Diamond
+                          </h3>
+                        </div>
+                      </div>
+                      <div className="hidden md:flex items-center gap-2">
+                        <svg className="w-5 h-5 text-cyan-400" fill="currentColor" viewBox="0 0 24 24">
+                          <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5" />
+                        </svg>
+                        <span className="text-sm text-cyan-400 font-medium">Elite</span>
+                      </div>
+                    </div>
+                  </div>
+
+                  {/* Platinum */}
+                  <div className="group relative px-6 py-5 transition-all duration-300 hover:bg-gradient-to-r hover:from-slate-400/10 hover:to-transparent">
+                    <div className="relative flex items-center gap-6">
+                      <div className="flex items-center justify-center w-12 h-12 rounded-2xl bg-gradient-to-br from-slate-300 to-slate-500 shadow-lg shadow-slate-400/30 group-hover:scale-110 transition-transform">
+                        <span className="text-xl font-bold text-slate-900">2</span>
+                      </div>
+                      <div className="flex-1">
+                        <div className="flex items-center gap-3">
+                          <span className="w-3 h-3 rounded-full bg-gradient-to-r from-slate-400 to-slate-300" />
+                          <h3 className="text-xl md:text-2xl font-bold bg-gradient-to-r from-slate-400 to-slate-200 bg-clip-text text-transparent">
+                            Platinum
+                          </h3>
+                        </div>
+                      </div>
+                      <div className="hidden md:flex items-center gap-2">
+                        <svg className="w-5 h-5 text-slate-400" fill="currentColor" viewBox="0 0 24 24">
+                          <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5" />
+                        </svg>
+                        <span className="text-sm text-slate-400 font-medium">Premium</span>
+                      </div>
+                    </div>
+                  </div>
+
+                  {/* Gold */}
+                  <div className="group relative px-6 py-5 transition-all duration-300 hover:bg-gradient-to-r hover:from-amber-500/10 hover:to-transparent">
+                    <div className="relative flex items-center gap-6">
+                      <div className="flex items-center justify-center w-12 h-12 rounded-2xl bg-gradient-to-br from-amber-400 to-amber-600 shadow-lg shadow-amber-500/30 group-hover:scale-110 transition-transform">
+                        <span className="text-xl font-bold text-amber-950">3</span>
+                      </div>
+                      <div className="flex-1">
+                        <div className="flex items-center gap-3">
+                          <span className="w-3 h-3 rounded-full bg-gradient-to-r from-amber-400 to-amber-300" />
+                          <h3 className="text-xl md:text-2xl font-bold bg-gradient-to-r from-amber-400 to-amber-200 bg-clip-text text-transparent">
+                            Gold
+                          </h3>
+                        </div>
+                      </div>
+                      <div className="hidden md:flex items-center gap-2">
+                        <svg className="w-5 h-5 text-amber-400" fill="currentColor" viewBox="0 0 24 24">
+                          <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5" />
+                        </svg>
+                        <span className="text-sm text-amber-400 font-medium">Advanced</span>
+                      </div>
+                    </div>
+                  </div>
+
+                  {/* Silver */}
+                  <div className="group relative px-6 py-5 transition-all duration-300 hover:bg-gradient-to-r hover:from-gray-400/10 hover:to-transparent">
+                    <div className="relative flex items-center gap-6">
+                      <div className="flex items-center justify-center w-12 h-12 rounded-2xl bg-gradient-to-br from-gray-300 to-gray-500 shadow-lg shadow-gray-400/20 group-hover:scale-110 transition-transform">
+                        <span className="text-xl font-bold text-gray-900">4</span>
+                      </div>
+                      <div className="flex-1">
+                        <div className="flex items-center gap-3">
+                          <span className="w-3 h-3 rounded-full bg-gradient-to-r from-gray-400 to-gray-300" />
+                          <h3 className="text-xl md:text-2xl font-bold bg-gradient-to-r from-gray-400 to-gray-300 bg-clip-text text-transparent">
+                            Silver
+                          </h3>
+                        </div>
+                      </div>
+                      <div className="hidden md:flex items-center gap-2">
+                        <svg className="w-5 h-5 text-gray-400" fill="currentColor" viewBox="0 0 24 24">
+                          <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5" />
+                        </svg>
+                        <span className="text-sm text-gray-400 font-medium">Standard</span>
+                      </div>
+                    </div>
+                  </div>
+
+                  {/* Bronze */}
+                  <div className="group relative px-6 py-5 transition-all duration-300 hover:bg-gradient-to-r hover:from-orange-600/10 hover:to-transparent">
+                    <div className="relative flex items-center gap-6">
+                      <div className="flex items-center justify-center w-12 h-12 rounded-2xl bg-gradient-to-br from-orange-400 to-orange-700 shadow-lg shadow-orange-600/20 group-hover:scale-110 transition-transform">
+                        <span className="text-xl font-bold text-orange-100">5</span>
+                      </div>
+                      <div className="flex-1">
+                        <div className="flex items-center gap-3">
+                          <span className="w-3 h-3 rounded-full bg-gradient-to-r from-orange-500 to-orange-400" />
+                          <h3 className="text-xl md:text-2xl font-bold bg-gradient-to-r from-orange-500 to-orange-300 bg-clip-text text-transparent">
+                            Bronze
+                          </h3>
+                        </div>
+                      </div>
+                      <div className="hidden md:flex items-center gap-2">
+                        <svg className="w-5 h-5 text-orange-500" fill="currentColor" viewBox="0 0 24 24">
+                          <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5" />
+                        </svg>
+                        <span className="text-sm text-orange-500 font-medium">Starter</span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                {/* Footer note */}
+                <div className="px-6 py-4 border-t border-border/50 bg-muted/30">
+                  <p className="text-center text-sm text-muted-foreground">
+                    Higher tiers unlock greater referral depth and reward limits.
+                  </p>
                 </div>
               </div>
             </div>
