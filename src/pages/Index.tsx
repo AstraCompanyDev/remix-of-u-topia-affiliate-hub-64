@@ -51,7 +51,7 @@ const Index = () => {
               style={{ animationDelay: '100ms' }}
             >
               <span className="inline-block px-4 py-2 rounded-full bg-primary/10 border border-primary/20 text-primary text-sm font-medium mb-8">
-                Ambassador Rewards Program
+                Earn through real platform activity
               </span>
             </div>
             
@@ -59,15 +59,23 @@ const Index = () => {
               className="text-5xl md:text-7xl font-bold mb-6 opacity-0 animate-fade-in-up"
               style={{ animationDelay: '200ms' }}
             >
-              <span className="text-foreground">U-topia </span>
-              <span className="gradient-text text-glow">Affiliate Hub</span>
+              <span className="text-foreground">Build with </span>
+              <span className="gradient-text text-glow">U-topia</span>
             </h1>
             
             <p 
-              className="text-xl md:text-2xl text-muted-foreground mb-12 max-w-2xl mx-auto opacity-0 animate-fade-in-up"
+              className="text-lg md:text-xl text-muted-foreground mb-6 max-w-2xl mx-auto opacity-0 animate-fade-in-up"
               style={{ animationDelay: '300ms' }}
             >
-              Your content will go here. Share your unique referral link and unlock exclusive rewards.
+              A digital financial ecosystem that rewards growth, usage, and contribution. 
+              Incentives aligned with real economic activity—not hype.
+            </p>
+
+            <p 
+              className="text-xl md:text-2xl font-semibold text-foreground mb-12 opacity-0 animate-fade-in-up"
+              style={{ animationDelay: '350ms' }}
+            >
+              Real products. Real users. <span className="text-primary">Real rewards.</span>
             </p>
 
             <div 
@@ -78,7 +86,7 @@ const Index = () => {
                 Get Started
               </Button>
               <Button variant="glass" size="xl">
-                Learn More
+                Learn How It Works
               </Button>
             </div>
           </div>
