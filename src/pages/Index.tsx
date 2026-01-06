@@ -20,9 +20,8 @@ const Index = () => {
         {/* Navigation */}
         <header className="relative z-20 container mx-auto px-6 py-6">
           <nav className="flex items-center justify-between">
-            <div className="flex items-center gap-2">
+            <div className="flex items-center">
               <img src={logoLight} alt="U-topia" className="h-8 md:h-10" />
-              <span className="text-lg font-semibold text-primary">Affiliate Hub</span>
             </div>
             <div className="hidden md:flex items-center gap-8">
               <a href="#" className="text-gray-400 hover:text-white transition-colors">
