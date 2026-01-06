@@ -1,6 +1,7 @@
 import { Button } from "@/components/ui/button";
 import logoLight from "@/assets/u-topia-logo-light.png";
 import logoDark from "@/assets/u-topia-logo-dark.png";
+import heroVisual from "@/assets/hero-visual.png";
 
 const Index = () => {
   return (
@@ -42,78 +43,97 @@ const Index = () => {
 
         {/* Hero Content */}
         <section className="relative z-10 container mx-auto px-6 pt-16 pb-24">
-          <div className="max-w-4xl">
-            {/* Badge */}
-            <div 
-              className="opacity-0 animate-fade-in-up"
-              style={{ animationDelay: '100ms' }}
-            >
-              <span className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/5 border border-white/10 text-gray-300 text-sm font-medium mb-8">
-                <span className="w-2 h-2 rounded-full bg-primary animate-pulse"></span>
-                Earn through real platform activity
-              </span>
+          <div className="flex flex-col lg:flex-row items-center gap-12">
+            {/* Left content */}
+            <div className="flex-1 max-w-2xl">
+              {/* Badge */}
+              <div 
+                className="opacity-0 animate-fade-in-up"
+                style={{ animationDelay: '100ms' }}
+              >
+                <span className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/5 border border-white/10 text-gray-300 text-sm font-medium mb-8">
+                  <span className="w-2 h-2 rounded-full bg-primary animate-pulse"></span>
+                  Earn through real platform activity
+                </span>
+              </div>
+              
+              {/* Headline */}
+              <h1 
+                className="text-5xl md:text-6xl lg:text-7xl font-bold mb-6 opacity-0 animate-fade-in-up leading-tight"
+                style={{ animationDelay: '200ms' }}
+              >
+                <span className="text-white">Build with </span>
+                <span className="gradient-text">U-topia</span>
+              </h1>
+              
+              {/* Subheadline */}
+              <p 
+                className="text-lg md:text-xl text-gray-400 mb-8 max-w-xl opacity-0 animate-fade-in-up"
+                style={{ animationDelay: '300ms' }}
+              >
+                A digital financial ecosystem that rewards growth, usage, and contribution. 
+                Incentives aligned with real economic activity, not hype.
+              </p>
+
+              {/* Tagline */}
+              <p 
+                className="text-xl md:text-2xl font-semibold text-white mb-10 opacity-0 animate-fade-in-up"
+                style={{ animationDelay: '350ms' }}
+              >
+                Real products. Real users. <span className="text-primary">Real rewards.</span>
+              </p>
+
+              {/* CTAs */}
+              <div 
+                className="flex flex-col sm:flex-row gap-4 opacity-0 animate-fade-in-up"
+                style={{ animationDelay: '400ms' }}
+              >
+                <Button className="bg-primary hover:bg-primary/90 text-white font-semibold px-8 py-6 text-base rounded-full shadow-lg shadow-primary/25 hover:shadow-xl hover:shadow-primary/30 transition-all">
+                  Get Started
+                  <svg className="w-5 h-5 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
+                  </svg>
+                </Button>
+                <Button variant="outline" className="border-white/20 text-white hover:bg-white/10 hover:border-white/30 px-8 py-6 text-base rounded-full transition-all">
+                  Learn How It Works
+                </Button>
+              </div>
+
+              {/* Stats */}
+              <div 
+                className="flex flex-wrap gap-8 md:gap-12 mt-16 pt-8 border-t border-white/10 opacity-0 animate-fade-in-up"
+                style={{ animationDelay: '500ms' }}
+              >
+                <div>
+                  <p className="text-3xl md:text-4xl font-bold text-white">100%</p>
+                  <p className="text-gray-500 text-sm mt-1">Real Activity</p>
+                </div>
+                <div className="w-px bg-white/10 hidden md:block"></div>
+                <div>
+                  <p className="text-3xl md:text-4xl font-bold text-white">Verified</p>
+                  <p className="text-gray-500 text-sm mt-1">Transactions</p>
+                </div>
+                <div className="w-px bg-white/10 hidden md:block"></div>
+                <div>
+                  <p className="text-3xl md:text-4xl font-bold text-white">Global</p>
+                  <p className="text-gray-500 text-sm mt-1">Rewards Network</p>
+                </div>
+              </div>
             </div>
-            
-            {/* Headline */}
-            <h1 
-              className="text-5xl md:text-7xl font-bold mb-6 opacity-0 animate-fade-in-up leading-tight"
-              style={{ animationDelay: '200ms' }}
-            >
-              <span className="text-white">Build with </span>
-              <span className="gradient-text">U-topia</span>
-            </h1>
-            
-            {/* Subheadline */}
-            <p 
-              className="text-lg md:text-xl text-gray-400 mb-8 max-w-xl opacity-0 animate-fade-in-up"
+
+            {/* Right visual - Floating hero image */}
+            <div 
+              className="flex-1 flex justify-center lg:justify-end opacity-0 animate-fade-in-up"
               style={{ animationDelay: '300ms' }}
             >
-              A digital financial ecosystem that rewards growth, usage, and contribution. 
-              Incentives aligned with real economic activity, not hype.
-            </p>
-
-            {/* Tagline */}
-            <p 
-              className="text-xl md:text-2xl font-semibold text-white mb-10 opacity-0 animate-fade-in-up"
-              style={{ animationDelay: '350ms' }}
-            >
-              Real products. Real users. <span className="text-primary">Real rewards.</span>
-            </p>
-
-            {/* CTAs */}
-            <div 
-              className="flex flex-col sm:flex-row gap-4 opacity-0 animate-fade-in-up"
-              style={{ animationDelay: '400ms' }}
-            >
-              <Button className="bg-primary hover:bg-primary/90 text-white font-semibold px-8 py-6 text-base rounded-full shadow-lg shadow-primary/25 hover:shadow-xl hover:shadow-primary/30 transition-all">
-                Get Started
-                <svg className="w-5 h-5 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
-                </svg>
-              </Button>
-              <Button variant="outline" className="border-white/20 text-white hover:bg-white/10 hover:border-white/30 px-8 py-6 text-base rounded-full transition-all">
-                Learn How It Works
-              </Button>
-            </div>
-
-            {/* Stats */}
-            <div 
-              className="flex flex-wrap gap-8 md:gap-12 mt-16 pt-8 border-t border-white/10 opacity-0 animate-fade-in-up"
-              style={{ animationDelay: '500ms' }}
-            >
-              <div>
-                <p className="text-3xl md:text-4xl font-bold text-white">100%</p>
-                <p className="text-gray-500 text-sm mt-1">Real Activity</p>
-              </div>
-              <div className="w-px bg-white/10 hidden md:block"></div>
-              <div>
-                <p className="text-3xl md:text-4xl font-bold text-white">Verified</p>
-                <p className="text-gray-500 text-sm mt-1">Transactions</p>
-              </div>
-              <div className="w-px bg-white/10 hidden md:block"></div>
-              <div>
-                <p className="text-3xl md:text-4xl font-bold text-white">Global</p>
-                <p className="text-gray-500 text-sm mt-1">Rewards Network</p>
+              <div className="relative">
+                <img 
+                  src={heroVisual} 
+                  alt="U-topia Virtual Card and Rewards" 
+                  className="w-full max-w-md lg:max-w-lg xl:max-w-xl animate-float-gentle drop-shadow-2xl"
+                />
+                {/* Glow effect behind image */}
+                <div className="absolute inset-0 -z-10 blur-3xl opacity-30 bg-primary/40 rounded-full scale-75" />
               </div>
             </div>
           </div>

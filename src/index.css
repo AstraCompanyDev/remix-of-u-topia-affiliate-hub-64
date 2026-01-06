@@ -167,6 +167,13 @@
   50% { transform: translateY(-20px) scale(1.05); }
 }
 
+@keyframes float-gentle {
+  0%, 100% { transform: translateY(0) translateX(0); }
+  25% { transform: translateY(-15px) translateX(5px); }
+  50% { transform: translateY(-8px) translateX(-5px); }
+  75% { transform: translateY(-20px) translateX(3px); }
+}
+
 @keyframes pulse-glow {
   0%, 100% { opacity: 0.3; }
   50% { opacity: 0.6; }
@@ -185,4 +192,8 @@
 @keyframes shimmer {
   0% { background-position: -200% 0; }
   100% { background-position: 200% 0; }
+}
+
+.animate-float-gentle {
+  animation: float-gentle 6s ease-in-out infinite;
 }
