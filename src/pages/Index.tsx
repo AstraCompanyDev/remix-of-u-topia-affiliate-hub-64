@@ -823,7 +823,66 @@ const Index = () => {
           </div>
         </section>
 
-        <footer className="container mx-auto px-6 py-12 border-t border-border">
+        {/* Final CTA Section */}
+        <section className="relative py-24 md:py-32 overflow-hidden bg-gradient-to-b from-[#0a0f1a] to-[#0d1526]">
+          {/* Background effects */}
+          <div className="absolute inset-0 pointer-events-none">
+            <div className="absolute w-[600px] h-[600px] top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 rounded-full blur-[120px] opacity-20 bg-gradient-to-r from-primary/40 to-cyan-500/40" />
+          </div>
+          
+          {/* Grid pattern */}
+          <div className="absolute inset-0 opacity-[0.03]" style={{ backgroundImage: 'linear-gradient(rgba(255,255,255,0.1) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.1) 1px, transparent 1px)', backgroundSize: '60px 60px' }} />
+          
+          <div className="relative container mx-auto px-6 text-center">
+            <div 
+              className="max-w-3xl mx-auto opacity-0 animate-fade-in-up"
+              style={{ animationDelay: '100ms' }}
+            >
+              <span className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-gradient-to-r from-primary/20 to-cyan-500/20 border border-primary/30 text-primary text-sm font-semibold mb-8 backdrop-blur-sm">
+                <svg className="w-4 h-4" viewBox="0 0 24 24" fill="currentColor">
+                  <path d="M14.5 10c-.83 0-1.5.67-1.5 1.5v5c0 .83.67 1.5 1.5 1.5s1.5-.67 1.5-1.5v-5c0-.83-.67-1.5-1.5-1.5z"/>
+                  <path d="M20.5 10H19V8.5c0-.83-.67-1.5-1.5-1.5S16 7.67 16 8.5V10h-2V8.5c0-.83-.67-1.5-1.5-1.5S11 7.67 11 8.5V10H9V8.5c0-.83-.67-1.5-1.5-1.5S6 7.67 6 8.5V10H4.5c-.83 0-1.5.67-1.5 1.5v9c0 .83.67 1.5 1.5 1.5h16c.83 0 1.5-.67 1.5-1.5v-9c0-.83-.67-1.5-1.5-1.5z"/>
+                </svg>
+                Start Today
+              </span>
+              
+              <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-6 tracking-tight leading-tight">
+                Ready to <span className="bg-gradient-to-r from-primary via-orange-400 to-primary bg-clip-text text-transparent">Build</span> Your Future?
+              </h2>
+              
+              <p className="text-lg md:text-xl text-gray-400 mb-10 leading-relaxed max-w-2xl mx-auto">
+                Join the U-topia Affiliate Program and start building with a platform designed for long-term growth.
+              </p>
+              
+              <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
+                <Button 
+                  variant="hero" 
+                  className="group gap-3 min-w-[200px]"
+                >
+                  Create Account
+                  <svg className="w-5 h-5 group-hover:translate-x-1 transition-transform" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                    <path d="M5 12h14M12 5l7 7-7 7"/>
+                  </svg>
+                </Button>
+                
+                <Button 
+                  variant="outline" 
+                  size="lg" 
+                  className="gap-3 min-w-[200px] border-white/20 text-white hover:bg-white/10 hover:border-white/40 rounded-2xl"
+                >
+                  <svg className="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                    <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
+                    <polyline points="7 10 12 15 17 10"/>
+                    <line x1="12" y1="15" x2="12" y2="3"/>
+                  </svg>
+                  Download Program Overview
+                </Button>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <footer className="container mx-auto px-6 py-12 border-t border-border bg-background">
           <div className="flex flex-col md:flex-row items-center justify-between gap-4">
             <div className="flex items-center gap-2">
               <img src={logoDark} alt="U-topia" className="h-6" />
