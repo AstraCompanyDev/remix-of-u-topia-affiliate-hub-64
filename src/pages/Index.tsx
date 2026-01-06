@@ -42,9 +42,11 @@ const Index = () => {
               <a href="#" className="text-gray-400 hover:text-white transition-colors">
                 Rewards
               </a>
-              <Button variant="default" size="sm">
-                Join Now
-              </Button>
+              <Link to="/auth">
+                <Button variant="default" size="sm">
+                  Join Now
+                </Button>
+              </Link>
             </div>
           </nav>
         </header>
@@ -627,12 +629,14 @@ const Index = () => {
                 className="opacity-0 animate-fade-in-up"
                 style={{ animationDelay: '250ms' }}
               >
-                <Button size="lg" className="group gap-2 text-base px-8 py-6 rounded-full shadow-xl shadow-primary/25 hover:shadow-primary/40 transition-all duration-300">
-                  Start Your Journey
-                  <svg className="w-5 h-5 group-hover:translate-x-1 transition-transform" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                    <path d="M5 12h14M12 5l7 7-7 7"/>
-                  </svg>
-                </Button>
+                <Link to="/auth">
+                  <Button size="lg" className="group gap-2 text-base px-8 py-6 rounded-full shadow-xl shadow-primary/25 hover:shadow-primary/40 transition-all duration-300">
+                    Start Your Journey
+                    <svg className="w-5 h-5 group-hover:translate-x-1 transition-transform" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                      <path d="M5 12h14M12 5l7 7-7 7"/>
+                    </svg>
+                  </Button>
+                </Link>
               </div>
             </div>
             
