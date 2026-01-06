@@ -871,9 +871,9 @@ const Index = () => {
 
         <footer className="bg-[#0a0f1a] py-16">
           <div className="container mx-auto px-6">
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10 mb-12">
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-10 mb-12">
               {/* Brand Column */}
-              <div className="lg:col-span-1">
+              <div>
                 <div className="flex items-center gap-2 mb-4">
                   <img src={logoLight} alt="U-topia" className="h-8" />
                 </div>
@@ -891,17 +891,6 @@ const Index = () => {
                   <li><a href="#" className="text-gray-400 hover:text-primary transition-colors text-sm">LinkedIn</a></li>
                   <li><a href="#" className="text-gray-400 hover:text-primary transition-colors text-sm">Instagram</a></li>
                   <li><a href="#" className="text-gray-400 hover:text-primary transition-colors text-sm">Discord</a></li>
-                </ul>
-              </div>
-
-              {/* Ecosystem */}
-              <div>
-                <h4 className="text-white font-semibold mb-5">Ecosystem</h4>
-                <ul className="space-y-3">
-                  <li><a href="#" className="text-gray-400 hover:text-primary transition-colors text-sm">Products</a></li>
-                  <li><a href="#" className="text-gray-400 hover:text-primary transition-colors text-sm">uPay</a></li>
-                  <li><a href="#" className="text-gray-400 hover:text-primary transition-colors text-sm">Team</a></li>
-                  <li><a href="#" className="text-gray-400 hover:text-primary transition-colors text-sm">Earn</a></li>
                 </ul>
               </div>
 
