@@ -95,6 +95,12 @@ const Index = () => {
         {/* Features Section */}
         <section className="container mx-auto px-6 pb-32">
           <div className="max-w-3xl mx-auto text-center mb-16">
+            <h2 
+              className="text-3xl md:text-4xl font-bold text-foreground mb-6 opacity-0 animate-fade-in-up"
+              style={{ animationDelay: '450ms' }}
+            >
+              Earn From <span className="gradient-text">Real Activity</span>
+            </h2>
             <p 
               className="text-lg md:text-xl text-muted-foreground opacity-0 animate-fade-in-up"
               style={{ animationDelay: '500ms' }}
