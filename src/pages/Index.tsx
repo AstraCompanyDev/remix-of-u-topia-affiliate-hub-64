@@ -94,7 +94,7 @@ const Index = () => {
 
         {/* Features Section */}
         <section className="container mx-auto px-6 pb-32">
-          <div className="max-w-3xl mx-auto text-center mb-16">
+          <div className="max-w-3xl mx-auto text-center mb-10">
             <h2 
               className="text-3xl md:text-4xl font-bold text-foreground mb-6 opacity-0 animate-fade-in-up"
               style={{ animationDelay: '450ms' }}
@@ -106,12 +106,6 @@ const Index = () => {
               style={{ animationDelay: '500ms' }}
             >
               The U-topia Affiliate Program allows participants to earn rewards by introducing users and businesses to U-topia's financial products and services.
-            </p>
-            <p 
-              className="text-lg md:text-xl text-foreground font-medium mt-6 opacity-0 animate-fade-in-up"
-              style={{ animationDelay: '550ms' }}
-            >
-              Rewards are generated from verified platform activity across:
             </p>
           </div>
 
