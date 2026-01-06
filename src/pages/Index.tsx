@@ -36,7 +36,7 @@ const Index = () => {
               <a href="#" className="text-muted-foreground hover:text-foreground transition-colors">
                 Rewards
               </a>
-              <Button variant="accent" size="sm">
+              <Button variant="default" size="sm">
                 Join Now
               </Button>
             </div>
@@ -306,17 +306,17 @@ const Index = () => {
                   className="group opacity-0 animate-fade-in-up"
                   style={{ animationDelay: '600ms' }}
                 >
-                  <div className="relative glass-card p-6 h-full border-accent/30 bg-accent/5 transition-all duration-300 hover:border-accent/50 hover:-translate-y-1">
+                  <div className="relative glass-card p-6 h-full border-emerald-500/30 bg-emerald-50 transition-all duration-300 hover:border-emerald-500/50 hover:-translate-y-1">
                     <div className="absolute -top-4 left-6">
-                      <div className="w-8 h-8 rounded-lg bg-accent text-accent-foreground flex items-center justify-center shadow-lg shadow-accent/25">
+                      <div className="w-8 h-8 rounded-lg bg-emerald-500 text-white flex items-center justify-center shadow-lg shadow-emerald-500/25">
                         <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M5 13l4 4L19 7" />
                         </svg>
                       </div>
                     </div>
                     
-                    <div className="w-12 h-12 rounded-xl bg-accent/10 border border-accent/20 flex items-center justify-center mt-4 mb-5 group-hover:scale-110 transition-transform duration-300">
-                      <svg className="w-6 h-6 text-accent" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <div className="w-12 h-12 rounded-xl bg-emerald-500/10 border border-emerald-500/20 flex items-center justify-center mt-4 mb-5 group-hover:scale-110 transition-transform duration-300">
+                      <svg className="w-6 h-6 text-emerald-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
                       </svg>
                     </div>

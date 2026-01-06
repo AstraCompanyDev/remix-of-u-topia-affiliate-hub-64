@@ -23,11 +23,11 @@ const buttonVariants = cva(
           "text-primary underline-offset-4 hover:underline",
         // U-topia specific variants
         accent:
-          "bg-accent text-accent-foreground hover:bg-accent/90 glow-accent hover:shadow-lg hover:shadow-accent/30 font-bold",
+          "bg-accent text-accent-foreground hover:bg-accent/90 hover:shadow-lg font-bold",
         hero:
-          "bg-accent text-accent-foreground hover:bg-accent/90 glow-accent hover:shadow-xl hover:shadow-accent/40 font-bold text-base px-8 py-6 rounded-2xl",
+          "bg-primary text-primary-foreground hover:bg-primary/90 hover:shadow-xl hover:shadow-primary/30 font-bold text-base px-8 py-6 rounded-2xl",
         glass:
-          "bg-card/40 backdrop-blur-lg border border-border/50 text-foreground hover:bg-card/60 hover:border-primary/30",
+          "bg-secondary border border-border text-foreground hover:bg-secondary/80 hover:border-primary/30",
         glow:
           "bg-primary text-primary-foreground glow-primary hover:shadow-xl hover:shadow-primary/40 font-bold",
       },
