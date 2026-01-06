@@ -459,11 +459,15 @@ const Index = () => {
 
               {/* Gold - Featured */}
               <div className="group relative col-span-2 md:col-span-1">
-                {/* Most Popular Tag */}
-                <div className="absolute -top-3 left-1/2 -translate-x-1/2 z-10">
-                  <span className="px-4 py-1.5 rounded-full bg-primary text-primary-foreground text-xs font-bold uppercase tracking-wide shadow-lg shadow-primary/30">
-                    Most Popular
-                  </span>
+                {/* Most Popular Ribbon */}
+                <div className="absolute -top-4 -right-2 z-10">
+                  <div className="relative">
+                    <div className="bg-gradient-to-r from-primary to-orange-600 text-primary-foreground text-[10px] font-bold uppercase tracking-wider px-3 py-1.5 rounded-sm shadow-lg transform rotate-12">
+                      Most Popular
+                    </div>
+                    {/* Ribbon tail */}
+                    <div className="absolute -bottom-1 -left-1 w-2 h-2 bg-orange-700 transform -skew-y-12" />
+                  </div>
                 </div>
                 
                 <div className="relative flex flex-col items-center p-6 md:p-8 rounded-2xl bg-[#0d2847] border-2 border-primary/50 transition-all duration-300 hover:-translate-y-2 hover:shadow-2xl hover:shadow-primary/20 hover:border-primary">
