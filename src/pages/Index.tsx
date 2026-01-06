@@ -92,27 +92,82 @@ const Index = () => {
           </div>
         </section>
 
-        {/* Features Grid - Placeholder */}
+        {/* Features Section */}
         <section className="container mx-auto px-6 pb-32">
-          <div className="grid md:grid-cols-3 gap-6">
-            {[1, 2, 3].map((item) => (
-              <div 
-                key={item}
-                className="glass-card p-8 opacity-0 animate-fade-in-up"
-                style={{ animationDelay: `${400 + item * 100}ms` }}
-              >
-                <div className="w-14 h-14 rounded-2xl bg-primary/10 border border-primary/20 flex items-center justify-center mb-6">
-                  <span className="text-primary text-2xl font-bold">{item}</span>
-                </div>
-                <h3 className="text-xl font-semibold text-foreground mb-3">
-                  Feature {item}
-                </h3>
-                <p className="text-muted-foreground">
-                  Your feature description will go here. Add your content to customize this section.
-                </p>
-              </div>
-            ))}
+          <div className="max-w-3xl mx-auto text-center mb-16">
+            <p 
+              className="text-lg md:text-xl text-muted-foreground opacity-0 animate-fade-in-up"
+              style={{ animationDelay: '500ms' }}
+            >
+              The U-topia Affiliate Program allows participants to earn rewards by introducing users and businesses to U-topia's financial products and services.
+            </p>
+            <p 
+              className="text-lg md:text-xl text-foreground font-medium mt-6 opacity-0 animate-fade-in-up"
+              style={{ animationDelay: '550ms' }}
+            >
+              Rewards are generated from verified platform activity across:
+            </p>
           </div>
+
+          <div className="grid md:grid-cols-3 gap-6 mb-12">
+            <div 
+              className="glass-card p-8 opacity-0 animate-fade-in-up"
+              style={{ animationDelay: '600ms' }}
+            >
+              <div className="w-14 h-14 rounded-2xl bg-primary/10 border border-primary/20 flex items-center justify-center mb-6">
+                <svg className="w-7 h-7 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 10h18M7 15h1m4 0h1m-7 4h12a3 3 0 003-3V8a3 3 0 00-3-3H6a3 3 0 00-3 3v8a3 3 0 003 3z" />
+                </svg>
+              </div>
+              <h3 className="text-xl font-semibold text-foreground mb-3">
+                Accounts & Financial Services
+              </h3>
+              <p className="text-muted-foreground">
+                Earn from user signups, account activations, and ongoing financial service usage within the platform.
+              </p>
+            </div>
+
+            <div 
+              className="glass-card p-8 opacity-0 animate-fade-in-up"
+              style={{ animationDelay: '700ms' }}
+            >
+              <div className="w-14 h-14 rounded-2xl bg-primary/10 border border-primary/20 flex items-center justify-center mb-6">
+                <svg className="w-7 h-7 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 9V7a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2m2 4h10a2 2 0 002-2v-6a2 2 0 00-2-2H9a2 2 0 00-2 2v6a2 2 0 002 2zm7-5a2 2 0 11-4 0 2 2 0 014 0z" />
+                </svg>
+              </div>
+              <h3 className="text-xl font-semibold text-foreground mb-3">
+                Payments & Merchant Transactions
+              </h3>
+              <p className="text-muted-foreground">
+                Generate rewards from payment processing, merchant integrations, and transaction volume across the network.
+              </p>
+            </div>
+
+            <div 
+              className="glass-card p-8 opacity-0 animate-fade-in-up"
+              style={{ animationDelay: '800ms' }}
+            >
+              <div className="w-14 h-14 rounded-2xl bg-primary/10 border border-primary/20 flex items-center justify-center mb-6">
+                <svg className="w-7 h-7 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 10h18M7 15h1m4 0h1m-7 4h12a3 3 0 003-3V8a3 3 0 00-3-3H6a3 3 0 00-3 3v8a3 3 0 003 3z" />
+                </svg>
+              </div>
+              <h3 className="text-xl font-semibold text-foreground mb-3">
+                Card Usage & Subscriptions
+              </h3>
+              <p className="text-muted-foreground">
+                Benefit from card activations, recurring subscription payments, and sustained user engagement.
+              </p>
+            </div>
+          </div>
+
+          <p 
+            className="text-center text-sm text-muted-foreground opacity-0 animate-fade-in-up"
+            style={{ animationDelay: '900ms' }}
+          >
+            There are no guaranteed returns. Rewards are earned through participation and sustained activity.
+          </p>
         </section>
 
         {/* Footer placeholder */}
