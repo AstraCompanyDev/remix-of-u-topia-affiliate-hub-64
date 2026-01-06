@@ -3,6 +3,7 @@ import logoLight from "@/assets/u-topia-logo-light.png";
 import logoDark from "@/assets/u-topia-logo-dark.png";
 import heroVisual from "@/assets/hero-visual.png";
 import membershipBadge from "@/assets/membership-badge.png";
+import badgeBronze from "@/assets/badge-bronze.png";
 
 const Index = () => {
   return (
@@ -421,19 +422,17 @@ const Index = () => {
               {/* Bronze */}
               <div className="group relative">
                 <div className="relative flex flex-col items-center p-6 md:p-8 rounded-2xl bg-[#0d1f3c] border border-white/5 transition-all duration-300 hover:border-orange-500/30 hover:-translate-y-2 hover:shadow-xl hover:shadow-orange-500/10">
-                  {/* Badge Circle */}
-                  <div className="relative w-16 h-16 md:w-20 md:h-20 mb-5 rounded-full bg-gradient-to-br from-orange-400 to-orange-600 flex items-center justify-center shadow-lg shadow-orange-500/30 group-hover:scale-110 transition-transform duration-300">
-                    <svg className="w-8 h-8 md:w-10 md:h-10 text-white" viewBox="0 0 24 24" fill="currentColor">
-                      <path d="M12 2l3 6 6.5 1-4.75 4.5L18 20l-6-3.5L6 20l1.25-6.5L2.5 9l6.5-1z"/>
-                    </svg>
+                  {/* Badge Image */}
+                  <div className="relative w-20 h-20 md:w-24 md:h-24 mb-4 group-hover:scale-110 transition-transform duration-300">
+                    <img src={badgeBronze} alt="Bronze Badge" className="w-full h-full object-contain drop-shadow-lg" />
                   </div>
                   
                   {/* Tier Name */}
                   <h3 className="text-lg md:text-xl font-bold text-white mb-1">Bronze</h3>
-                  <p className="text-sm text-gray-500 mb-4">Depth 1</p>
+                  <p className="text-sm text-gray-500 mb-3">Depth 1</p>
                   
-                  {/* Decorative line */}
-                  <div className="w-12 h-0.5 bg-gradient-to-r from-transparent via-orange-500/50 to-transparent mb-4" />
+                  {/* Price */}
+                  <p className="text-2xl md:text-3xl font-bold text-orange-400">$100</p>
                 </div>
               </div>
 
