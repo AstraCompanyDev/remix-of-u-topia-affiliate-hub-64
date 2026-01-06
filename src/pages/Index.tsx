@@ -4,6 +4,7 @@ import logoDark from "@/assets/u-topia-logo-dark.png";
 import heroVisual from "@/assets/hero-visual.png";
 import membershipBadge from "@/assets/membership-badge.png";
 import badgeBronze from "@/assets/badge-bronze.png";
+import badgePlatinum from "@/assets/badge-platinum.png";
 
 const Index = () => {
   return (
@@ -498,26 +499,17 @@ const Index = () => {
               {/* Platinum */}
               <div className="group relative">
                 <div className="relative flex flex-col items-center p-6 md:p-8 rounded-2xl bg-[#0d1f3c] border border-white/5 transition-all duration-300 hover:border-slate-400/30 hover:-translate-y-2 hover:shadow-xl hover:shadow-slate-400/10">
-                  {/* Badge Circle */}
-                  <div className="relative w-16 h-16 md:w-20 md:h-20 mb-5 rounded-full bg-gradient-to-br from-slate-400 to-slate-600 flex items-center justify-center shadow-lg shadow-slate-500/30 group-hover:scale-110 transition-transform duration-300">
-                    <svg className="w-8 h-8 md:w-10 md:h-10 text-white" viewBox="0 0 24 24" fill="currentColor">
-                      <rect x="4" y="8" width="16" height="10" rx="2"/>
-                      <path d="M8 6h8v2H8z"/>
-                    </svg>
-                    {/* Star icon overlay */}
-                    <div className="absolute -top-1 -right-1 w-5 h-5 rounded-full bg-amber-400 flex items-center justify-center">
-                      <svg className="w-3 h-3 text-amber-900" viewBox="0 0 24 24" fill="currentColor">
-                        <path d="M12 2l2.4 7.4h7.6l-6 4.6 2.3 7-6.3-4.6-6.3 4.6 2.3-7-6-4.6h7.6z"/>
-                      </svg>
-                    </div>
+                  {/* Badge Image */}
+                  <div className="relative w-20 h-20 md:w-24 md:h-24 mb-4 group-hover:scale-110 transition-transform duration-300">
+                    <img src={badgePlatinum} alt="Platinum Badge" className="w-full h-full object-contain drop-shadow-lg" />
                   </div>
                   
                   {/* Tier Name */}
                   <h3 className="text-lg md:text-xl font-bold text-white mb-1">Platinum</h3>
-                  <p className="text-sm text-gray-500 mb-4">Depth 4</p>
+                  <p className="text-sm text-gray-500 mb-3">Depth 4</p>
                   
-                  {/* Decorative line */}
-                  <div className="w-12 h-0.5 bg-gradient-to-r from-transparent via-slate-400/50 to-transparent mb-4" />
+                  {/* Price */}
+                  <p className="text-2xl md:text-3xl font-bold text-slate-400">$1,000</p>
                 </div>
               </div>
 
