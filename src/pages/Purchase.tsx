@@ -3,6 +3,12 @@ import { Link, useSearchParams } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { useToast } from "@/hooks/use-toast";
 import { supabase } from "@/integrations/supabase/client";
+import {
+  Accordion,
+  AccordionContent,
+  AccordionItem,
+  AccordionTrigger,
+} from "@/components/ui/accordion";
 import logoLight from "@/assets/u-topia-logo-light.png";
 import badgeBronze from "@/assets/badge-bronze.png";
 import badgeSilver from "@/assets/badge-silver.png";
@@ -261,15 +267,147 @@ const Purchase = () => {
         </div>
       </section>
 
+      {/* FAQ Section */}
+      <section className="container mx-auto px-6 py-24">
+        <div className="max-w-4xl mx-auto">
+          {/* Header */}
+          <div className="text-center mb-16">
+            <span className="inline-block px-4 py-2 rounded-full bg-primary/10 border border-primary/20 text-primary text-sm font-medium mb-6">
+              Got Questions?
+            </span>
+            <h2 className="text-3xl md:text-5xl font-bold text-foreground mb-6">
+              Frequently Asked <span className="gradient-text">Questions</span>
+            </h2>
+            <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
+              Everything you need to know about the U-topia Affiliate Program
+            </p>
+          </div>
+
+          {/* FAQ Accordion */}
+          <Accordion type="single" defaultValue="item-1" collapsible className="space-y-4">
+            <AccordionItem 
+              value="item-1" 
+              className="glass-card border-none rounded-2xl overflow-hidden data-[state=open]:border-primary/30 transition-all duration-300 hover:border-primary/20"
+            >
+              <AccordionTrigger className="px-6 py-5 hover:no-underline group">
+                <span className="text-left text-lg font-semibold text-foreground group-hover:text-primary transition-colors">
+                  Is this an investment or guaranteed income program?
+                </span>
+              </AccordionTrigger>
+              <AccordionContent className="px-6 pb-6">
+                <p className="text-muted-foreground leading-relaxed">
+                  No. The U-topia Affiliate Program is not an investment, and it does not offer guaranteed income. Rewards are performance-based and depend on real platform activity, eligibility, and compliance checks.
+                </p>
+              </AccordionContent>
+            </AccordionItem>
+
+            <AccordionItem 
+              value="item-2" 
+              className="glass-card border-none rounded-2xl overflow-hidden data-[state=open]:border-primary/30 transition-all duration-300 hover:border-primary/20"
+            >
+              <AccordionTrigger className="px-6 py-5 hover:no-underline group">
+                <span className="text-left text-lg font-semibold text-foreground group-hover:text-primary transition-colors">
+                  How are rewards generated?
+                </span>
+              </AccordionTrigger>
+              <AccordionContent className="px-6 pb-6">
+                <p className="text-muted-foreground leading-relaxed">
+                  Rewards are generated from verified activity on U-topia's platform, such as account usage, payments, subscriptions, and card activity. There are no rewards for sign-ups alone or inactive users.
+                </p>
+              </AccordionContent>
+            </AccordionItem>
+
+            <AccordionItem 
+              value="item-3" 
+              className="glass-card border-none rounded-2xl overflow-hidden data-[state=open]:border-primary/30 transition-all duration-300 hover:border-primary/20"
+            >
+              <AccordionTrigger className="px-6 py-5 hover:no-underline group">
+                <span className="text-left text-lg font-semibold text-foreground group-hover:text-primary transition-colors">
+                  Do I need to sell products or handle payments?
+                </span>
+              </AccordionTrigger>
+              <AccordionContent className="px-6 pb-6">
+                <p className="text-muted-foreground leading-relaxed">
+                  No. You do not process transactions or handle customer funds. U-topia's core products handle all financial activity. Affiliates focus on introductions and growth.
+                </p>
+              </AccordionContent>
+            </AccordionItem>
+
+            <AccordionItem 
+              value="item-4" 
+              className="glass-card border-none rounded-2xl overflow-hidden data-[state=open]:border-primary/30 transition-all duration-300 hover:border-primary/20"
+            >
+              <AccordionTrigger className="px-6 py-5 hover:no-underline group">
+                <span className="text-left text-lg font-semibold text-foreground group-hover:text-primary transition-colors">
+                  Is there a limit to how much I can earn?
+                </span>
+              </AccordionTrigger>
+              <AccordionContent className="px-6 pb-6">
+                <p className="text-muted-foreground leading-relaxed">
+                  Yes. Earning capacity is defined by participation tiers, referral depth limits, and reward caps. This ensures the program remains fair, sustainable, and transparent.
+                </p>
+              </AccordionContent>
+            </AccordionItem>
+
+            <AccordionItem 
+              value="item-5" 
+              className="glass-card border-none rounded-2xl overflow-hidden data-[state=open]:border-primary/30 transition-all duration-300 hover:border-primary/20"
+            >
+              <AccordionTrigger className="px-6 py-5 hover:no-underline group">
+                <span className="text-left text-lg font-semibold text-foreground group-hover:text-primary transition-colors">
+                  When and how are payouts made?
+                </span>
+              </AccordionTrigger>
+              <AccordionContent className="px-6 pb-6">
+                <p className="text-muted-foreground leading-relaxed">
+                  Payout timing depends on the reward type. Some commissions are processed quickly after validation, while bonuses and incentives may follow scheduled payout cycles. All payouts are subject to verification and compliance checks.
+                </p>
+              </AccordionContent>
+            </AccordionItem>
+          </Accordion>
+        </div>
+      </section>
+
       {/* Footer */}
-      <footer className="bg-muted/30 border-t border-border py-8">
+      <footer className="bg-[#0a0f1a] py-16">
         <div className="container mx-auto px-6">
-          <div className="flex flex-col md:flex-row items-center justify-between gap-4">
-            <Link to="/" className="flex items-center">
-              <img src={logoLight} alt="U-topia" className="h-6 invert dark:invert-0" />
-            </Link>
-            <p className="text-sm text-muted-foreground">
-              © 2024 U-topia. All rights reserved.
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-10 mb-12">
+            {/* Brand Column */}
+            <div>
+              <div className="flex items-center gap-2 mb-4">
+                <img src={logoLight} alt="U-topia" className="h-8" />
+              </div>
+              <p className="text-gray-400 text-sm leading-relaxed max-w-xs">
+                U-topia puts YOU first – connecting modern banking, digital assets, and cross-chain opportunities in one universal wallet.
+              </p>
+            </div>
+
+            {/* Follow U-topia */}
+            <div>
+              <h4 className="text-white font-semibold mb-5">Follow U-topia</h4>
+              <ul className="space-y-3">
+                <li><a href="https://t.me/+G6ntSwYCzjJkNzE0" target="_blank" rel="noopener noreferrer" className="text-gray-400 hover:text-primary transition-colors text-sm">Telegram</a></li>
+                <li><a href="https://x.com/UCoinOfficial" target="_blank" rel="noopener noreferrer" className="text-gray-400 hover:text-primary transition-colors text-sm">X (Twitter)</a></li>
+                <li><a href="https://www.linkedin.com/company/u-topia/" target="_blank" rel="noopener noreferrer" className="text-gray-400 hover:text-primary transition-colors text-sm">LinkedIn</a></li>
+                <li><a href="https://www.instagram.com/ucoinofficial" target="_blank" rel="noopener noreferrer" className="text-gray-400 hover:text-primary transition-colors text-sm">Instagram</a></li>
+                <li><a href="https://discord.gg/qZB83k5HmX" target="_blank" rel="noopener noreferrer" className="text-gray-400 hover:text-primary transition-colors text-sm">Discord</a></li>
+              </ul>
+            </div>
+
+            {/* Legal */}
+            <div>
+              <h4 className="text-white font-semibold mb-5">Legal</h4>
+              <ul className="space-y-3">
+                <li><a href="https://docsend.com/view/3wjptrvw2c35gj8p" target="_blank" rel="noopener noreferrer" className="text-gray-400 hover:text-primary transition-colors text-sm">Privacy Policy</a></li>
+                <li><a href="https://docsend.com/view/pehz2xqa23xw3pyc" target="_blank" rel="noopener noreferrer" className="text-gray-400 hover:text-primary transition-colors text-sm">Terms of Service</a></li>
+              </ul>
+            </div>
+          </div>
+
+          {/* Bottom Bar */}
+          <div className="pt-8 border-t border-white/10">
+            <p className="text-center text-gray-500 text-sm">
+              © U-topia 2026, All rights reserved.
             </p>
           </div>
         </div>
