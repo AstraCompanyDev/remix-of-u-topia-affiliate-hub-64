@@ -189,10 +189,10 @@ const Index = () => {
 
           <div className="grid md:grid-cols-3 gap-6 mb-12">
             <div 
-              className="glass-card p-8 opacity-0 animate-fade-in-up"
+              className="feature-card p-8 opacity-0 animate-fade-in-up"
               style={{ animationDelay: '600ms' }}
             >
-              <div className="w-14 h-14 rounded-2xl bg-primary/10 border border-primary/20 flex items-center justify-center mb-6">
+              <div className="w-14 h-14 rounded-2xl bg-gradient-to-br from-primary/15 to-primary/5 border border-primary/20 flex items-center justify-center mb-6">
                 <svg className="w-7 h-7 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 10h18M7 15h1m4 0h1m-7 4h12a3 3 0 003-3V8a3 3 0 00-3-3H6a3 3 0 00-3 3v8a3 3 0 003 3z" />
                 </svg>
@@ -200,16 +200,16 @@ const Index = () => {
               <h3 className="text-xl font-semibold text-foreground mb-3">
                 Accounts & Financial Services
               </h3>
-              <p className="text-muted-foreground">
+              <p className="text-muted-foreground leading-relaxed">
                 Earn from user signups, account activations, and ongoing financial service usage within the platform.
               </p>
             </div>
 
             <div 
-              className="glass-card p-8 opacity-0 animate-fade-in-up"
+              className="feature-card p-8 opacity-0 animate-fade-in-up"
               style={{ animationDelay: '700ms' }}
             >
-              <div className="w-14 h-14 rounded-2xl bg-primary/10 border border-primary/20 flex items-center justify-center mb-6">
+              <div className="w-14 h-14 rounded-2xl bg-gradient-to-br from-primary/15 to-primary/5 border border-primary/20 flex items-center justify-center mb-6">
                 <svg className="w-7 h-7 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 9V7a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2m2 4h10a2 2 0 002-2v-6a2 2 0 00-2-2H9a2 2 0 00-2 2v6a2 2 0 002 2zm7-5a2 2 0 11-4 0 2 2 0 014 0z" />
                 </svg>
@@ -217,16 +217,16 @@ const Index = () => {
               <h3 className="text-xl font-semibold text-foreground mb-3">
                 Payments & Merchant Transactions
               </h3>
-              <p className="text-muted-foreground">
+              <p className="text-muted-foreground leading-relaxed">
                 Generate rewards from payment processing, merchant integrations, and transaction volume across the network.
               </p>
             </div>
 
             <div 
-              className="glass-card p-8 opacity-0 animate-fade-in-up"
+              className="feature-card p-8 opacity-0 animate-fade-in-up"
               style={{ animationDelay: '800ms' }}
             >
-              <div className="w-14 h-14 rounded-2xl bg-primary/10 border border-primary/20 flex items-center justify-center mb-6">
+              <div className="w-14 h-14 rounded-2xl bg-gradient-to-br from-primary/15 to-primary/5 border border-primary/20 flex items-center justify-center mb-6">
                 <svg className="w-7 h-7 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 10h18M7 15h1m4 0h1m-7 4h12a3 3 0 003-3V8a3 3 0 00-3-3H6a3 3 0 00-3 3v8a3 3 0 003 3z" />
                 </svg>
@@ -234,7 +234,7 @@ const Index = () => {
               <h3 className="text-xl font-semibold text-foreground mb-3">
                 Card Usage & Subscriptions
               </h3>
-              <p className="text-muted-foreground">
+              <p className="text-muted-foreground leading-relaxed">
                 Benefit from card activations, recurring subscription payments, and sustained user engagement.
               </p>
             </div>
@@ -274,14 +274,14 @@ const Index = () => {
                   className="group opacity-0 animate-fade-in-up"
                   style={{ animationDelay: '200ms' }}
                 >
-                  <div className="relative glass-card p-6 h-full transition-all duration-300 hover:border-primary/40 hover:-translate-y-1">
+                  <div className="relative step-card p-7 h-full">
                     <div className="absolute -top-4 left-6">
                       <div className="w-8 h-8 rounded-lg bg-primary text-primary-foreground flex items-center justify-center text-sm font-bold shadow-lg shadow-primary/25">
                         1
                       </div>
                     </div>
                     
-                    <div className="w-12 h-12 rounded-xl bg-primary/10 border border-primary/20 flex items-center justify-center mt-4 mb-5 group-hover:scale-110 transition-transform duration-300">
+                    <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-primary/15 to-primary/5 border border-primary/20 flex items-center justify-center mt-4 mb-5 group-hover:scale-110 transition-transform duration-300">
                       <svg className="w-6 h-6 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M18 9v3m0 0v3m0-3h3m-3 0h-3m-2-5a4 4 0 11-8 0 4 4 0 018 0zM3 20a6 6 0 0112 0v1H3v-1z" />
                       </svg>
@@ -301,14 +301,14 @@ const Index = () => {
                   className="group opacity-0 animate-fade-in-up"
                   style={{ animationDelay: '300ms' }}
                 >
-                  <div className="relative glass-card p-6 h-full transition-all duration-300 hover:border-primary/40 hover:-translate-y-1">
+                  <div className="relative step-card p-7 h-full">
                     <div className="absolute -top-4 left-6">
                       <div className="w-8 h-8 rounded-lg bg-primary text-primary-foreground flex items-center justify-center text-sm font-bold shadow-lg shadow-primary/25">
                         2
                       </div>
                     </div>
                     
-                    <div className="w-12 h-12 rounded-xl bg-primary/10 border border-primary/20 flex items-center justify-center mt-4 mb-5 group-hover:scale-110 transition-transform duration-300">
+                    <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-primary/15 to-primary/5 border border-primary/20 flex items-center justify-center mt-4 mb-5 group-hover:scale-110 transition-transform duration-300">
                       <svg className="w-6 h-6 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z" />
                       </svg>
@@ -328,14 +328,14 @@ const Index = () => {
                   className="group opacity-0 animate-fade-in-up"
                   style={{ animationDelay: '400ms' }}
                 >
-                  <div className="relative glass-card p-6 h-full transition-all duration-300 hover:border-primary/40 hover:-translate-y-1">
+                  <div className="relative step-card p-7 h-full">
                     <div className="absolute -top-4 left-6">
                       <div className="w-8 h-8 rounded-lg bg-primary text-primary-foreground flex items-center justify-center text-sm font-bold shadow-lg shadow-primary/25">
                         3
                       </div>
                     </div>
                     
-                    <div className="w-12 h-12 rounded-xl bg-primary/10 border border-primary/20 flex items-center justify-center mt-4 mb-5 group-hover:scale-110 transition-transform duration-300">
+                    <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-primary/15 to-primary/5 border border-primary/20 flex items-center justify-center mt-4 mb-5 group-hover:scale-110 transition-transform duration-300">
                       <svg className="w-6 h-6 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M13 10V3L4 14h7v7l9-11h-7z" />
                       </svg>
@@ -355,14 +355,14 @@ const Index = () => {
                   className="group opacity-0 animate-fade-in-up"
                   style={{ animationDelay: '500ms' }}
                 >
-                  <div className="relative glass-card p-6 h-full transition-all duration-300 hover:border-primary/40 hover:-translate-y-1">
+                  <div className="relative step-card p-7 h-full">
                     <div className="absolute -top-4 left-6">
                       <div className="w-8 h-8 rounded-lg bg-primary text-primary-foreground flex items-center justify-center text-sm font-bold shadow-lg shadow-primary/25">
                         4
                       </div>
                     </div>
                     
-                    <div className="w-12 h-12 rounded-xl bg-primary/10 border border-primary/20 flex items-center justify-center mt-4 mb-5 group-hover:scale-110 transition-transform duration-300">
+                    <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-primary/15 to-primary/5 border border-primary/20 flex items-center justify-center mt-4 mb-5 group-hover:scale-110 transition-transform duration-300">
                       <svg className="w-6 h-6 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M9 7h6m0 10v-3m-3 3h.01M9 17h.01M9 14h.01M12 14h.01M15 11h.01M12 11h.01M9 11h.01M7 21h10a2 2 0 002-2V5a2 2 0 00-2-2H7a2 2 0 00-2 2v14a2 2 0 002 2z" />
                       </svg>
@@ -382,7 +382,7 @@ const Index = () => {
                   className="group opacity-0 animate-fade-in-up"
                   style={{ animationDelay: '600ms' }}
                 >
-                  <div className="relative glass-card p-6 h-full border-emerald-500/30 bg-emerald-50 transition-all duration-300 hover:border-emerald-500/50 hover:-translate-y-1">
+                  <div className="relative step-card-success p-7 h-full">
                     <div className="absolute -top-4 left-6">
                       <div className="w-8 h-8 rounded-lg bg-emerald-500 text-white flex items-center justify-center shadow-lg shadow-emerald-500/25">
                         <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -391,7 +391,7 @@ const Index = () => {
                       </div>
                     </div>
                     
-                    <div className="w-12 h-12 rounded-xl bg-emerald-500/10 border border-emerald-500/20 flex items-center justify-center mt-4 mb-5 group-hover:scale-110 transition-transform duration-300">
+                    <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-emerald-500/20 to-emerald-500/5 border border-emerald-500/25 flex items-center justify-center mt-4 mb-5 group-hover:scale-110 transition-transform duration-300">
                       <svg className="w-6 h-6 text-emerald-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
                       </svg>
@@ -645,11 +645,11 @@ const Index = () => {
               {/* Row 1 */}
               {/* Card 1 - Entrepreneurs */}
               <div 
-                className="group relative opacity-0 animate-fade-in-up"
+                className="group opacity-0 animate-fade-in-up"
                 style={{ animationDelay: '300ms' }}
               >
-                <div className="relative p-8 rounded-2xl bg-card/50 border border-border/80 hover:border-primary/40 transition-all duration-400 hover:-translate-y-2 hover:shadow-2xl hover:shadow-primary/10 backdrop-blur-sm h-full">
-                  <div className="w-14 h-14 rounded-2xl bg-primary/10 flex items-center justify-center mb-6 group-hover:scale-110 group-hover:bg-primary/20 transition-all duration-300">
+                <div className="audience-card audience-card-primary p-8 h-full">
+                  <div className="w-14 h-14 rounded-2xl bg-gradient-to-br from-primary/15 to-primary/5 border border-primary/20 flex items-center justify-center mb-6 group-hover:scale-110 group-hover:bg-gradient-to-br group-hover:from-primary/25 group-hover:to-primary/10 transition-all duration-300">
                     <svg className="w-7 h-7 text-primary" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
                       <path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/>
                     </svg>
@@ -661,11 +661,11 @@ const Index = () => {
               
               {/* Card 2 - Business Owners */}
               <div 
-                className="group relative opacity-0 animate-fade-in-up"
+                className="group opacity-0 animate-fade-in-up"
                 style={{ animationDelay: '350ms' }}
               >
-                <div className="relative p-8 rounded-2xl bg-card/50 border border-border/80 hover:border-cyan-400/40 transition-all duration-400 hover:-translate-y-2 hover:shadow-2xl hover:shadow-cyan-400/10 backdrop-blur-sm h-full">
-                  <div className="w-14 h-14 rounded-2xl bg-cyan-500/10 flex items-center justify-center mb-6 group-hover:scale-110 group-hover:bg-cyan-500/20 transition-all duration-300">
+                <div className="audience-card audience-card-cyan p-8 h-full">
+                  <div className="w-14 h-14 rounded-2xl bg-gradient-to-br from-cyan-500/15 to-cyan-500/5 border border-cyan-500/20 flex items-center justify-center mb-6 group-hover:scale-110 group-hover:bg-gradient-to-br group-hover:from-cyan-500/25 group-hover:to-cyan-500/10 transition-all duration-300">
                     <svg className="w-7 h-7 text-cyan-500" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
                       <rect x="2" y="7" width="20" height="14" rx="2" ry="2"/>
                       <path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/>
@@ -679,11 +679,11 @@ const Index = () => {
               {/* Row 2 */}
               {/* Card 3 - Community Builders */}
               <div 
-                className="group relative opacity-0 animate-fade-in-up"
+                className="group opacity-0 animate-fade-in-up"
                 style={{ animationDelay: '400ms' }}
               >
-                <div className="relative p-8 rounded-2xl bg-card/50 border border-border/80 hover:border-amber-400/40 transition-all duration-400 hover:-translate-y-2 hover:shadow-2xl hover:shadow-amber-400/10 backdrop-blur-sm h-full">
-                  <div className="w-14 h-14 rounded-2xl bg-amber-500/10 flex items-center justify-center mb-6 group-hover:scale-110 group-hover:bg-amber-500/20 transition-all duration-300">
+                <div className="audience-card audience-card-amber p-8 h-full">
+                  <div className="w-14 h-14 rounded-2xl bg-gradient-to-br from-amber-500/15 to-amber-500/5 border border-amber-500/20 flex items-center justify-center mb-6 group-hover:scale-110 group-hover:bg-gradient-to-br group-hover:from-amber-500/25 group-hover:to-amber-500/10 transition-all duration-300">
                     <svg className="w-7 h-7 text-amber-500" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
                       <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/>
                       <circle cx="9" cy="7" r="4"/>
@@ -698,11 +698,11 @@ const Index = () => {
               
               {/* Card 4 - Growth Partners */}
               <div 
-                className="group relative opacity-0 animate-fade-in-up"
+                className="group opacity-0 animate-fade-in-up"
                 style={{ animationDelay: '450ms' }}
               >
-                <div className="relative p-8 rounded-2xl bg-card/50 border border-border/80 hover:border-emerald-400/40 transition-all duration-400 hover:-translate-y-2 hover:shadow-2xl hover:shadow-emerald-400/10 backdrop-blur-sm h-full">
-                  <div className="w-14 h-14 rounded-2xl bg-emerald-500/10 flex items-center justify-center mb-6 group-hover:scale-110 group-hover:bg-emerald-500/20 transition-all duration-300">
+                <div className="audience-card audience-card-emerald p-8 h-full">
+                  <div className="w-14 h-14 rounded-2xl bg-gradient-to-br from-emerald-500/15 to-emerald-500/5 border border-emerald-500/20 flex items-center justify-center mb-6 group-hover:scale-110 group-hover:bg-gradient-to-br group-hover:from-emerald-500/25 group-hover:to-emerald-500/10 transition-all duration-300">
                     <svg className="w-7 h-7 text-emerald-500" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
                       <polyline points="23 6 13.5 15.5 8.5 10.5 1 18"/>
                       <polyline points="17 6 23 6 23 12"/>
