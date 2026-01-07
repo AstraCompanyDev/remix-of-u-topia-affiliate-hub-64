@@ -1,13 +1,49 @@
+import { useEffect, useState } from "react";
 import { Link, useSearchParams } from "react-router-dom";
 import { Button } from "@/components/ui/button";
-import { CheckCircle2 } from "lucide-react";
+import { CheckCircle2, Loader2, Mail } from "lucide-react";
+import { supabase } from "@/integrations/supabase/client";
 import logoLight from "@/assets/u-topia-logo-light.png";
 
 const PurchaseSuccess = () => {
   const [searchParams] = useSearchParams();
   const tier = searchParams.get("tier") || "membership";
+  const sessionId = searchParams.get("session_id");
+  
+  const [verifying, setVerifying] = useState(true);
+  const [verified, setVerified] = useState(false);
+  const [emailSent, setEmailSent] = useState(false);
 
   const tierName = tier.charAt(0).toUpperCase() + tier.slice(1);
+
+  useEffect(() => {
+    const verifyPurchase = async () => {
+      if (!sessionId) {
+        setVerifying(false);
+        setVerified(true); // Assume success if no session_id (direct navigation)
+        return;
+      }
+
+      try {
+        const { data, error } = await supabase.functions.invoke("verify-purchase", {
+          body: { session_id: sessionId, tier },
+        });
+
+        if (error) {
+          console.error("Verification error:", error);
+        } else {
+          setVerified(data?.verified || false);
+          setEmailSent(data?.email_sent || false);
+        }
+      } catch (err) {
+        console.error("Failed to verify purchase:", err);
+      } finally {
+        setVerifying(false);
+      }
+    };
+
+    verifyPurchase();
+  }, [sessionId, tier]);
 
   return (
     <div className="min-h-screen bg-background flex flex-col">
@@ -25,37 +61,60 @@ const PurchaseSuccess = () => {
       {/* Success Content */}
       <main className="flex-1 flex items-center justify-center p-6">
         <div className="text-center max-w-md">
-          <div className="mb-8 flex justify-center">
-            <div className="relative">
-              <div className="absolute -inset-4 bg-green-500/20 rounded-full blur-xl" />
-              <CheckCircle2 className="relative w-24 h-24 text-green-500" />
-            </div>
-          </div>
+          {verifying ? (
+            <>
+              <div className="mb-8 flex justify-center">
+                <Loader2 className="w-24 h-24 text-primary animate-spin" />
+              </div>
+              <h1 className="text-3xl md:text-4xl font-bold text-foreground mb-4">
+                Verifying Payment...
+              </h1>
+              <p className="text-muted-foreground">
+                Please wait while we confirm your purchase.
+              </p>
+            </>
+          ) : (
+            <>
+              <div className="mb-8 flex justify-center">
+                <div className="relative">
+                  <div className="absolute -inset-4 bg-green-500/20 rounded-full blur-xl" />
+                  <CheckCircle2 className="relative w-24 h-24 text-green-500" />
+                </div>
+              </div>
 
-          <h1 className="text-3xl md:text-4xl font-bold text-foreground mb-4">
-            Payment Successful!
-          </h1>
+              <h1 className="text-3xl md:text-4xl font-bold text-foreground mb-4">
+                Payment Successful!
+              </h1>
 
-          <p className="text-lg text-muted-foreground mb-2">
-            Thank you for your purchase.
-          </p>
+              <p className="text-lg text-muted-foreground mb-2">
+                Thank you for your purchase.
+              </p>
 
-          <p className="text-muted-foreground mb-8">
-            Your <span className="text-primary font-semibold">{tierName}</span> membership is now active.
-          </p>
+              <p className="text-muted-foreground mb-4">
+                Your <span className="text-primary font-semibold">{tierName}</span> membership is now active.
+              </p>
 
-          <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <Link to="/">
-              <Button variant="default" size="lg" className="w-full sm:w-auto">
-                Go to Dashboard
-              </Button>
-            </Link>
-            <Link to="/purchase">
-              <Button variant="outline" size="lg" className="w-full sm:w-auto">
-                View Packages
-              </Button>
-            </Link>
-          </div>
+              {emailSent && (
+                <div className="flex items-center justify-center gap-2 text-sm text-green-500 mb-8">
+                  <Mail className="w-4 h-4" />
+                  <span>Confirmation email sent!</span>
+                </div>
+              )}
+
+              <div className="flex flex-col sm:flex-row gap-4 justify-center">
+                <Link to="/">
+                  <Button variant="default" size="lg" className="w-full sm:w-auto">
+                    Go to Dashboard
+                  </Button>
+                </Link>
+                <Link to="/purchase">
+                  <Button variant="outline" size="lg" className="w-full sm:w-auto">
+                    View Packages
+                  </Button>
+                </Link>
+              </div>
+            </>
+          )}
         </div>
       </main>
 
