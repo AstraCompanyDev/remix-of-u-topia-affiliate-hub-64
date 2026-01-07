@@ -7,6 +7,7 @@ import Index from "./pages/Index";
 import Auth from "./pages/Auth";
 import Purchase from "./pages/Purchase";
 import PurchaseSuccess from "./pages/PurchaseSuccess";
+import ReferAndEarn from "./pages/ReferAndEarn";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -22,6 +23,7 @@ const App = () => (
           <Route path="/auth" element={<Auth />} />
           <Route path="/purchase" element={<Purchase />} />
           <Route path="/purchase-success" element={<PurchaseSuccess />} />
+          <Route path="/refer-and-earn" element={<ReferAndEarn />} />
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="*" element={<NotFound />} />
         </Routes>

@@ -147,6 +147,9 @@ const Purchase = () => {
               <Link to="/" className="text-gray-400 hover:text-white transition-colors">
                 Home
               </Link>
+              <Link to="/refer-and-earn" className="text-gray-400 hover:text-white transition-colors">
+                Refer & Earn
+              </Link>
               <Link to="/purchase" className="text-white font-medium">
                 Purchase
               </Link>

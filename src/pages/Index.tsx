@@ -36,9 +36,9 @@ const Index = () => {
               <a href="#" className="text-gray-400 hover:text-white transition-colors">
                 Home
               </a>
-              <a href="#" className="text-gray-400 hover:text-white transition-colors">
-                About
-              </a>
+              <Link to="/refer-and-earn" className="text-gray-400 hover:text-white transition-colors">
+                Refer & Earn
+              </Link>
               <Link to="/purchase" className="text-gray-400 hover:text-white transition-colors">
                 Purchase
               </Link>
