@@ -39,9 +39,9 @@ const Index = () => {
               <a href="#" className="text-gray-400 hover:text-white transition-colors">
                 About
               </a>
-              <a href="#" className="text-gray-400 hover:text-white transition-colors">
-                Rewards
-              </a>
+              <Link to="/purchase" className="text-gray-400 hover:text-white transition-colors">
+                Purchase
+              </Link>
               <Link to="/auth">
                 <Button variant="default" size="sm">
                   Join Now
@@ -469,13 +469,21 @@ const Index = () => {
                   
                   {/* Tier Name */}
                   <h3 className="text-xl md:text-2xl font-bold text-white mb-2 tracking-tight">Bronze</h3>
-                  <p className="text-sm text-gray-500 mb-6 font-medium">Depth 1</p>
+                  <p className="text-sm text-gray-500 mb-4 font-medium">Depth 1</p>
                   
                   {/* Divider */}
-                  <div className="w-16 h-px bg-gradient-to-r from-transparent via-orange-500/50 to-transparent mb-6" />
+                  <div className="w-16 h-px bg-gradient-to-r from-transparent via-orange-500/50 to-transparent mb-4" />
                   
                   {/* Price */}
-                  <p className="text-3xl md:text-4xl font-bold bg-gradient-to-r from-primary to-orange-400 bg-clip-text text-transparent">$100</p>
+                  <p className="text-3xl md:text-4xl font-bold bg-gradient-to-r from-primary to-orange-400 bg-clip-text text-transparent mb-4">$100</p>
+                  
+                  {/* View Package Link */}
+                  <Link to="/purchase?tier=bronze" className="text-sm text-gray-400 hover:text-primary transition-colors font-medium flex items-center gap-1 mt-auto">
+                    View Package
+                    <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+                    </svg>
+                  </Link>
                 </div>
               </div>
 
@@ -490,11 +498,19 @@ const Index = () => {
                   </div>
                   
                   <h3 className="text-xl md:text-2xl font-bold text-white mb-2 tracking-tight">Silver</h3>
-                  <p className="text-sm text-gray-500 mb-6 font-medium">Depth 2</p>
+                  <p className="text-sm text-gray-500 mb-4 font-medium">Depth 2</p>
                   
-                  <div className="w-16 h-px bg-gradient-to-r from-transparent via-gray-400/50 to-transparent mb-6" />
+                  <div className="w-16 h-px bg-gradient-to-r from-transparent via-gray-400/50 to-transparent mb-4" />
                   
-                  <p className="text-3xl md:text-4xl font-bold bg-gradient-to-r from-primary to-orange-400 bg-clip-text text-transparent">$250</p>
+                  <p className="text-3xl md:text-4xl font-bold bg-gradient-to-r from-primary to-orange-400 bg-clip-text text-transparent mb-4">$250</p>
+                  
+                  {/* View Package Link */}
+                  <Link to="/purchase?tier=silver" className="text-sm text-gray-400 hover:text-primary transition-colors font-medium flex items-center gap-1 mt-auto">
+                    View Package
+                    <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+                    </svg>
+                  </Link>
                 </div>
               </div>
 
@@ -524,11 +540,19 @@ const Index = () => {
                   </div>
                   
                   <h3 className="text-xl md:text-2xl font-bold text-white mb-2 tracking-tight">Gold</h3>
-                  <p className="text-sm text-gray-500 mb-6 font-medium">Depth 3</p>
+                  <p className="text-sm text-gray-500 mb-4 font-medium">Depth 3</p>
                   
-                  <div className="w-16 h-px bg-gradient-to-r from-transparent via-amber-500/50 to-transparent mb-6" />
+                  <div className="w-16 h-px bg-gradient-to-r from-transparent via-amber-500/50 to-transparent mb-4" />
                   
-                  <p className="text-3xl md:text-4xl font-bold bg-gradient-to-r from-primary to-orange-400 bg-clip-text text-transparent">$500</p>
+                  <p className="text-3xl md:text-4xl font-bold bg-gradient-to-r from-primary to-orange-400 bg-clip-text text-transparent mb-4">$500</p>
+                  
+                  {/* View Package Link */}
+                  <Link to="/purchase?tier=gold" className="text-sm text-amber-400 hover:text-primary transition-colors font-medium flex items-center gap-1 mt-auto">
+                    View Package
+                    <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+                    </svg>
+                  </Link>
                 </div>
               </div>
 
@@ -543,11 +567,19 @@ const Index = () => {
                   </div>
                   
                   <h3 className="text-xl md:text-2xl font-bold text-white mb-2 tracking-tight">Platinum</h3>
-                  <p className="text-sm text-gray-500 mb-6 font-medium">Depth 4</p>
+                  <p className="text-sm text-gray-500 mb-4 font-medium">Depth 4</p>
                   
-                  <div className="w-16 h-px bg-gradient-to-r from-transparent via-slate-400/50 to-transparent mb-6" />
+                  <div className="w-16 h-px bg-gradient-to-r from-transparent via-slate-400/50 to-transparent mb-4" />
                   
-                  <p className="text-3xl md:text-4xl font-bold bg-gradient-to-r from-primary to-orange-400 bg-clip-text text-transparent">$1,000</p>
+                  <p className="text-3xl md:text-4xl font-bold bg-gradient-to-r from-primary to-orange-400 bg-clip-text text-transparent mb-4">$1,000</p>
+                  
+                  {/* View Package Link */}
+                  <Link to="/purchase?tier=platinum" className="text-sm text-gray-400 hover:text-primary transition-colors font-medium flex items-center gap-1 mt-auto">
+                    View Package
+                    <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+                    </svg>
+                  </Link>
                 </div>
               </div>
 
@@ -562,11 +594,19 @@ const Index = () => {
                   </div>
                   
                   <h3 className="text-xl md:text-2xl font-bold text-white mb-2 tracking-tight">Diamond</h3>
-                  <p className="text-sm text-gray-500 mb-6 font-medium">Depth 5</p>
+                  <p className="text-sm text-gray-500 mb-4 font-medium">Depth 5</p>
                   
-                  <div className="w-16 h-px bg-gradient-to-r from-transparent via-cyan-400/50 to-transparent mb-6" />
+                  <div className="w-16 h-px bg-gradient-to-r from-transparent via-cyan-400/50 to-transparent mb-4" />
                   
-                  <p className="text-3xl md:text-4xl font-bold bg-gradient-to-r from-primary to-orange-400 bg-clip-text text-transparent">$2,500</p>
+                  <p className="text-3xl md:text-4xl font-bold bg-gradient-to-r from-primary to-orange-400 bg-clip-text text-transparent mb-4">$2,500</p>
+                  
+                  {/* View Package Link */}
+                  <Link to="/purchase?tier=diamond" className="text-sm text-cyan-400 hover:text-primary transition-colors font-medium flex items-center gap-1 mt-auto">
+                    View Package
+                    <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+                    </svg>
+                  </Link>
                 </div>
               </div>
             </div>
