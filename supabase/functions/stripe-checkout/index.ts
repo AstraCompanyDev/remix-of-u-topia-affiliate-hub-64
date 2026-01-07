@@ -57,7 +57,7 @@ serve(async (req) => {
           quantity: 1,
         },
       ],
-      success_url: `${origin}/purchase-success?tier=${tier}`,
+      success_url: `${origin}/purchase-success?tier=${tier}&session_id={CHECKOUT_SESSION_ID}`,
       cancel_url: `${origin}/purchase?tier=${tier}`,
     });
 
