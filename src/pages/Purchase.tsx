@@ -1,5 +1,5 @@
-import { useState } from "react";
-import { Link } from "react-router-dom";
+import { useState, useEffect } from "react";
+import { Link, useSearchParams } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import logoLight from "@/assets/u-topia-logo-light.png";
 import badgeBronze from "@/assets/badge-bronze.png";
@@ -91,7 +91,19 @@ const packages: Record<PackageKey, PackageInfo> = {
 const packageOrder: PackageKey[] = ["bronze", "silver", "gold", "platinum", "diamond"];
 
 const Purchase = () => {
-  const [selectedPackage, setSelectedPackage] = useState<PackageKey>("bronze");
+  const [searchParams] = useSearchParams();
+  const initialPackage = (searchParams.get("tier") as PackageKey) || "bronze";
+  const [selectedPackage, setSelectedPackage] = useState<PackageKey>(
+    packageOrder.includes(initialPackage) ? initialPackage : "bronze"
+  );
+
+  useEffect(() => {
+    const tier = searchParams.get("tier") as PackageKey;
+    if (tier && packageOrder.includes(tier)) {
+      setSelectedPackage(tier);
+    }
+  }, [searchParams]);
+
   const currentPackage = packages[selectedPackage];
   const otherPackages = packageOrder.filter((key) => key !== selectedPackage);
 
