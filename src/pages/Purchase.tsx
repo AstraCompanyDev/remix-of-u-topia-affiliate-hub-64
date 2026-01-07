@@ -1,6 +1,8 @@
 import { useState, useEffect } from "react";
 import { Link, useSearchParams } from "react-router-dom";
 import { Button } from "@/components/ui/button";
+import { useToast } from "@/hooks/use-toast";
+import { supabase } from "@/integrations/supabase/client";
 import logoLight from "@/assets/u-topia-logo-light.png";
 import badgeBronze from "@/assets/badge-bronze.png";
 import badgeSilver from "@/assets/badge-silver.png";
@@ -84,7 +86,9 @@ const packages: Record<PackageKey, PackageInfo> = {
 const packageOrder: PackageKey[] = ["bronze", "silver", "gold", "platinum", "diamond"];
 
 const Purchase = () => {
+  const { toast } = useToast();
   const [searchParams] = useSearchParams();
+  const [isLoading, setIsLoading] = useState(false);
   const initialPackage = (searchParams.get("tier") as PackageKey) || "bronze";
   const [selectedPackage, setSelectedPackage] = useState<PackageKey>(
     packageOrder.includes(initialPackage) ? initialPackage : "bronze"
@@ -99,6 +103,30 @@ const Purchase = () => {
 
   const currentPackage = packages[selectedPackage];
   const otherPackages = packageOrder.filter((key) => key !== selectedPackage);
+
+  const handleCheckout = async () => {
+    setIsLoading(true);
+    try {
+      const { data, error } = await supabase.functions.invoke("stripe-checkout", {
+        body: { tier: selectedPackage },
+      });
+
+      if (error) throw error;
+
+      if (data?.url) {
+        window.location.href = data.url;
+      }
+    } catch (error) {
+      console.error("Checkout error:", error);
+      toast({
+        title: "Checkout Error",
+        description: "Failed to start checkout. Please try again.",
+        variant: "destructive",
+      });
+    } finally {
+      setIsLoading(false);
+    }
+  };
 
   return (
     <div className="min-h-screen bg-background">
@@ -155,12 +183,16 @@ const Purchase = () => {
 
             <Button
               size="lg"
+              onClick={handleCheckout}
+              disabled={isLoading}
               className="w-full md:w-auto bg-primary hover:bg-primary/90 text-white font-semibold px-12 py-7 text-lg rounded-full shadow-lg shadow-primary/25 hover:shadow-xl hover:shadow-primary/30 transition-all mb-4"
             >
-              Buy Now
-              <svg className="w-5 h-5 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
-              </svg>
+              {isLoading ? "Processing..." : "Buy Now"}
+              {!isLoading && (
+                <svg className="w-5 h-5 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
+                </svg>
+              )}
             </Button>
 
             <p className="text-sm text-muted-foreground mb-8">
