@@ -22,67 +22,78 @@ const ResetPassword = () => {
   });
 
   useEffect(() => {
-    // Listen for the PASSWORD_RECOVERY event which fires when user clicks the reset link
+    let isSubscribed = true;
+    let timeoutId: NodeJS.Timeout;
+
+    // Listen for auth state changes - PASSWORD_RECOVERY event is the key
     const { data: { subscription } } = supabase.auth.onAuthStateChange((event, session) => {
+      console.log("Auth event:", event, "Session:", !!session);
+      
+      if (!isSubscribed) return;
+
       if (event === "PASSWORD_RECOVERY") {
-        // Valid recovery session detected
+        // Valid recovery session detected - this is the main success path
         setPageState("valid");
-      } else if (event === "SIGNED_IN" && pageState === "loading") {
-        // Check if this is from a recovery flow by checking the session
-        // If we got here without PASSWORD_RECOVERY, we need to verify
-        checkRecoverySession();
+        return;
+      }
+
+      if (event === "SIGNED_IN" && session) {
+        // Supabase sometimes fires SIGNED_IN instead of PASSWORD_RECOVERY
+        // Check if this came from a recovery flow by looking at URL params
+        const hash = window.location.hash;
+        const search = window.location.search;
+        
+        if (hash.includes("type=recovery") || search.includes("type=recovery")) {
+          setPageState("valid");
+          return;
+        }
       }
     });
 
-    // Initial check for existing session
-    checkRecoverySession();
-
-    return () => subscription.unsubscribe();
-  }, []);
-
-  const checkRecoverySession = async () => {
-    try {
-      const { data: { session }, error } = await supabase.auth.getSession();
+    // Give Supabase time to process the URL tokens (PKCE flow is async)
+    // Then check if we have a valid session
+    const checkSession = async () => {
+      // Wait a bit for Supabase to process URL tokens
+      await new Promise(resolve => setTimeout(resolve, 500));
       
-      if (error) {
-        console.error("Session check error:", error);
-        setPageState("invalid");
-        return;
-      }
+      if (!isSubscribed) return;
 
-      // Check URL hash for recovery tokens (Supabase puts them in the hash)
-      const hashParams = new URLSearchParams(window.location.hash.substring(1));
-      const type = hashParams.get("type");
-      const accessToken = hashParams.get("access_token");
+      // Check if already set to valid by auth event
+      // We use a ref-like approach with the current state
+      const { data: { session } } = await supabase.auth.getSession();
+      
+      // Check URL for recovery indicators
+      const hash = window.location.hash;
+      const search = window.location.search;
+      const isRecoveryUrl = hash.includes("type=recovery") || search.includes("type=recovery");
 
-      if (type === "recovery" && accessToken) {
-        // We have recovery tokens in the URL, session should be valid for password reset
+      if (session && isRecoveryUrl) {
+        // We have a session from a recovery URL - allow password reset
         setPageState("valid");
         return;
       }
 
-      // Also check query params (older Supabase versions)
-      const queryParams = new URLSearchParams(window.location.search);
-      const queryType = queryParams.get("type");
-
-      if (queryType === "recovery" && session) {
-        setPageState("valid");
-        return;
-      }
-
-      // If there's a session but no recovery indication, treat as invalid
-      // (User might have navigated here directly while logged in)
-      if (session) {
-        // Sign them out to prevent auto-login behavior
+      // If session exists but not from recovery, sign out
+      if (session && !isRecoveryUrl) {
         await supabase.auth.signOut();
       }
 
-      setPageState("invalid");
-    } catch (err) {
-      console.error("Error checking recovery session:", err);
-      setPageState("invalid");
-    }
-  };
+      // Set to invalid after timeout if still loading
+      timeoutId = setTimeout(() => {
+        if (isSubscribed) {
+          setPageState(prev => prev === "loading" ? "invalid" : prev);
+        }
+      }, 2000);
+    };
+
+    checkSession();
+
+    return () => {
+      isSubscribed = false;
+      subscription.unsubscribe();
+      if (timeoutId) clearTimeout(timeoutId);
+    };
+  }, []);
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setFormData({
