@@ -14,24 +14,102 @@ export type Database = {
   }
   public: {
     Tables: {
+      admin_audit_log: {
+        Row: {
+          action: string
+          admin_email: string
+          after: Json | null
+          before: Json | null
+          created_at: string
+          id: string
+          target_id: string | null
+          target_table: string
+        }
+        Insert: {
+          action: string
+          admin_email: string
+          after?: Json | null
+          before?: Json | null
+          created_at?: string
+          id?: string
+          target_id?: string | null
+          target_table: string
+        }
+        Update: {
+          action?: string
+          admin_email?: string
+          after?: Json | null
+          before?: Json | null
+          created_at?: string
+          id?: string
+          target_id?: string | null
+          target_table?: string
+        }
+        Relationships: []
+      }
       admin_whitelist: {
         Row: {
           created_at: string
+          created_by: string | null
           email: string
           id: string
           is_active: boolean
+          updated_at: string | null
+          updated_by: string | null
         }
         Insert: {
           created_at?: string
+          created_by?: string | null
           email: string
           id?: string
           is_active?: boolean
+          updated_at?: string | null
+          updated_by?: string | null
         }
         Update: {
           created_at?: string
+          created_by?: string | null
           email?: string
           id?: string
           is_active?: boolean
+          updated_at?: string | null
+          updated_by?: string | null
+        }
+        Relationships: []
+      }
+      packages: {
+        Row: {
+          created_at: string
+          dividend_cap_percent: number
+          id: string
+          is_active: boolean
+          name: string
+          price_usd: number
+          shares: number
+          updated_at: string
+          updated_by: string | null
+        }
+        Insert: {
+          created_at?: string
+          dividend_cap_percent: number
+          id?: string
+          is_active?: boolean
+          name: string
+          price_usd: number
+          shares: number
+          updated_at?: string
+          updated_by?: string | null
+        }
+        Update: {
+          created_at?: string
+          dividend_cap_percent?: number
+          id?: string
+          is_active?: boolean
+          name?: string
+          price_usd?: number
+          shares?: number
+          updated_at?: string
+          updated_by?: string | null
         }
         Relationships: []
       }
@@ -65,6 +143,36 @@ export type Database = {
           status?: string
           user_email?: string | null
           user_id?: string | null
+        }
+        Relationships: []
+      }
+      platform_settings: {
+        Row: {
+          created_at: string
+          description: string | null
+          id: string
+          key: string
+          updated_at: string
+          updated_by: string | null
+          value: Json
+        }
+        Insert: {
+          created_at?: string
+          description?: string | null
+          id?: string
+          key: string
+          updated_at?: string
+          updated_by?: string | null
+          value: Json
+        }
+        Update: {
+          created_at?: string
+          description?: string | null
+          id?: string
+          key?: string
+          updated_at?: string
+          updated_by?: string | null
+          value?: Json
         }
         Relationships: []
       }
