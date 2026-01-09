@@ -2,22 +2,39 @@ import { useState, useEffect } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { supabase } from "@/integrations/supabase/client";
-import { LogOut, Menu, X } from "lucide-react";
+import { LogOut, Menu, X, Shield } from "lucide-react";
 import logoLight from "@/assets/u-topia-logo-light.png";
 
 const Header = () => {
   const [user, setUser] = useState<any>(null);
+  const [isAdmin, setIsAdmin] = useState(false);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const location = useLocation();
   const navigate = useNavigate();
 
   useEffect(() => {
-    const { data: { subscription } } = supabase.auth.onAuthStateChange((_, session) => {
+    const checkAuthAndAdmin = async (session: any) => {
       setUser(session?.user ?? null);
+      
+      if (session?.user?.email) {
+        const { data } = await supabase
+          .from('admin_whitelist')
+          .select('id')
+          .eq('email', session.user.email)
+          .eq('is_active', true)
+          .maybeSingle();
+        setIsAdmin(!!data);
+      } else {
+        setIsAdmin(false);
+      }
+    };
+
+    const { data: { subscription } } = supabase.auth.onAuthStateChange((_, session) => {
+      checkAuthAndAdmin(session);
     });
 
     supabase.auth.getSession().then(({ data: { session } }) => {
-      setUser(session?.user ?? null);
+      checkAuthAndAdmin(session);
     });
 
     return () => subscription.unsubscribe();
@@ -35,6 +52,7 @@ const Header = () => {
     { path: "/refer-and-earn", label: "Refer & Earn" },
     { path: "/purchase", label: "Purchase" },
     { path: "/dashboard", label: "Dashboard" },
+    ...(isAdmin ? [{ path: "/admin", label: "Admin", isAdmin: true }] : []),
   ];
 
   return (
