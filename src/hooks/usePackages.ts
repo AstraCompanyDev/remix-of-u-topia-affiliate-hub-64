@@ -37,26 +37,47 @@ export function usePackages() {
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState<Error | null>(null);
 
+  const fetchPackages = async () => {
+    try {
+      const { data, error } = await supabase
+        .from('packages')
+        .select('*')
+        .eq('is_active', true)
+        .order('price_usd', { ascending: true });
+
+      if (error) throw error;
+      setPackages(data || []);
+    } catch (err) {
+      console.error('Error fetching packages:', err);
+      setError(err instanceof Error ? err : new Error('Failed to fetch packages'));
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
   useEffect(() => {
-    const fetchPackages = async () => {
-      try {
-        const { data, error } = await supabase
-          .from('packages')
-          .select('*')
-          .eq('is_active', true)
-          .order('price_usd', { ascending: true });
-
-        if (error) throw error;
-        setPackages(data || []);
-      } catch (err) {
-        console.error('Error fetching packages:', err);
-        setError(err instanceof Error ? err : new Error('Failed to fetch packages'));
-      } finally {
-        setIsLoading(false);
-      }
-    };
-
     fetchPackages();
+
+    // Subscribe to real-time updates
+    const channel = supabase
+      .channel('packages-changes')
+      .on(
+        'postgres_changes',
+        {
+          event: '*',
+          schema: 'public',
+          table: 'packages'
+        },
+        () => {
+          // Refetch packages when any change occurs
+          fetchPackages();
+        }
+      )
+      .subscribe();
+
+    return () => {
+      supabase.removeChannel(channel);
+    };
   }, []);
 
   const getPackageByName = (name: string): Package | undefined => {
