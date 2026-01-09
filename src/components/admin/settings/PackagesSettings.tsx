@@ -142,7 +142,32 @@ export function PackagesSettings() {
         is_active: formIsActive,
       };
 
-      // Update package
+      // Check if price changed - if so, sync with Stripe first
+      if (price !== editingPackage.price_usd) {
+        toast({
+          title: 'Syncing with Stripe...',
+          description: 'Updating payment configuration',
+        });
+
+        const { data: stripeData, error: stripeError } = await supabase.functions.invoke(
+          'sync-stripe-price',
+          {
+            body: {
+              package_id: editingPackage.id,
+              price_usd: price,
+              name: editingPackage.name,
+            },
+          }
+        );
+
+        if (stripeError || stripeData?.error) {
+          throw new Error(stripeData?.error || stripeError?.message || 'Failed to sync with Stripe');
+        }
+
+        console.log('Stripe sync successful:', stripeData);
+      }
+
+      // Update package in database
       const { error: updateError } = await supabase
         .from('packages')
         .update({
@@ -172,7 +197,7 @@ export function PackagesSettings() {
 
       toast({
         title: 'Package Updated',
-        description: `${editingPackage.name} package has been updated successfully`,
+        description: `${editingPackage.name} package has been updated successfully (including Stripe pricing)`,
       });
 
       closeEditModal();
@@ -181,7 +206,7 @@ export function PackagesSettings() {
       console.error('Error saving package:', err);
       toast({
         title: 'Error',
-        description: 'Failed to update package',
+        description: err instanceof Error ? err.message : 'Failed to update package',
         variant: 'destructive',
       });
     } finally {

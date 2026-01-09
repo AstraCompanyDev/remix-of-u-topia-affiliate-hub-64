@@ -8,3 +8,6 @@ verify_jwt = false
 
 [functions.referral-link]
 verify_jwt = false
+
+[functions.sync-stripe-price]
+verify_jwt = false

@@ -1,5 +1,6 @@
 import { serve } from "https://deno.land/std@0.190.0/http/server.ts";
 import Stripe from "https://esm.sh/stripe@18.5.0";
+import { createClient } from "https://esm.sh/@supabase/supabase-js@2.57.2";
 
 // Allowed origins for CORS
 const ALLOWED_ORIGINS = [
@@ -24,21 +25,17 @@ const getCorsHeaders = (origin: string | null) => {
 const VALID_TIERS = ["bronze", "silver", "gold", "platinum", "diamond"] as const;
 type ValidTier = typeof VALID_TIERS[number];
 
-// Price IDs for each membership tier
-const PRICE_IDS: Record<ValidTier, string> = {
-  bronze: "price_1SmqHeGagzA6swjX6xWyaEa9",
-  silver: "price_1SmqHvGagzA6swjXkbAKbS2C",
-  gold: "price_1SmqI5GagzA6swjXSRVL5CXE",
-  platinum: "price_1SmqIEGagzA6swjX0KJjGYze",
-  diamond: "price_1SmqINGagzA6swjXH0jVXLiH",
-};
-
 // Input validation
 function validateTier(tier: unknown): tier is ValidTier {
   return typeof tier === "string" && 
          tier.length <= 20 && 
          VALID_TIERS.includes(tier as ValidTier);
 }
+
+const logStep = (step: string, details?: Record<string, unknown>) => {
+  const detailsStr = details ? ` - ${JSON.stringify(details)}` : "";
+  console.log(`[STRIPE-CHECKOUT] ${step}${detailsStr}`);
+};
 
 serve(async (req) => {
   const origin = req.headers.get("origin");
@@ -80,7 +77,44 @@ serve(async (req) => {
       );
     }
 
-    console.log(`Creating checkout session for tier: ${tier}`);
+    logStep("Creating checkout session for tier", { tier });
+
+    // Initialize Supabase client to fetch package data
+    const supabaseClient = createClient(
+      Deno.env.get("SUPABASE_URL") ?? "",
+      Deno.env.get("SUPABASE_SERVICE_ROLE_KEY") ?? "",
+      { auth: { persistSession: false } }
+    );
+
+    // Fetch the package from database to get current Stripe price ID
+    const { data: packageData, error: packageError } = await supabaseClient
+      .from("packages")
+      .select("stripe_price_id, price_usd, name")
+      .ilike("name", tier)
+      .eq("is_active", true)
+      .single();
+
+    if (packageError || !packageData) {
+      logStep("Package not found or inactive", { tier, error: packageError?.message });
+      return new Response(
+        JSON.stringify({ error: "Package not found or is inactive" }),
+        { headers: { ...corsHeaders, "Content-Type": "application/json" }, status: 404 }
+      );
+    }
+
+    if (!packageData.stripe_price_id) {
+      logStep("Package has no Stripe price configured", { tier });
+      return new Response(
+        JSON.stringify({ error: "Package pricing not configured. Please contact support." }),
+        { headers: { ...corsHeaders, "Content-Type": "application/json" }, status: 500 }
+      );
+    }
+
+    logStep("Package found", { 
+      tier, 
+      price_id: packageData.stripe_price_id, 
+      price_usd: packageData.price_usd 
+    });
 
     const stripe = new Stripe(stripeKey, {
       apiVersion: "2025-08-27.basil",
@@ -93,7 +127,7 @@ serve(async (req) => {
       mode: "payment",
       line_items: [
         {
-          price: PRICE_IDS[tier],
+          price: packageData.stripe_price_id,
           quantity: 1,
         },
       ],
@@ -101,7 +135,7 @@ serve(async (req) => {
       cancel_url: `${requestOrigin}/purchase?tier=${tier}`,
     });
 
-    console.log(`Checkout session created: ${session.id}`);
+    logStep("Checkout session created", { sessionId: session.id });
 
     return new Response(JSON.stringify({ url: session.url }), {
       headers: { ...corsHeaders, "Content-Type": "application/json" },
