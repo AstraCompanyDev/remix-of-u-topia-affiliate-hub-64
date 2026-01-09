@@ -4,8 +4,8 @@ import Header from '@/components/Header';
 import { AdminMetricCard } from '@/components/admin/AdminMetricCard';
 import { ActivityFeed } from '@/components/admin/ActivityFeed';
 import { UsersTable } from '@/components/admin/UsersTable';
-import { AdminControls } from '@/components/admin/AdminControls';
 import { TierBreakdown } from '@/components/admin/TierBreakdown';
+import { AdminSettings } from '@/components/admin/settings/AdminSettings';
 import { useAdmin } from '@/hooks/useAdmin';
 import { useToast } from '@/hooks/use-toast';
 import { supabase } from '@/integrations/supabase/client';
@@ -19,10 +19,14 @@ import {
   Clock,
   Loader2,
   Shield,
-  Calendar
+  Calendar,
+  LayoutDashboard,
+  Activity,
+  Settings
 } from 'lucide-react';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { Badge } from '@/components/ui/badge';
+import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 
 const AdminDashboard = () => {
   const navigate = useNavigate();
@@ -30,6 +34,7 @@ const AdminDashboard = () => {
   const { isAdmin, isLoading: adminLoading } = useAdmin();
   const [isAuthLoading, setIsAuthLoading] = useState(true);
   const [timeRange, setTimeRange] = useState('30d');
+  const [activeTab, setActiveTab] = useState('overview');
 
   useEffect(() => {
     const checkAuth = async () => {
@@ -98,99 +103,118 @@ const AdminDashboard = () => {
               Platform-wide overview and management
             </p>
           </div>
-          <div className="flex items-center gap-2">
-            <Calendar className="w-4 h-4 text-muted-foreground" />
-            <Select value={timeRange} onValueChange={setTimeRange}>
-              <SelectTrigger className="w-40">
-                <SelectValue />
-              </SelectTrigger>
-              <SelectContent>
-                <SelectItem value="7d">Last 7 days</SelectItem>
-                <SelectItem value="30d">Last 30 days</SelectItem>
-                <SelectItem value="all">All time</SelectItem>
-              </SelectContent>
-            </Select>
-          </div>
+          {activeTab !== 'settings' && (
+            <div className="flex items-center gap-2">
+              <Calendar className="w-4 h-4 text-muted-foreground" />
+              <Select value={timeRange} onValueChange={setTimeRange}>
+                <SelectTrigger className="w-40">
+                  <SelectValue />
+                </SelectTrigger>
+                <SelectContent>
+                  <SelectItem value="7d">Last 7 days</SelectItem>
+                  <SelectItem value="30d">Last 30 days</SelectItem>
+                  <SelectItem value="all">All time</SelectItem>
+                </SelectContent>
+              </Select>
+            </div>
+          )}
         </div>
       </section>
 
-      {/* Global Metrics */}
-      <section className="container mx-auto px-6 pb-12">
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
-          <AdminMetricCard
-            label="Total Users"
-            value={metrics.totalUsers}
-            icon={<Users className="w-5 h-5 text-primary" />}
-            subtext="Registered accounts"
-            trend={{ value: '+12%', isPositive: true }}
-          />
-          <AdminMetricCard
-            label="Verified Users"
-            value={metrics.verifiedUsers}
-            icon={<UserCheck className="w-5 h-5 text-primary" />}
-            subtext={`${Math.round((metrics.verifiedUsers / metrics.totalUsers) * 100)}% verification rate`}
-          />
-          <AdminMetricCard
-            label="Total Referrals"
-            value={metrics.totalReferrals}
-            icon={<Link2 className="w-5 h-5 text-primary" />}
-            subtext="Referral links created"
-          />
-          <AdminMetricCard
-            label="Active Referrals"
-            value={metrics.activeReferrals}
-            icon={<Link2 className="w-5 h-5 text-primary" />}
-            subtext="Unconverted links"
-          />
-        </div>
+      {/* Tabs Navigation */}
+      <section className="container mx-auto px-6 pb-6">
+        <Tabs value={activeTab} onValueChange={setActiveTab}>
+          <TabsList className="grid w-full max-w-md grid-cols-4 h-12">
+            <TabsTrigger value="overview" className="gap-2">
+              <LayoutDashboard className="w-4 h-4" />
+              <span className="hidden sm:inline">Overview</span>
+            </TabsTrigger>
+            <TabsTrigger value="users" className="gap-2">
+              <Users className="w-4 h-4" />
+              <span className="hidden sm:inline">Users</span>
+            </TabsTrigger>
+            <TabsTrigger value="activity" className="gap-2">
+              <Activity className="w-4 h-4" />
+              <span className="hidden sm:inline">Activity</span>
+            </TabsTrigger>
+            <TabsTrigger value="settings" className="gap-2">
+              <Settings className="w-4 h-4" />
+              <span className="hidden sm:inline">Settings</span>
+            </TabsTrigger>
+          </TabsList>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 mt-4">
-          <AdminMetricCard
-            label="Qualifying Revenue"
-            value={`$${metrics.qualifyingRevenue.toLocaleString()}`}
-            icon={<DollarSign className="w-5 h-5 text-primary" />}
-            subtext="Total platform revenue"
-            trend={{ value: '+8.5%', isPositive: true }}
-          />
-          <AdminMetricCard
-            label="Rewards Paid"
-            value={`$${metrics.rewardsPaid.toLocaleString()}`}
-            icon={<Gift className="w-5 h-5 text-primary" />}
-            subtext="Total paid to affiliates"
-          />
-          <AdminMetricCard
-            label="Rewards Pending"
-            value={`$${metrics.rewardsPending.toLocaleString()}`}
-            icon={<Clock className="w-5 h-5 text-primary" />}
-            subtext="Awaiting payout"
-          />
-        </div>
-      </section>
+          {/* Overview Tab */}
+          <TabsContent value="overview" className="mt-8 space-y-8">
+            {/* Global Metrics */}
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+              <AdminMetricCard
+                label="Total Users"
+                value={metrics.totalUsers}
+                icon={<Users className="w-5 h-5 text-primary" />}
+                subtext="Registered accounts"
+                trend={{ value: '+12%', isPositive: true }}
+              />
+              <AdminMetricCard
+                label="Verified Users"
+                value={metrics.verifiedUsers}
+                icon={<UserCheck className="w-5 h-5 text-primary" />}
+                subtext={`${Math.round((metrics.verifiedUsers / metrics.totalUsers) * 100)}% verification rate`}
+              />
+              <AdminMetricCard
+                label="Total Referrals"
+                value={metrics.totalReferrals}
+                icon={<Link2 className="w-5 h-5 text-primary" />}
+                subtext="Referral links created"
+              />
+              <AdminMetricCard
+                label="Active Referrals"
+                value={metrics.activeReferrals}
+                icon={<Link2 className="w-5 h-5 text-primary" />}
+                subtext="Unconverted links"
+              />
+            </div>
 
-      {/* Tier Breakdown */}
-      <section className="container mx-auto px-6 pb-12">
-        <TierBreakdown />
-      </section>
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+              <AdminMetricCard
+                label="Qualifying Revenue"
+                value={`$${metrics.qualifyingRevenue.toLocaleString()}`}
+                icon={<DollarSign className="w-5 h-5 text-primary" />}
+                subtext="Total platform revenue"
+                trend={{ value: '+8.5%', isPositive: true }}
+              />
+              <AdminMetricCard
+                label="Rewards Paid"
+                value={`$${metrics.rewardsPaid.toLocaleString()}`}
+                icon={<Gift className="w-5 h-5 text-primary" />}
+                subtext="Total paid to affiliates"
+              />
+              <AdminMetricCard
+                label="Rewards Pending"
+                value={`$${metrics.rewardsPending.toLocaleString()}`}
+                icon={<Clock className="w-5 h-5 text-primary" />}
+                subtext="Awaiting payout"
+              />
+            </div>
 
-      {/* Activity Feed */}
-      <section className="container mx-auto px-6 pb-12">
-        <ActivityFeed />
-      </section>
+            {/* Tier Breakdown */}
+            <TierBreakdown />
+          </TabsContent>
 
-      {/* Users Table */}
-      <section className="container mx-auto px-6 pb-12">
-        <UsersTable />
-      </section>
+          {/* Users Tab */}
+          <TabsContent value="users" className="mt-8">
+            <UsersTable />
+          </TabsContent>
 
-      {/* Admin Controls */}
-      <section className="container mx-auto px-6 pb-20">
-        <div className="mb-6">
-          <h2 className="text-xl font-semibold text-foreground mb-1">Admin Controls</h2>
-          <p className="text-sm text-muted-foreground">
-            Manage platform settings and admin access
-          </p>
-        </div>
-        <AdminControls />
+          {/* Activity Tab */}
+          <TabsContent value="activity" className="mt-8">
+            <ActivityFeed />
+          </TabsContent>
+
+          {/* Settings Tab */}
+          <TabsContent value="settings" className="mt-8">
+            <AdminSettings />
+          </TabsContent>
+        </Tabs>
       </section>
 
       {/* Footer */}
