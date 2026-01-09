@@ -42,6 +42,9 @@ const Index = () => {
               <Link to="/purchase" className="text-gray-400 hover:text-white transition-colors">
                 Purchase
               </Link>
+              <Link to="/dashboard" className="text-gray-400 hover:text-white transition-colors">
+                Dashboard
+              </Link>
               <Link to="/auth">
                 <Button variant="default" size="sm">
                   Join Now

@@ -153,6 +153,9 @@ const Purchase = () => {
               <Link to="/purchase" className="text-white font-medium">
                 Purchase
               </Link>
+              <Link to="/dashboard" className="text-gray-400 hover:text-white transition-colors">
+                Dashboard
+              </Link>
               <Link to="/auth">
                 <Button variant="default" size="sm">
                   Join Now
