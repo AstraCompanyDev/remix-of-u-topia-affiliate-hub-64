@@ -86,6 +86,8 @@ export type Database = {
           name: string
           price_usd: number
           shares: number
+          stripe_price_id: string | null
+          stripe_product_id: string | null
           updated_at: string
           updated_by: string | null
         }
@@ -97,6 +99,8 @@ export type Database = {
           name: string
           price_usd: number
           shares: number
+          stripe_price_id?: string | null
+          stripe_product_id?: string | null
           updated_at?: string
           updated_by?: string | null
         }
@@ -108,6 +112,8 @@ export type Database = {
           name?: string
           price_usd?: number
           shares?: number
+          stripe_price_id?: string | null
+          stripe_product_id?: string | null
           updated_at?: string
           updated_by?: string | null
         }
