@@ -1,5 +1,6 @@
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
+import Header from "@/components/Header";
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
 import logoLight from "@/assets/u-topia-logo-light.png";
 import logoDark from "@/assets/u-topia-logo-dark.png";
@@ -27,32 +28,9 @@ const Index = () => {
         <div className="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-[#0a0f1a] pointer-events-none" />
 
         {/* Navigation */}
-        <header className="relative z-20 container mx-auto px-6 py-6">
-          <nav className="flex items-center justify-between">
-            <div className="flex items-center">
-              <img src={logoLight} alt="U-topia" className="h-8 md:h-10" />
-            </div>
-            <div className="hidden md:flex items-center gap-8">
-              <a href="#" className="text-gray-400 hover:text-white transition-colors">
-                Home
-              </a>
-              <Link to="/refer-and-earn" className="text-gray-400 hover:text-white transition-colors">
-                Refer & Earn
-              </Link>
-              <Link to="/purchase" className="text-gray-400 hover:text-white transition-colors">
-                Purchase
-              </Link>
-              <Link to="/dashboard" className="text-gray-400 hover:text-white transition-colors">
-                Dashboard
-              </Link>
-              <Link to="/auth">
-                <Button variant="default" size="sm">
-                  Join Now
-                </Button>
-              </Link>
-            </div>
-          </nav>
-        </header>
+        <div className="relative z-20">
+          <Header />
+        </div>
 
         {/* Hero Content */}
         <section className="relative z-10 container mx-auto px-6 pt-16 pb-24">

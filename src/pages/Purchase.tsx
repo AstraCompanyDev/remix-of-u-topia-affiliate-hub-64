@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { Link, useSearchParams } from "react-router-dom";
 import { Button } from "@/components/ui/button";
+import Header from "@/components/Header";
 import { useToast } from "@/hooks/use-toast";
 import { supabase } from "@/integrations/supabase/client";
 import {
@@ -136,35 +137,7 @@ const Purchase = () => {
 
   return (
     <div className="min-h-screen bg-background">
-      {/* Navigation */}
-      <header className="sticky top-0 z-50 bg-[#0a0f1a] border-b border-white/10">
-        <div className="container mx-auto px-6 py-4">
-          <nav className="flex items-center justify-between">
-            <Link to="/" className="flex items-center">
-              <img src={logoLight} alt="U-topia" className="h-8 md:h-10" />
-            </Link>
-            <div className="hidden md:flex items-center gap-8">
-              <Link to="/" className="text-gray-400 hover:text-white transition-colors">
-                Home
-              </Link>
-              <Link to="/refer-and-earn" className="text-gray-400 hover:text-white transition-colors">
-                Refer & Earn
-              </Link>
-              <Link to="/purchase" className="text-white font-medium">
-                Purchase
-              </Link>
-              <Link to="/dashboard" className="text-gray-400 hover:text-white transition-colors">
-                Dashboard
-              </Link>
-              <Link to="/auth">
-                <Button variant="default" size="sm">
-                  Join Now
-                </Button>
-              </Link>
-            </div>
-          </nav>
-        </div>
-      </header>
+      <Header />
 
       {/* Main Product Detail Section */}
       <section className="container mx-auto px-6 py-12 md:py-20">
