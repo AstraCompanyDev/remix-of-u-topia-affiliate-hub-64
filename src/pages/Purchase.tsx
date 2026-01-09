@@ -3,6 +3,7 @@ import { Link, useSearchParams } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import Header from "@/components/Header";
 import { useToast } from "@/hooks/use-toast";
+import { usePackages, PackageKey } from "@/hooks/usePackages";
 import { supabase } from "@/integrations/supabase/client";
 import {
   Accordion,
@@ -10,6 +11,7 @@ import {
   AccordionItem,
   AccordionTrigger,
 } from "@/components/ui/accordion";
+import { Loader2 } from "lucide-react";
 import logoLight from "@/assets/u-topia-logo-light.png";
 import badgeBronze from "@/assets/badge-bronze.png";
 import badgeSilver from "@/assets/badge-silver.png";
@@ -17,85 +19,20 @@ import badgeGold from "@/assets/badge-gold.png";
 import badgePlatinum from "@/assets/badge-platinum.png";
 import badgeDiamond from "@/assets/badge-diamond.png";
 
-type PackageKey = "bronze" | "silver" | "gold" | "platinum" | "diamond";
-
-interface PackageInfo {
-  name: string;
-  price: string;
-  image: string;
-  features: string[];
-  highlights: string[];
-}
-
-const packages: Record<PackageKey, PackageInfo> = {
-  bronze: {
-    name: "Bronze",
-    price: "$100",
-    image: badgeBronze,
-    features: [
-      "100 Share Allocation",
-      "Maximum Referral Capacity: 3",
-      "Commission Depth: 1 layer",
-      "Maximum Reward Rate: Up to 2%",
-    ],
-    highlights: ["100 Shares", "3 Referrals", "Entry-level passive income"],
-  },
-  silver: {
-    name: "Silver",
-    price: "$250",
-    image: badgeSilver,
-    features: [
-      "250 Share Allocation",
-      "Maximum Referral Capacity: 9",
-      "Commission Depth: 2 layers",
-      "Maximum Reward Rate: Up to 3%",
-    ],
-    highlights: ["250 Shares", "9 Referrals", "Mid-tier dividends"],
-  },
-  gold: {
-    name: "Gold",
-    price: "$500",
-    image: badgeGold,
-    features: [
-      "500 Share Allocation",
-      "Maximum Referral Capacity: 27",
-      "Commission Depth: 3 layers",
-      "Maximum Reward Rate: Up to 4%",
-    ],
-    highlights: ["500 Shares", "27 Referrals", "LP growth eligible"],
-  },
-  platinum: {
-    name: "Platinum",
-    price: "$1,000",
-    image: badgePlatinum,
-    features: [
-      "1,000 Share Allocation",
-      "Maximum Referral Capacity: 81",
-      "Commission Depth: 4 layers",
-      "Maximum Reward Rate: Up to 5%",
-    ],
-    highlights: ["1,000 Shares", "81 Referrals", "Higher passive rewards"],
-  },
-  diamond: {
-    name: "Diamond",
-    price: "$2,500",
-    image: badgeDiamond,
-    features: [
-      "2,500 Share Allocation",
-      "Maximum Referral Capacity: 243",
-      "Commission Depth: 5 layers",
-      "Maximum Reward Rate: Up to 6%",
-    ],
-    highlights: ["2,500 Shares", "243 Referrals", "Top-tier dividends"],
-  },
+const badgeImages: Record<PackageKey, string> = {
+  bronze: badgeBronze,
+  silver: badgeSilver,
+  gold: badgeGold,
+  platinum: badgePlatinum,
+  diamond: badgeDiamond,
 };
-
-const packageOrder: PackageKey[] = ["bronze", "silver", "gold", "platinum", "diamond"];
 
 const Purchase = () => {
   const { toast } = useToast();
   const [searchParams] = useSearchParams();
-  const [isLoading, setIsLoading] = useState(false);
+  const [isCheckoutLoading, setIsCheckoutLoading] = useState(false);
+  const { packages, isLoading, formatPrice, getPackageFeatures, getPackageHighlights, packageOrder } = usePackages();
+  
   const initialPackage = (searchParams.get("tier") as PackageKey) || "bronze";
   const [selectedPackage, setSelectedPackage] = useState<PackageKey>(
     packageOrder.includes(initialPackage) ? initialPackage : "bronze"
@@ -108,11 +45,11 @@ const Purchase = () => {
     }
   }, [searchParams]);
 
-  const currentPackage = packages[selectedPackage];
-  const otherPackages = packageOrder.filter((key) => key !== selectedPackage);
+  const currentPackage = packages.find(p => p.name.toLowerCase() === selectedPackage);
+  const otherPackageKeys = packageOrder.filter((key) => key !== selectedPackage);
 
   const handleCheckout = async () => {
-    setIsLoading(true);
+    setIsCheckoutLoading(true);
     try {
       const { data, error } = await supabase.functions.invoke("stripe-checkout", {
         body: { tier: selectedPackage },
@@ -131,9 +68,32 @@ const Purchase = () => {
         variant: "destructive",
       });
     } finally {
-      setIsLoading(false);
+      setIsCheckoutLoading(false);
     }
   };
+
+  if (isLoading) {
+    return (
+      <div className="min-h-screen bg-background flex items-center justify-center">
+        <Loader2 className="w-8 h-8 animate-spin text-primary" />
+      </div>
+    );
+  }
+
+  if (!currentPackage) {
+    return (
+      <div className="min-h-screen bg-background">
+        <Header />
+        <div className="container mx-auto px-6 py-20 text-center">
+          <h1 className="text-2xl font-bold text-foreground">Package not found</h1>
+          <p className="text-muted-foreground mt-2">The selected package is not available.</p>
+          <Link to="/purchase?tier=bronze">
+            <Button className="mt-6">View Bronze Package</Button>
+          </Link>
+        </div>
+      </div>
+    );
+  }
 
   return (
     <div className="min-h-screen bg-background">
@@ -148,7 +108,7 @@ const Purchase = () => {
               <div className="relative">
                 <div className="absolute -inset-4 bg-gradient-to-r from-primary/20 via-primary/10 to-primary/20 rounded-full blur-2xl opacity-60" />
                 <img
-                  src={currentPackage.image}
+                  src={badgeImages[selectedPackage]}
                   alt={`${currentPackage.name} Package`}
                   className="relative w-48 h-48 md:w-64 md:h-64 lg:w-72 lg:h-72 object-contain drop-shadow-2xl transition-transform duration-500"
                 />
@@ -163,17 +123,17 @@ const Purchase = () => {
             </h1>
 
             <p className="text-5xl md:text-6xl font-bold text-primary mb-8">
-              {currentPackage.price}
+              {formatPrice(currentPackage.price_usd)}
             </p>
 
             <Button
               size="lg"
               onClick={handleCheckout}
-              disabled={isLoading}
+              disabled={isCheckoutLoading}
               className="w-full md:w-auto bg-primary hover:bg-primary/90 text-white font-semibold px-12 py-7 text-lg rounded-full shadow-lg shadow-primary/25 hover:shadow-xl hover:shadow-primary/30 transition-all mb-4"
             >
-              {isLoading ? "Processing..." : "Buy Now"}
-              {!isLoading && (
+              {isCheckoutLoading ? "Processing..." : "Buy Now"}
+              {!isCheckoutLoading && (
                 <svg className="w-5 h-5 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
                 </svg>
@@ -187,7 +147,7 @@ const Purchase = () => {
             <div className="border-t border-border pt-8">
               <h3 className="text-xl font-semibold text-foreground mb-6">What's included</h3>
               <ul className="space-y-4">
-                {currentPackage.features.map((feature, index) => (
+                {getPackageFeatures(currentPackage).map((feature, index) => (
                   <li key={index} className="flex items-start gap-3">
                     <div className="w-5 h-5 rounded-full bg-primary/10 border border-primary/30 flex items-center justify-center flex-shrink-0 mt-0.5">
                       <svg className="w-3 h-3 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -213,8 +173,10 @@ const Purchase = () => {
         </div>
 
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-          {otherPackages.map((key) => {
-            const pkg = packages[key];
+          {otherPackageKeys.map((key) => {
+            const pkg = packages.find(p => p.name.toLowerCase() === key);
+            if (!pkg) return null;
+            
             return (
               <button
                 key={key}
@@ -223,17 +185,17 @@ const Purchase = () => {
               >
                 <div className="flex items-center gap-4 mb-4">
                   <img
-                    src={pkg.image}
+                    src={badgeImages[key]}
                     alt={pkg.name}
                     className="w-12 h-12 object-contain group-hover:scale-110 transition-transform duration-300"
                   />
                   <div>
                     <h3 className="text-lg font-semibold text-foreground">{pkg.name}</h3>
-                    <p className="text-xl font-bold text-primary">{pkg.price}</p>
+                    <p className="text-xl font-bold text-primary">{formatPrice(pkg.price_usd)}</p>
                   </div>
                 </div>
                 <ul className="space-y-2">
-                  {pkg.highlights.map((highlight, index) => (
+                  {getPackageHighlights(pkg).map((highlight, index) => (
                     <li key={index} className="flex items-center gap-2 text-sm text-muted-foreground">
                       <div className="w-1.5 h-1.5 rounded-full bg-primary/60" />
                       {highlight}
