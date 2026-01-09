@@ -8,7 +8,7 @@ import { supabase } from "@/integrations/supabase/client";
 import logoLight from "@/assets/u-topia-logo-light.png";
 import { Eye, EyeOff, Mail, User, Phone, Briefcase, Lock, ArrowRight, Loader2, ArrowLeft } from "lucide-react";
 
-type AuthMode = "signin" | "signup" | "forgot" | "reset";
+type AuthMode = "signin" | "signup" | "forgot";
 
 const Auth = () => {
   const navigate = useNavigate();
@@ -23,40 +23,41 @@ const Auth = () => {
     title: "",
     mobile: "",
     password: "",
-    newPassword: "",
-    confirmPassword: "",
   });
 
-  // Check for password reset token in URL
+  // Check for forgot mode from URL params
   useEffect(() => {
-    const accessToken = searchParams.get("access_token");
-    const type = searchParams.get("type");
-    
-    if (type === "recovery" && accessToken) {
-      setMode("reset");
+    const modeParam = searchParams.get("mode");
+    if (modeParam === "forgot") {
+      setMode("forgot");
     }
   }, [searchParams]);
 
-  // Check if user is already logged in
+  // Check if user is already logged in - redirect to home
   useEffect(() => {
     const checkSession = async () => {
       const { data: { session } } = await supabase.auth.getSession();
-      if (session && mode !== "reset") {
+      if (session) {
         navigate("/");
       }
     };
     checkSession();
 
     const { data: { subscription } } = supabase.auth.onAuthStateChange((event, session) => {
+      // If this is a password recovery event, redirect to the dedicated reset page
       if (event === "PASSWORD_RECOVERY") {
-        setMode("reset");
-      } else if (session && mode !== "reset") {
+        navigate("/reset-password");
+        return;
+      }
+      
+      // For normal sign in, redirect to home
+      if (session) {
         navigate("/");
       }
     });
 
     return () => subscription.unsubscribe();
-  }, [navigate, mode]);
+  }, [navigate]);
 
   // Check for referral code in URL
   const referralCode = searchParams.get("ref");
@@ -74,26 +75,6 @@ const Auth = () => {
         toast({
           title: "Invalid Email",
           description: "Please enter a valid email address.",
-          variant: "destructive",
-        });
-        return false;
-      }
-      return true;
-    }
-
-    if (mode === "reset") {
-      if (!formData.newPassword || formData.newPassword.length < 6) {
-        toast({
-          title: "Invalid Password",
-          description: "Password must be at least 6 characters.",
-          variant: "destructive",
-        });
-        return false;
-      }
-      if (formData.newPassword !== formData.confirmPassword) {
-        toast({
-          title: "Passwords Don't Match",
-          description: "Please make sure both passwords match.",
           variant: "destructive",
         });
         return false;
@@ -140,22 +121,14 @@ const Auth = () => {
       const { error } = await supabase.auth.resetPasswordForEmail(
         formData.email.trim().toLowerCase(),
         {
-          redirectTo: `${window.location.origin}/auth`,
+          redirectTo: `${window.location.origin}/reset-password`,
         }
       );
 
-      if (error) {
-        toast({
-          title: "Error",
-          description: error.message,
-          variant: "destructive",
-        });
-        return;
-      }
-
+      // Always show generic success message for security (don't reveal if email exists)
       toast({
         title: "Check Your Email",
-        description: "We've sent you a password reset link. Please check your inbox.",
+        description: "If an account exists for this email, we've sent a password reset link.",
       });
       
       // Go back to sign in
@@ -172,54 +145,11 @@ const Auth = () => {
     }
   };
 
-  const handleResetPassword = async () => {
-    if (!validateForm()) return;
-    
-    setIsLoading(true);
-
-    try {
-      const { error } = await supabase.auth.updateUser({
-        password: formData.newPassword,
-      });
-
-      if (error) {
-        toast({
-          title: "Error",
-          description: error.message,
-          variant: "destructive",
-        });
-        return;
-      }
-
-      toast({
-        title: "Password Updated",
-        description: "Your password has been successfully reset.",
-      });
-      
-      // Navigate to home
-      navigate("/");
-    } catch (err) {
-      console.error("Reset password error:", err);
-      toast({
-        title: "Something Went Wrong",
-        description: "Please try again later.",
-        variant: "destructive",
-      });
-    } finally {
-      setIsLoading(false);
-    }
-  };
-
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     
     if (mode === "forgot") {
       await handleForgotPassword();
-      return;
-    }
-
-    if (mode === "reset") {
-      await handleResetPassword();
       return;
     }
 
@@ -343,7 +273,6 @@ const Auth = () => {
 
   const isSignUp = mode === "signup";
   const isForgot = mode === "forgot";
-  const isReset = mode === "reset";
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-[#0a0f1a] via-[#0d1526] to-[#0a0f1a] flex flex-col">
@@ -377,104 +306,48 @@ const Auth = () => {
 
           {/* Card */}
           <div className="bg-white/[0.03] backdrop-blur-xl border border-white/10 rounded-3xl p-8 md:p-10 shadow-2xl">
-            {/* Forgot/Reset Password View */}
-            {(isForgot || isReset) ? (
+            {/* Forgot Password View */}
+            {isForgot ? (
               <>
                 {/* Back button */}
-                {isForgot && (
-                  <button
-                    type="button"
-                    onClick={() => setMode("signin")}
-                    className="flex items-center gap-2 text-gray-400 hover:text-white transition-colors mb-6"
-                  >
-                    <ArrowLeft className="w-4 h-4" />
-                    Back to Sign In
-                  </button>
-                )}
+                <button
+                  type="button"
+                  onClick={() => setMode("signin")}
+                  className="flex items-center gap-2 text-gray-400 hover:text-white transition-colors mb-6"
+                >
+                  <ArrowLeft className="w-4 h-4" />
+                  Back to Sign In
+                </button>
 
                 {/* Title */}
                 <div className="text-center mb-8">
                   <h1 className="text-2xl md:text-3xl font-bold text-white mb-2">
-                    {isReset ? "Reset Your Password" : "Forgot Password?"}
+                    Forgot Password?
                   </h1>
                   <p className="text-gray-400 text-sm">
-                    {isReset 
-                      ? "Enter your new password below"
-                      : "Enter your email and we'll send you a reset link"}
+                    Enter your email and we'll send you a reset link
                   </p>
                 </div>
 
-                {/* Form */}
                 <form onSubmit={handleSubmit} className="space-y-5">
-                  {isForgot && (
-                    <div className="space-y-2">
-                      <Label htmlFor="email" className="text-gray-300 text-sm font-medium">
-                        Email Address
-                      </Label>
-                      <div className="relative">
-                        <Mail className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-gray-500" />
-                        <Input
-                          id="email"
-                          name="email"
-                          type="email"
-                          placeholder="john@example.com"
-                          value={formData.email}
-                          onChange={handleInputChange}
-                          disabled={isLoading}
-                          className="pl-12 py-6 bg-white/5 border-white/10 text-white placeholder:text-gray-500 rounded-xl focus:border-primary/50 focus:ring-primary/20"
-                        />
-                      </div>
+                  <div className="space-y-2">
+                    <Label htmlFor="email" className="text-gray-300 text-sm font-medium">
+                      Email Address
+                    </Label>
+                    <div className="relative">
+                      <Mail className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-gray-500" />
+                      <Input
+                        id="email"
+                        name="email"
+                        type="email"
+                        placeholder="john@example.com"
+                        value={formData.email}
+                        onChange={handleInputChange}
+                        disabled={isLoading}
+                        className="pl-12 py-6 bg-white/5 border-white/10 text-white placeholder:text-gray-500 rounded-xl focus:border-primary/50 focus:ring-primary/20"
+                      />
                     </div>
-                  )}
-
-                  {isReset && (
-                    <>
-                      <div className="space-y-2">
-                        <Label htmlFor="newPassword" className="text-gray-300 text-sm font-medium">
-                          New Password
-                        </Label>
-                        <div className="relative">
-                          <Lock className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-gray-500" />
-                          <Input
-                            id="newPassword"
-                            name="newPassword"
-                            type={showPassword ? "text" : "password"}
-                            placeholder="••••••••"
-                            value={formData.newPassword}
-                            onChange={handleInputChange}
-                            disabled={isLoading}
-                            className="pl-12 pr-12 py-6 bg-white/5 border-white/10 text-white placeholder:text-gray-500 rounded-xl focus:border-primary/50 focus:ring-primary/20"
-                          />
-                          <button
-                            type="button"
-                            onClick={() => setShowPassword(!showPassword)}
-                            className="absolute right-4 top-1/2 -translate-y-1/2 text-gray-500 hover:text-gray-300 transition-colors"
-                          >
-                            {showPassword ? <EyeOff className="w-5 h-5" /> : <Eye className="w-5 h-5" />}
-                          </button>
-                        </div>
-                      </div>
-
-                      <div className="space-y-2">
-                        <Label htmlFor="confirmPassword" className="text-gray-300 text-sm font-medium">
-                          Confirm Password
-                        </Label>
-                        <div className="relative">
-                          <Lock className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-gray-500" />
-                          <Input
-                            id="confirmPassword"
-                            name="confirmPassword"
-                            type={showPassword ? "text" : "password"}
-                            placeholder="••••••••"
-                            value={formData.confirmPassword}
-                            onChange={handleInputChange}
-                            disabled={isLoading}
-                            className="pl-12 py-6 bg-white/5 border-white/10 text-white placeholder:text-gray-500 rounded-xl focus:border-primary/50 focus:ring-primary/20"
-                          />
-                        </div>
-                      </div>
-                    </>
-                  )}
+                  </div>
 
                   <Button
                     type="submit"
@@ -485,7 +358,7 @@ const Auth = () => {
                       <Loader2 className="w-5 h-5 animate-spin" />
                     ) : (
                       <>
-                        {isReset ? "Update Password" : "Send Reset Link"}
+                        Send Reset Link
                         <ArrowRight className="w-5 h-5 ml-2 group-hover:translate-x-1 transition-transform" />
                       </>
                     )}
