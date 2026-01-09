@@ -5,3 +5,6 @@ verify_jwt = false
 
 [functions.verify-purchase]
 verify_jwt = false
+
+[functions.referral-link]
+verify_jwt = false

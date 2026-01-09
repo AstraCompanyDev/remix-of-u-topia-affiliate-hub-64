@@ -1,7 +1,6 @@
-import { useState } from "react";
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
-import { useToast } from "@/hooks/use-toast";
+import { ReferralToolsCard } from "@/components/ReferralToolsCard";
 import logoLight from "@/assets/u-topia-logo-light.png";
 import { 
   Link2, 
@@ -9,10 +8,6 @@ import {
   ShieldCheck, 
   Activity, 
   Calculator, 
-  Copy, 
-  QrCode, 
-  Mail, 
-  MessageCircle, 
   CheckCircle2, 
   XCircle, 
   BarChart3, 
@@ -20,36 +15,6 @@ import {
 } from "lucide-react";
 
 const ReferAndEarn = () => {
-  const { toast } = useToast();
-  const [referralLink] = useState("https://u-topia.com/ref/YOUR_ID");
-
-  const handleCopyLink = () => {
-    navigator.clipboard.writeText(referralLink);
-    toast({
-      title: "Link Copied",
-      description: "Referral link copied to clipboard.",
-    });
-  };
-
-  const handleShare = (platform: string) => {
-    const message = encodeURIComponent("Join U-topia using my referral link: " + referralLink);
-    let url = "";
-    
-    switch (platform) {
-      case "whatsapp":
-        url = `https://wa.me/?text=${message}`;
-        break;
-      case "email":
-        url = `mailto:?subject=${encodeURIComponent("Join U-topia")}&body=${message}`;
-        break;
-      default:
-        handleCopyLink();
-        return;
-    }
-    
-    window.open(url, "_blank");
-  };
-
   const steps = [
     {
       icon: Link2,
@@ -258,67 +223,7 @@ const ReferAndEarn = () => {
             </p>
           </div>
 
-          <div className="feature-card p-8 md:p-10">
-            {/* Referral Link */}
-            <div className="mb-8">
-              <label className="text-sm font-medium text-foreground mb-3 block">Your Referral Link</label>
-              <div className="flex items-center gap-3">
-                <div className="flex-1 bg-secondary/50 border border-border rounded-xl px-4 py-3 font-mono text-sm text-muted-foreground overflow-x-auto">
-                  {referralLink}
-                </div>
-                <Button
-                  variant="outline"
-                  size="icon"
-                  onClick={handleCopyLink}
-                  className="flex-shrink-0 h-12 w-12 rounded-xl border-border hover:border-primary/50 hover:bg-primary/5"
-                >
-                  <Copy className="w-5 h-5" />
-                </Button>
-              </div>
-            </div>
-
-            {/* QR Code Placeholder */}
-            <div className="mb-8">
-              <label className="text-sm font-medium text-foreground mb-3 block">QR Code</label>
-              <div className="w-40 h-40 bg-secondary/50 border border-border rounded-xl flex items-center justify-center">
-                <div className="text-center">
-                  <QrCode className="w-12 h-12 text-muted-foreground/40 mx-auto mb-2" />
-                  <span className="text-xs text-muted-foreground/60">QR Code</span>
-                </div>
-              </div>
-            </div>
-
-            {/* Share Buttons */}
-            <div>
-              <label className="text-sm font-medium text-foreground mb-3 block">Quick Share</label>
-              <div className="flex flex-wrap gap-3">
-                <Button
-                  variant="outline"
-                  onClick={() => handleShare("whatsapp")}
-                  className="gap-2 rounded-xl border-border hover:border-emerald-500/50 hover:bg-emerald-500/5"
-                >
-                  <MessageCircle className="w-4 h-4" />
-                  WhatsApp
-                </Button>
-                <Button
-                  variant="outline"
-                  onClick={() => handleShare("email")}
-                  className="gap-2 rounded-xl border-border hover:border-primary/50 hover:bg-primary/5"
-                >
-                  <Mail className="w-4 h-4" />
-                  Email
-                </Button>
-                <Button
-                  variant="outline"
-                  onClick={handleCopyLink}
-                  className="gap-2 rounded-xl border-border hover:border-primary/50 hover:bg-primary/5"
-                >
-                  <Copy className="w-4 h-4" />
-                  Copy Link
-                </Button>
-              </div>
-            </div>
-          </div>
+          <ReferralToolsCard />
         </div>
       </section>
 
