@@ -47,12 +47,42 @@ export type Database = {
         }
         Relationships: []
       }
+      referral_links: {
+        Row: {
+          code: string
+          created_at: string
+          id: string
+          is_active: boolean
+          used_at: string | null
+          used_by_email: string | null
+          user_id: string
+        }
+        Insert: {
+          code: string
+          created_at?: string
+          id?: string
+          is_active?: boolean
+          used_at?: string | null
+          used_by_email?: string | null
+          user_id: string
+        }
+        Update: {
+          code?: string
+          created_at?: string
+          id?: string
+          is_active?: boolean
+          used_at?: string | null
+          used_by_email?: string | null
+          user_id?: string
+        }
+        Relationships: []
+      }
     }
     Views: {
       [_ in never]: never
     }
     Functions: {
-      [_ in never]: never
+      generate_referral_code: { Args: never; Returns: string }
     }
     Enums: {
       [_ in never]: never
