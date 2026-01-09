@@ -40,13 +40,14 @@ const Header = () => {
   return (
     <header className="sticky top-0 z-50 bg-[#0a0f1a] border-b border-white/10">
       <div className="container mx-auto px-6 py-4">
-        <nav className="flex items-center justify-between">
-          <Link to="/" className="flex items-center">
+        <nav className="flex items-center">
+          {/* Logo - Left */}
+          <Link to="/" className="flex items-center flex-shrink-0">
             <img src={logoLight} alt="U-topia" className="h-8 md:h-10" />
           </Link>
           
-          {/* Desktop Navigation */}
-          <div className="hidden md:flex items-center gap-8">
+          {/* Desktop Navigation - Center */}
+          <div className="hidden md:flex items-center justify-center gap-8 flex-1">
             {navLinks.map((link) => (
               <Link
                 key={link.path}
@@ -56,9 +57,17 @@ const Header = () => {
                 {link.label}
               </Link>
             ))}
-            
+          </div>
+          
+          {/* Auth Button - Right */}
+          <div className="hidden md:flex items-center flex-shrink-0">
             {user ? (
-              <Button variant="outline" size="sm" onClick={handleSignOut} className="gap-2">
+              <Button 
+                variant="outline" 
+                size="sm" 
+                onClick={handleSignOut} 
+                className="gap-2 border-white/20 bg-transparent text-white hover:bg-white/10 hover:text-white"
+              >
                 <LogOut className="h-4 w-4" />
                 Sign Out
               </Button>
@@ -73,7 +82,7 @@ const Header = () => {
 
           {/* Mobile Menu Button */}
           <button
-            className="md:hidden text-white"
+            className="md:hidden text-white ml-auto"
             onClick={() => setIsMenuOpen(!isMenuOpen)}
           >
             {isMenuOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
