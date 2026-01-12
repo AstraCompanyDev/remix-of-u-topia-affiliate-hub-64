@@ -592,6 +592,22 @@ const Index = () => {
               >
                 <AccordionTrigger className="px-6 py-5 hover:no-underline group">
                   <span className="text-left text-lg font-semibold text-foreground group-hover:text-primary transition-colors">
+                    Do I earn commissions when someone just signs up?
+                  </span>
+                </AccordionTrigger>
+                <AccordionContent className="px-6 pb-6">
+                  <p className="text-muted-foreground leading-relaxed">
+                    <strong>No.</strong> Commissions are earned only after the referred user purchases a package. Signing up alone does not generate commissions. The referred user must complete a package purchase (Bronze, Silver, Gold, Platinum, or Diamond) and the transaction must be confirmed.
+                  </p>
+                </AccordionContent>
+              </AccordionItem>
+
+              <AccordionItem 
+                value="item-4" 
+                className="glass-card border-none rounded-2xl overflow-hidden data-[state=open]:border-primary/30 transition-all duration-300 hover:border-primary/20"
+              >
+                <AccordionTrigger className="px-6 py-5 hover:no-underline group">
+                  <span className="text-left text-lg font-semibold text-foreground group-hover:text-primary transition-colors">
                     Do I need to sell products or handle payments?
                   </span>
                 </AccordionTrigger>
@@ -603,7 +619,7 @@ const Index = () => {
               </AccordionItem>
 
               <AccordionItem 
-                value="item-4" 
+                value="item-5" 
                 className="glass-card border-none rounded-2xl overflow-hidden data-[state=open]:border-primary/30 transition-all duration-300 hover:border-primary/20"
               >
                 <AccordionTrigger className="px-6 py-5 hover:no-underline group">
@@ -619,7 +635,7 @@ const Index = () => {
               </AccordionItem>
 
               <AccordionItem 
-                value="item-5" 
+                value="item-6" 
                 className="glass-card border-none rounded-2xl overflow-hidden data-[state=open]:border-primary/30 transition-all duration-300 hover:border-primary/20"
               >
                 <AccordionTrigger className="px-6 py-5 hover:no-underline group">

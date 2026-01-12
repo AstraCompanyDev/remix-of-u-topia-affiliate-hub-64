@@ -140,9 +140,11 @@ const Purchase = () => {
               )}
             </Button>
 
-            <p className="text-sm text-muted-foreground mb-8">
-              Rewards are performance-based. Terms apply.
-            </p>
+            <div className="bg-primary/5 border border-primary/20 rounded-xl p-4 mb-8">
+              <p className="text-sm text-muted-foreground">
+                <strong className="text-foreground">Commission Eligibility:</strong> Package purchase is required to activate commission eligibility for your referrer. Once confirmed, you also become eligible to earn commissions on your referrals.
+              </p>
+            </div>
 
             <div className="border-t border-border pt-8">
               <h3 className="text-xl font-semibold text-foreground mb-6">What's included</h3>
