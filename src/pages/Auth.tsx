@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { Link, useNavigate, useSearchParams } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -23,6 +23,9 @@ const Auth = () => {
     mobile: "",
     password: "",
   });
+  
+  // Track if user is actively submitting the form - prevents redirect on token refresh
+  const isSubmittingRef = useRef(false);
 
   // Check for forgot mode from URL params
   useEffect(() => {
@@ -32,7 +35,7 @@ const Auth = () => {
     }
   }, [searchParams]);
 
-  // Only redirect after a successful sign in/sign up action, not on page load
+  // Only redirect after a successful sign in/sign up action triggered by user
   useEffect(() => {
     const { data: { subscription } } = supabase.auth.onAuthStateChange((event, session) => {
       // If this is a password recovery event, redirect to the dedicated reset page
@@ -41,8 +44,9 @@ const Auth = () => {
         return;
       }
       
-      // Only redirect on actual sign in events, not on initial load
-      if (event === "SIGNED_IN" && session) {
+      // Only redirect if user actively submitted the form (not on token refresh)
+      if (event === "SIGNED_IN" && session && isSubmittingRef.current) {
+        isSubmittingRef.current = false;
         navigate("/");
       }
     });
@@ -147,6 +151,7 @@ const Auth = () => {
     if (!validateForm()) return;
     
     setIsLoading(true);
+    isSubmittingRef.current = true;
 
     try {
       if (mode === "signup") {
