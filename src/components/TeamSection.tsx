@@ -1,4 +1,3 @@
-import { Linkedin } from "lucide-react";
 import teamEmmanuel from "@/assets/team/team-emmanuel.avif";
 import teamOwen from "@/assets/team/team-owen.avif";
 import teamMaissa from "@/assets/team/team-maissa.avif";
@@ -53,63 +52,104 @@ const teamMembers = [
 ];
 
 const TeamSection = () => {
+  // Split into two rows: first 4, then remaining 3
+  const firstRow = teamMembers.slice(0, 4);
+  const secondRow = teamMembers.slice(4);
+
   return (
-    <section className="py-24 bg-background">
+    <section className="py-24 bg-[#0a0f1a]">
       <div className="container mx-auto px-6">
         <div className="max-w-6xl mx-auto">
+          {/* Header */}
           <div className="text-center mb-16">
-            <span 
-              className="inline-block px-4 py-2 rounded-full bg-primary/10 border border-primary/20 text-primary text-sm font-medium mb-6 opacity-0 animate-fade-in-up"
+            <h2 
+              className="text-3xl md:text-5xl font-bold text-white mb-6 opacity-0 animate-fade-in-up"
               style={{ animationDelay: '100ms' }}
             >
-              Leadership
-            </span>
-            <h2 
-              className="text-3xl md:text-5xl font-bold text-foreground mb-6 opacity-0 animate-fade-in-up"
-              style={{ animationDelay: '150ms' }}
-            >
-              Meet the team behind <span className="gradient-text">U-topia</span>
+              Meet the team behind U-topia
             </h2>
             <p 
-              className="text-lg md:text-xl text-muted-foreground max-w-3xl mx-auto opacity-0 animate-fade-in-up"
-              style={{ animationDelay: '200ms' }}
+              className="text-lg text-gray-400 max-w-3xl mx-auto opacity-0 animate-fade-in-up"
+              style={{ animationDelay: '150ms' }}
             >
-              We're supported by high-powered builders who value creative freedom and doing their best work. 
-              In past lives, we've led teams and projects at startups, large companies, and places in between.
+              We're supported by{" "}
+              <span className="text-primary underline underline-offset-4 decoration-primary/50">
+                high-powered builders who value creative freedom
+              </span>{" "}
+              and doing their best work. In past lives, we've led teams and projects at startups, large companies, and places in between.
             </p>
           </div>
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
-            {teamMembers.map((member, index) => (
+          {/* First Row - 4 members */}
+          <div 
+            className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 mb-4 opacity-0 animate-fade-in-up"
+            style={{ animationDelay: '200ms' }}
+          >
+            {firstRow.map((member) => (
               <a
                 key={member.name}
                 href={member.linkedin}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="group opacity-0 animate-fade-in-up"
-                style={{ animationDelay: `${250 + index * 100}ms` }}
+                className="group relative overflow-hidden rounded-2xl aspect-[3/4] cursor-pointer"
               >
-                <div className="feature-card p-6 h-full transition-all duration-300 group-hover:shadow-xl group-hover:-translate-y-1">
-                  <div className="relative mb-4 overflow-hidden rounded-xl">
-                    <img
-                      src={member.image}
-                      alt={member.name}
-                      className="w-full aspect-square object-cover transition-transform duration-500 group-hover:scale-105"
-                    />
-                    <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end justify-center pb-4">
-                      <div className="w-10 h-10 rounded-full bg-white/90 flex items-center justify-center">
-                        <Linkedin className="w-5 h-5 text-[#0077b5]" />
-                      </div>
-                    </div>
-                  </div>
-                  <div className="text-center">
-                    <h3 className="text-lg font-semibold text-foreground mb-1 group-hover:text-primary transition-colors">
-                      {member.name}
-                    </h3>
-                    <p className="text-sm text-muted-foreground">
-                      {member.role}
-                    </p>
-                  </div>
+                {/* Grayscale Image */}
+                <img
+                  src={member.image}
+                  alt={member.name}
+                  className="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-500 group-hover:scale-105"
+                />
+                
+                {/* Gradient Overlay */}
+                <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent" />
+                
+                {/* Text Content */}
+                <div className="absolute bottom-0 left-0 right-0 p-5">
+                  <h3 className="text-white font-semibold text-lg mb-1 group-hover:text-primary transition-colors">
+                    {member.name}
+                  </h3>
+                  <p className="text-gray-400 text-sm">
+                    {member.role}
+                  </p>
+                </div>
+              </a>
+            ))}
+          </div>
+
+          {/* Second Row - 3 members, centered */}
+          <div 
+            className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 opacity-0 animate-fade-in-up"
+            style={{ animationDelay: '300ms' }}
+          >
+            {/* Empty first column on large screens to center the 3 items */}
+            <div className="hidden lg:block" />
+            
+            {secondRow.map((member) => (
+              <a
+                key={member.name}
+                href={member.linkedin}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="group relative overflow-hidden rounded-2xl aspect-[3/4] cursor-pointer"
+              >
+                {/* Grayscale Image */}
+                <img
+                  src={member.image}
+                  alt={member.name}
+                  className="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-500 group-hover:scale-105"
+                />
+                
+                {/* Gradient Overlay */}
+                <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent" />
+                
+                {/* Text Content */}
+                <div className="absolute bottom-0 left-0 right-0 p-5">
+                  <h3 className="text-white font-semibold text-lg mb-1 group-hover:text-primary transition-colors">
+                    {member.name}
+                  </h3>
+                  <p className="text-gray-400 text-sm">
+                    {member.role}
+                  </p>
                 </div>
               </a>
             ))}
