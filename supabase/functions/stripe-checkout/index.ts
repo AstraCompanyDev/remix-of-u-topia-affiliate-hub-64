@@ -67,7 +67,7 @@ serve(async (req) => {
       );
     }
 
-    const { tier } = body as { tier: unknown };
+    const { tier, email } = body as { tier: unknown; email?: string };
 
     if (!validateTier(tier)) {
       console.warn(`Invalid tier requested: ${String(tier).substring(0, 50)}`);
@@ -76,6 +76,10 @@ serve(async (req) => {
         { headers: { ...corsHeaders, "Content-Type": "application/json" }, status: 400 }
       );
     }
+
+    // Validate email if provided
+    const customerEmail = typeof email === "string" && email.includes("@") ? email : undefined;
+    logStep("Customer email from request", { email: customerEmail ? customerEmail.substring(0, 3) + "***" : "none" });
 
     logStep("Creating checkout session for tier", { tier });
 
@@ -131,6 +135,8 @@ serve(async (req) => {
           quantity: 1,
         },
       ],
+      // Pre-fill customer email if provided (ensures email matches auth user)
+      ...(customerEmail && { customer_email: customerEmail }),
       success_url: `${requestOrigin}/purchase-success?tier=${tier}&session_id={CHECKOUT_SESSION_ID}`,
       cancel_url: `${requestOrigin}/purchase?tier=${tier}`,
     });
