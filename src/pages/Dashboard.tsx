@@ -6,7 +6,7 @@ import { MetricCard } from '@/components/dashboard/MetricCard';
 import { ReferralChart } from '@/components/dashboard/ReferralChart';
 import { ReferralTable } from '@/components/dashboard/ReferralTable';
 import { RewardsBreakdown } from '@/components/dashboard/RewardsBreakdown';
-import { RankProgress } from '@/components/dashboard/RankProgress';
+import { RankOverview } from '@/components/dashboard/RankOverview';
 import { ReferralToolsCard } from '@/components/ReferralToolsCard';
 import { supabase } from '@/integrations/supabase/client';
 import { useCommissions, formatUSD, getTierLabel } from '@/hooks/useCommissions';
@@ -34,13 +34,6 @@ const tierBadges: Record<string, string> = {
   diamond: badgeDiamond,
 };
 
-const tierReferralThresholds: Record<string, { current: number; next: string; required: number }> = {
-  bronze: { current: 3, next: 'Silver', required: 9 },
-  silver: { current: 9, next: 'Gold', required: 27 },
-  gold: { current: 27, next: 'Platinum', required: 81 },
-  platinum: { current: 81, next: 'Diamond', required: 243 },
-  diamond: { current: 243, next: 'Diamond', required: 243 },
-};
 
 const Dashboard = () => {
   const navigate = useNavigate();
@@ -78,7 +71,6 @@ const Dashboard = () => {
   }
 
   const currentTier = affiliateStatus?.tier || 'bronze';
-  const tierProgress = tierReferralThresholds[currentTier] || tierReferralThresholds.bronze;
 
   return (
     <div className="min-h-screen bg-background">
@@ -159,14 +151,9 @@ const Dashboard = () => {
         <RewardsBreakdown summary={summary} isLoading={commissionsLoading} />
       </section>
 
-      {/* Rank Progress */}
+      {/* Rank Overview */}
       <section className="container mx-auto px-6 pb-12">
-        <RankProgress 
-          currentRank={getTierLabel(currentTier)}
-          nextRank={tierProgress.next}
-          currentReferrals={activeReferrals}
-          requiredReferrals={tierProgress.required}
-        />
+        <RankOverview qualifyingReferrals={activeReferrals} />
       </section>
 
       {/* Action Buttons */}
