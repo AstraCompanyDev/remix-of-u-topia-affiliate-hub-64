@@ -80,6 +80,7 @@ export type Database = {
       affiliate_status: {
         Row: {
           is_active: boolean
+          is_test: boolean
           tier: Database["public"]["Enums"]["affiliate_tier"]
           tier_depth_limit: number
           updated_at: string
@@ -87,6 +88,7 @@ export type Database = {
         }
         Insert: {
           is_active?: boolean
+          is_test?: boolean
           tier?: Database["public"]["Enums"]["affiliate_tier"]
           tier_depth_limit?: number
           updated_at?: string
@@ -94,6 +96,7 @@ export type Database = {
         }
         Update: {
           is_active?: boolean
+          is_test?: boolean
           tier?: Database["public"]["Enums"]["affiliate_tier"]
           tier_depth_limit?: number
           updated_at?: string
@@ -128,6 +131,7 @@ export type Database = {
           beneficiary_user_id: string
           created_at: string
           id: string
+          is_test: boolean
           layer: number
           notes: string | null
           rate_percent: number
@@ -140,6 +144,7 @@ export type Database = {
           beneficiary_user_id: string
           created_at?: string
           id?: string
+          is_test?: boolean
           layer: number
           notes?: string | null
           rate_percent: number
@@ -152,6 +157,7 @@ export type Database = {
           beneficiary_user_id?: string
           created_at?: string
           id?: string
+          is_test?: boolean
           layer?: number
           notes?: string | null
           rate_percent?: number
@@ -241,6 +247,7 @@ export type Database = {
           created_at: string
           event_type: string
           id: string
+          is_test: boolean
           metadata: Json | null
           status: string
           user_email: string | null
@@ -251,6 +258,7 @@ export type Database = {
           created_at?: string
           event_type: string
           id?: string
+          is_test?: boolean
           metadata?: Json | null
           status?: string
           user_email?: string | null
@@ -261,6 +269,7 @@ export type Database = {
           created_at?: string
           event_type?: string
           id?: string
+          is_test?: boolean
           metadata?: Json | null
           status?: string
           user_email?: string | null
@@ -337,6 +346,7 @@ export type Database = {
           created_at: string
           email: string
           id: string
+          is_test: boolean
           status: string
           stripe_session_id: string | null
           tier: string
@@ -347,6 +357,7 @@ export type Database = {
           created_at?: string
           email: string
           id?: string
+          is_test?: boolean
           status?: string
           stripe_session_id?: string | null
           tier: string
@@ -357,6 +368,7 @@ export type Database = {
           created_at?: string
           email?: string
           id?: string
+          is_test?: boolean
           status?: string
           stripe_session_id?: string | null
           tier?: string
@@ -398,6 +410,7 @@ export type Database = {
         Row: {
           created_at: string
           id: string
+          is_test: boolean
           referred_user_id: string
           referrer_user_id: string
           status: Database["public"]["Enums"]["referral_status"]
@@ -406,6 +419,7 @@ export type Database = {
         Insert: {
           created_at?: string
           id?: string
+          is_test?: boolean
           referred_user_id: string
           referrer_user_id: string
           status?: Database["public"]["Enums"]["referral_status"]
@@ -414,6 +428,7 @@ export type Database = {
         Update: {
           created_at?: string
           id?: string
+          is_test?: boolean
           referred_user_id?: string
           referrer_user_id?: string
           status?: Database["public"]["Enums"]["referral_status"]
@@ -427,6 +442,7 @@ export type Database = {
           created_at: string
           external_reference: string | null
           id: string
+          is_test: boolean
           occurred_at: string
           settled_at: string | null
           source: string
@@ -438,6 +454,7 @@ export type Database = {
           created_at?: string
           external_reference?: string | null
           id?: string
+          is_test?: boolean
           occurred_at?: string
           settled_at?: string | null
           source: string
@@ -449,6 +466,7 @@ export type Database = {
           created_at?: string
           external_reference?: string | null
           id?: string
+          is_test?: boolean
           occurred_at?: string
           settled_at?: string | null
           source?: string
