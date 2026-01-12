@@ -531,11 +531,21 @@ const Auth = () => {
                 {isSignUp && (
                   <p className="mt-6 text-center text-xs text-gray-500">
                     By creating an account, you agree to our{" "}
-                    <a href="#" className="text-primary hover:underline">
+                    <a 
+                      href="https://docsend.com/view/pehz2xqa23xw3pyc" 
+                      target="_blank" 
+                      rel="noopener noreferrer"
+                      className="text-primary hover:underline"
+                    >
                       Terms of Service
                     </a>{" "}
                     and{" "}
-                    <a href="#" className="text-primary hover:underline">
+                    <a 
+                      href="https://docsend.com/view/3wjptrvw2c35gj8p" 
+                      target="_blank" 
+                      rel="noopener noreferrer"
+                      className="text-primary hover:underline"
+                    >
                       Privacy Policy
                     </a>
                   </p>
