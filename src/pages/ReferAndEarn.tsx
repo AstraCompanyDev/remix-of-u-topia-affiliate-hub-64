@@ -25,44 +25,44 @@ const ReferAndEarn = () => {
     {
       icon: UserPlus,
       title: "New User Signs Up",
-      description: "A referral is counted only when a user signs up using your link. Self-referrals and duplicate accounts are not allowed.",
+      description: "A referral is recorded when a user signs up using your link. However, signup alone does not generate commissions.",
     },
     {
       icon: ShieldCheck,
-      title: "User Completes Verification",
-      description: "Referred users must complete onboarding and verification. Inactive or unverified users do not count as qualifying referrals.",
+      title: "User Purchases a Package",
+      description: "The referred user must purchase a package (Bronze, Silver, Gold, Platinum, or Diamond). This is the activation step.",
     },
     {
       icon: Activity,
-      title: "Platform Activity Happens",
-      description: "Rewards are generated only when referred users use U-topia products. Activity may include payments, subscriptions, card usage, or business services.",
+      title: "Purchase Is Confirmed",
+      description: "The transaction must be completed and settled. Pending, failed, or reversed purchases do not count.",
     },
     {
       icon: Calculator,
-      title: "Rewards Are Calculated",
-      description: "Rewards are calculated from completed and verified activity. Reward eligibility depends on your active package and status.",
+      title: "Commissions Are Calculated",
+      description: "Once the purchase is confirmed, commissions are calculated based on your tier and distributed to eligible upline referrers.",
     },
   ];
 
-  const validReferrals = [
-    "Sign up using your referral link",
-    "Complete identity verification",
-    "Use eligible U-topia products",
-    "Remain compliant with platform rules",
+  const commissionableConditions = [
+    "Referrer has an active participation package",
+    "Referred user signs up using your link",
+    "Referred user purchases a package",
+    "Purchase is completed and settled",
   ];
 
-  const invalidReferrals = [
-    "Self-referrals",
-    "Duplicate or fake accounts",
-    "Inactive users",
-    "Violations of platform policies",
+  const nonCommissionableEvents = [
+    "Signup without package purchase",
+    "Account creation without verification",
+    "Pending, failed, or reversed purchases",
+    "Inactive or unverified users",
   ];
 
-  const boundaries = [
-    "Rewards are performance-based",
-    "Referral capacity depends on your package",
-    "Not all activity generates rewards",
-    "Rewards are subject to verification and compliance",
+  const downstreamRules = [
+    "Same rules apply to all referral layers",
+    "Each referred user must purchase their own package",
+    "Your tier determines how many layers you earn from",
+    "No commission from users who haven't purchased",
   ];
 
   return (
@@ -131,26 +131,32 @@ const ReferAndEarn = () => {
         </div>
       </section>
 
-      {/* What Counts as a Valid Referral */}
+      {/* When Do Referrals Become Commissionable */}
       <section className="container mx-auto px-6 pb-20">
         <div className="max-w-4xl mx-auto">
           <div className="text-center mb-12">
+            <span className="inline-block px-4 py-2 rounded-full bg-primary/10 border border-primary/20 text-primary text-sm font-medium mb-6">
+              Important
+            </span>
             <h2 className="text-3xl md:text-4xl font-bold text-foreground">
-              What Counts as a <span className="gradient-text">Valid Referral</span>
+              When Do Referrals Become <span className="gradient-text">Commissionable?</span>
             </h2>
+            <p className="text-muted-foreground mt-4 max-w-2xl mx-auto">
+              A referral becomes commissionable <strong>only after the referred user purchases a package</strong>. Signing up alone does not generate commissions.
+            </p>
           </div>
 
           <div className="grid md:grid-cols-2 gap-6">
-            {/* Valid Referrals */}
+            {/* Commissionable Conditions */}
             <div className="feature-card p-8">
               <div className="flex items-center gap-3 mb-6">
                 <div className="w-10 h-10 rounded-xl bg-emerald-500/10 border border-emerald-500/20 flex items-center justify-center">
                   <CheckCircle2 className="w-5 h-5 text-emerald-500" />
                 </div>
-                <h3 className="text-xl font-semibold text-foreground">Valid Referrals</h3>
+                <h3 className="text-xl font-semibold text-foreground">All Conditions Must Be Met</h3>
               </div>
               <ul className="space-y-4">
-                {validReferrals.map((item, index) => (
+                {commissionableConditions.map((item, index) => (
                   <li key={index} className="flex items-start gap-3">
                     <div className="w-5 h-5 rounded-full bg-emerald-500/10 border border-emerald-500/30 flex items-center justify-center flex-shrink-0 mt-0.5">
                       <CheckCircle2 className="w-3 h-3 text-emerald-500" />
@@ -161,16 +167,16 @@ const ReferAndEarn = () => {
               </ul>
             </div>
 
-            {/* Invalid Referrals */}
+            {/* Non-Commissionable Events */}
             <div className="feature-card p-8">
               <div className="flex items-center gap-3 mb-6">
                 <div className="w-10 h-10 rounded-xl bg-red-500/10 border border-red-500/20 flex items-center justify-center">
                   <XCircle className="w-5 h-5 text-red-500" />
                 </div>
-                <h3 className="text-xl font-semibold text-foreground">Invalid Referrals</h3>
+                <h3 className="text-xl font-semibold text-foreground">Does NOT Generate Commissions</h3>
               </div>
               <ul className="space-y-4">
-                {invalidReferrals.map((item, index) => (
+                {nonCommissionableEvents.map((item, index) => (
                   <li key={index} className="flex items-start gap-3">
                     <div className="w-5 h-5 rounded-full bg-red-500/10 border border-red-500/30 flex items-center justify-center flex-shrink-0 mt-0.5">
                       <XCircle className="w-3 h-3 text-red-500" />
@@ -180,6 +186,29 @@ const ReferAndEarn = () => {
                 ))}
               </ul>
             </div>
+          </div>
+
+          {/* Downstream Rules */}
+          <div className="mt-6 feature-card p-8">
+            <div className="flex items-center gap-3 mb-6">
+              <div className="w-10 h-10 rounded-xl bg-primary/10 border border-primary/20 flex items-center justify-center">
+                <Activity className="w-5 h-5 text-primary" />
+              </div>
+              <h3 className="text-xl font-semibold text-foreground">Downstream Referral Rule</h3>
+            </div>
+            <p className="text-muted-foreground mb-4">
+              The same commission rules apply at every referral layer. For example, if User A refers User B, and User B refers User C:
+            </p>
+            <ul className="grid md:grid-cols-2 gap-4">
+              {downstreamRules.map((item, index) => (
+                <li key={index} className="flex items-start gap-3">
+                  <div className="w-5 h-5 rounded-full bg-primary/10 border border-primary/30 flex items-center justify-center flex-shrink-0 mt-0.5">
+                    <CheckCircle2 className="w-3 h-3 text-primary" />
+                  </div>
+                  <span className="text-muted-foreground">{item}</span>
+                </li>
+              ))}
+            </ul>
           </div>
         </div>
       </section>
@@ -242,12 +271,22 @@ const ReferAndEarn = () => {
               <div>
                 <h3 className="text-lg font-semibold text-foreground mb-4">Important Information</h3>
                 <ul className="space-y-3">
-                  {boundaries.map((item, index) => (
-                    <li key={index} className="flex items-center gap-3 text-muted-foreground">
-                      <div className="w-1.5 h-1.5 rounded-full bg-primary/60 flex-shrink-0" />
-                      {item}
-                    </li>
-                  ))}
+                  <li className="flex items-center gap-3 text-muted-foreground">
+                    <div className="w-1.5 h-1.5 rounded-full bg-primary/60 flex-shrink-0" />
+                    Rewards are performance-based
+                  </li>
+                  <li className="flex items-center gap-3 text-muted-foreground">
+                    <div className="w-1.5 h-1.5 rounded-full bg-primary/60 flex-shrink-0" />
+                    Referral capacity depends on your package
+                  </li>
+                  <li className="flex items-center gap-3 text-muted-foreground">
+                    <div className="w-1.5 h-1.5 rounded-full bg-primary/60 flex-shrink-0" />
+                    Package purchase is the mandatory trigger for commissions
+                  </li>
+                  <li className="flex items-center gap-3 text-muted-foreground">
+                    <div className="w-1.5 h-1.5 rounded-full bg-primary/60 flex-shrink-0" />
+                    Rewards are subject to verification and compliance
+                  </li>
                 </ul>
               </div>
             </div>
