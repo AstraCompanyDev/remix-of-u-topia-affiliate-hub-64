@@ -51,15 +51,8 @@ const Purchase = () => {
   const handleCheckout = async () => {
     setIsCheckoutLoading(true);
     try {
-      // Get current user's email to pre-fill Stripe checkout
-      const { data: sessionData } = await supabase.auth.getSession();
-      const userEmail = sessionData?.session?.user?.email;
-      
       const { data, error } = await supabase.functions.invoke("stripe-checkout", {
-        body: { 
-          tier: selectedPackage,
-          email: userEmail, // Pass user's email to pre-fill and associate
-        },
+        body: { tier: selectedPackage },
       });
 
       if (error) throw error;

@@ -500,18 +500,31 @@ serve(async (req) => {
       );
     }
 
-    // Try to find user by email
-    const { data: userData } = await supabaseClient.auth.admin.listUsers();
-    const user = userData?.users?.find((u) => u.email === customerEmail);
+    // Get user_id from session metadata (set during checkout) or fall back to email lookup
+    let userId: string | null = session.metadata?.user_id || null;
+    
+    logStep("User info from session", { 
+      userIdFromMetadata: userId ? "present" : "not present"
+    });
 
-    // Determine if this is a test transaction (Stripe test mode uses test keys)
-    // Test mode sessions have IDs starting with "cs_test_"
+    // If no user_id from metadata, try to find user by email (fallback for older sessions)
+    if (!userId) {
+      logStep("No user_id in metadata, attempting email lookup");
+      const { data: userData } = await supabaseClient.auth.admin.listUsers();
+      const user = userData?.users?.find((u) => u.email === customerEmail);
+      userId = user?.id || null;
+      if (userId) {
+        logStep("User found by email lookup", { userId });
+      }
+    }
+
+    // Determine if this is a test transaction
     const isTestTransaction = session_id.startsWith("cs_test_");
     logStep("Transaction mode detected", { isTest: isTestTransaction });
 
     // Record the purchase
     const { error: insertError } = await supabaseClient.from("purchases").insert({
-      user_id: user?.id || null,
+      user_id: userId,
       email: customerEmail,
       tier: tier,
       amount: TIER_PRICES[tier],
@@ -534,17 +547,17 @@ serve(async (req) => {
     let commissionsCreated = 0;
     let revenueEventId: string | null = null;
 
-    if (user?.id) {
+    if (userId) {
       // 1. Initialize/upgrade affiliate status
-      await initializeAffiliateStatus(supabaseClient, user.id, tier);
+      await initializeAffiliateStatus(supabaseClient, userId, tier);
 
       // 2. Activate pending referral if exists
-      await activateReferralIfExists(supabaseClient, user.id);
+      await activateReferralIfExists(supabaseClient, userId);
 
       // 3. Create revenue event and calculate commissions
       const commissionResult = await createRevenueEventAndCommissions(
         supabaseClient,
-        user.id,
+        userId,
         tier,
         TIER_PRICES[tier],
         session_id,
