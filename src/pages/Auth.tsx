@@ -32,16 +32,8 @@ const Auth = () => {
     }
   }, [searchParams]);
 
-  // Check if user is already logged in - redirect to home
+  // Only redirect after a successful sign in/sign up action, not on page load
   useEffect(() => {
-    const checkSession = async () => {
-      const { data: { session } } = await supabase.auth.getSession();
-      if (session) {
-        navigate("/");
-      }
-    };
-    checkSession();
-
     const { data: { subscription } } = supabase.auth.onAuthStateChange((event, session) => {
       // If this is a password recovery event, redirect to the dedicated reset page
       if (event === "PASSWORD_RECOVERY") {
@@ -49,8 +41,8 @@ const Auth = () => {
         return;
       }
       
-      // For normal sign in, redirect to home
-      if (session) {
+      // Only redirect on actual sign in events, not on initial load
+      if (event === "SIGNED_IN" && session) {
         navigate("/");
       }
     });
