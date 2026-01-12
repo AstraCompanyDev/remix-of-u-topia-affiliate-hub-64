@@ -14,6 +14,51 @@ export type PackageKey = 'bronze' | 'silver' | 'gold' | 'platinum' | 'diamond';
 
 const packageOrder: PackageKey[] = ['bronze', 'silver', 'gold', 'platinum', 'diamond'];
 
+// Fallback packages used if the backend returns no rows (e.g. during RLS/config transitions).
+// This prevents the UI from appearing "broken" while keeping dynamic package updates when available.
+const DEFAULT_PACKAGES: Package[] = [
+  {
+    id: 'default-bronze',
+    name: 'Bronze',
+    price_usd: 100,
+    shares: 100,
+    dividend_cap_percent: 2,
+    is_active: true,
+  },
+  {
+    id: 'default-silver',
+    name: 'Silver',
+    price_usd: 250,
+    shares: 300,
+    dividend_cap_percent: 3,
+    is_active: true,
+  },
+  {
+    id: 'default-gold',
+    name: 'Gold',
+    price_usd: 500,
+    shares: 750,
+    dividend_cap_percent: 4,
+    is_active: true,
+  },
+  {
+    id: 'default-platinum',
+    name: 'Platinum',
+    price_usd: 1000,
+    shares: 1800,
+    dividend_cap_percent: 5,
+    is_active: true,
+  },
+  {
+    id: 'default-diamond',
+    name: 'Diamond',
+    price_usd: 2500,
+    shares: 5000,
+    dividend_cap_percent: 6,
+    is_active: true,
+  },
+];
+
 // Mapping for referral capacity based on tier
 const referralCapacity: Record<PackageKey, number> = {
   bronze: 3,
@@ -46,10 +91,19 @@ export function usePackages() {
         .order('price_usd', { ascending: true });
 
       if (error) throw error;
-      setPackages(data || []);
+
+      // If backend returns nothing, fall back so the marketing UI never looks empty.
+      if (!data || data.length === 0) {
+        setPackages(DEFAULT_PACKAGES);
+      } else {
+        setPackages(data);
+      }
     } catch (err) {
       console.error('Error fetching packages:', err);
       setError(err instanceof Error ? err : new Error('Failed to fetch packages'));
+
+      // On error, still show fallback packages for a functional UI.
+      setPackages(DEFAULT_PACKAGES);
     } finally {
       setIsLoading(false);
     }
