@@ -9,8 +9,13 @@ import { RewardsBreakdown } from '@/components/dashboard/RewardsBreakdown';
 import { RankProgress } from '@/components/dashboard/RankProgress';
 import { ReferralToolsCard } from '@/components/ReferralToolsCard';
 import { supabase } from '@/integrations/supabase/client';
+import { useCommissions, formatUSD, getTierLabel } from '@/hooks/useCommissions';
 import logoLight from '@/assets/u-topia-logo-light.png';
+import badgeBronze from '@/assets/badge-bronze.png';
+import badgeSilver from '@/assets/badge-silver.png';
 import badgeGold from '@/assets/badge-gold.png';
+import badgePlatinum from '@/assets/badge-platinum.png';
+import badgeDiamond from '@/assets/badge-diamond.png';
 import { 
   Users, 
   DollarSign, 
@@ -21,10 +26,27 @@ import {
   Loader2
 } from 'lucide-react';
 
+const tierBadges: Record<string, string> = {
+  bronze: badgeBronze,
+  silver: badgeSilver,
+  gold: badgeGold,
+  platinum: badgePlatinum,
+  diamond: badgeDiamond,
+};
+
+const tierReferralThresholds: Record<string, { current: number; next: string; required: number }> = {
+  bronze: { current: 3, next: 'Silver', required: 9 },
+  silver: { current: 9, next: 'Gold', required: 27 },
+  gold: { current: 27, next: 'Platinum', required: 81 },
+  platinum: { current: 81, next: 'Diamond', required: 243 },
+  diamond: { current: 243, next: 'Diamond', required: 243 },
+};
+
 const Dashboard = () => {
   const navigate = useNavigate();
   const [isLoading, setIsLoading] = useState(true);
   const [isAuthenticated, setIsAuthenticated] = useState(false);
+  const { summary, affiliateStatus, activeReferrals, isLoading: commissionsLoading } = useCommissions();
 
   useEffect(() => {
     const checkAuth = async () => {
@@ -55,13 +77,8 @@ const Dashboard = () => {
     );
   }
 
-  // Placeholder metrics
-  const metrics = {
-    totalReferrals: 24,
-    activeRevenue: '$1,250.00',
-    totalRewards: '$440.50',
-    currentRank: 'Gold',
-  };
+  const currentTier = affiliateStatus?.tier || 'bronze';
+  const tierProgress = tierReferralThresholds[currentTier] || tierReferralThresholds.bronze;
 
   return (
     <div className="min-h-screen bg-background">
@@ -86,31 +103,31 @@ const Dashboard = () => {
       <section className="container mx-auto px-6 pb-12">
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
           <MetricCard
-            label="Total Referrals"
-            value={metrics.totalReferrals}
+            label="Active Referrals"
+            value={activeReferrals}
             icon={<Users className="w-5 h-5 text-primary" />}
             subtext="Verified referrals"
           />
           <MetricCard
-            label="Active Referral Revenue"
-            value={metrics.activeRevenue}
+            label="Pending Commissions"
+            value={formatUSD(summary?.pending || 0)}
             icon={<TrendingUp className="w-5 h-5 text-primary" />}
-            subtext="Qualifying network revenue"
+            subtext="Awaiting approval"
           />
           <MetricCard
-            label="Total Rewards Earned"
-            value={metrics.totalRewards}
+            label="Total Earned"
+            value={formatUSD(summary?.total_earned || 0)}
             icon={<DollarSign className="w-5 h-5 text-primary" />}
-            subtext="Commissions + bonuses + dividends"
+            subtext="Approved + paid commissions"
           />
           <div className="feature-card p-6">
             <div className="flex items-start justify-between mb-4">
               <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-primary/15 to-primary/5 border border-primary/20 flex items-center justify-center">
                 <Award className="w-5 h-5 text-primary" />
               </div>
-              <img src={badgeGold} alt="Gold Badge" className="w-10 h-10 object-contain" />
+              <img src={tierBadges[currentTier] || badgeBronze} alt={`${currentTier} Badge`} className="w-10 h-10 object-contain" />
             </div>
-            <p className="text-2xl md:text-3xl font-bold text-foreground mb-1">{metrics.currentRank}</p>
+            <p className="text-2xl md:text-3xl font-bold text-foreground mb-1">{getTierLabel(currentTier)}</p>
             <p className="text-sm text-muted-foreground">Current Rank</p>
           </div>
         </div>
@@ -139,12 +156,17 @@ const Dashboard = () => {
 
       {/* Rewards Breakdown */}
       <section className="container mx-auto px-6 pb-12">
-        <RewardsBreakdown />
+        <RewardsBreakdown summary={summary} isLoading={commissionsLoading} />
       </section>
 
       {/* Rank Progress */}
       <section className="container mx-auto px-6 pb-12">
-        <RankProgress />
+        <RankProgress 
+          currentRank={getTierLabel(currentTier)}
+          nextRank={tierProgress.next}
+          currentReferrals={activeReferrals}
+          requiredReferrals={tierProgress.required}
+        />
       </section>
 
       {/* Action Buttons */}
