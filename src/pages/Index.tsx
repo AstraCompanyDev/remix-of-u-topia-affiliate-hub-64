@@ -5,7 +5,8 @@ import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/
 import { MembershipTiers } from "@/components/MembershipTiers";
 import logoLight from "@/assets/u-topia-logo-light.png";
 import logoDark from "@/assets/u-topia-logo-dark.png";
-import affiliateHubHero from "@/assets/affiliate-hub-hero.png";
+import heroCard from "@/assets/ucard-hero.png";
+import ucoin3D from "@/assets/ucoin-3d.png";
 import membershipBadge from "@/assets/membership-badge.png";
 
 const Index = () => {
@@ -116,35 +117,62 @@ const Index = () => {
               </div>
             </div>
 
-            {/* Right visual - Affiliate Hub Dashboard */}
+            {/* Right visual - Composed Hero with Card and uCoins */}
             <div 
               className="flex-1 flex justify-center lg:justify-end opacity-0 animate-fade-in-up"
               style={{ animationDelay: '300ms' }}
             >
-              <div className="relative group">
-                {/* Subtle ambient glow */}
-                <div className="absolute -inset-8 bg-gradient-to-r from-blue-500/20 via-indigo-500/15 to-primary/20 rounded-3xl blur-3xl opacity-50 animate-pulse-slow" />
-                
-                {/* Main hero image with gentle float */}
-                <div className="relative animate-hero-float">
+              <div className="relative">
+                {/* Floating uCoin - Top Left */}
+                <div className="absolute -top-8 -left-12 z-10 animate-hero-float" style={{ animationDelay: '0.5s' }}>
                   <img 
-                    src={affiliateHubHero} 
-                    alt="U-topia Affiliate Hub Dashboard" 
-                    className="w-full max-w-xl lg:max-w-2xl rounded-2xl drop-shadow-[0_25px_60px_rgba(59,130,246,0.25)]"
+                    src={ucoin3D} 
+                    alt="uCoin" 
+                    className="w-14 h-14 md:w-16 md:h-16 drop-shadow-[0_8px_20px_rgba(59,130,246,0.4)]"
                   />
-                  
-                  {/* Overlay for subtle network line animation */}
-                  <div className="absolute inset-0 pointer-events-none rounded-2xl overflow-hidden">
-                    <div className="absolute inset-0 bg-gradient-to-t from-[#0a0f1a]/20 via-transparent to-transparent" />
-                    {/* Animated pulse dots to simulate activity */}
-                    <div className="absolute top-[28%] left-[35%] w-2 h-2 rounded-full bg-cyan-400/80 animate-ping-slow" />
-                    <div className="absolute top-[42%] right-[38%] w-1.5 h-1.5 rounded-full bg-primary/70 animate-ping-slower" />
-                    <div className="absolute bottom-[35%] left-[48%] w-1.5 h-1.5 rounded-full bg-blue-400/60 animate-ping-slow animation-delay-1000" />
-                  </div>
                 </div>
                 
-                {/* Secondary depth glow */}
-                <div className="absolute inset-0 -z-10 blur-3xl opacity-30 bg-gradient-to-br from-blue-600/40 via-indigo-500/30 to-cyan-500/40 rounded-3xl scale-95" />
+                {/* Floating uCoin - Top Right */}
+                <div className="absolute -top-4 -right-8 z-10 animate-hero-float" style={{ animationDelay: '1.2s' }}>
+                  <img 
+                    src={ucoin3D} 
+                    alt="uCoin" 
+                    className="w-12 h-12 md:w-14 md:h-14 drop-shadow-[0_8px_20px_rgba(59,130,246,0.4)]"
+                  />
+                </div>
+                
+                {/* Floating uCoin - Bottom Left */}
+                <div className="absolute bottom-16 -left-16 z-10 animate-hero-float" style={{ animationDelay: '0.8s' }}>
+                  <img 
+                    src={ucoin3D} 
+                    alt="uCoin" 
+                    className="w-10 h-10 md:w-12 md:h-12 drop-shadow-[0_8px_20px_rgba(59,130,246,0.4)]"
+                  />
+                </div>
+                
+                {/* Floating uCoin - Right side */}
+                <div className="absolute top-1/2 -right-14 z-10 animate-hero-float" style={{ animationDelay: '1.5s' }}>
+                  <img 
+                    src={ucoin3D} 
+                    alt="uCoin" 
+                    className="w-11 h-11 md:w-14 md:h-14 drop-shadow-[0_8px_20px_rgba(59,130,246,0.4)]"
+                  />
+                </div>
+
+                {/* Subtle ambient glow behind card */}
+                <div className="absolute -inset-8 bg-gradient-to-r from-cyan-500/15 via-blue-500/10 to-primary/15 rounded-3xl blur-3xl opacity-60" />
+                
+                {/* Main Card with gentle float */}
+                <div className="relative animate-card-float group">
+                  <img 
+                    src={heroCard} 
+                    alt="U-topia Virtual Card" 
+                    className="w-full max-w-sm lg:max-w-md xl:max-w-lg drop-shadow-[0_25px_50px_rgba(0,180,216,0.3)] transition-transform duration-500 group-hover:scale-105"
+                  />
+                  
+                  {/* Shine effect overlay */}
+                  <div className="absolute inset-0 bg-gradient-to-tr from-transparent via-white/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-700 rounded-2xl pointer-events-none" />
+                </div>
               </div>
             </div>
           </div>
