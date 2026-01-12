@@ -1,6 +1,6 @@
 import { serve } from "https://deno.land/std@0.190.0/http/server.ts";
 import Stripe from "https://esm.sh/stripe@18.5.0";
-import { createClient } from "https://esm.sh/@supabase/supabase-js@2.57.2";
+import { createClient, SupabaseClient } from "https://esm.sh/@supabase/supabase-js@2.57.2";
 import { Resend } from "https://esm.sh/resend@2.0.0";
 
 // Allowed origins for CORS
@@ -42,6 +42,14 @@ const TIER_NAMES: Record<ValidTier, string> = {
   diamond: "Diamond",
 };
 
+const TIER_DEPTH_LIMITS: Record<ValidTier, number> = {
+  bronze: 1,
+  silver: 2,
+  gold: 3,
+  platinum: 4,
+  diamond: 5,
+};
+
 // Input validation functions
 function validateTier(tier: unknown): tier is ValidTier {
   return typeof tier === "string" && 
@@ -59,6 +67,324 @@ function validateSessionId(sessionId: unknown): sessionId is string {
 // Sanitize string for logging (prevent log injection)
 function sanitizeForLog(input: string, maxLength = 50): string {
   return input.replace(/[\n\r\t]/g, ' ').substring(0, maxLength);
+}
+
+const logStep = (step: string, details?: Record<string, unknown>) => {
+  console.log(`[VERIFY-PURCHASE] ${step}`, details ? JSON.stringify(details) : "");
+};
+
+// Initialize affiliate status for a user
+// deno-lint-ignore no-explicit-any
+async function initializeAffiliateStatus(
+  supabase: SupabaseClient<any>,
+  userId: string,
+  tier: ValidTier
+): Promise<void> {
+  logStep("Initializing affiliate status", { userId, tier });
+  
+  // Check if already exists
+  const { data: existing } = await supabase
+    .from("affiliate_status")
+    .select("user_id, tier")
+    .eq("user_id", userId)
+    .maybeSingle();
+
+  if (existing) {
+    // Upgrade tier if new tier is higher
+    const existingDepth = TIER_DEPTH_LIMITS[existing.tier as ValidTier] || 1;
+    const newDepth = TIER_DEPTH_LIMITS[tier];
+    
+    if (newDepth > existingDepth) {
+      const { error } = await supabase
+        .from("affiliate_status")
+        .update({
+          tier: tier,
+          tier_depth_limit: newDepth,
+        })
+        .eq("user_id", userId);
+
+      if (error) {
+        logStep("Error upgrading tier", { error: error.message });
+      } else {
+        logStep("Tier upgraded", { from: existing.tier, to: tier });
+      }
+    } else {
+      logStep("Existing tier is same or higher", { existing: existing.tier, new: tier });
+    }
+    return;
+  }
+
+  // Create new affiliate status
+  const { error } = await supabase
+    .from("affiliate_status")
+    .insert({
+      user_id: userId,
+      tier: tier,
+      tier_depth_limit: TIER_DEPTH_LIMITS[tier],
+      is_active: true,
+    });
+
+  if (error) {
+    logStep("Error creating affiliate status", { error: error.message });
+  } else {
+    logStep("Affiliate status created", { tier });
+  }
+}
+
+// Activate referral if user was referred
+// deno-lint-ignore no-explicit-any
+async function activateReferralIfExists(
+  supabase: SupabaseClient<any>,
+  userId: string
+): Promise<void> {
+  logStep("Checking for pending referral", { userId });
+
+  const { data: referral, error: fetchError } = await supabase
+    .from("referrals")
+    .select("*")
+    .eq("referred_user_id", userId)
+    .eq("status", "pending")
+    .maybeSingle();
+
+  if (fetchError) {
+    logStep("Error checking referral", { error: fetchError.message });
+    return;
+  }
+
+  if (!referral) {
+    logStep("No pending referral found");
+    return;
+  }
+
+  // Activate the referral
+  const { error: updateError } = await supabase
+    .from("referrals")
+    .update({
+      status: "active",
+      verified_at: new Date().toISOString(),
+    })
+    .eq("id", referral.id);
+
+  if (updateError) {
+    logStep("Error activating referral", { error: updateError.message });
+  } else {
+    logStep("Referral activated", { referrer: referral.referrer_user_id });
+  }
+}
+
+// Create revenue event and trigger commission calculation
+// deno-lint-ignore no-explicit-any
+async function createRevenueEventAndCommissions(
+  supabase: SupabaseClient<any>,
+  userId: string,
+  tier: ValidTier,
+  amountCents: number,
+  sessionId: string
+): Promise<{ revenueEventId: string | null; commissionsCreated: number }> {
+  const amountUsd = amountCents / 100;
+  logStep("Creating revenue event", { userId, tier, amountUsd, sessionId });
+
+  // Create settled revenue event
+  const { data: revenueEvent, error: insertError } = await supabase
+    .from("revenue_events")
+    .insert({
+      user_id: userId,
+      source: "membership",
+      amount_usd: amountUsd,
+      status: "settled",
+      external_reference: `stripe_${sessionId}`,
+      settled_at: new Date().toISOString(),
+    })
+    .select()
+    .single();
+
+  if (insertError) {
+    logStep("Error creating revenue event", { error: insertError.message });
+    return { revenueEventId: null, commissionsCreated: 0 };
+  }
+
+  logStep("Revenue event created", { id: revenueEvent.id });
+
+  // Process commissions using the commission engine
+  const commissionsCreated = await processCommissions(supabase, revenueEvent);
+
+  return { revenueEventId: revenueEvent.id, commissionsCreated };
+}
+
+// Process commissions for a revenue event
+// deno-lint-ignore no-explicit-any
+async function processCommissions(
+  supabase: SupabaseClient<any>,
+  revenueEvent: { id: string; user_id: string; source: string; amount_usd: number; status: string }
+): Promise<number> {
+  logStep("Processing commissions", { 
+    revenue_event_id: revenueEvent.id, 
+    user_id: revenueEvent.user_id,
+    amount: revenueEvent.amount_usd 
+  });
+
+  // Verify event is commissionable
+  if (revenueEvent.status !== "settled" || Number(revenueEvent.amount_usd) <= 0) {
+    logStep("Event not commissionable", { status: revenueEvent.status, amount: revenueEvent.amount_usd });
+    return 0;
+  }
+
+  // Verify source is approved
+  const { data: approvedSource } = await supabase
+    .from("approved_revenue_sources")
+    .select("source_name")
+    .eq("source_name", revenueEvent.source)
+    .eq("is_active", true)
+    .maybeSingle();
+
+  if (!approvedSource) {
+    logStep("Source not approved for commission", { source: revenueEvent.source });
+    return 0;
+  }
+
+  // Get commission rates
+  const { data: ratesData, error: ratesError } = await supabase
+    .from("commission_rates")
+    .select("*")
+    .eq("is_active", true)
+    .order("layer");
+
+  if (ratesError || !ratesData || ratesData.length === 0) {
+    logStep("Error fetching commission rates", { error: ratesError?.message });
+    return 0;
+  }
+
+  const rateMap = new Map<number, number>();
+  for (const rate of ratesData) {
+    rateMap.set(rate.layer, Number(rate.rate_percent));
+  }
+
+  // Build upline chain using the database function
+  const { data: uplineData, error: uplineError } = await supabase
+    .rpc("get_upline_chain", { p_user_id: revenueEvent.user_id, p_max_depth: 5 });
+
+  if (uplineError) {
+    logStep("Error getting upline chain", { error: uplineError.message });
+    return 0;
+  }
+
+  if (!uplineData || uplineData.length === 0) {
+    logStep("No upline found for user");
+    return 0;
+  }
+
+  logStep("Upline chain found", { layers: uplineData.length });
+
+  // Get affiliate statuses for all upline members
+  const uplineUserIds = uplineData.map((u: { referrer_id: string }) => u.referrer_id);
+  const { data: affiliateStatusData, error: statusError } = await supabase
+    .from("affiliate_status")
+    .select("*")
+    .in("user_id", uplineUserIds);
+
+  if (statusError) {
+    logStep("Error fetching affiliate statuses", { error: statusError.message });
+    return 0;
+  }
+
+  const statusMap = new Map<string, { tier: string; tier_depth_limit: number; is_active: boolean }>();
+  for (const status of affiliateStatusData || []) {
+    statusMap.set(status.user_id, {
+      tier: status.tier,
+      tier_depth_limit: status.tier_depth_limit,
+      is_active: status.is_active,
+    });
+  }
+
+  // Calculate and insert commissions
+  const commissionsToInsert: Array<{
+    beneficiary_user_id: string;
+    source_revenue_event_id: string;
+    layer: number;
+    referred_user_id: string;
+    amount_usd: number;
+    rate_percent: number;
+    status: string;
+  }> = [];
+
+  for (const uplineMember of uplineData) {
+    const layer = uplineMember.layer;
+    const affiliateId = uplineMember.referrer_id;
+    
+    // Get affiliate status (default to bronze if not found)
+    const status = statusMap.get(affiliateId) || { 
+      tier: "bronze", 
+      tier_depth_limit: 1, 
+      is_active: true 
+    };
+
+    // Skip inactive affiliates
+    if (!status.is_active) {
+      logStep("Skipping inactive affiliate", { user_id: affiliateId, layer });
+      continue;
+    }
+
+    // Check tier depth limit
+    if (layer > status.tier_depth_limit) {
+      logStep("Layer exceeds tier depth limit", { 
+        user_id: affiliateId, 
+        layer, 
+        tier: status.tier,
+        limit: status.tier_depth_limit 
+      });
+      continue;
+    }
+
+    // Get rate for this layer
+    const ratePercent = rateMap.get(layer);
+    if (!ratePercent) {
+      logStep("No rate found for layer", { layer });
+      continue;
+    }
+
+    // Calculate commission amount: Revenue × (Rate / 100)
+    const commissionAmount = Number(revenueEvent.amount_usd) * (ratePercent / 100);
+
+    logStep("Commission calculated", { 
+      beneficiary: affiliateId, 
+      layer, 
+      rate: ratePercent, 
+      amount: commissionAmount 
+    });
+
+    commissionsToInsert.push({
+      beneficiary_user_id: affiliateId,
+      source_revenue_event_id: revenueEvent.id,
+      layer,
+      referred_user_id: revenueEvent.user_id,
+      amount_usd: commissionAmount,
+      rate_percent: ratePercent,
+      status: "pending",
+    });
+  }
+
+  if (commissionsToInsert.length === 0) {
+    logStep("No commissions to insert");
+    return 0;
+  }
+
+  // Insert commissions (with upsert for idempotency)
+  const { data: insertedCommissions, error: insertError } = await supabase
+    .from("commission_ledger")
+    .upsert(commissionsToInsert, {
+      onConflict: "beneficiary_user_id,source_revenue_event_id,layer",
+      ignoreDuplicates: true,
+    })
+    .select();
+
+  if (insertError) {
+    logStep("Error inserting commissions", { error: insertError.message });
+    return 0;
+  }
+
+  logStep("Commissions inserted successfully", { count: insertedCommissions?.length || 0 });
+
+  return insertedCommissions?.length || commissionsToInsert.length;
 }
 
 serve(async (req) => {
@@ -101,7 +427,7 @@ serve(async (req) => {
       );
     }
 
-    console.log(`Verifying purchase for session: ${sanitizeForLog(session_id)}, tier: ${tier}`);
+    logStep("Verifying purchase", { session: sanitizeForLog(session_id), tier });
 
     const stripeKey = Deno.env.get("STRIPE_SECRET_KEY");
     if (!stripeKey) {
@@ -126,7 +452,7 @@ serve(async (req) => {
       );
     }
 
-    console.log(`Session status: ${session.payment_status}`);
+    logStep("Session retrieved", { status: session.payment_status });
 
     if (session.payment_status !== "paid") {
       return new Response(
@@ -144,7 +470,7 @@ serve(async (req) => {
       );
     }
 
-    console.log(`Customer email retrieved successfully`);
+    logStep("Customer email found", { email: customerEmail.substring(0, 3) + "***" });
 
     // Create Supabase client with service role
     const supabaseClient = createClient(
@@ -161,7 +487,7 @@ serve(async (req) => {
       .maybeSingle();
 
     if (existingPurchase) {
-      console.log("Purchase already recorded");
+      logStep("Purchase already recorded");
       return new Response(
         JSON.stringify({ verified: true, already_recorded: true }),
         { headers: { ...corsHeaders, "Content-Type": "application/json" }, status: 200 }
@@ -183,14 +509,44 @@ serve(async (req) => {
     });
 
     if (insertError) {
-      console.error("Error recording purchase:", insertError.message);
+      logStep("Error recording purchase", { error: insertError.message });
       return new Response(
         JSON.stringify({ error: "Unable to record purchase. Please contact support.", verified: false }),
         { headers: { ...corsHeaders, "Content-Type": "application/json" }, status: 500 }
       );
     }
 
-    console.log("Purchase recorded successfully");
+    logStep("Purchase recorded successfully");
+
+    // === COMMISSION SYSTEM INTEGRATION ===
+    let commissionsCreated = 0;
+    let revenueEventId: string | null = null;
+
+    if (user?.id) {
+      // 1. Initialize/upgrade affiliate status
+      await initializeAffiliateStatus(supabaseClient, user.id, tier);
+
+      // 2. Activate pending referral if exists
+      await activateReferralIfExists(supabaseClient, user.id);
+
+      // 3. Create revenue event and calculate commissions
+      const commissionResult = await createRevenueEventAndCommissions(
+        supabaseClient,
+        user.id,
+        tier,
+        TIER_PRICES[tier],
+        session_id
+      );
+      commissionsCreated = commissionResult.commissionsCreated;
+      revenueEventId = commissionResult.revenueEventId;
+
+      logStep("Commission processing complete", { 
+        commissionsCreated, 
+        revenueEventId 
+      });
+    } else {
+      logStep("No user found - skipping commission processing (guest purchase)");
+    }
 
     // Send confirmation email
     let emailSent = false;
@@ -238,11 +594,11 @@ serve(async (req) => {
                   </table>
                 </div>
                 <p style="color: #94a3b8; font-size: 14px; line-height: 1.6; margin: 24px 0 0 0; text-align: center;">
-                  If you have any questions, feel free to reach out to our support team.
+                  Your affiliate status has been activated. Start referring friends to earn commissions!
                 </p>
                 <hr style="border: none; border-top: 1px solid rgba(255,255,255,0.1); margin: 32px 0;">
                 <p style="color: #64748b; font-size: 12px; text-align: center; margin: 0;">
-                  © 2024 U-topia. All rights reserved.
+                  © ${new Date().getFullYear()} U-topia. All rights reserved.
                 </p>
               </div>
             </body>
@@ -251,26 +607,31 @@ serve(async (req) => {
         });
 
         if (emailError) {
-          console.error("Error sending email:", emailError);
+          logStep("Error sending email", { error: emailError });
         } else {
-          console.log("Confirmation email sent successfully");
+          logStep("Confirmation email sent");
           emailSent = true;
         }
       } catch (emailErr) {
-        console.error("Email sending failed:", emailErr instanceof Error ? emailErr.message : "Unknown");
+        logStep("Email sending failed", { error: emailErr instanceof Error ? emailErr.message : "Unknown" });
       }
     } else {
-      console.log("RESEND_API_KEY not configured, skipping email");
+      logStep("RESEND_API_KEY not configured, skipping email");
     }
 
     return new Response(
-      JSON.stringify({ verified: true, email_sent: emailSent }),
+      JSON.stringify({ 
+        verified: true, 
+        email_sent: emailSent,
+        commissions_created: commissionsCreated,
+        revenue_event_id: revenueEventId,
+      }),
       { headers: { ...corsHeaders, "Content-Type": "application/json" }, status: 200 }
     );
   } catch (error) {
     // Log detailed error for debugging
     const errorMessage = error instanceof Error ? error.message : String(error);
-    console.error("Error verifying purchase:", errorMessage);
+    logStep("Error verifying purchase", { error: errorMessage });
     
     // Return generic error to client
     return new Response(
