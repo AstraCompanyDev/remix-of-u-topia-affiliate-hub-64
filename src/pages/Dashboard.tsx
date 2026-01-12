@@ -10,6 +10,7 @@ import { RankOverview } from '@/components/dashboard/RankOverview';
 import { ReferralToolsCard } from '@/components/ReferralToolsCard';
 import { supabase } from '@/integrations/supabase/client';
 import { useCommissions, formatUSD, getTierLabel } from '@/hooks/useCommissions';
+import { calculateRankInfo } from '@/components/dashboard/RankOverview';
 import logoLight from '@/assets/u-topia-logo-light.png';
 import badgeBronze from '@/assets/badge-bronze.png';
 import badgeSilver from '@/assets/badge-silver.png';
@@ -71,6 +72,7 @@ const Dashboard = () => {
   }
 
   const currentTier = affiliateStatus?.tier || 'bronze';
+  const rankInfo = calculateRankInfo(activeReferrals);
 
   return (
     <div className="min-h-screen bg-background">
@@ -82,11 +84,12 @@ const Dashboard = () => {
           <h1 className="text-3xl md:text-4xl lg:text-5xl font-bold text-foreground mb-3">
             Dashboard
           </h1>
-          <p className="text-lg md:text-xl text-muted-foreground mb-2">
+          <p className="text-lg md:text-xl text-muted-foreground mb-4">
             Track your referrals, rewards, and progress
           </p>
-          <p className="text-sm text-muted-foreground/70">
-            View your current status and referral performance at a glance.
+          {/* Current Rank Display */}
+          <p className="text-base text-muted-foreground">
+            Current Rank: <span className="font-semibold bg-gradient-to-r from-[#f97316] to-[#fb923c] bg-clip-text text-transparent">{rankInfo.currentRank}</span>
           </p>
         </div>
       </section>
@@ -120,7 +123,7 @@ const Dashboard = () => {
               <img src={tierBadges[currentTier] || badgeBronze} alt={`${currentTier} Badge`} className="w-10 h-10 object-contain" />
             </div>
             <p className="text-2xl md:text-3xl font-bold text-foreground mb-1">{getTierLabel(currentTier)}</p>
-            <p className="text-sm text-muted-foreground">Current Rank</p>
+            <p className="text-sm text-muted-foreground">Current Tier</p>
           </div>
         </div>
       </section>
