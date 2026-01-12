@@ -59,11 +59,13 @@ export function PlatformSettings() {
 
       if (error) throw error;
       
-      // Parse JSON values to strings for display
-      const parsedData = (data || []).map(s => ({
-        ...s,
-        value: typeof s.value === 'string' ? s.value : JSON.stringify(s.value).replace(/"/g, ''),
-      }));
+      // Parse JSON values to strings for display, exclude deprecated settings
+      const parsedData = (data || [])
+        .filter(s => s.key !== 'environment_mode') // Remove deprecated test mode setting
+        .map(s => ({
+          ...s,
+          value: typeof s.value === 'string' ? s.value : JSON.stringify(s.value).replace(/"/g, ''),
+        }));
       
       setSettings(parsedData);
       
