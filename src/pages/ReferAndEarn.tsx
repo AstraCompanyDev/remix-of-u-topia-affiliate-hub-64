@@ -248,7 +248,7 @@ const ReferAndEarn = () => {
             <p className="text-muted-foreground leading-relaxed max-w-2xl mx-auto mb-8">
               Every referral and activity is tracked automatically. You can view referral status, activity progress, and reward eligibility from your dashboard.
             </p>
-            <Link to="/auth">
+            <Link to="/dashboard">
               <Button className="bg-primary hover:bg-primary/90 text-white font-semibold px-8 py-6 text-base rounded-full shadow-lg shadow-primary/25 hover:shadow-xl hover:shadow-primary/30 transition-all">
                 View Referral Dashboard
                 <svg className="w-5 h-5 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
