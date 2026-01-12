@@ -179,10 +179,11 @@ async function createRevenueEventAndCommissions(
   userId: string,
   tier: ValidTier,
   amountCents: number,
-  sessionId: string
+  sessionId: string,
+  isTest: boolean = false
 ): Promise<{ revenueEventId: string | null; commissionsCreated: number }> {
   const amountUsd = amountCents / 100;
-  logStep("Creating revenue event", { userId, tier, amountUsd, sessionId });
+  logStep("Creating revenue event", { userId, tier, amountUsd, sessionId, isTest });
 
   // Create settled revenue event
   const { data: revenueEvent, error: insertError } = await supabase
@@ -194,6 +195,7 @@ async function createRevenueEventAndCommissions(
       status: "settled",
       external_reference: `stripe_${sessionId}`,
       settled_at: new Date().toISOString(),
+      is_test: isTest,
     })
     .select()
     .single();
@@ -206,7 +208,7 @@ async function createRevenueEventAndCommissions(
   logStep("Revenue event created", { id: revenueEvent.id });
 
   // Process commissions using the commission engine
-  const commissionsCreated = await processCommissions(supabase, revenueEvent);
+  const commissionsCreated = await processCommissions(supabase, revenueEvent, isTest);
 
   return { revenueEventId: revenueEvent.id, commissionsCreated };
 }
@@ -215,12 +217,14 @@ async function createRevenueEventAndCommissions(
 // deno-lint-ignore no-explicit-any
 async function processCommissions(
   supabase: SupabaseClient<any>,
-  revenueEvent: { id: string; user_id: string; source: string; amount_usd: number; status: string }
+  revenueEvent: { id: string; user_id: string; source: string; amount_usd: number; status: string },
+  isTest: boolean = false
 ): Promise<number> {
   logStep("Processing commissions", { 
     revenue_event_id: revenueEvent.id, 
     user_id: revenueEvent.user_id,
-    amount: revenueEvent.amount_usd 
+    amount: revenueEvent.amount_usd,
+    is_test: isTest
   });
 
   // Verify event is commissionable
@@ -305,6 +309,7 @@ async function processCommissions(
     amount_usd: number;
     rate_percent: number;
     status: string;
+    is_test: boolean;
   }> = [];
 
   for (const uplineMember of uplineData) {
@@ -360,6 +365,7 @@ async function processCommissions(
       amount_usd: commissionAmount,
       rate_percent: ratePercent,
       status: "pending",
+      is_test: isTest,
     });
   }
 
@@ -498,6 +504,11 @@ serve(async (req) => {
     const { data: userData } = await supabaseClient.auth.admin.listUsers();
     const user = userData?.users?.find((u) => u.email === customerEmail);
 
+    // Determine if this is a test transaction (Stripe test mode uses test keys)
+    // Test mode sessions have IDs starting with "cs_test_"
+    const isTestTransaction = session_id.startsWith("cs_test_");
+    logStep("Transaction mode detected", { isTest: isTestTransaction });
+
     // Record the purchase
     const { error: insertError } = await supabaseClient.from("purchases").insert({
       user_id: user?.id || null,
@@ -506,6 +517,7 @@ serve(async (req) => {
       amount: TIER_PRICES[tier],
       stripe_session_id: session_id,
       status: "completed",
+      is_test: isTestTransaction,
     });
 
     if (insertError) {
@@ -535,14 +547,16 @@ serve(async (req) => {
         user.id,
         tier,
         TIER_PRICES[tier],
-        session_id
+        session_id,
+        isTestTransaction
       );
       commissionsCreated = commissionResult.commissionsCreated;
       revenueEventId = commissionResult.revenueEventId;
 
       logStep("Commission processing complete", { 
         commissionsCreated, 
-        revenueEventId 
+        revenueEventId,
+        isTest: isTestTransaction
       });
     } else {
       logStep("No user found - skipping commission processing (guest purchase)");
