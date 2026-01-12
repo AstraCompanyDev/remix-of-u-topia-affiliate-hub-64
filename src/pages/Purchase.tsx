@@ -51,14 +51,22 @@ const Purchase = () => {
   const handleCheckout = async () => {
     setIsCheckoutLoading(true);
     try {
+      // Get current user's email to pre-fill Stripe checkout
+      const { data: sessionData } = await supabase.auth.getSession();
+      const userEmail = sessionData?.session?.user?.email;
+      
       const { data, error } = await supabase.functions.invoke("stripe-checkout", {
-        body: { tier: selectedPackage },
+        body: { 
+          tier: selectedPackage,
+          email: userEmail, // Pass user's email to pre-fill and associate
+        },
       });
 
       if (error) throw error;
 
       if (data?.url) {
-        window.open(data.url, "_blank");
+        // Navigate in same window to maintain session continuity
+        window.location.href = data.url;
       }
     } catch (error) {
       console.error("Checkout error:", error);
