@@ -72,11 +72,7 @@ const TeamSection = () => {
               className="text-lg text-gray-400 max-w-3xl mx-auto opacity-0 animate-fade-in-up"
               style={{ animationDelay: '150ms' }}
             >
-              We're supported by{" "}
-              <span className="text-primary underline underline-offset-4 decoration-primary/50">
-                high-powered builders who value creative freedom
-              </span>{" "}
-              and doing their best work. In past lives, we've led teams and projects at startups, large companies, and places in between.
+              We're supported by high-powered builders who value creative freedom and doing their best work. In past lives, we've led teams and projects at startups, large companies, and places in between.
             </p>
           </div>
 
