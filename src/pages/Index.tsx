@@ -5,7 +5,7 @@ import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/
 import { MembershipTiers } from "@/components/MembershipTiers";
 import logoLight from "@/assets/u-topia-logo-light.png";
 import logoDark from "@/assets/u-topia-logo-dark.png";
-import heroCard from "@/assets/ucard-hero.png";
+import affiliateHubHero from "@/assets/affiliate-hub-hero.png";
 import membershipBadge from "@/assets/membership-badge.png";
 
 const Index = () => {
@@ -116,29 +116,35 @@ const Index = () => {
               </div>
             </div>
 
-            {/* Right visual - Animated Card */}
+            {/* Right visual - Affiliate Hub Dashboard */}
             <div 
               className="flex-1 flex justify-center lg:justify-end opacity-0 animate-fade-in-up"
               style={{ animationDelay: '300ms' }}
             >
-              <div className="relative group perspective-1000">
-                {/* Animated glow ring */}
-                <div className="absolute -inset-4 bg-gradient-to-r from-cyan-500/40 via-primary/40 to-cyan-500/40 rounded-3xl blur-2xl opacity-60 group-hover:opacity-80 animate-pulse-glow transition-opacity duration-500" />
+              <div className="relative group">
+                {/* Subtle ambient glow */}
+                <div className="absolute -inset-8 bg-gradient-to-r from-blue-500/20 via-indigo-500/15 to-primary/20 rounded-3xl blur-3xl opacity-50 animate-pulse-slow" />
                 
-                {/* Card with 3D tilt animation */}
-                <div className="relative animate-card-float">
+                {/* Main hero image with gentle float */}
+                <div className="relative animate-hero-float">
                   <img 
-                    src={heroCard} 
-                    alt="U-topia Virtual Card" 
-                    className="w-full max-w-sm lg:max-w-md xl:max-w-lg drop-shadow-[0_25px_50px_rgba(0,180,216,0.3)] transition-transform duration-500 group-hover:scale-105"
+                    src={affiliateHubHero} 
+                    alt="U-topia Affiliate Hub Dashboard" 
+                    className="w-full max-w-xl lg:max-w-2xl rounded-2xl drop-shadow-[0_25px_60px_rgba(59,130,246,0.25)]"
                   />
                   
-                  {/* Shine effect overlay */}
-                  <div className="absolute inset-0 bg-gradient-to-tr from-transparent via-white/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-700 rounded-2xl pointer-events-none animate-shine" />
+                  {/* Overlay for subtle network line animation */}
+                  <div className="absolute inset-0 pointer-events-none rounded-2xl overflow-hidden">
+                    <div className="absolute inset-0 bg-gradient-to-t from-[#0a0f1a]/20 via-transparent to-transparent" />
+                    {/* Animated pulse dots to simulate activity */}
+                    <div className="absolute top-[28%] left-[35%] w-2 h-2 rounded-full bg-cyan-400/80 animate-ping-slow" />
+                    <div className="absolute top-[42%] right-[38%] w-1.5 h-1.5 rounded-full bg-primary/70 animate-ping-slower" />
+                    <div className="absolute bottom-[35%] left-[48%] w-1.5 h-1.5 rounded-full bg-blue-400/60 animate-ping-slow animation-delay-1000" />
+                  </div>
                 </div>
                 
-                {/* Secondary glow effect */}
-                <div className="absolute inset-0 -z-10 blur-3xl opacity-40 bg-gradient-to-br from-cyan-500/50 via-blue-600/30 to-primary/40 rounded-full scale-90" />
+                {/* Secondary depth glow */}
+                <div className="absolute inset-0 -z-10 blur-3xl opacity-30 bg-gradient-to-br from-blue-600/40 via-indigo-500/30 to-cyan-500/40 rounded-3xl scale-95" />
               </div>
             </div>
           </div>
