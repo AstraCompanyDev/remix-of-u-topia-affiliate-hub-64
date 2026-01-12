@@ -77,6 +77,122 @@ export type Database = {
         }
         Relationships: []
       }
+      affiliate_status: {
+        Row: {
+          is_active: boolean
+          tier: Database["public"]["Enums"]["affiliate_tier"]
+          tier_depth_limit: number
+          updated_at: string
+          user_id: string
+        }
+        Insert: {
+          is_active?: boolean
+          tier?: Database["public"]["Enums"]["affiliate_tier"]
+          tier_depth_limit?: number
+          updated_at?: string
+          user_id: string
+        }
+        Update: {
+          is_active?: boolean
+          tier?: Database["public"]["Enums"]["affiliate_tier"]
+          tier_depth_limit?: number
+          updated_at?: string
+          user_id?: string
+        }
+        Relationships: []
+      }
+      approved_revenue_sources: {
+        Row: {
+          created_at: string
+          id: string
+          is_active: boolean
+          source_name: string
+        }
+        Insert: {
+          created_at?: string
+          id?: string
+          is_active?: boolean
+          source_name: string
+        }
+        Update: {
+          created_at?: string
+          id?: string
+          is_active?: boolean
+          source_name?: string
+        }
+        Relationships: []
+      }
+      commission_ledger: {
+        Row: {
+          amount_usd: number
+          beneficiary_user_id: string
+          created_at: string
+          id: string
+          layer: number
+          notes: string | null
+          rate_percent: number
+          referred_user_id: string
+          source_revenue_event_id: string
+          status: Database["public"]["Enums"]["commission_status"]
+        }
+        Insert: {
+          amount_usd: number
+          beneficiary_user_id: string
+          created_at?: string
+          id?: string
+          layer: number
+          notes?: string | null
+          rate_percent: number
+          referred_user_id: string
+          source_revenue_event_id: string
+          status?: Database["public"]["Enums"]["commission_status"]
+        }
+        Update: {
+          amount_usd?: number
+          beneficiary_user_id?: string
+          created_at?: string
+          id?: string
+          layer?: number
+          notes?: string | null
+          rate_percent?: number
+          referred_user_id?: string
+          source_revenue_event_id?: string
+          status?: Database["public"]["Enums"]["commission_status"]
+        }
+        Relationships: [
+          {
+            foreignKeyName: "commission_ledger_source_revenue_event_id_fkey"
+            columns: ["source_revenue_event_id"]
+            isOneToOne: false
+            referencedRelation: "revenue_events"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      commission_rates: {
+        Row: {
+          is_active: boolean
+          layer: number
+          rate_percent: number
+          updated_at: string
+          updated_by: string | null
+        }
+        Insert: {
+          is_active?: boolean
+          layer: number
+          rate_percent: number
+          updated_at?: string
+          updated_by?: string | null
+        }
+        Update: {
+          is_active?: boolean
+          layer?: number
+          rate_percent?: number
+          updated_at?: string
+          updated_by?: string | null
+        }
+        Relationships: []
+      }
       packages: {
         Row: {
           created_at: string
@@ -278,16 +394,93 @@ export type Database = {
         }
         Relationships: []
       }
+      referrals: {
+        Row: {
+          created_at: string
+          id: string
+          referred_user_id: string
+          referrer_user_id: string
+          status: Database["public"]["Enums"]["referral_status"]
+          verified_at: string | null
+        }
+        Insert: {
+          created_at?: string
+          id?: string
+          referred_user_id: string
+          referrer_user_id: string
+          status?: Database["public"]["Enums"]["referral_status"]
+          verified_at?: string | null
+        }
+        Update: {
+          created_at?: string
+          id?: string
+          referred_user_id?: string
+          referrer_user_id?: string
+          status?: Database["public"]["Enums"]["referral_status"]
+          verified_at?: string | null
+        }
+        Relationships: []
+      }
+      revenue_events: {
+        Row: {
+          amount_usd: number
+          created_at: string
+          external_reference: string | null
+          id: string
+          occurred_at: string
+          settled_at: string | null
+          source: string
+          status: Database["public"]["Enums"]["revenue_status"]
+          user_id: string
+        }
+        Insert: {
+          amount_usd: number
+          created_at?: string
+          external_reference?: string | null
+          id?: string
+          occurred_at?: string
+          settled_at?: string | null
+          source: string
+          status?: Database["public"]["Enums"]["revenue_status"]
+          user_id: string
+        }
+        Update: {
+          amount_usd?: number
+          created_at?: string
+          external_reference?: string | null
+          id?: string
+          occurred_at?: string
+          settled_at?: string | null
+          source?: string
+          status?: Database["public"]["Enums"]["revenue_status"]
+          user_id?: string
+        }
+        Relationships: []
+      }
     }
     Views: {
       [_ in never]: never
     }
     Functions: {
       generate_referral_code: { Args: never; Returns: string }
+      get_tier_depth_limit: {
+        Args: { p_tier: Database["public"]["Enums"]["affiliate_tier"] }
+        Returns: number
+      }
+      get_upline_chain: {
+        Args: { p_max_depth?: number; p_user_id: string }
+        Returns: {
+          layer: number
+          referrer_id: string
+        }[]
+      }
       is_admin: { Args: { _email: string }; Returns: boolean }
     }
     Enums: {
-      [_ in never]: never
+      affiliate_tier: "bronze" | "silver" | "gold" | "platinum" | "diamond"
+      commission_status: "pending" | "approved" | "paid" | "reversed" | "held"
+      referral_status: "pending" | "active" | "invalid"
+      revenue_status: "pending" | "settled" | "reversed"
     }
     CompositeTypes: {
       [_ in never]: never
@@ -414,6 +607,11 @@ export type CompositeTypes<
 
 export const Constants = {
   public: {
-    Enums: {},
+    Enums: {
+      affiliate_tier: ["bronze", "silver", "gold", "platinum", "diamond"],
+      commission_status: ["pending", "approved", "paid", "reversed", "held"],
+      referral_status: ["pending", "active", "invalid"],
+      revenue_status: ["pending", "settled", "reversed"],
+    },
   },
 } as const
