@@ -165,15 +165,35 @@ export function TestEnvironmentSettings() {
 
       if (error) throw error;
 
+      // Check if the response contains an error message from the edge function
+      if (data?.error) {
+        toast({
+          title: 'Action Required',
+          description: data.error,
+          variant: 'destructive',
+        });
+        return;
+      }
+
       toast({
         title: 'Revenue Event Simulated',
         description: `Created a test revenue event for $250. Commissions: ${data?.commissions_created || 0}`,
       });
-    } catch (err) {
+    } catch (err: any) {
       console.error('Error simulating revenue:', err);
+      // Parse error message from edge function response
+      let errorMessage = 'Failed to simulate revenue event.';
+      if (err?.message) {
+        try {
+          const parsed = JSON.parse(err.message);
+          errorMessage = parsed.error || errorMessage;
+        } catch {
+          errorMessage = err.message;
+        }
+      }
       toast({
         title: 'Error',
-        description: 'Failed to simulate revenue event.',
+        description: errorMessage,
         variant: 'destructive',
       });
     } finally {
