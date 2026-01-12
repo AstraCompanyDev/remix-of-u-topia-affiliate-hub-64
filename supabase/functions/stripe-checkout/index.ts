@@ -67,7 +67,7 @@ serve(async (req) => {
       );
     }
 
-    const { tier, email } = body as { tier: unknown; email?: string };
+    const { tier } = body as { tier: unknown };
 
     if (!validateTier(tier)) {
       console.warn(`Invalid tier requested: ${String(tier).substring(0, 50)}`);
@@ -77,18 +77,28 @@ serve(async (req) => {
       );
     }
 
-    // Validate email if provided
-    const customerEmail = typeof email === "string" && email.includes("@") ? email : undefined;
-    logStep("Customer email from request", { email: customerEmail ? customerEmail.substring(0, 3) + "***" : "none" });
-
     logStep("Creating checkout session for tier", { tier });
 
-    // Initialize Supabase client to fetch package data
+    // Initialize Supabase client to fetch package data and get user
     const supabaseClient = createClient(
       Deno.env.get("SUPABASE_URL") ?? "",
       Deno.env.get("SUPABASE_SERVICE_ROLE_KEY") ?? "",
       { auth: { persistSession: false } }
     );
+
+    // Get authenticated user from the request (if logged in)
+    let userId: string | null = null;
+    let userEmail: string | null = null;
+    const authHeader = req.headers.get("authorization");
+    if (authHeader) {
+      const token = authHeader.replace("Bearer ", "");
+      const { data: userData } = await supabaseClient.auth.getUser(token);
+      if (userData?.user) {
+        userId = userData.user.id;
+        userEmail = userData.user.email || null;
+        logStep("Authenticated user found", { userId, email: userEmail?.substring(0, 3) + "***" });
+      }
+    }
 
     // Fetch the package from database to get current Stripe price ID
     const { data: packageData, error: packageError } = await supabaseClient
@@ -135,8 +145,13 @@ serve(async (req) => {
           quantity: 1,
         },
       ],
-      // Pre-fill customer email if provided (ensures email matches auth user)
-      ...(customerEmail && { customer_email: customerEmail }),
+      // Pre-fill customer email if user is logged in
+      ...(userEmail && { customer_email: userEmail }),
+      // Store user_id in metadata so verify-purchase can link the purchase
+      metadata: {
+        user_id: userId || "",
+        tier: tier,
+      },
       success_url: `${requestOrigin}/purchase-success?tier=${tier}&session_id={CHECKOUT_SESSION_ID}`,
       cancel_url: `${requestOrigin}/purchase?tier=${tier}`,
     });
