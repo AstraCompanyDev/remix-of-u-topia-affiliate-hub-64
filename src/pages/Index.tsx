@@ -3,6 +3,7 @@ import { Button } from "@/components/ui/button";
 import Header from "@/components/Header";
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
 import { MembershipTiers } from "@/components/MembershipTiers";
+import TeamSection from "@/components/TeamSection";
 import logoLight from "@/assets/u-topia-logo-light.png";
 import logoDark from "@/assets/u-topia-logo-dark.png";
 import heroCard from "@/assets/ucard-hero.png";
@@ -558,6 +559,9 @@ const Index = () => {
             </div>
           </div>
         </section>
+
+        {/* Team Section */}
+        <TeamSection />
 
         {/* FAQ Section */}
         <section className="container mx-auto px-6 py-24">
