@@ -41,7 +41,14 @@ const Header = () => {
   }, []);
 
   const handleSignOut = async () => {
-    await supabase.auth.signOut();
+    try {
+      await supabase.auth.signOut({ scope: 'local' });
+    } catch (error) {
+      console.error("Sign out error:", error);
+    }
+    // Clear local state regardless of server response
+    setUser(null);
+    setIsAdmin(false);
     navigate('/');
   };
 
