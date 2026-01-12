@@ -112,14 +112,11 @@ const TeamSection = () => {
             ))}
           </div>
 
-          {/* Second Row - 3 members, centered */}
+          {/* Second Row - 3 members, left-aligned */}
           <div 
             className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 opacity-0 animate-fade-in-up"
             style={{ animationDelay: '300ms' }}
           >
-            {/* Empty first column on large screens to center the 3 items */}
-            <div className="hidden lg:block" />
-            
             {secondRow.map((member) => (
               <a
                 key={member.name}
