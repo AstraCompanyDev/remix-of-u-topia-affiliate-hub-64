@@ -6,9 +6,7 @@ import { MembershipTiers } from "@/components/MembershipTiers";
 import TeamSection from "@/components/TeamSection";
 import logoLight from "@/assets/u-topia-logo-light.png";
 import logoDark from "@/assets/u-topia-logo-dark.png";
-import heroCard from "@/assets/ucard-hero.png";
-import ucoin3D from "@/assets/ucoin-3d.png";
-import dashboardHero from "@/assets/affiliate-dashboard-hero.png";
+import heroVisual from "@/assets/hero-visual-new.png";
 import membershipBadge from "@/assets/membership-badge.png";
 
 const Index = () => {
@@ -119,65 +117,17 @@ const Index = () => {
               </div>
             </div>
 
-            {/* Right visual - Dashboard with floating Card and uCoins */}
+            {/* Right visual - Hero Image */}
             <div 
               className="flex-1 flex justify-center lg:justify-end opacity-0 animate-fade-in-up"
               style={{ animationDelay: '300ms' }}
             >
-              <div className="relative">
-                {/* Floating uCoin - Top Left */}
-                <div className="absolute -top-6 -left-8 z-20 animate-hero-float" style={{ animationDelay: '0.5s' }}>
-                  <img 
-                    src={ucoin3D} 
-                    alt="uCoin" 
-                    className="w-12 h-12 md:w-14 md:h-14 drop-shadow-[0_8px_20px_rgba(99,102,241,0.5)]"
-                  />
-                </div>
-                
-                {/* Floating uCoin - Top Right */}
-                <div className="absolute -top-2 -right-6 z-20 animate-hero-float" style={{ animationDelay: '1.2s' }}>
-                  <img 
-                    src={ucoin3D} 
-                    alt="uCoin" 
-                    className="w-10 h-10 md:w-12 md:h-12 drop-shadow-[0_8px_20px_rgba(99,102,241,0.5)]"
-                  />
-                </div>
-                
-                {/* Floating uCoin - Bottom Left */}
-                <div className="absolute bottom-24 -left-10 z-20 animate-hero-float" style={{ animationDelay: '0.8s' }}>
-                  <img 
-                    src={ucoin3D} 
-                    alt="uCoin" 
-                    className="w-9 h-9 md:w-11 md:h-11 drop-shadow-[0_8px_20px_rgba(99,102,241,0.5)]"
-                  />
-                </div>
-                
-                {/* Floating uCoin - Right side */}
-                <div className="absolute top-1/3 -right-10 z-20 animate-hero-float" style={{ animationDelay: '1.5s' }}>
-                  <img 
-                    src={ucoin3D} 
-                    alt="uCoin" 
-                    className="w-10 h-10 md:w-12 md:h-12 drop-shadow-[0_8px_20px_rgba(99,102,241,0.5)]"
-                  />
-                </div>
-
-                {/* Main Dashboard Image */}
-                <div className="relative animate-hero-float">
-                  <img 
-                    src={dashboardHero} 
-                    alt="U-topia Affiliate Dashboard" 
-                    className="w-full max-w-lg lg:max-w-xl xl:max-w-2xl drop-shadow-[0_20px_60px_rgba(59,130,246,0.2)]"
-                  />
-                </div>
-                
-                {/* Floating Card - Bottom Right overlay */}
-                <div className="absolute -bottom-8 -right-8 z-10 animate-card-float">
-                  <img 
-                    src={heroCard} 
-                    alt="U-topia Virtual Card" 
-                    className="w-40 md:w-52 lg:w-60 drop-shadow-[0_15px_40px_rgba(0,180,216,0.4)] rotate-[-8deg]"
-                  />
-                </div>
+              <div className="relative animate-hero-float">
+                <img 
+                  src={heroVisual} 
+                  alt="U-topia Financial Dashboard" 
+                  className="w-full max-w-lg lg:max-w-xl xl:max-w-2xl drop-shadow-[0_20px_60px_rgba(59,130,246,0.3)]"
+                />
               </div>
             </div>
           </div>
