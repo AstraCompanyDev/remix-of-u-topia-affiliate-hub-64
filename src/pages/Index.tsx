@@ -448,8 +448,8 @@ const Index = () => {
                       <path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/>
                     </svg>
                   </div>
-                  <h3 className="text-xl font-bold text-foreground mb-3">Entrepreneurs & Creators</h3>
-                  <p className="text-muted-foreground leading-relaxed">Visionaries who turn ideas into income streams and build audiences that trust them.</p>
+                  <h3 className="text-xl font-bold text-foreground mb-3">Everyday Users</h3>
+                  <p className="text-muted-foreground leading-relaxed">Individuals looking for an easy way to earn rewards by referring friends and family. Share U-topia, get rewarded when they join and use the platform.</p>
                 </div>
               </div>
               
@@ -465,8 +465,8 @@ const Index = () => {
                       <path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/>
                     </svg>
                   </div>
-                  <h3 className="text-xl font-bold text-foreground mb-3">Business Owners</h3>
-                  <p className="text-muted-foreground leading-relaxed">Leaders and consultants seeking new revenue channels aligned with their expertise.</p>
+                  <h3 className="text-xl font-bold text-foreground mb-3">Web3 Enthusiasts</h3>
+                  <p className="text-muted-foreground leading-relaxed">Crypto-savvy users familiar with digital ecosystems who want to engage with a modern, rewarding referral system.</p>
                 </div>
               </div>
               
@@ -486,7 +486,7 @@ const Index = () => {
                     </svg>
                   </div>
                   <h3 className="text-xl font-bold text-foreground mb-3">Community Builders</h3>
-                  <p className="text-muted-foreground leading-relaxed">Connectors who nurture engaged communities and foster meaningful relationships.</p>
+                  <p className="text-muted-foreground leading-relaxed">People who love connecting with others and want to build a network while earning real rewards for each connection.</p>
                 </div>
               </div>
               
@@ -502,8 +502,8 @@ const Index = () => {
                       <polyline points="17 6 23 6 23 12"/>
                     </svg>
                   </div>
-                  <h3 className="text-xl font-bold text-foreground mb-3">Growth-Focused Partners</h3>
-                  <p className="text-muted-foreground leading-relaxed">Ambitious individuals driven by results and long-term wealth building strategies.</p>
+                  <h3 className="text-xl font-bold text-foreground mb-3">Ambitious Referral Partners</h3>
+                  <p className="text-muted-foreground leading-relaxed">Users seeking a straightforward way to generate additional income by leveraging U-topia's simple referral program.</p>
                 </div>
               </div>
             </div>
