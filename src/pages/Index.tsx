@@ -205,13 +205,6 @@ const Index = () => {
               </p>
             </div>
           </div>
-
-          <p 
-            className="text-left text-sm text-muted-foreground/70 italic opacity-0 animate-fade-in-up"
-            style={{ animationDelay: '900ms' }}
-          >
-            *There are no guaranteed returns. Rewards are earned through participation and sustained activity.
-          </p>
         </section>
 
         {/* How It Works Section */}
