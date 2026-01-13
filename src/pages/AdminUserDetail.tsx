@@ -348,11 +348,8 @@ const AdminUserDetail = () => {
       {/* Footer */}
       <footer className="bg-[#0a0f1a] py-16">
         <div className="container mx-auto px-6">
-          <div className="pt-8 border-t border-white/10 flex flex-col md:flex-row justify-between items-center gap-4">
-            <div className="flex items-center gap-2">
-              <img src={logoLight} alt="U-topia" className="h-6" />
-            </div>
-            <p className="text-gray-500 text-sm">
+          <div className="pt-8 border-t border-white/10">
+            <p className="text-center text-gray-500 text-sm">
               © {new Date().getFullYear()} U-topia. All rights reserved.
             </p>
           </div>

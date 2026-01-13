@@ -121,12 +121,9 @@ const PurchaseSuccess = () => {
       {/* Footer */}
       <footer className="bg-muted/30 border-t border-border py-8">
         <div className="container mx-auto px-6">
-          <div className="flex flex-col md:flex-row items-center justify-between gap-4">
-            <Link to="/" className="flex items-center">
-              <img src={logoLight} alt="U-topia" className="h-6 invert dark:invert-0" />
-            </Link>
-            <p className="text-sm text-muted-foreground">
-              © 2024 U-topia. All rights reserved.
+          <div>
+            <p className="text-center text-sm text-muted-foreground">
+              © {new Date().getFullYear()} U-topia. All rights reserved.
             </p>
           </div>
         </div>
