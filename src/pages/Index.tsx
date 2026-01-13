@@ -30,8 +30,8 @@ const Index = () => {
         </div>
 
         {/* Hero Content */}
-        <section className="relative z-10 container mx-auto px-6 pt-16 pb-24">
-          <div className="flex flex-col lg:flex-row items-center gap-12">
+        <section className="relative z-10 container mx-auto px-4 sm:px-6 pt-8 sm:pt-16 pb-16 sm:pb-24">
+          <div className="flex flex-col lg:flex-row items-center gap-8 sm:gap-12">
             {/* Left content */}
             <div className="flex-1 max-w-2xl">
               {/* Badge */}
@@ -39,15 +39,15 @@ const Index = () => {
                 className="opacity-0 animate-fade-in-up"
                 style={{ animationDelay: '100ms' }}
               >
-                <span className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/5 border border-white/10 text-gray-300 text-sm font-medium mb-8">
-                  <span className="w-2 h-2 rounded-full bg-primary animate-pulse"></span>
+                <span className="inline-flex items-center gap-2 px-3 sm:px-4 py-1.5 sm:py-2 rounded-full bg-white/5 border border-white/10 text-gray-300 text-xs sm:text-sm font-medium mb-6 sm:mb-8">
+                  <span className="w-1.5 sm:w-2 h-1.5 sm:h-2 rounded-full bg-primary animate-pulse"></span>
                   Earn through real platform activity
                 </span>
               </div>
               
               {/* Headline */}
               <h1 
-                className="text-5xl md:text-6xl lg:text-7xl font-bold mb-6 opacity-0 animate-fade-in-up leading-tight"
+                className="text-3xl sm:text-4xl md:text-5xl lg:text-7xl font-bold mb-6 opacity-0 animate-fade-in-up leading-tight whitespace-nowrap"
                 style={{ animationDelay: '200ms' }}
               >
                 <span className="text-white">Build with </span>
@@ -56,7 +56,7 @@ const Index = () => {
               
               {/* Subheadline */}
               <p 
-                className="text-lg md:text-xl text-gray-400 mb-8 max-w-xl opacity-0 animate-fade-in-up"
+                className="text-base sm:text-lg md:text-xl text-gray-400 mb-6 sm:mb-8 max-w-xl opacity-0 animate-fade-in-up"
                 style={{ animationDelay: '300ms' }}
               >
                 A digital financial ecosystem that rewards growth, usage, and contribution. 
@@ -65,7 +65,7 @@ const Index = () => {
 
               {/* Tagline */}
               <p 
-                className="text-xl md:text-2xl font-semibold text-white mb-10 opacity-0 animate-fade-in-up"
+                className="text-lg sm:text-xl md:text-2xl font-semibold text-white mb-8 sm:mb-10 opacity-0 animate-fade-in-up"
                 style={{ animationDelay: '350ms' }}
               >
                 Real products. Real users. <span className="text-primary">Real rewards.</span>
@@ -73,13 +73,13 @@ const Index = () => {
 
               {/* CTAs */}
               <div 
-                className="flex flex-col sm:flex-row gap-4 opacity-0 animate-fade-in-up"
+                className="flex flex-row gap-2 sm:gap-4 opacity-0 animate-fade-in-up"
                 style={{ animationDelay: '400ms' }}
               >
                 <Link to="/auth">
-                  <Button className="bg-primary hover:bg-primary/90 text-white font-semibold px-8 py-6 text-base rounded-full shadow-lg shadow-primary/25 hover:shadow-xl hover:shadow-primary/30 transition-all">
+                  <Button className="bg-primary hover:bg-primary/90 text-white font-semibold px-4 sm:px-8 py-4 sm:py-6 text-sm sm:text-base rounded-full shadow-lg shadow-primary/25 hover:shadow-xl hover:shadow-primary/30 transition-all">
                     Get Started
-                    <svg className="w-5 h-5 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <svg className="w-4 h-4 sm:w-5 sm:h-5 ml-1 sm:ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
                     </svg>
                   </Button>
@@ -89,30 +89,30 @@ const Index = () => {
                   target="_blank" 
                   rel="noopener noreferrer"
                 >
-                  <Button variant="outline" className="border-white/20 text-white hover:bg-white/10 hover:border-white/30 px-8 py-6 text-base rounded-full transition-all">
-                    Learn How It Works
+                  <Button variant="outline" className="border-white/20 text-white hover:bg-white/10 hover:border-white/30 px-4 sm:px-8 py-4 sm:py-6 text-sm sm:text-base rounded-full transition-all">
+                    Learn More
                   </Button>
                 </a>
               </div>
 
               {/* Stats */}
               <div 
-                className="flex flex-wrap gap-8 md:gap-12 mt-16 pt-8 border-t border-white/10 opacity-0 animate-fade-in-up"
+                className="flex flex-wrap gap-6 sm:gap-8 md:gap-12 mt-10 sm:mt-16 pt-6 sm:pt-8 border-t border-white/10 opacity-0 animate-fade-in-up"
                 style={{ animationDelay: '500ms' }}
               >
                 <div>
-                  <p className="text-3xl md:text-4xl font-bold text-white">100%</p>
-                  <p className="text-gray-500 text-sm mt-1">Real Activity</p>
+                  <p className="text-2xl sm:text-3xl md:text-4xl font-bold text-white">100%</p>
+                  <p className="text-gray-500 text-xs sm:text-sm mt-1">Real Activity</p>
                 </div>
                 <div className="w-px bg-white/10 hidden md:block"></div>
                 <div>
-                  <p className="text-3xl md:text-4xl font-bold text-white">Verified</p>
-                  <p className="text-gray-500 text-sm mt-1">Transactions</p>
+                  <p className="text-2xl sm:text-3xl md:text-4xl font-bold text-white">Verified</p>
+                  <p className="text-gray-500 text-xs sm:text-sm mt-1">Transactions</p>
                 </div>
                 <div className="w-px bg-white/10 hidden md:block"></div>
                 <div>
-                  <p className="text-3xl md:text-4xl font-bold text-white">Global</p>
-                  <p className="text-gray-500 text-sm mt-1">Rewards Network</p>
+                  <p className="text-2xl sm:text-3xl md:text-4xl font-bold text-white">Global</p>
+                  <p className="text-gray-500 text-xs sm:text-sm mt-1">Rewards Network</p>
                 </div>
               </div>
             </div>
