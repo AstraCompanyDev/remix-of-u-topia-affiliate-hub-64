@@ -220,8 +220,8 @@ const Dashboard = () => {
           </div>
 
           {/* Bottom bar */}
-          <div className="pt-8 border-t border-white/10 flex flex-col md:flex-row justify-between items-center gap-4">
-            <p className="text-gray-500 text-sm">
+          <div className="pt-8 border-t border-white/10">
+            <p className="text-center text-gray-500 text-sm">
               © {new Date().getFullYear()} U-topia. All rights reserved.
             </p>
           </div>
