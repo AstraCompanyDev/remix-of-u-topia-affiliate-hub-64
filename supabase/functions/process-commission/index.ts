@@ -1,9 +1,22 @@
 import { serve } from "https://deno.land/std@0.190.0/http/server.ts";
 import { createClient, SupabaseClient } from "https://esm.sh/@supabase/supabase-js@2.57.2";
 
-const corsHeaders = {
-  "Access-Control-Allow-Origin": "*",
-  "Access-Control-Allow-Headers": "authorization, x-client-info, apikey, content-type",
+const ALLOWED_ORIGINS = [
+  "https://jhrsmjlvzfzdfbdfhwss.lovableproject.com",
+  "https://lovable.dev",
+  "http://localhost:5173",
+  "http://localhost:8080",
+];
+
+const getCorsHeaders = (origin: string | null) => {
+  const allowedOrigin = origin && ALLOWED_ORIGINS.some(allowed => 
+    origin === allowed || origin.endsWith('.lovable.app') || origin.endsWith('.lovableproject.com')
+  ) ? origin : ALLOWED_ORIGINS[0];
+  
+  return {
+    "Access-Control-Allow-Origin": allowedOrigin,
+    "Access-Control-Allow-Headers": "authorization, x-client-info, apikey, content-type",
+  };
 };
 
 interface RevenueEvent {
@@ -40,6 +53,9 @@ const logStep = (step: string, details?: Record<string, unknown>) => {
 };
 
 serve(async (req) => {
+  const origin = req.headers.get("origin");
+  const corsHeaders = getCorsHeaders(origin);
+
   if (req.method === "OPTIONS") {
     return new Response(null, { headers: corsHeaders });
   }
@@ -460,6 +476,8 @@ serve(async (req) => {
   } catch (error) {
     const errorMessage = error instanceof Error ? error.message : "Unknown error";
     logStep("Error", { message: errorMessage });
+    const origin = req.headers.get("origin");
+    const corsHeaders = getCorsHeaders(origin);
     return new Response(
       JSON.stringify({ error: errorMessage }),
       { headers: { ...corsHeaders, "Content-Type": "application/json" }, status: 500 }
@@ -498,130 +516,116 @@ async function processCommissions(
     return { count: 0 };
   }
 
-  // Get commission rates
-  const { data: ratesData, error: ratesError } = await supabaseAdmin
+  // Fetch active commission rates
+  const { data: commissionRates, error: ratesError } = await supabaseAdmin
     .from("commission_rates")
-    .select("*")
+    .select("layer, rate_percent, is_active")
     .eq("is_active", true)
-    .order("layer");
+    .order("layer", { ascending: true });
 
-  const rates = ratesData as CommissionRate[] | null;
-
-  if (ratesError || !rates || rates.length === 0) {
-    logStep("Error fetching commission rates", { error: ratesError?.message });
+  if (ratesError || !commissionRates?.length) {
+    logStep("No active commission rates found", { error: ratesError?.message });
     return { count: 0 };
   }
 
-  const rateMap = new Map<number, number>();
-  for (const rate of rates) {
-    rateMap.set(rate.layer, Number(rate.rate_percent));
-  }
+  logStep("Commission rates loaded", { rates: commissionRates });
 
-  // Build upline chain using the database function
-  const { data: uplineData, error: uplineError } = await supabaseAdmin
+  // Get upline chain using RPC function
+  const { data: uplineChain, error: uplineError } = await supabaseAdmin
     .rpc("get_upline_chain", { p_user_id: revenueEvent.user_id, p_max_depth: 5 });
 
   if (uplineError) {
-    logStep("Error getting upline chain", { error: uplineError.message });
+    logStep("Error fetching upline chain", { error: uplineError.message });
     return { count: 0 };
   }
-
-  const uplineChain = uplineData as UplineMember[] | null;
 
   if (!uplineChain || uplineChain.length === 0) {
-    logStep("No upline found for user");
+    logStep("No upline found for user", { user_id: revenueEvent.user_id });
     return { count: 0 };
   }
 
-  logStep("Upline chain found", { layers: uplineChain.length });
+  logStep("Upline chain fetched", { chain: uplineChain });
 
-  // Get affiliate statuses for all upline members
-  const uplineUserIds = uplineChain.map((u) => u.referrer_id);
-  const { data: affiliateStatusData, error: statusError } = await supabaseAdmin
+  // Fetch affiliate statuses for all upline members
+  const uplineIds = (uplineChain as UplineMember[]).map((u) => u.referrer_id);
+  const { data: affiliateStatuses, error: affiliateError } = await supabaseAdmin
     .from("affiliate_status")
-    .select("*")
-    .in("user_id", uplineUserIds);
+    .select("user_id, tier, tier_depth_limit, is_active")
+    .in("user_id", uplineIds);
 
-  if (statusError) {
-    logStep("Error fetching affiliate statuses", { error: statusError.message });
+  if (affiliateError) {
+    logStep("Error fetching affiliate statuses", { error: affiliateError.message });
     return { count: 0 };
   }
 
-  const affiliateStatuses = affiliateStatusData as AffiliateStatus[] | null;
-
-  const statusMap = new Map<string, { tier: string; tier_depth_limit: number; is_active: boolean }>();
+  const affiliateMap = new Map<string, AffiliateStatus>();
   for (const status of affiliateStatuses || []) {
-    statusMap.set(status.user_id, {
-      tier: status.tier,
-      tier_depth_limit: status.tier_depth_limit,
-      is_active: status.is_active,
-    });
+    affiliateMap.set(status.user_id, status as AffiliateStatus);
   }
 
-  // Calculate and insert commissions
+  // Calculate commissions for each layer
   const commissionsToInsert: Array<{
     beneficiary_user_id: string;
+    referred_user_id: string;
     source_revenue_event_id: string;
     layer: number;
-    referred_user_id: string;
-    amount_usd: number;
     rate_percent: number;
+    amount_usd: number;
     status: string;
+    notes: string;
   }> = [];
 
-  for (const uplineMember of uplineChain) {
-    const layer = uplineMember.layer;
-    const affiliateId = uplineMember.referrer_id;
-    
-    // Get affiliate status (default to bronze if not found)
-    const status = statusMap.get(affiliateId) || { 
-      tier: "bronze", 
-      tier_depth_limit: 1, 
-      is_active: true 
-    };
+  const ratesMap = new Map<number, CommissionRate>();
+  for (const rate of commissionRates) {
+    ratesMap.set(rate.layer, rate as CommissionRate);
+  }
 
-    // Skip inactive affiliates
-    if (!status.is_active) {
-      logStep("Skipping inactive affiliate", { user_id: affiliateId, layer });
+  for (const uplineMember of uplineChain as UplineMember[]) {
+    const { layer, referrer_id } = uplineMember;
+    
+    // Check if this layer has an active rate
+    const rate = ratesMap.get(layer);
+    if (!rate || !rate.is_active) {
+      logStep("No active rate for layer", { layer });
+      continue;
+    }
+
+    // Check affiliate status and tier depth limit
+    const affiliateStatus = affiliateMap.get(referrer_id);
+    if (!affiliateStatus || !affiliateStatus.is_active) {
+      logStep("Affiliate not active", { referrer_id, layer });
       continue;
     }
 
     // Check tier depth limit
-    if (layer > status.tier_depth_limit) {
+    if (layer > affiliateStatus.tier_depth_limit) {
       logStep("Layer exceeds tier depth limit", { 
-        user_id: affiliateId, 
         layer, 
-        tier: status.tier,
-        limit: status.tier_depth_limit 
+        tier: affiliateStatus.tier,
+        tier_depth_limit: affiliateStatus.tier_depth_limit 
       });
       continue;
     }
 
-    // Get rate for this layer
-    const ratePercent = rateMap.get(layer);
-    if (!ratePercent) {
-      logStep("No rate found for layer", { layer });
-      continue;
-    }
-
-    // Calculate commission amount: Revenue × (Rate / 100)
-    const commissionAmount = Number(revenueEvent.amount_usd) * (ratePercent / 100);
-
-    logStep("Commission calculated", { 
-      beneficiary: affiliateId, 
-      layer, 
-      rate: ratePercent, 
-      amount: commissionAmount 
-    });
-
+    // Calculate commission amount
+    const commissionAmount = Number(revenueEvent.amount_usd) * (rate.rate_percent / 100);
+    
     commissionsToInsert.push({
-      beneficiary_user_id: affiliateId,
+      beneficiary_user_id: referrer_id,
+      referred_user_id: revenueEvent.user_id,
       source_revenue_event_id: revenueEvent.id,
       layer,
-      referred_user_id: revenueEvent.user_id,
+      rate_percent: rate.rate_percent,
       amount_usd: commissionAmount,
-      rate_percent: ratePercent,
       status: "pending",
+      notes: `Layer ${layer} commission from ${revenueEvent.source}`,
+    });
+
+    logStep("Commission calculated", { 
+      beneficiary: referrer_id, 
+      layer, 
+      rate: rate.rate_percent, 
+      amount: commissionAmount 
     });
   }
 
@@ -630,7 +634,7 @@ async function processCommissions(
     return { count: 0 };
   }
 
-  // Insert commissions (with upsert for idempotency)
+  // Insert commissions with upsert for idempotency
   const { data: insertedCommissions, error: insertError } = await supabaseAdmin
     .from("commission_ledger")
     .upsert(commissionsToInsert, {
@@ -644,7 +648,6 @@ async function processCommissions(
     return { count: 0 };
   }
 
-  logStep("Commissions inserted successfully", { count: insertedCommissions?.length || 0 });
-
-  return { count: insertedCommissions?.length || commissionsToInsert.length };
+  logStep("Commissions inserted", { count: insertedCommissions?.length || 0 });
+  return { count: insertedCommissions?.length || 0 };
 }
