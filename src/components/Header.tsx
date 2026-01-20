@@ -2,13 +2,22 @@ import { useState, useEffect } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { supabase } from "@/integrations/supabase/client";
-import { LogOut, Menu, X, Shield } from "lucide-react";
+import { LogOut, Menu, X, User } from "lucide-react";
 import logoLight from "@/assets/u-topia-logo-light.png";
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuSeparator,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu";
+import { Avatar, AvatarFallback } from "@/components/ui/avatar";
 
 const Header = () => {
   const [user, setUser] = useState<any>(null);
   const [isAdmin, setIsAdmin] = useState(false);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [profile, setProfile] = useState<{ full_name: string | null; email: string | null } | null>(null);
   const location = useLocation();
   const navigate = useNavigate();
 
@@ -17,15 +26,24 @@ const Header = () => {
       setUser(session?.user ?? null);
       
       if (session?.user?.email) {
-        const { data } = await supabase
+        const { data: adminData } = await supabase
           .from('admin_whitelist')
           .select('id')
           .eq('email', session.user.email)
           .eq('is_active', true)
           .maybeSingle();
-        setIsAdmin(!!data);
+        setIsAdmin(!!adminData);
+
+        // Fetch profile data
+        const { data: profileData } = await supabase
+          .from('profiles')
+          .select('full_name, email')
+          .eq('id', session.user.id)
+          .maybeSingle();
+        setProfile(profileData);
       } else {
         setIsAdmin(false);
+        setProfile(null);
       }
     };
 
@@ -46,13 +64,28 @@ const Header = () => {
     } catch (error) {
       console.error("Sign out error:", error);
     }
-    // Clear local state regardless of server response
     setUser(null);
     setIsAdmin(false);
+    setProfile(null);
     navigate('/');
   };
 
   const isActive = (path: string) => location.pathname === path;
+
+  const getInitials = () => {
+    if (profile?.full_name) {
+      return profile.full_name
+        .split(' ')
+        .map(n => n[0])
+        .join('')
+        .toUpperCase()
+        .slice(0, 2);
+    }
+    if (profile?.email || user?.email) {
+      return (profile?.email || user?.email)[0].toUpperCase();
+    }
+    return 'U';
+  };
 
   const navLinks = [
     { path: "/", label: "Home" },
@@ -84,18 +117,38 @@ const Header = () => {
             ))}
           </div>
           
-          {/* Auth Button - Right */}
+          {/* Auth Button / User Avatar - Right */}
           <div className="hidden md:flex items-center flex-shrink-0">
             {user ? (
-              <Button 
-                variant="outline" 
-                size="sm" 
-                onClick={handleSignOut} 
-                className="gap-2 border-white/20 bg-transparent text-white hover:bg-white/10 hover:text-white"
-              >
-                <LogOut className="h-4 w-4" />
-                Sign Out
-              </Button>
+              <DropdownMenu>
+                <DropdownMenuTrigger asChild>
+                  <button className="flex items-center gap-2 rounded-full focus:outline-none focus:ring-2 focus:ring-primary/50">
+                    <Avatar className="h-9 w-9 border-2 border-primary/50 cursor-pointer hover:border-primary transition-colors">
+                      <AvatarFallback className="bg-primary/20 text-white text-sm font-medium">
+                        {getInitials()}
+                      </AvatarFallback>
+                    </Avatar>
+                  </button>
+                </DropdownMenuTrigger>
+                <DropdownMenuContent align="end" className="w-56">
+                  <div className="px-3 py-2">
+                    <p className="text-sm font-medium truncate">{profile?.full_name || 'User'}</p>
+                    <p className="text-xs text-muted-foreground truncate">{profile?.email || user?.email}</p>
+                  </div>
+                  <DropdownMenuSeparator />
+                  <DropdownMenuItem asChild>
+                    <Link to="/dashboard" className="cursor-pointer">
+                      <User className="mr-2 h-4 w-4" />
+                      Dashboard
+                    </Link>
+                  </DropdownMenuItem>
+                  <DropdownMenuSeparator />
+                  <DropdownMenuItem onClick={handleSignOut} className="text-destructive cursor-pointer">
+                    <LogOut className="mr-2 h-4 w-4" />
+                    Sign Out
+                  </DropdownMenuItem>
+                </DropdownMenuContent>
+              </DropdownMenu>
             ) : (
               <Link to="/auth">
                 <Button variant="default" size="sm">
@@ -118,6 +171,21 @@ const Header = () => {
         {isMenuOpen && (
           <div className="md:hidden mt-4 pb-4 border-t border-white/10 pt-4">
             <div className="flex flex-col gap-4">
+              {/* User info in mobile menu */}
+              {user && (
+                <div className="flex items-center gap-3 pb-3 border-b border-white/10">
+                  <Avatar className="h-10 w-10 border-2 border-primary/50">
+                    <AvatarFallback className="bg-primary/20 text-white text-sm font-medium">
+                      {getInitials()}
+                    </AvatarFallback>
+                  </Avatar>
+                  <div className="overflow-hidden">
+                    <p className="text-white text-sm font-medium truncate">{profile?.full_name || 'User'}</p>
+                    <p className="text-gray-400 text-xs truncate">{profile?.email || user?.email}</p>
+                  </div>
+                </div>
+              )}
+              
               {navLinks.map((link) => (
                 <Link
                   key={link.path}
