@@ -1,5 +1,5 @@
 // Avatar library with male and female avatars
-// Using DiceBear Lorelei style for friendly, modern Bitmoji/Snapchat-like avatars
+// Using DiceBear Adventurer style for friendly, colorful cartoon avatars
 
 export interface Avatar {
   id: string;
@@ -8,7 +8,7 @@ export interface Avatar {
 }
 
 const generateAvatarUrl = (seed: string) => 
-  `https://api.dicebear.com/9.x/lorelei/svg?seed=${seed}&backgroundColor=b6e3f4,c0aede,d1d4f9,ffd5dc,ffdfbf`;
+  `https://api.dicebear.com/9.x/adventurer/svg?seed=${seed}&backgroundColor=b6e3f4,c0aede,d1d4f9,ffd5dc,ffdfbf`;
 
 // Generate 25 male avatars
 const maleSeeds = [
