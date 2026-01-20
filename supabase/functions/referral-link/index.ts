@@ -131,6 +131,48 @@ Deno.serve(async (req) => {
         );
       }
 
+      // Find the referred user's profile ID by email
+      const { data: referredProfile, error: referredProfileError } = await supabase
+        .from('profiles')
+        .select('id')
+        .eq('email', body.email.toLowerCase().trim())
+        .maybeSingle();
+
+      if (referredProfileError) {
+        console.error('Error looking up referred user profile:', referredProfileError);
+      }
+
+      // Create a pending referral record if we found the referred user
+      if (referredProfile) {
+        // Check if a referral already exists for this user
+        const { data: existingReferral } = await supabase
+          .from('referrals')
+          .select('id')
+          .eq('referred_user_id', referredProfile.id)
+          .maybeSingle();
+
+        if (!existingReferral) {
+          const { error: referralError } = await supabase
+            .from('referrals')
+            .insert({
+              referrer_user_id: link.user_id,
+              referred_user_id: referredProfile.id,
+              status: 'pending',
+              is_test: false,
+            });
+
+          if (referralError) {
+            console.error('Error creating referral record:', referralError);
+          } else {
+            console.log('Created pending referral record:', { referrer: link.user_id, referred: referredProfile.id });
+          }
+        } else {
+          console.log('Referral already exists for user:', referredProfile.id);
+        }
+      } else {
+        console.log('Referred user profile not found yet, referral will be created after purchase verification');
+      }
+
       // Generate a new referral link for the referrer
       const { data: newCodeData, error: codeError } = await supabase
         .rpc('generate_referral_code');

@@ -135,7 +135,8 @@ async function initializeAffiliateStatus(
 // deno-lint-ignore no-explicit-any
 async function activateReferralIfExists(
   supabase: SupabaseClient<any>,
-  userId: string
+  userId: string,
+  userEmail: string
 ): Promise<void> {
   logStep("Checking for pending referral", { userId });
 
@@ -151,24 +152,61 @@ async function activateReferralIfExists(
     return;
   }
 
-  if (!referral) {
-    logStep("No pending referral found");
+  if (referral) {
+    // Activate the existing referral
+    const { error: updateError } = await supabase
+      .from("referrals")
+      .update({
+        status: "active",
+        verified_at: new Date().toISOString(),
+      })
+      .eq("id", referral.id);
+
+    if (updateError) {
+      logStep("Error activating referral", { error: updateError.message });
+    } else {
+      logStep("Referral activated", { referrer: referral.referrer_user_id });
+    }
     return;
   }
 
-  // Activate the referral
-  const { error: updateError } = await supabase
+  // No pending referral found - check if there's a used referral_link for this email
+  logStep("No pending referral found, checking referral_links");
+  
+  const { data: usedLink, error: linkError } = await supabase
+    .from("referral_links")
+    .select("user_id")
+    .eq("used_by_email", userEmail.toLowerCase().trim())
+    .eq("is_active", false)
+    .maybeSingle();
+
+  if (linkError) {
+    logStep("Error checking referral links", { error: linkError.message });
+    return;
+  }
+
+  if (!usedLink) {
+    logStep("No referral link found for this email");
+    return;
+  }
+
+  // Create and activate the referral from the referral_link data
+  logStep("Found used referral link, creating referral", { referrer: usedLink.user_id });
+  
+  const { error: insertError } = await supabase
     .from("referrals")
-    .update({
+    .insert({
+      referrer_user_id: usedLink.user_id,
+      referred_user_id: userId,
       status: "active",
       verified_at: new Date().toISOString(),
-    })
-    .eq("id", referral.id);
+      is_test: false,
+    });
 
-  if (updateError) {
-    logStep("Error activating referral", { error: updateError.message });
+  if (insertError) {
+    logStep("Error creating referral from link", { error: insertError.message });
   } else {
-    logStep("Referral activated", { referrer: referral.referrer_user_id });
+    logStep("Referral created and activated from link", { referrer: usedLink.user_id });
   }
 }
 
@@ -552,7 +590,7 @@ serve(async (req) => {
       await initializeAffiliateStatus(supabaseClient, userId, tier);
 
       // 2. Activate pending referral if exists
-      await activateReferralIfExists(supabaseClient, userId);
+      await activateReferralIfExists(supabaseClient, userId, customerEmail);
 
       // 3. Create revenue event and calculate commissions
       const commissionResult = await createRevenueEventAndCommissions(
