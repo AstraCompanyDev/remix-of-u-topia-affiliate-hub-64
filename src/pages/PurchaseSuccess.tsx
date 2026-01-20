@@ -102,7 +102,7 @@ const PurchaseSuccess = () => {
               )}
 
               <div className="flex flex-col sm:flex-row gap-4 justify-center">
-                <Link to="/">
+                <Link to="/dashboard">
                   <Button variant="default" size="lg" className="w-full sm:w-auto">
                     Go to Dashboard
                   </Button>
