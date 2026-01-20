@@ -124,9 +124,22 @@ Deno.serve(async (req) => {
         .eq('id', link.id);
 
       if (updateError) {
+        // Most common failure here is the unique constraint on used_by_email.
+        // Return a user-friendly (non-500) error so the signup page can display it.
+        if ((updateError as any).code === '23505') {
+          return new Response(
+            JSON.stringify({
+              success: false,
+              valid: false,
+              error: 'This email has already been referred. Please sign up without a referral code or use a different email.',
+            }),
+            { status: 200, headers: { ...corsHeaders, 'Content-Type': 'application/json' } }
+          );
+        }
+
         console.error('Error marking referral link as used:', updateError);
         return new Response(
-          JSON.stringify({ error: 'Failed to process referral' }),
+          JSON.stringify({ error: 'Failed to process referral', success: false, valid: false }),
           { status: 500, headers: { ...corsHeaders, 'Content-Type': 'application/json' } }
         );
       }
