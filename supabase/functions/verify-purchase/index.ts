@@ -329,6 +329,30 @@ async function processCommissions(
     return 0;
   }
 
+  // Also fetch purchases for upline members who might be missing affiliate_status
+  const { data: uplinePurchases } = await supabase
+    .from("purchases")
+    .select("user_id, tier")
+    .in("user_id", uplineUserIds)
+    .eq("status", "completed")
+    .order("created_at", { ascending: false });
+
+  // Build a map of highest tier purchased by each upline user
+  const purchaseTierMap = new Map<string, string>();
+  const tierOrder = ["bronze", "silver", "gold", "platinum", "diamond"];
+  for (const purchase of uplinePurchases || []) {
+    if (!purchase.user_id) continue;
+    const existingTier = purchaseTierMap.get(purchase.user_id);
+    const purchaseTier = purchase.tier?.toLowerCase();
+    if (!existingTier || tierOrder.indexOf(purchaseTier) > tierOrder.indexOf(existingTier)) {
+      purchaseTierMap.set(purchase.user_id, purchaseTier);
+    }
+  }
+
+  const tierDepthMap: Record<string, number> = {
+    bronze: 1, silver: 2, gold: 3, platinum: 4, diamond: 5
+  };
+
   const statusMap = new Map<string, { tier: string; tier_depth_limit: number; is_active: boolean }>();
   for (const status of affiliateStatusData || []) {
     statusMap.set(status.user_id, {
@@ -336,6 +360,28 @@ async function processCommissions(
       tier_depth_limit: status.tier_depth_limit,
       is_active: status.is_active,
     });
+  }
+
+  // For upline members without affiliate_status but with purchases, create status dynamically
+  for (const userId of uplineUserIds) {
+    if (!statusMap.has(userId) && purchaseTierMap.has(userId)) {
+      const tier = purchaseTierMap.get(userId)!;
+      const depthLimit = tierDepthMap[tier] || 1;
+      statusMap.set(userId, {
+        tier: tier,
+        tier_depth_limit: depthLimit,
+        is_active: true,
+      });
+      logStep("Using purchase-based tier for upline member", { userId, tier, depthLimit });
+      
+      // Also create the missing affiliate_status record for future use
+      await supabase.from("affiliate_status").upsert({
+        user_id: userId,
+        tier: tier,
+        tier_depth_limit: depthLimit,
+        is_active: true,
+      }, { onConflict: "user_id" });
+    }
   }
 
   // Calculate and insert commissions
@@ -354,12 +400,12 @@ async function processCommissions(
     const layer = uplineMember.layer;
     const affiliateId = uplineMember.referrer_id;
     
-    // Get affiliate status (default to bronze if not found)
-    const status = statusMap.get(affiliateId) || { 
-      tier: "bronze", 
-      tier_depth_limit: 1, 
-      is_active: true 
-    };
+    // Get affiliate status - skip if not found (no purchase = no commissions)
+    const status = statusMap.get(affiliateId);
+    if (!status) {
+      logStep("Affiliate has no status (no purchase)", { user_id: affiliateId, layer });
+      continue;
+    }
 
     // Skip inactive affiliates
     if (!status.is_active) {
@@ -367,7 +413,7 @@ async function processCommissions(
       continue;
     }
 
-    // Check tier depth limit
+    // Check tier depth limit - this enforces layer 1-5 based on purchased tier
     if (layer > status.tier_depth_limit) {
       logStep("Layer exceeds tier depth limit", { 
         user_id: affiliateId, 
