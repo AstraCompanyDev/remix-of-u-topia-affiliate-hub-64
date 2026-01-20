@@ -96,6 +96,18 @@
   body {
     @apply bg-background text-foreground font-sans antialiased;
   }
+  
+  /* Safe area for bottom nav on mobile */
+  .safe-area-bottom {
+    padding-bottom: env(safe-area-inset-bottom, 0);
+  }
+  
+  /* Add padding to main content on mobile to account for bottom nav */
+  @media (max-width: 767px) {
+    main, .main-content {
+      padding-bottom: 80px;
+    }
+  }
 }
 
 @layer components {
