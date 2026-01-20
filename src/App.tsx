@@ -12,6 +12,7 @@ import ReferAndEarn from "./pages/ReferAndEarn";
 import Dashboard from "./pages/Dashboard";
 import AdminDashboard from "./pages/AdminDashboard";
 import AdminUserDetail from "./pages/AdminUserDetail";
+import ProfileSettings from "./pages/ProfileSettings";
 import NotFound from "./pages/NotFound";
 import BottomNav from "./components/BottomNav";
 
@@ -31,6 +32,7 @@ const App = () => (
           <Route path="/purchase-success" element={<PurchaseSuccess />} />
           <Route path="/refer-and-earn" element={<ReferAndEarn />} />
           <Route path="/dashboard" element={<Dashboard />} />
+          <Route path="/profile" element={<ProfileSettings />} />
           <Route path="/admin" element={<AdminDashboard />} />
           <Route path="/admin/users/:id" element={<AdminUserDetail />} />
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
