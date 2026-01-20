@@ -120,9 +120,10 @@ export function useReferrals() {
         
         // Mask email for privacy
         const email = profile?.email || 'Unknown';
-        const maskedEmail = email.length > 3 
-          ? email.substring(0, 3) + '***@' + email.split('@')[1]
-          : '***';
+        const emailParts = email.split('@');
+        const maskedEmail = emailParts.length === 2 && emailParts[0].length > 3
+          ? emailParts[0].substring(0, 3) + '***@' + emailParts[1]
+          : email;
 
         return {
           id: r.id,
