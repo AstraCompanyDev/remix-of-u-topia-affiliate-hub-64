@@ -558,9 +558,56 @@ async function processCommissions(
     return { count: 0 };
   }
 
+  // Also fetch purchases for upline members who might be missing affiliate_status
+  const { data: uplinePurchases } = await supabaseAdmin
+    .from("purchases")
+    .select("user_id, tier")
+    .in("user_id", uplineIds)
+    .eq("status", "completed")
+    .order("created_at", { ascending: false });
+
+  // Build a map of highest tier purchased by each upline user
+  const purchaseTierMap = new Map<string, string>();
+  const tierOrder = ["bronze", "silver", "gold", "platinum", "diamond"];
+  for (const purchase of uplinePurchases || []) {
+    if (!purchase.user_id) continue;
+    const existingTier = purchaseTierMap.get(purchase.user_id);
+    const purchaseTier = purchase.tier?.toLowerCase();
+    if (!existingTier || tierOrder.indexOf(purchaseTier) > tierOrder.indexOf(existingTier)) {
+      purchaseTierMap.set(purchase.user_id, purchaseTier);
+    }
+  }
+
+  const tierDepthMap: Record<string, number> = {
+    bronze: 1, silver: 2, gold: 3, platinum: 4, diamond: 5
+  };
+
   const affiliateMap = new Map<string, AffiliateStatus>();
   for (const status of affiliateStatuses || []) {
     affiliateMap.set(status.user_id, status as AffiliateStatus);
+  }
+
+  // For upline members without affiliate_status but with purchases, create status dynamically
+  for (const referrerId of uplineIds) {
+    if (!affiliateMap.has(referrerId) && purchaseTierMap.has(referrerId)) {
+      const tier = purchaseTierMap.get(referrerId)!;
+      const depthLimit = tierDepthMap[tier] || 1;
+      affiliateMap.set(referrerId, {
+        user_id: referrerId,
+        tier: tier,
+        tier_depth_limit: depthLimit,
+        is_active: true,
+      });
+      logStep("Using purchase-based tier for upline member", { referrerId, tier, depthLimit });
+      
+      // Also create the missing affiliate_status record for future use
+      await supabaseAdmin.from("affiliate_status").upsert({
+        user_id: referrerId,
+        tier: tier,
+        tier_depth_limit: depthLimit,
+        is_active: true,
+      }, { onConflict: "user_id" });
+    }
   }
 
   // Calculate commissions for each layer
