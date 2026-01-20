@@ -6,7 +6,9 @@ import { ActivityFeed } from '@/components/admin/ActivityFeed';
 import { UsersTable } from '@/components/admin/UsersTable';
 import { TierBreakdown } from '@/components/admin/TierBreakdown';
 import { AdminSettings } from '@/components/admin/settings/AdminSettings';
+import { CommissionManagement } from '@/components/admin/CommissionManagement';
 import { useAdmin } from '@/hooks/useAdmin';
+import { useAdminStats } from '@/hooks/useAdminStats';
 import { useToast } from '@/hooks/use-toast';
 import { supabase } from '@/integrations/supabase/client';
 import logoLight from '@/assets/u-topia-logo-light.png';
@@ -22,7 +24,8 @@ import {
   Calendar,
   LayoutDashboard,
   Activity,
-  Settings
+  Settings,
+  Wallet
 } from 'lucide-react';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { Badge } from '@/components/ui/badge';
@@ -32,6 +35,7 @@ const AdminDashboard = () => {
   const navigate = useNavigate();
   const { toast } = useToast();
   const { isAdmin, isLoading: adminLoading } = useAdmin();
+  const { stats, isLoading: statsLoading } = useAdminStats();
   const [isAuthLoading, setIsAuthLoading] = useState(true);
   const [timeRange, setTimeRange] = useState('30d');
   const [activeTab, setActiveTab] = useState('overview');
@@ -71,16 +75,8 @@ const AdminDashboard = () => {
     return null;
   }
 
-  // Placeholder metrics
-  const metrics = {
-    totalUsers: 156,
-    verifiedUsers: 128,
-    totalReferrals: 342,
-    activeReferrals: 89,
-    qualifyingRevenue: 45230,
-    rewardsPaid: 12450,
-    rewardsPending: 3280,
-  };
+  // Use real stats from the hook
+  const metrics = stats;
 
   return (
     <div className="min-h-screen bg-background">
@@ -124,7 +120,7 @@ const AdminDashboard = () => {
       {/* Tabs Navigation */}
       <section className="container mx-auto px-6 pb-6">
         <Tabs value={activeTab} onValueChange={setActiveTab}>
-          <TabsList className="grid w-full max-w-md grid-cols-4 h-12">
+          <TabsList className="grid w-full max-w-xl grid-cols-5 h-12">
             <TabsTrigger value="overview" className="gap-2">
               <LayoutDashboard className="w-4 h-4" />
               <span className="hidden sm:inline">Overview</span>
@@ -132,6 +128,10 @@ const AdminDashboard = () => {
             <TabsTrigger value="users" className="gap-2">
               <Users className="w-4 h-4" />
               <span className="hidden sm:inline">Users</span>
+            </TabsTrigger>
+            <TabsTrigger value="commissions" className="gap-2">
+              <Wallet className="w-4 h-4" />
+              <span className="hidden sm:inline">Commissions</span>
             </TabsTrigger>
             <TabsTrigger value="activity" className="gap-2">
               <Activity className="w-4 h-4" />
@@ -174,13 +174,12 @@ const AdminDashboard = () => {
               />
             </div>
 
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
               <AdminMetricCard
                 label="Qualifying Revenue"
                 value={`$${metrics.qualifyingRevenue.toLocaleString()}`}
                 icon={<DollarSign className="w-5 h-5 text-primary" />}
                 subtext="Total platform revenue"
-                trend={{ value: '+8.5%', isPositive: true }}
               />
               <AdminMetricCard
                 label="Rewards Paid"
@@ -192,7 +191,13 @@ const AdminDashboard = () => {
                 label="Rewards Pending"
                 value={`$${metrics.rewardsPending.toLocaleString()}`}
                 icon={<Clock className="w-5 h-5 text-primary" />}
-                subtext="Awaiting payout"
+                subtext="Awaiting approval"
+              />
+              <AdminMetricCard
+                label="Rewards Approved"
+                value={`$${metrics.rewardsApproved.toLocaleString()}`}
+                icon={<Gift className="w-5 h-5 text-primary" />}
+                subtext="Ready for payout"
               />
             </div>
 
@@ -203,6 +208,11 @@ const AdminDashboard = () => {
           {/* Users Tab */}
           <TabsContent value="users" className="mt-8">
             <UsersTable />
+          </TabsContent>
+
+          {/* Commissions Tab */}
+          <TabsContent value="commissions" className="mt-8">
+            <CommissionManagement />
           </TabsContent>
 
           {/* Activity Tab */}
