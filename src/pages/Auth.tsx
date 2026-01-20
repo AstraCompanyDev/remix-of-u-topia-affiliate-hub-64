@@ -17,6 +17,7 @@ const Auth = () => {
   const [mode, setMode] = useState<AuthMode>("signup");
   const [showPassword, setShowPassword] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
+  const [referralError, setReferralError] = useState<string | null>(null);
   const [formData, setFormData] = useState({
     name: "",
     email: "",
@@ -191,15 +192,30 @@ const Auth = () => {
         // If there's a referral code, mark it as used
         if (referralCode && data.user) {
           try {
-            await supabase.functions.invoke("referral-link", {
+            const { data: refData, error: refFuncError } = await supabase.functions.invoke("referral-link", {
               body: {
                 action: "use",
                 code: referralCode,
                 email: formData.email.trim().toLowerCase(),
               },
             });
+            
+            if (refFuncError) {
+              console.error("Error processing referral:", refFuncError);
+              setReferralError("Failed to process referral code.");
+            } else if (refData && !refData.success && refData.error) {
+              // Check for specific error messages
+              if (refData.error.includes("Invalid or expired") || refData.error.includes("already")) {
+                setReferralError("This referral code has already been used or is invalid.");
+              } else if (refData.error.includes("already been referred")) {
+                setReferralError("This email has already been referred by another user.");
+              } else {
+                setReferralError(refData.error);
+              }
+            }
           } catch (refError) {
             console.error("Error processing referral:", refError);
+            setReferralError("Failed to process referral code.");
           }
         }
 
@@ -291,10 +307,20 @@ const Auth = () => {
         <div className="w-full max-w-md">
           {/* Referral badge */}
           {referralCode && isSignUp && (
-            <div className="mb-6 p-3 bg-primary/10 border border-primary/20 rounded-xl text-center">
-              <p className="text-sm text-primary">
-                🎉 You were referred! Your referral code: <strong>{referralCode}</strong>
-              </p>
+            <div className={`mb-6 p-3 rounded-xl text-center ${
+              referralError 
+                ? "bg-red-500/10 border border-red-500/30" 
+                : "bg-primary/10 border border-primary/20"
+            }`}>
+              {referralError ? (
+                <p className="text-sm text-red-400">
+                  ❌ {referralError}
+                </p>
+              ) : (
+                <p className="text-sm text-primary">
+                  🎉 You were referred! Your referral code: <strong>{referralCode}</strong>
+                </p>
+              )}
             </div>
           )}
 
