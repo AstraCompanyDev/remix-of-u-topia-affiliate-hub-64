@@ -7,11 +7,37 @@ import { Label } from "@/components/ui/label";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
+import { Switch } from "@/components/ui/switch";
+import {
+  AlertDialog,
+  AlertDialogAction,
+  AlertDialogCancel,
+  AlertDialogContent,
+  AlertDialogDescription,
+  AlertDialogFooter,
+  AlertDialogHeader,
+  AlertDialogTitle,
+  AlertDialogTrigger,
+} from "@/components/ui/alert-dialog";
 import { supabase } from "@/integrations/supabase/client";
 import { toast } from "sonner";
-import { Camera, Upload, User, Check, Loader2 } from "lucide-react";
+import { Upload, User, Check, Loader2, Bell, Trash2, AlertTriangle } from "lucide-react";
 import { maleAvatars, femaleAvatars, Avatar as AvatarType } from "@/data/avatarLibrary";
 import logoDark from "@/assets/u-topia-logo-dark.png";
+
+interface NotificationPreferences {
+  marketing: boolean;
+  referral_updates: boolean;
+  commission_alerts: boolean;
+  platform_news: boolean;
+}
+
+const defaultPreferences: NotificationPreferences = {
+  marketing: true,
+  referral_updates: true,
+  commission_alerts: true,
+  platform_news: true,
+};
 
 const ProfileSettings = () => {
   const navigate = useNavigate();
@@ -19,10 +45,14 @@ const ProfileSettings = () => {
   const [loading, setLoading] = useState(true);
   const [saving, setSaving] = useState(false);
   const [uploading, setUploading] = useState(false);
+  const [deleting, setDeleting] = useState(false);
+  const [deleteConfirmation, setDeleteConfirmation] = useState("");
+  const [deleteDialogOpen, setDeleteDialogOpen] = useState(false);
   
   const [fullName, setFullName] = useState("");
   const [avatarUrl, setAvatarUrl] = useState<string | null>(null);
   const [selectedAvatarId, setSelectedAvatarId] = useState<string | null>(null);
+  const [notificationPreferences, setNotificationPreferences] = useState<NotificationPreferences>(defaultPreferences);
 
   useEffect(() => {
     const checkAuth = async () => {
@@ -38,13 +68,24 @@ const ProfileSettings = () => {
       // Fetch profile
       const { data: profile } = await supabase
         .from('profiles')
-        .select('full_name, avatar_url')
+        .select('full_name, avatar_url, notification_preferences')
         .eq('id', session.user.id)
         .maybeSingle();
       
       if (profile) {
         setFullName(profile.full_name || '');
         setAvatarUrl(profile.avatar_url);
+        
+        // Load notification preferences
+        if (profile.notification_preferences) {
+          const prefs = profile.notification_preferences as Record<string, unknown>;
+          setNotificationPreferences({
+            marketing: typeof prefs.marketing === 'boolean' ? prefs.marketing : defaultPreferences.marketing,
+            referral_updates: typeof prefs.referral_updates === 'boolean' ? prefs.referral_updates : defaultPreferences.referral_updates,
+            commission_alerts: typeof prefs.commission_alerts === 'boolean' ? prefs.commission_alerts : defaultPreferences.commission_alerts,
+            platform_news: typeof prefs.platform_news === 'boolean' ? prefs.platform_news : defaultPreferences.platform_news,
+          });
+        }
         
         // Check if it's a library avatar
         const allAvatars = [...maleAvatars, ...femaleAvatars];
@@ -123,6 +164,13 @@ const ProfileSettings = () => {
     setSelectedAvatarId(avatar.id);
   };
 
+  const handleNotificationChange = (key: keyof NotificationPreferences, value: boolean) => {
+    setNotificationPreferences(prev => ({
+      ...prev,
+      [key]: value,
+    }));
+  };
+
   const handleSave = async () => {
     if (!user) return;
     
@@ -134,6 +182,7 @@ const ProfileSettings = () => {
         .update({
           full_name: fullName,
           avatar_url: avatarUrl,
+          notification_preferences: notificationPreferences as unknown as Record<string, boolean>,
           updated_at: new Date().toISOString(),
         })
         .eq('id', user.id);
@@ -146,6 +195,43 @@ const ProfileSettings = () => {
       toast.error('Failed to save profile');
     } finally {
       setSaving(false);
+    }
+  };
+
+  const handleDeleteAccount = async () => {
+    if (deleteConfirmation !== 'DELETE') {
+      toast.error('Please type DELETE to confirm');
+      return;
+    }
+
+    setDeleting(true);
+
+    try {
+      const { data: { session } } = await supabase.auth.getSession();
+      
+      if (!session?.access_token) {
+        toast.error('Please log in again to delete your account');
+        return;
+      }
+
+      const response = await supabase.functions.invoke('delete-account', {
+        body: { confirmation: 'DELETE' },
+      });
+
+      if (response.error) {
+        throw new Error(response.error.message || 'Failed to delete account');
+      }
+
+      toast.success('Account deleted successfully');
+      await supabase.auth.signOut({ scope: 'local' });
+      navigate('/');
+    } catch (error: any) {
+      console.error('Delete error:', error);
+      toast.error(error.message || 'Failed to delete account');
+    } finally {
+      setDeleting(false);
+      setDeleteDialogOpen(false);
+      setDeleteConfirmation("");
     }
   };
 
@@ -256,6 +342,66 @@ const ProfileSettings = () => {
               </CardContent>
             </Card>
 
+            {/* Notification Preferences */}
+            <Card>
+              <CardHeader>
+                <CardTitle className="flex items-center gap-2">
+                  <Bell className="h-5 w-5" />
+                  Email Notifications
+                </CardTitle>
+                <CardDescription>Choose what emails you'd like to receive</CardDescription>
+              </CardHeader>
+              <CardContent className="space-y-4">
+                <div className="flex items-center justify-between">
+                  <div className="space-y-0.5">
+                    <Label htmlFor="commission_alerts">Commission Alerts</Label>
+                    <p className="text-xs text-muted-foreground">Get notified when you earn commissions</p>
+                  </div>
+                  <Switch
+                    id="commission_alerts"
+                    checked={notificationPreferences.commission_alerts}
+                    onCheckedChange={(checked) => handleNotificationChange('commission_alerts', checked)}
+                  />
+                </div>
+                
+                <div className="flex items-center justify-between">
+                  <div className="space-y-0.5">
+                    <Label htmlFor="referral_updates">Referral Updates</Label>
+                    <p className="text-xs text-muted-foreground">Updates about your referral activity</p>
+                  </div>
+                  <Switch
+                    id="referral_updates"
+                    checked={notificationPreferences.referral_updates}
+                    onCheckedChange={(checked) => handleNotificationChange('referral_updates', checked)}
+                  />
+                </div>
+                
+                <div className="flex items-center justify-between">
+                  <div className="space-y-0.5">
+                    <Label htmlFor="platform_news">Platform News</Label>
+                    <p className="text-xs text-muted-foreground">Important updates about U-topia</p>
+                  </div>
+                  <Switch
+                    id="platform_news"
+                    checked={notificationPreferences.platform_news}
+                    onCheckedChange={(checked) => handleNotificationChange('platform_news', checked)}
+                  />
+                </div>
+                
+                <div className="flex items-center justify-between">
+                  <div className="space-y-0.5">
+                    <Label htmlFor="marketing">Marketing & Promotions</Label>
+                    <p className="text-xs text-muted-foreground">Special offers and promotional content</p>
+                  </div>
+                  <Switch
+                    id="marketing"
+                    checked={notificationPreferences.marketing}
+                    onCheckedChange={(checked) => handleNotificationChange('marketing', checked)}
+                  />
+                </div>
+              </CardContent>
+            </Card>
+
             {/* Avatar Library */}
             <Card>
               <CardHeader>
@@ -341,6 +487,82 @@ const ProfileSettings = () => {
                 )}
               </Button>
             </div>
+
+            {/* Danger Zone */}
+            <Card className="border-destructive/50">
+              <CardHeader>
+                <CardTitle className="flex items-center gap-2 text-destructive">
+                  <AlertTriangle className="h-5 w-5" />
+                  Danger Zone
+                </CardTitle>
+                <CardDescription>Irreversible actions that affect your account</CardDescription>
+              </CardHeader>
+              <CardContent>
+                <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 p-4 border border-destructive/30 rounded-lg bg-destructive/5">
+                  <div>
+                    <h4 className="font-medium text-foreground">Delete Account</h4>
+                    <p className="text-sm text-muted-foreground">
+                      Permanently delete your account and all associated data. This action cannot be undone.
+                    </p>
+                  </div>
+                  <AlertDialog open={deleteDialogOpen} onOpenChange={setDeleteDialogOpen}>
+                    <AlertDialogTrigger asChild>
+                      <Button variant="destructive" className="gap-2 shrink-0">
+                        <Trash2 className="h-4 w-4" />
+                        Delete Account
+                      </Button>
+                    </AlertDialogTrigger>
+                    <AlertDialogContent>
+                      <AlertDialogHeader>
+                        <AlertDialogTitle className="flex items-center gap-2 text-destructive">
+                          <AlertTriangle className="h-5 w-5" />
+                          Delete Your Account?
+                        </AlertDialogTitle>
+                        <AlertDialogDescription className="space-y-3">
+                          <p>
+                            This action is <strong>permanent and irreversible</strong>. All your data will be deleted, including:
+                          </p>
+                          <ul className="list-disc list-inside text-sm space-y-1">
+                            <li>Your profile and personal information</li>
+                            <li>Referral history and links</li>
+                            <li>Commission records</li>
+                            <li>Purchase history</li>
+                          </ul>
+                          <p className="pt-2">
+                            To confirm, please type <strong>DELETE</strong> below:
+                          </p>
+                        </AlertDialogDescription>
+                      </AlertDialogHeader>
+                      <Input
+                        value={deleteConfirmation}
+                        onChange={(e) => setDeleteConfirmation(e.target.value.toUpperCase())}
+                        placeholder="Type DELETE to confirm"
+                        className="font-mono"
+                      />
+                      <AlertDialogFooter>
+                        <AlertDialogCancel onClick={() => setDeleteConfirmation("")}>
+                          Cancel
+                        </AlertDialogCancel>
+                        <Button
+                          variant="destructive"
+                          onClick={handleDeleteAccount}
+                          disabled={deleteConfirmation !== 'DELETE' || deleting}
+                        >
+                          {deleting ? (
+                            <>
+                              <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+                              Deleting...
+                            </>
+                          ) : (
+                            'Delete My Account'
+                          )}
+                        </Button>
+                      </AlertDialogFooter>
+                    </AlertDialogContent>
+                  </AlertDialog>
+                </div>
+              </CardContent>
+            </Card>
           </div>
         </div>
       </main>
