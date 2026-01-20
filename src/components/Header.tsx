@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { supabase } from "@/integrations/supabase/client";
-import { LogOut, Menu, X, User } from "lucide-react";
+import { LogOut, Menu, X, User, Settings } from "lucide-react";
 import logoLight from "@/assets/u-topia-logo-light.png";
 import {
   DropdownMenu,
@@ -11,13 +11,13 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
-import { Avatar, AvatarFallback } from "@/components/ui/avatar";
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 
 const Header = () => {
   const [user, setUser] = useState<any>(null);
   const [isAdmin, setIsAdmin] = useState(false);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const [profile, setProfile] = useState<{ full_name: string | null; email: string | null } | null>(null);
+  const [profile, setProfile] = useState<{ full_name: string | null; email: string | null; avatar_url: string | null } | null>(null);
   const location = useLocation();
   const navigate = useNavigate();
 
@@ -37,7 +37,7 @@ const Header = () => {
         // Fetch profile data
         const { data: profileData } = await supabase
           .from('profiles')
-          .select('full_name, email')
+          .select('full_name, email, avatar_url')
           .eq('id', session.user.id)
           .maybeSingle();
         setProfile(profileData);
@@ -124,6 +124,7 @@ const Header = () => {
                 <DropdownMenuTrigger asChild>
                   <button className="flex items-center gap-2 rounded-full focus:outline-none focus:ring-2 focus:ring-primary/50">
                     <Avatar className="h-9 w-9 border-2 border-primary/50 cursor-pointer hover:border-primary transition-colors">
+                      <AvatarImage src={profile?.avatar_url || undefined} alt="Profile" />
                       <AvatarFallback className="bg-primary/20 text-white text-sm font-medium">
                         {getInitials()}
                       </AvatarFallback>
@@ -140,6 +141,12 @@ const Header = () => {
                     <Link to="/dashboard" className="cursor-pointer">
                       <User className="mr-2 h-4 w-4" />
                       Dashboard
+                    </Link>
+                  </DropdownMenuItem>
+                  <DropdownMenuItem asChild>
+                    <Link to="/profile" className="cursor-pointer">
+                      <Settings className="mr-2 h-4 w-4" />
+                      Profile Settings
                     </Link>
                   </DropdownMenuItem>
                   <DropdownMenuSeparator />
@@ -173,17 +180,23 @@ const Header = () => {
             <div className="flex flex-col gap-4">
               {/* User info in mobile menu */}
               {user && (
-                <div className="flex items-center gap-3 pb-3 border-b border-white/10">
+                <Link 
+                  to="/profile" 
+                  onClick={() => setIsMenuOpen(false)}
+                  className="flex items-center gap-3 pb-3 border-b border-white/10 hover:opacity-80 transition-opacity"
+                >
                   <Avatar className="h-10 w-10 border-2 border-primary/50">
+                    <AvatarImage src={profile?.avatar_url || undefined} alt="Profile" />
                     <AvatarFallback className="bg-primary/20 text-white text-sm font-medium">
                       {getInitials()}
                     </AvatarFallback>
                   </Avatar>
-                  <div className="overflow-hidden">
+                  <div className="overflow-hidden flex-1">
                     <p className="text-white text-sm font-medium truncate">{profile?.full_name || 'User'}</p>
                     <p className="text-gray-400 text-xs truncate">{profile?.email || user?.email}</p>
                   </div>
-                </div>
+                  <Settings className="h-4 w-4 text-gray-400" />
+                </Link>
               )}
               
               {navLinks.map((link) => (
