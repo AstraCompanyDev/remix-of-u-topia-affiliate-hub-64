@@ -3,12 +3,15 @@ import { Link, useNavigate, useSearchParams } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
+import { Checkbox } from "@/components/ui/checkbox";
 import { useToast } from "@/hooks/use-toast";
 import { supabase } from "@/integrations/supabase/client";
 import logoLight from "@/assets/u-topia-logo-light.png";
 import { Eye, EyeOff, Mail, User, Phone, Lock, ArrowRight, Loader2, ArrowLeft } from "lucide-react";
 
 type AuthMode = "signin" | "signup" | "forgot";
+
+const REMEMBERED_CREDENTIALS_KEY = "utopia_remembered_credentials";
 
 const Auth = () => {
   const navigate = useNavigate();
@@ -18,6 +21,7 @@ const Auth = () => {
   const [showPassword, setShowPassword] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const [referralError, setReferralError] = useState<string | null>(null);
+  const [rememberMe, setRememberMe] = useState(false);
   const [formData, setFormData] = useState({
     name: "",
     email: "",
@@ -27,6 +31,21 @@ const Auth = () => {
   
   // Track if user is actively submitting the form - prevents redirect on token refresh
   const isSubmittingRef = useRef(false);
+
+  // Load remembered credentials on mount
+  useEffect(() => {
+    try {
+      const saved = localStorage.getItem(REMEMBERED_CREDENTIALS_KEY);
+      if (saved) {
+        const { email, password } = JSON.parse(saved);
+        setFormData(prev => ({ ...prev, email, password }));
+        setRememberMe(true);
+        setMode("signin"); // Switch to signin if we have saved credentials
+      }
+    } catch (e) {
+      console.error("Failed to load remembered credentials:", e);
+    }
+  }, []);
 
   // Check for forgot mode from URL params
   useEffect(() => {
@@ -261,6 +280,19 @@ const Auth = () => {
             });
           }
           return;
+        }
+
+        // Save or clear remembered credentials based on checkbox
+        if (rememberMe) {
+          localStorage.setItem(
+            REMEMBERED_CREDENTIALS_KEY,
+            JSON.stringify({
+              email: formData.email.trim().toLowerCase(),
+              password: formData.password,
+            })
+          );
+        } else {
+          localStorage.removeItem(REMEMBERED_CREDENTIALS_KEY);
         }
 
         if (data.session) {
@@ -522,9 +554,23 @@ const Auth = () => {
                     </div>
                   </div>
 
-                  {/* Forgot Password - Sign In only */}
+                  {/* Remember Me & Forgot Password - Sign In only */}
                   {!isSignUp && (
-                    <div className="text-right">
+                    <div className="flex items-center justify-between">
+                      <div className="flex items-center gap-2">
+                        <Checkbox
+                          id="remember"
+                          checked={rememberMe}
+                          onCheckedChange={(checked) => setRememberMe(checked === true)}
+                          className="border-white/20 data-[state=checked]:bg-primary data-[state=checked]:border-primary"
+                        />
+                        <Label
+                          htmlFor="remember"
+                          className="text-sm text-gray-400 cursor-pointer hover:text-gray-300 transition-colors"
+                        >
+                          Remember me
+                        </Label>
+                      </div>
                       <button
                         type="button"
                         onClick={() => setMode("forgot")}
