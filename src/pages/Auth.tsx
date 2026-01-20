@@ -205,7 +205,9 @@ const Auth = () => {
               setReferralError("Failed to process referral code.");
             } else if (refData && !refData.success && refData.error) {
               // Check for specific error messages
-              if (refData.error.includes("Invalid or expired") || refData.error.includes("already")) {
+              if (refData.error.includes("cannot refer yourself")) {
+                setReferralError("You cannot use your own referral code.");
+              } else if (refData.error.includes("Invalid or expired") || refData.error.includes("already")) {
                 setReferralError("This referral code has already been used or is invalid.");
               } else if (refData.error.includes("already been referred")) {
                 setReferralError("This email has already been referred by another user.");
