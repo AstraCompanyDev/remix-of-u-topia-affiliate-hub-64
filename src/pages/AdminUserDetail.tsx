@@ -27,37 +27,8 @@ import {
 } from 'lucide-react';
 import { format } from 'date-fns';
 
-// Placeholder user data
-const mockUserDetail = {
-  id: '1',
-  email: 'john@example.com',
-  fullName: 'John Doe',
-  signupDate: new Date('2024-01-15'),
-  isVerified: true,
-  tier: 'Gold',
-  rank: 'Gold',
-  totalReferrals: 12,
-  activeReferrals: 5,
-  convertedReferrals: 7,
-  rewardsEarned: 450,
-  rewardsPending: 75,
-  commissionEarned: 280,
-  bonusesEarned: 120,
-  dividendsEarned: 50,
-  lastActive: new Date(),
-  purchases: [
-    { id: '1', tier: 'Gold', amount: 499, date: new Date('2024-01-15'), status: 'completed' },
-  ],
-  payouts: [
-    { id: '1', amount: 200, date: new Date('2024-02-01'), status: 'completed' },
-    { id: '2', amount: 175, date: new Date('2024-03-01'), status: 'completed' },
-  ],
-  referrals: [
-    { id: '1', email: 'ref1@example.com', status: 'verified', date: new Date('2024-01-20') },
-    { id: '2', email: 'ref2@example.com', status: 'verified', date: new Date('2024-01-25') },
-    { id: '3', email: 'ref3@example.com', status: 'pending', date: new Date('2024-02-10') },
-  ],
-};
+import { useAdminUserDetail } from '@/hooks/useAdminUserDetail';
+
 
 const tierColors: Record<string, string> = {
   Bronze: 'bg-amber-700/10 text-amber-700',
@@ -97,6 +68,8 @@ const AdminUserDetail = () => {
     }
   }, [isAdmin, adminLoading, isAuthLoading, navigate, toast]);
 
+  const { user, isLoading: userLoading, error: userError } = useAdminUserDetail(id);
+
   if (isAuthLoading || adminLoading) {
     return (
       <div className="min-h-screen bg-background flex items-center justify-center">
@@ -109,7 +82,29 @@ const AdminUserDetail = () => {
     return null;
   }
 
-  const user = mockUserDetail;
+  if (userLoading) {
+    return (
+      <div className="min-h-screen bg-background flex items-center justify-center">
+        <Loader2 className="w-8 h-8 animate-spin text-primary" />
+      </div>
+    );
+  }
+
+  if (userError || !user) {
+    return (
+      <div className="min-h-screen bg-background">
+        <Header />
+        <section className="container mx-auto px-6 py-12">
+          <Button variant="ghost" size="sm" onClick={() => navigate('/admin')} className="gap-2">
+            <ArrowLeft className="w-4 h-4" />
+            Back to Admin
+          </Button>
+          <div className="mt-8 text-muted-foreground">User not found.</div>
+        </section>
+      </div>
+    );
+  }
+
 
   return (
     <div className="min-h-screen bg-background">

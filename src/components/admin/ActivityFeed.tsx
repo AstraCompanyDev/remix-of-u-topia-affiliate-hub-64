@@ -1,9 +1,10 @@
-import { useState } from 'react';
+import { useMemo, useState } from 'react';
 import { Input } from '@/components/ui/input';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { Badge } from '@/components/ui/badge';
 import { Search, UserPlus, ShoppingCart, Link2, CheckCircle, Gift, CreditCard, AlertTriangle } from 'lucide-react';
 import { format } from 'date-fns';
+import { useAdminActivity } from '@/hooks/useAdminActivity';
 
 interface Activity {
   id: string;
@@ -13,17 +14,6 @@ interface Activity {
   status: 'success' | 'pending' | 'failed';
   amount?: number;
 }
-
-// Placeholder data
-const mockActivities: Activity[] = [
-  { id: '1', timestamp: new Date(), userEmail: 'user1@example.com', eventType: 'signup', status: 'success' },
-  { id: '2', timestamp: new Date(Date.now() - 3600000), userEmail: 'user2@example.com', eventType: 'purchase', status: 'success', amount: 99 },
-  { id: '3', timestamp: new Date(Date.now() - 7200000), userEmail: 'user3@example.com', eventType: 'referral_created', status: 'success' },
-  { id: '4', timestamp: new Date(Date.now() - 10800000), userEmail: 'user4@example.com', eventType: 'referral_conversion', status: 'pending' },
-  { id: '5', timestamp: new Date(Date.now() - 14400000), userEmail: 'user5@example.com', eventType: 'reward_issued', status: 'success', amount: 25 },
-  { id: '6', timestamp: new Date(Date.now() - 18000000), userEmail: 'user6@example.com', eventType: 'payout', status: 'pending', amount: 150 },
-  { id: '7', timestamp: new Date(Date.now() - 21600000), userEmail: 'user7@example.com', eventType: 'purchase', status: 'failed', amount: 199 },
-];
 
 const eventTypeConfig: Record<string, { label: string; icon: typeof UserPlus; color: string }> = {
   signup: { label: 'New Signup', icon: UserPlus, color: 'text-blue-500' },
@@ -42,23 +32,29 @@ const statusColors = {
 };
 
 export function ActivityFeed() {
+  const { activities, isLoading, error } = useAdminActivity(200);
+
   const [search, setSearch] = useState('');
   const [eventFilter, setEventFilter] = useState<string>('all');
   const [statusFilter, setStatusFilter] = useState<string>('all');
 
-  const filteredActivities = mockActivities.filter((activity) => {
-    const matchesSearch = activity.userEmail.toLowerCase().includes(search.toLowerCase());
-    const matchesEvent = eventFilter === 'all' || activity.eventType === eventFilter;
-    const matchesStatus = statusFilter === 'all' || activity.status === statusFilter;
-    return matchesSearch && matchesEvent && matchesStatus;
-  });
+  const filteredActivities = useMemo(() => {
+    const normalized: Activity[] = activities as any;
+
+    return normalized.filter((activity) => {
+      const matchesSearch = activity.userEmail.toLowerCase().includes(search.toLowerCase());
+      const matchesEvent = eventFilter === 'all' || activity.eventType === eventFilter;
+      const matchesStatus = statusFilter === 'all' || activity.status === statusFilter;
+      return matchesSearch && matchesEvent && matchesStatus;
+    });
+  }, [activities, eventFilter, search, statusFilter]);
 
   return (
     <div className="feature-card p-6">
       <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 mb-6">
         <div>
           <h3 className="text-lg font-semibold text-foreground">Platform Activity</h3>
-          <p className="text-sm text-muted-foreground">Real-time activity feed across all users</p>
+          <p className="text-sm text-muted-foreground">Live activity feed across all users</p>
         </div>
         <div className="flex flex-col sm:flex-row gap-3">
           <div className="relative">
@@ -98,58 +94,64 @@ export function ActivityFeed() {
         </div>
       </div>
 
-      <div className="overflow-x-auto">
-        <table className="w-full">
-          <thead>
-            <tr className="border-b border-border">
-              <th className="text-left py-3 px-4 text-sm font-medium text-muted-foreground">Timestamp</th>
-              <th className="text-left py-3 px-4 text-sm font-medium text-muted-foreground">User</th>
-              <th className="text-left py-3 px-4 text-sm font-medium text-muted-foreground">Event</th>
-              <th className="text-left py-3 px-4 text-sm font-medium text-muted-foreground">Status</th>
-              <th className="text-right py-3 px-4 text-sm font-medium text-muted-foreground">Amount</th>
-            </tr>
-          </thead>
-          <tbody>
-            {filteredActivities.map((activity) => {
-              const config = eventTypeConfig[activity.eventType] || eventTypeConfig.signup;
-              const Icon = config.icon;
-              return (
-                <tr key={activity.id} className="border-b border-border/50 hover:bg-muted/30 transition-colors">
-                  <td className="py-3 px-4 text-sm text-muted-foreground">
-                    {format(activity.timestamp, 'MMM d, HH:mm')}
-                  </td>
-                  <td className="py-3 px-4 text-sm text-foreground font-medium">
-                    {activity.userEmail}
-                  </td>
-                  <td className="py-3 px-4">
-                    <div className="flex items-center gap-2">
-                      <Icon className={`w-4 h-4 ${config.color}`} />
-                      <span className="text-sm text-foreground">{config.label}</span>
-                    </div>
-                  </td>
-                  <td className="py-3 px-4">
-                    <Badge variant="outline" className={`${statusColors[activity.status]} border-0`}>
-                      {activity.status.charAt(0).toUpperCase() + activity.status.slice(1)}
-                    </Badge>
-                  </td>
-                  <td className="py-3 px-4 text-right text-sm">
-                    {activity.amount ? (
-                      <span className="text-primary font-medium">${activity.amount}</span>
-                    ) : (
-                      <span className="text-muted-foreground">—</span>
-                    )}
-                  </td>
+      {isLoading ? (
+        <div className="text-center py-10 text-muted-foreground">Loading activity…</div>
+      ) : error ? (
+        <div className="text-center py-10 text-muted-foreground">Failed to load activity.</div>
+      ) : (
+        <>
+          <div className="overflow-x-auto">
+            <table className="w-full">
+              <thead>
+                <tr className="border-b border-border">
+                  <th className="text-left py-3 px-4 text-sm font-medium text-muted-foreground">Timestamp</th>
+                  <th className="text-left py-3 px-4 text-sm font-medium text-muted-foreground">User</th>
+                  <th className="text-left py-3 px-4 text-sm font-medium text-muted-foreground">Event</th>
+                  <th className="text-left py-3 px-4 text-sm font-medium text-muted-foreground">Status</th>
+                  <th className="text-right py-3 px-4 text-sm font-medium text-muted-foreground">Amount</th>
                 </tr>
-              );
-            })}
-          </tbody>
-        </table>
-      </div>
+              </thead>
+              <tbody>
+                {filteredActivities.map((activity) => {
+                  const config = eventTypeConfig[activity.eventType] || eventTypeConfig.signup;
+                  const Icon = config.icon;
+                  return (
+                    <tr key={activity.id} className="border-b border-border/50 hover:bg-muted/30 transition-colors">
+                      <td className="py-3 px-4 text-sm text-muted-foreground">
+                        {format(activity.timestamp, 'MMM d, HH:mm')}
+                      </td>
+                      <td className="py-3 px-4 text-sm text-foreground font-medium">{activity.userEmail}</td>
+                      <td className="py-3 px-4">
+                        <div className="flex items-center gap-2">
+                          <Icon className={`w-4 h-4 ${config.color}`} />
+                          <span className="text-sm text-foreground">{config.label}</span>
+                        </div>
+                      </td>
+                      <td className="py-3 px-4">
+                        <Badge variant="outline" className={`${statusColors[activity.status]} border-0`}>
+                          {activity.status.charAt(0).toUpperCase() + activity.status.slice(1)}
+                        </Badge>
+                      </td>
+                      <td className="py-3 px-4 text-right text-sm">
+                        {activity.amount != null ? (
+                          <span className="text-primary font-medium">${activity.amount}</span>
+                        ) : (
+                          <span className="text-muted-foreground">—</span>
+                        )}
+                      </td>
+                    </tr>
+                  );
+                })}
+              </tbody>
+            </table>
+          </div>
 
-      {filteredActivities.length === 0 && (
-        <div className="text-center py-8">
-          <p className="text-muted-foreground">No activities found</p>
-        </div>
+          {filteredActivities.length === 0 && (
+            <div className="text-center py-8">
+              <p className="text-muted-foreground">No activities found</p>
+            </div>
+          )}
+        </>
       )}
     </div>
   );
