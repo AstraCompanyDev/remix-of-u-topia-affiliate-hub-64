@@ -130,7 +130,12 @@ const Header = () => {
               ))}
               
               {user ? (
-                <Button variant="outline" size="sm" onClick={handleSignOut} className="gap-2 w-fit">
+                <Button 
+                  variant="outline" 
+                  size="sm" 
+                  onClick={handleSignOut} 
+                  className="gap-2 w-fit border-white/20 bg-transparent text-white hover:bg-white/10 hover:text-white"
+                >
                   <LogOut className="h-4 w-4" />
                   Sign Out
                 </Button>
