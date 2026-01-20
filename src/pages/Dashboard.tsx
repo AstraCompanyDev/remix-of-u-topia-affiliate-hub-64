@@ -11,6 +11,14 @@ import { ReferralToolsCard } from '@/components/ReferralToolsCard';
 import { supabase } from '@/integrations/supabase/client';
 import { useCommissions, formatUSD, getTierLabel } from '@/hooks/useCommissions';
 import { calculateRankInfo } from '@/components/dashboard/RankOverview';
+import { usePackages, PackageKey } from '@/hooks/usePackages';
+import {
+  Dialog,
+  DialogContent,
+  DialogHeader,
+  DialogTitle,
+  DialogDescription,
+} from '@/components/ui/dialog';
 import logoLight from '@/assets/u-topia-logo-light.png';
 import badgeBronze from '@/assets/badge-bronze.png';
 import badgeSilver from '@/assets/badge-silver.png';
@@ -24,7 +32,8 @@ import {
   TrendingUp,
   BookOpen,
   History,
-  Loader2
+  Loader2,
+  ArrowUpCircle
 } from 'lucide-react';
 
 const tierBadges: Record<string, string> = {
@@ -35,12 +44,16 @@ const tierBadges: Record<string, string> = {
   diamond: badgeDiamond,
 };
 
+const tierOrder: PackageKey[] = ['bronze', 'silver', 'gold', 'platinum', 'diamond'];
+
 
 const Dashboard = () => {
   const navigate = useNavigate();
   const [isLoading, setIsLoading] = useState(true);
   const [isAuthenticated, setIsAuthenticated] = useState(false);
+  const [isUpgradeDialogOpen, setIsUpgradeDialogOpen] = useState(false);
   const { summary, affiliateStatus, activeReferrals, isLoading: commissionsLoading } = useCommissions();
+  const { packages, formatPrice, packageOrder } = usePackages();
 
   useEffect(() => {
     const checkAuth = async () => {
@@ -71,8 +84,13 @@ const Dashboard = () => {
     );
   }
 
-  const currentTier = affiliateStatus?.tier || 'bronze';
+  const currentTier = (affiliateStatus?.tier || 'bronze') as PackageKey;
   const rankInfo = calculateRankInfo(activeReferrals);
+  
+  // Get available upgrades (tiers higher than current)
+  const currentTierIndex = tierOrder.indexOf(currentTier);
+  const availableUpgrades = tierOrder.slice(currentTierIndex + 1);
+  const hasUpgradesAvailable = availableUpgrades.length > 0;
 
   return (
     <div className="min-h-screen bg-background">
@@ -123,7 +141,18 @@ const Dashboard = () => {
               <img src={tierBadges[currentTier] || badgeBronze} alt={`${currentTier} Badge`} className="w-10 h-10 object-contain" />
             </div>
             <p className="text-2xl md:text-3xl font-bold text-foreground mb-1">{getTierLabel(currentTier)}</p>
-            <p className="text-sm text-muted-foreground">Current Tier</p>
+            <p className="text-sm text-muted-foreground mb-3">Current Tier</p>
+            {hasUpgradesAvailable && (
+              <Button
+                size="sm"
+                variant="outline"
+                onClick={() => setIsUpgradeDialogOpen(true)}
+                className="w-full gap-2 text-primary border-primary/30 hover:bg-primary/10 hover:border-primary/50"
+              >
+                <ArrowUpCircle className="w-4 h-4" />
+                Upgrade Tier
+              </Button>
+            )}
           </div>
         </div>
       </section>
@@ -227,6 +256,63 @@ const Dashboard = () => {
           </div>
         </div>
       </footer>
+
+      {/* Upgrade Dialog */}
+      <Dialog open={isUpgradeDialogOpen} onOpenChange={setIsUpgradeDialogOpen}>
+        <DialogContent className="sm:max-w-lg">
+          <DialogHeader>
+            <DialogTitle className="text-xl font-bold">Upgrade Your Tier</DialogTitle>
+            <DialogDescription>
+              Unlock deeper commission layers and increased earning potential.
+            </DialogDescription>
+          </DialogHeader>
+          
+          <div className="space-y-3 mt-4">
+            {availableUpgrades.map((tierKey) => {
+              const pkg = packages.find(p => p.name.toLowerCase() === tierKey);
+              if (!pkg) return null;
+              
+              const tierIndex = tierOrder.indexOf(tierKey);
+              const depthLimit = tierIndex + 1;
+              
+              return (
+                <button
+                  key={tierKey}
+                  onClick={() => {
+                    setIsUpgradeDialogOpen(false);
+                    navigate(`/purchase?tier=${tierKey}`);
+                  }}
+                  className="w-full flex items-center gap-4 p-4 rounded-xl border border-border bg-card hover:border-primary/50 hover:bg-primary/5 transition-all group"
+                >
+                  <img
+                    src={tierBadges[tierKey]}
+                    alt={pkg.name}
+                    className="w-12 h-12 object-contain group-hover:scale-110 transition-transform"
+                  />
+                  <div className="flex-1 text-left">
+                    <p className="font-semibold text-foreground">{pkg.name}</p>
+                    <p className="text-sm text-muted-foreground">
+                      Up to {depthLimit} commission layer{depthLimit > 1 ? 's' : ''}
+                    </p>
+                  </div>
+                  <div className="text-right">
+                    <p className="text-lg font-bold text-primary">{formatPrice(pkg.price_usd)}</p>
+                    <p className="text-xs text-muted-foreground">One-time</p>
+                  </div>
+                </button>
+              );
+            })}
+          </div>
+
+          {currentTier === 'diamond' && (
+            <div className="mt-4 p-4 rounded-xl bg-primary/10 border border-primary/20 text-center">
+              <p className="text-sm text-primary font-medium">
+                🎉 You're already at the highest tier!
+              </p>
+            </div>
+          )}
+        </DialogContent>
+      </Dialog>
     </div>
   );
 };
