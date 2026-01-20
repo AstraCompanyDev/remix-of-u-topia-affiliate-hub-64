@@ -148,9 +148,17 @@ const ProfileSettings = () => {
       // Add cache-buster
       const urlWithCacheBuster = `${publicUrl}?t=${Date.now()}`;
       
+      // Save avatar URL to database immediately
+      const { error: updateError } = await supabase
+        .from('profiles')
+        .update({ avatar_url: urlWithCacheBuster, updated_at: new Date().toISOString() })
+        .eq('id', user.id);
+      
+      if (updateError) throw updateError;
+      
       setAvatarUrl(urlWithCacheBuster);
       setSelectedAvatarId(null);
-      toast.success('Avatar uploaded successfully');
+      toast.success('Avatar uploaded and saved');
     } catch (error: any) {
       console.error('Upload error:', error);
       toast.error('Failed to upload avatar');
