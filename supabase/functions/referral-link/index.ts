@@ -94,6 +94,25 @@ Deno.serve(async (req) => {
         );
       }
 
+      // Check if the user is trying to refer themselves
+      const { data: referrerProfile, error: profileError } = await supabase
+        .from('profiles')
+        .select('email')
+        .eq('id', link.user_id)
+        .maybeSingle();
+
+      if (profileError) {
+        console.error('Error fetching referrer profile:', profileError);
+      }
+
+      if (referrerProfile?.email && referrerProfile.email.toLowerCase() === body.email.toLowerCase().trim()) {
+        console.log('User attempted to refer themselves:', body.email);
+        return new Response(
+          JSON.stringify({ error: 'You cannot refer yourself', valid: false }),
+          { status: 200, headers: { ...corsHeaders, 'Content-Type': 'application/json' } }
+        );
+      }
+
       // Mark the link as used
       const { error: updateError } = await supabase
         .from('referral_links')
