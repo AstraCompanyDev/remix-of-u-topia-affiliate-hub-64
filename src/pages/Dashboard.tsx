@@ -52,8 +52,8 @@ const Dashboard = () => {
   const [isLoading, setIsLoading] = useState(true);
   const [isAuthenticated, setIsAuthenticated] = useState(false);
   const [isUpgradeDialogOpen, setIsUpgradeDialogOpen] = useState(false);
-  const { summary, affiliateStatus, activeReferrals, isLoading: commissionsLoading } = useCommissions();
-  const { packages, formatPrice, packageOrder } = usePackages();
+  const { summary, affiliateStatus, activeReferrals } = useCommissions();
+  const { packages, formatPrice } = usePackages();
 
   useEffect(() => {
     const checkAuth = async () => {
@@ -76,18 +76,19 @@ const Dashboard = () => {
     return () => subscription.unsubscribe();
   }, [navigate]);
 
-  // Show loading state while checking auth OR loading commission data
-  if (isLoading || commissionsLoading) {
+  // Only block on auth check, not data loading
+  if (isLoading) {
     return (
-      <div className="min-h-screen bg-background flex flex-col items-center justify-center gap-3">
+      <div className="min-h-screen bg-background flex items-center justify-center">
         <Loader2 className="w-8 h-8 animate-spin text-primary" />
-        <p className="text-sm text-muted-foreground">Loading your dashboard...</p>
       </div>
     );
   }
 
+  // Use actual values or sensible defaults while data loads in background
   const currentTier = (affiliateStatus?.tier || 'bronze') as PackageKey;
-  const rankInfo = calculateRankInfo(activeReferrals);
+  const displayActiveReferrals = activeReferrals;
+  const rankInfo = calculateRankInfo(displayActiveReferrals);
   
   // Get available upgrades (tiers higher than current)
   const currentTierIndex = tierOrder.indexOf(currentTier);
@@ -182,7 +183,7 @@ const Dashboard = () => {
 
       {/* Rewards Breakdown */}
       <section className="container mx-auto px-6 pb-12">
-        <RewardsBreakdown summary={summary} isLoading={commissionsLoading} />
+        <RewardsBreakdown summary={summary} isLoading={false} />
       </section>
 
       {/* Rank Overview */}

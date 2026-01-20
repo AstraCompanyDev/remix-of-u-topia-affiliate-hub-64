@@ -1,4 +1,4 @@
-import { useState, useEffect, useCallback } from 'react';
+import { useQuery } from '@tanstack/react-query';
 import { supabase } from '@/integrations/supabase/client';
 
 export interface CommissionSummary {
@@ -42,60 +42,92 @@ interface UseCommissionsResult {
   refetch: () => Promise<void>;
 }
 
-export function useCommissions(): UseCommissionsResult {
-  const [summary, setSummary] = useState<CommissionSummary | null>(null);
-  const [affiliateStatus, setAffiliateStatus] = useState<AffiliateStatus | null>(null);
-  const [activeReferrals, setActiveReferrals] = useState(0);
-  const [recentCommissions, setRecentCommissions] = useState<CommissionEntry[]>([]);
-  const [isLoading, setIsLoading] = useState(true);
-  const [error, setError] = useState<string | null>(null);
+async function fetchCommissionData() {
+  const { data: session } = await supabase.auth.getSession();
+  if (!session?.session?.user) {
+    return null;
+  }
 
-  const fetchCommissions = useCallback(async () => {
-    try {
-      setError(null);
-      
-      const { data: session } = await supabase.auth.getSession();
-      if (!session?.session) {
-        setIsLoading(false);
-        return;
-      }
+  const userId = session.session.user.id;
 
-      const { data, error: fetchError } = await supabase.functions.invoke('process-commission', {
-        body: { action: 'get_user_commissions' },
-      });
+  // Fetch all data in parallel for speed
+  const [commissionsResult, affiliateResult, referralsResult] = await Promise.all([
+    supabase
+      .from('commission_ledger')
+      .select('*')
+      .eq('beneficiary_user_id', userId)
+      .order('created_at', { ascending: false }),
+    supabase
+      .from('affiliate_status')
+      .select('*')
+      .eq('user_id', userId)
+      .maybeSingle(),
+    supabase
+      .from('referrals')
+      .select('id', { count: 'exact', head: true })
+      .eq('referrer_user_id', userId)
+      .eq('status', 'active'),
+  ]);
 
-      if (fetchError) {
-        console.error('Error fetching commissions:', fetchError);
-        setError('Failed to fetch commission data');
-        return;
-      }
+  // Calculate summary from commissions
+  const commissions = commissionsResult.data || [];
+  const summary: CommissionSummary = {
+    total_earned: 0,
+    pending: 0,
+    approved: 0,
+    paid: 0,
+    held: 0,
+    reversed: 0,
+    by_layer: { 1: 0, 2: 0, 3: 0, 4: 0, 5: 0 },
+  };
 
-      if (data?.success) {
-        setSummary(data.summary);
-        setAffiliateStatus(data.affiliate_status);
-        setActiveReferrals(data.active_referrals || 0);
-        setRecentCommissions(data.recent_commissions || []);
-      }
-    } catch (err) {
-      console.error('Error in fetchCommissions:', err);
-      setError('Failed to fetch commission data');
-    } finally {
-      setIsLoading(false);
+  for (const comm of commissions) {
+    const amount = Number(comm.amount_usd);
+    if (comm.status === 'pending') {
+      summary.pending += amount;
+    } else if (comm.status === 'approved') {
+      summary.approved += amount;
+      summary.total_earned += amount;
+    } else if (comm.status === 'paid') {
+      summary.paid += amount;
+      summary.total_earned += amount;
+    } else if (comm.status === 'held') {
+      summary.held += amount;
+    } else if (comm.status === 'reversed') {
+      summary.reversed += amount;
     }
-  }, []);
 
-  useEffect(() => {
-    fetchCommissions();
-  }, [fetchCommissions]);
+    if (comm.status !== 'reversed') {
+      summary.by_layer[comm.layer] = (summary.by_layer[comm.layer] || 0) + amount;
+    }
+  }
 
   return {
     summary,
-    affiliateStatus,
-    activeReferrals,
-    recentCommissions,
+    affiliateStatus: affiliateResult.data as AffiliateStatus | null,
+    activeReferrals: referralsResult.count || 0,
+    recentCommissions: commissions.slice(0, 10) as CommissionEntry[],
+  };
+}
+
+export function useCommissions(): UseCommissionsResult {
+  const { data, isLoading, error, refetch } = useQuery({
+    queryKey: ['commissions'],
+    queryFn: fetchCommissionData,
+    staleTime: 1000 * 60 * 5, // 5 minutes - data stays fresh
+    gcTime: 1000 * 60 * 30, // 30 minutes - keep in cache
+    refetchOnWindowFocus: false,
+    retry: 1,
+  });
+
+  return {
+    summary: data?.summary || null,
+    affiliateStatus: data?.affiliateStatus || null,
+    activeReferrals: data?.activeReferrals || 0,
+    recentCommissions: data?.recentCommissions || [],
     isLoading,
-    error,
-    refetch: fetchCommissions,
+    error: error ? 'Failed to fetch commission data' : null,
+    refetch: async () => { await refetch(); },
   };
 }
 
