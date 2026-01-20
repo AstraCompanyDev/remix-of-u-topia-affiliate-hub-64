@@ -108,6 +108,30 @@ export function useAdminUsers() {
 
   useEffect(() => {
     fetchUsers();
+
+    // Subscribe to realtime updates
+    const channel = supabase
+      .channel('admin-users-realtime')
+      .on(
+        'postgres_changes',
+        { event: '*', schema: 'public', table: 'profiles' },
+        () => fetchUsers()
+      )
+      .on(
+        'postgres_changes',
+        { event: '*', schema: 'public', table: 'referrals' },
+        () => fetchUsers()
+      )
+      .on(
+        'postgres_changes',
+        { event: '*', schema: 'public', table: 'commission_ledger' },
+        () => fetchUsers()
+      )
+      .subscribe();
+
+    return () => {
+      supabase.removeChannel(channel);
+    };
   }, [fetchUsers]);
 
   return useMemo(

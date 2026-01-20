@@ -50,6 +50,20 @@ export function useAdminActivity(limit = 200) {
 
   useEffect(() => {
     fetchActivity();
+
+    // Subscribe to realtime updates
+    const channel = supabase
+      .channel('admin-activity-realtime')
+      .on(
+        'postgres_changes',
+        { event: '*', schema: 'public', table: 'platform_activity' },
+        () => fetchActivity()
+      )
+      .subscribe();
+
+    return () => {
+      supabase.removeChannel(channel);
+    };
   }, [fetchActivity]);
 
   return useMemo(

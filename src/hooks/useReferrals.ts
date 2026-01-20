@@ -157,6 +157,30 @@ export function useReferrals() {
 
   useEffect(() => {
     fetchReferrals();
+
+    // Subscribe to realtime updates
+    const channel = supabase
+      .channel('referrals-realtime')
+      .on(
+        'postgres_changes',
+        { event: '*', schema: 'public', table: 'referrals' },
+        () => fetchReferrals()
+      )
+      .on(
+        'postgres_changes',
+        { event: '*', schema: 'public', table: 'commission_ledger' },
+        () => fetchReferrals()
+      )
+      .on(
+        'postgres_changes',
+        { event: '*', schema: 'public', table: 'purchases' },
+        () => fetchReferrals()
+      )
+      .subscribe();
+
+    return () => {
+      supabase.removeChannel(channel);
+    };
   }, [fetchReferrals]);
 
   return {
