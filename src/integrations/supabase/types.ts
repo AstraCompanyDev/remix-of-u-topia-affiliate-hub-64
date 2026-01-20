@@ -316,6 +316,7 @@ export type Database = {
           id: string
           is_verified: boolean
           last_active: string | null
+          notification_preferences: Json | null
           updated_at: string
         }
         Insert: {
@@ -326,6 +327,7 @@ export type Database = {
           id: string
           is_verified?: boolean
           last_active?: string | null
+          notification_preferences?: Json | null
           updated_at?: string
         }
         Update: {
@@ -336,6 +338,7 @@ export type Database = {
           id?: string
           is_verified?: boolean
           last_active?: string | null
+          notification_preferences?: Json | null
           updated_at?: string
         }
         Relationships: []
