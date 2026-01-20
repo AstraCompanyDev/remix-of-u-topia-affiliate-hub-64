@@ -136,6 +136,35 @@ export function useAdminStats() {
 
   useEffect(() => {
     fetchStats();
+
+    // Subscribe to realtime updates
+    const channel = supabase
+      .channel('admin-stats-realtime')
+      .on(
+        'postgres_changes',
+        { event: '*', schema: 'public', table: 'profiles' },
+        () => fetchStats()
+      )
+      .on(
+        'postgres_changes',
+        { event: '*', schema: 'public', table: 'referrals' },
+        () => fetchStats()
+      )
+      .on(
+        'postgres_changes',
+        { event: '*', schema: 'public', table: 'purchases' },
+        () => fetchStats()
+      )
+      .on(
+        'postgres_changes',
+        { event: '*', schema: 'public', table: 'commission_ledger' },
+        () => fetchStats()
+      )
+      .subscribe();
+
+    return () => {
+      supabase.removeChannel(channel);
+    };
   }, [fetchStats]);
 
   return {
@@ -257,6 +286,20 @@ export function useAdminCommissions() {
 
   useEffect(() => {
     fetchCommissions();
+
+    // Subscribe to realtime updates
+    const channel = supabase
+      .channel('admin-commissions-realtime')
+      .on(
+        'postgres_changes',
+        { event: '*', schema: 'public', table: 'commission_ledger' },
+        () => fetchCommissions()
+      )
+      .subscribe();
+
+    return () => {
+      supabase.removeChannel(channel);
+    };
   }, [fetchCommissions]);
 
   return {
