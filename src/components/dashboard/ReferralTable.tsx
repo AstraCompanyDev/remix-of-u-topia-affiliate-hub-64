@@ -9,7 +9,7 @@ import {
 } from '@/components/ui/table';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
-import { Search, ChevronDown, Info } from 'lucide-react';
+import { Search, ChevronDown, Info, Loader2 } from 'lucide-react';
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -22,33 +22,14 @@ import {
   TooltipProvider,
   TooltipTrigger,
 } from '@/components/ui/tooltip';
+import { useReferrals, getDisplayStatus } from '@/hooks/useReferrals';
+import { format } from 'date-fns';
 
 // Status types matching the new terminology
-type ReferralStatus = 'Signed Up' | 'Pending Activation' | 'Commissionable' | 'Inactive' | 'Reversed';
+type DisplayStatus = 'Signed Up' | 'Pending Activation' | 'Commissionable' | 'Inactive' | 'Reversed';
+type FilterStatus = 'All' | DisplayStatus;
 
-interface Referral {
-  id: string;
-  name: string;
-  signupDate: string;
-  status: ReferralStatus;
-  packagePurchased: string | null;
-  commissionEarned: number;
-}
-
-// Placeholder data with new status labels
-const mockReferrals: Referral[] = [
-  { id: '1', name: 'User A***', signupDate: '2025-01-05', status: 'Commissionable', packagePurchased: 'Silver', commissionEarned: 30 },
-  { id: '2', name: 'User B***', signupDate: '2025-01-04', status: 'Commissionable', packagePurchased: 'Gold', commissionEarned: 60 },
-  { id: '3', name: 'User C***', signupDate: '2025-01-03', status: 'Signed Up', packagePurchased: null, commissionEarned: 0 },
-  { id: '4', name: 'User D***', signupDate: '2025-01-02', status: 'Pending Activation', packagePurchased: null, commissionEarned: 0 },
-  { id: '5', name: 'User E***', signupDate: '2024-12-28', status: 'Inactive', packagePurchased: null, commissionEarned: 0 },
-  { id: '6', name: 'User F***', signupDate: '2024-12-25', status: 'Commissionable', packagePurchased: 'Platinum', commissionEarned: 120 },
-  { id: '7', name: 'User G***', signupDate: '2024-12-20', status: 'Reversed', packagePurchased: 'Bronze', commissionEarned: 0 },
-];
-
-type FilterStatus = 'All' | ReferralStatus;
-
-const statusDescriptions: Record<ReferralStatus, string> = {
+const statusDescriptions: Record<DisplayStatus, string> = {
   'Signed Up': 'User created an account but has not purchased a package',
   'Pending Activation': 'Package purchase initiated but not yet confirmed',
   'Commissionable': 'Package purchased and confirmed - eligible for commission',
@@ -59,14 +40,17 @@ const statusDescriptions: Record<ReferralStatus, string> = {
 export function ReferralTable() {
   const [searchQuery, setSearchQuery] = useState('');
   const [filterStatus, setFilterStatus] = useState<FilterStatus>('All');
+  const { referrals, isLoading, error } = useReferrals();
 
-  const filteredReferrals = mockReferrals.filter(referral => {
-    const matchesSearch = referral.name.toLowerCase().includes(searchQuery.toLowerCase());
-    const matchesFilter = filterStatus === 'All' || referral.status === filterStatus;
+  const filteredReferrals = referrals.filter(referral => {
+    const displayStatus = getDisplayStatus(referral);
+    const displayName = referral.referredName || referral.referredEmail;
+    const matchesSearch = displayName.toLowerCase().includes(searchQuery.toLowerCase());
+    const matchesFilter = filterStatus === 'All' || displayStatus === filterStatus;
     return matchesSearch && matchesFilter;
   });
 
-  const getStatusBadge = (status: ReferralStatus) => {
+  const getStatusBadge = (status: DisplayStatus) => {
     const baseClasses = 'inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium';
     
     switch (status) {
@@ -84,6 +68,26 @@ export function ReferralTable() {
         return baseClasses;
     }
   };
+
+  if (isLoading) {
+    return (
+      <div className="feature-card p-6 md:p-8">
+        <div className="flex items-center justify-center py-12">
+          <Loader2 className="w-6 h-6 animate-spin text-primary" />
+        </div>
+      </div>
+    );
+  }
+
+  if (error) {
+    return (
+      <div className="feature-card p-6 md:p-8">
+        <div className="text-center py-8 text-muted-foreground">
+          Failed to load referrals. Please try again later.
+        </div>
+      </div>
+    );
+  }
 
   return (
     <TooltipProvider>
@@ -135,56 +139,70 @@ export function ReferralTable() {
         </div>
 
         {/* Table */}
-        <div className="overflow-x-auto -mx-6 md:-mx-8">
-          <div className="min-w-[700px] px-6 md:px-8">
-            <Table>
-              <TableHeader>
-                <TableRow className="border-border">
-                  <TableHead className="text-muted-foreground">Name</TableHead>
-                  <TableHead className="text-muted-foreground">Sign-up Date</TableHead>
-                  <TableHead className="text-muted-foreground">Status</TableHead>
-                  <TableHead className="text-muted-foreground">Package</TableHead>
-                  <TableHead className="text-muted-foreground text-right">Commission</TableHead>
-                </TableRow>
-              </TableHeader>
-              <TableBody>
-                {filteredReferrals.map((referral, index) => (
-                  <TableRow 
-                    key={referral.id} 
-                    className={`border-border ${index % 2 === 0 ? 'bg-secondary/20' : ''}`}
-                  >
-                    <TableCell className="font-medium text-foreground">{referral.name}</TableCell>
-                    <TableCell className="text-muted-foreground">{referral.signupDate}</TableCell>
-                    <TableCell>
-                      <Tooltip>
-                        <TooltipTrigger>
-                          <span className={getStatusBadge(referral.status)}>
-                            {referral.status}
-                          </span>
-                        </TooltipTrigger>
-                        <TooltipContent>
-                          <p>{statusDescriptions[referral.status]}</p>
-                        </TooltipContent>
-                      </Tooltip>
-                    </TableCell>
-                    <TableCell className="text-muted-foreground">
-                      {referral.packagePurchased || '—'}
-                    </TableCell>
-                    <TableCell className="text-right">
-                      {referral.commissionEarned > 0 ? (
-                        <span className="text-emerald-600 font-medium">${referral.commissionEarned}</span>
-                      ) : (
-                        <span className="text-muted-foreground">—</span>
-                      )}
-                    </TableCell>
-                  </TableRow>
-                ))}
-              </TableBody>
-            </Table>
+        {referrals.length === 0 ? (
+          <div className="text-center py-12 text-muted-foreground">
+            <p className="text-lg mb-2">No referrals yet</p>
+            <p className="text-sm">Share your referral link to start earning commissions!</p>
           </div>
-        </div>
+        ) : (
+          <div className="overflow-x-auto -mx-6 md:-mx-8">
+            <div className="min-w-[700px] px-6 md:px-8">
+              <Table>
+                <TableHeader>
+                  <TableRow className="border-border">
+                    <TableHead className="text-muted-foreground">Name</TableHead>
+                    <TableHead className="text-muted-foreground">Sign-up Date</TableHead>
+                    <TableHead className="text-muted-foreground">Status</TableHead>
+                    <TableHead className="text-muted-foreground">Package</TableHead>
+                    <TableHead className="text-muted-foreground text-right">Commission</TableHead>
+                  </TableRow>
+                </TableHeader>
+                <TableBody>
+                  {filteredReferrals.map((referral, index) => {
+                    const displayStatus = getDisplayStatus(referral) as DisplayStatus;
+                    const displayName = referral.referredName || referral.referredEmail;
+                    
+                    return (
+                      <TableRow 
+                        key={referral.id} 
+                        className={`border-border ${index % 2 === 0 ? 'bg-secondary/20' : ''}`}
+                      >
+                        <TableCell className="font-medium text-foreground">{displayName}</TableCell>
+                        <TableCell className="text-muted-foreground">
+                          {format(new Date(referral.signupDate), 'yyyy-MM-dd')}
+                        </TableCell>
+                        <TableCell>
+                          <Tooltip>
+                            <TooltipTrigger>
+                              <span className={getStatusBadge(displayStatus)}>
+                                {displayStatus}
+                              </span>
+                            </TooltipTrigger>
+                            <TooltipContent>
+                              <p>{statusDescriptions[displayStatus]}</p>
+                            </TooltipContent>
+                          </Tooltip>
+                        </TableCell>
+                        <TableCell className="text-muted-foreground">
+                          {referral.packagePurchased || '—'}
+                        </TableCell>
+                        <TableCell className="text-right">
+                          {referral.commissionEarned > 0 ? (
+                            <span className="text-emerald-600 font-medium">${referral.commissionEarned.toFixed(2)}</span>
+                          ) : (
+                            <span className="text-muted-foreground">—</span>
+                          )}
+                        </TableCell>
+                      </TableRow>
+                    );
+                  })}
+                </TableBody>
+              </Table>
+            </div>
+          </div>
+        )}
 
-        {filteredReferrals.length === 0 && (
+        {filteredReferrals.length === 0 && referrals.length > 0 && (
           <div className="text-center py-8 text-muted-foreground">
             No referrals found matching your criteria.
           </div>
