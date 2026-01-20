@@ -7,11 +7,16 @@ import { Checkbox } from "@/components/ui/checkbox";
 import { useToast } from "@/hooks/use-toast";
 import { supabase } from "@/integrations/supabase/client";
 import logoLight from "@/assets/u-topia-logo-light.png";
-import { Eye, EyeOff, Mail, User, Phone, Lock, ArrowRight, Loader2, ArrowLeft } from "lucide-react";
+import { Eye, EyeOff, Mail, User, Phone, Lock, ArrowRight, Loader2, ArrowLeft, X } from "lucide-react";
 
 type AuthMode = "signin" | "signup" | "forgot";
 
-const REMEMBERED_CREDENTIALS_KEY = "utopia_remembered_credentials";
+interface SavedAccount {
+  email: string;
+  password: string;
+}
+
+const REMEMBERED_CREDENTIALS_KEY = "utopia_remembered_accounts";
 
 const Auth = () => {
   const navigate = useNavigate();
@@ -22,6 +27,8 @@ const Auth = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [referralError, setReferralError] = useState<string | null>(null);
   const [rememberMe, setRememberMe] = useState(false);
+  const [savedAccounts, setSavedAccounts] = useState<SavedAccount[]>([]);
+  const [showSavedAccounts, setShowSavedAccounts] = useState(false);
   const [formData, setFormData] = useState({
     name: "",
     email: "",
@@ -31,20 +38,30 @@ const Auth = () => {
   
   // Track if user is actively submitting the form - prevents redirect on token refresh
   const isSubmittingRef = useRef(false);
+  const emailInputRef = useRef<HTMLDivElement>(null);
 
-  // Load remembered credentials on mount
+  // Load saved accounts on mount
   useEffect(() => {
     try {
       const saved = localStorage.getItem(REMEMBERED_CREDENTIALS_KEY);
       if (saved) {
-        const { email, password } = JSON.parse(saved);
-        setFormData(prev => ({ ...prev, email, password }));
-        setRememberMe(true);
-        setMode("signin"); // Switch to signin if we have saved credentials
+        const accounts: SavedAccount[] = JSON.parse(saved);
+        setSavedAccounts(accounts);
       }
     } catch (e) {
-      console.error("Failed to load remembered credentials:", e);
+      console.error("Failed to load saved accounts:", e);
     }
+  }, []);
+
+  // Close dropdown when clicking outside
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      if (emailInputRef.current && !emailInputRef.current.contains(event.target as Node)) {
+        setShowSavedAccounts(false);
+      }
+    };
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => document.removeEventListener("mousedown", handleClickOutside);
   }, []);
 
   // Check for forgot mode from URL params
@@ -282,17 +299,24 @@ const Auth = () => {
           return;
         }
 
-        // Save or clear remembered credentials based on checkbox
+        // Save or update remembered accounts based on checkbox
         if (rememberMe) {
-          localStorage.setItem(
-            REMEMBERED_CREDENTIALS_KEY,
-            JSON.stringify({
-              email: formData.email.trim().toLowerCase(),
-              password: formData.password,
-            })
-          );
-        } else {
-          localStorage.removeItem(REMEMBERED_CREDENTIALS_KEY);
+          const email = formData.email.trim().toLowerCase();
+          const password = formData.password;
+          
+          // Update existing or add new account
+          const existingIndex = savedAccounts.findIndex(acc => acc.email === email);
+          let updatedAccounts: SavedAccount[];
+          
+          if (existingIndex >= 0) {
+            updatedAccounts = [...savedAccounts];
+            updatedAccounts[existingIndex] = { email, password };
+          } else {
+            updatedAccounts = [...savedAccounts, { email, password }];
+          }
+          
+          localStorage.setItem(REMEMBERED_CREDENTIALS_KEY, JSON.stringify(updatedAccounts));
+          setSavedAccounts(updatedAccounts);
         }
 
         if (data.session) {
@@ -512,8 +536,8 @@ const Auth = () => {
                     <Label htmlFor="email" className="text-gray-300 text-sm font-medium">
                       Email Address
                     </Label>
-                    <div className="relative">
-                      <Mail className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-gray-500" />
+                    <div className="relative" ref={emailInputRef}>
+                      <Mail className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-gray-500 z-10" />
                       <Input
                         id="email"
                         name="email"
@@ -521,9 +545,61 @@ const Auth = () => {
                         placeholder="john@example.com"
                         value={formData.email}
                         onChange={handleInputChange}
+                        onFocus={() => !isSignUp && savedAccounts.length > 0 && setShowSavedAccounts(true)}
                         disabled={isLoading}
+                        autoComplete="off"
                         className="pl-12 py-6 bg-white/5 border-white/10 text-white placeholder:text-gray-500 rounded-xl focus:border-primary/50 focus:ring-primary/20"
                       />
+                      
+                      {/* Saved accounts dropdown */}
+                      {showSavedAccounts && savedAccounts.length > 0 && !isSignUp && (
+                        <div className="absolute top-full left-0 right-0 mt-2 bg-[#1a1f2e] border border-white/10 rounded-xl shadow-2xl overflow-hidden z-50">
+                          <div className="px-3 py-2 border-b border-white/10">
+                            <p className="text-xs text-gray-400">Saved accounts</p>
+                          </div>
+                          {savedAccounts.map((account, index) => (
+                            <div
+                              key={account.email}
+                              className="flex items-center justify-between px-3 py-3 hover:bg-white/5 cursor-pointer transition-colors group"
+                            >
+                              <button
+                                type="button"
+                                onClick={() => {
+                                  setFormData(prev => ({
+                                    ...prev,
+                                    email: account.email,
+                                    password: account.password,
+                                  }));
+                                  setShowSavedAccounts(false);
+                                  setRememberMe(true);
+                                }}
+                                className="flex items-center gap-3 flex-1 text-left"
+                              >
+                                <div className="w-8 h-8 rounded-full bg-primary/20 flex items-center justify-center">
+                                  <User className="w-4 h-4 text-primary" />
+                                </div>
+                                <span className="text-sm text-white">{account.email}</span>
+                              </button>
+                              <button
+                                type="button"
+                                onClick={(e) => {
+                                  e.stopPropagation();
+                                  const updatedAccounts = savedAccounts.filter((_, i) => i !== index);
+                                  localStorage.setItem(REMEMBERED_CREDENTIALS_KEY, JSON.stringify(updatedAccounts));
+                                  setSavedAccounts(updatedAccounts);
+                                  if (updatedAccounts.length === 0) {
+                                    setShowSavedAccounts(false);
+                                  }
+                                }}
+                                className="p-1.5 rounded-full opacity-0 group-hover:opacity-100 hover:bg-white/10 transition-all"
+                                title="Remove saved account"
+                              >
+                                <X className="w-4 h-4 text-gray-400 hover:text-red-400" />
+                              </button>
+                            </div>
+                          ))}
+                        </div>
+                      )}
                     </div>
                   </div>
 
