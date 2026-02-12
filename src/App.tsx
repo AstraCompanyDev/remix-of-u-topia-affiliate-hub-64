@@ -13,6 +13,7 @@ import Dashboard from "./pages/Dashboard";
 import AdminDashboard from "./pages/AdminDashboard";
 import AdminUserDetail from "./pages/AdminUserDetail";
 import ProfileSettings from "./pages/ProfileSettings";
+import ShareholderPortal from "./pages/ShareholderPortal";
 import NotFound from "./pages/NotFound";
 import BottomNav from "./components/BottomNav";
 
@@ -35,6 +36,7 @@ const App = () => (
           <Route path="/profile" element={<ProfileSettings />} />
           <Route path="/admin" element={<AdminDashboard />} />
           <Route path="/admin/users/:id" element={<AdminUserDetail />} />
+          <Route path="/shareholder-portal" element={<ShareholderPortal />} />
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="*" element={<NotFound />} />
         </Routes>
