@@ -119,19 +119,6 @@ const Index = () => {
               </div>
             </div>
 
-            {/* Right visual - Hero Image */}
-            <div 
-              className="flex-1 flex justify-center lg:justify-end opacity-0 animate-fade-in-up"
-              style={{ animationDelay: '300ms' }}
-            >
-              <div className="relative animate-hero-float group cursor-pointer">
-                <img 
-                  src={heroVisual} 
-                  alt="U-topia Financial Dashboard" 
-                  className="w-full max-w-xl lg:max-w-2xl xl:max-w-3xl drop-shadow-[0_20px_60px_rgba(59,130,246,0.3)] transition-all duration-500 group-hover:drop-shadow-[0_25px_80px_rgba(0,180,216,0.5)]"
-                />
-              </div>
-            </div>
           </div>
         </section>
       </div>
