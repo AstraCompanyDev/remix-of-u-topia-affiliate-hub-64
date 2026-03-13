@@ -301,6 +301,12 @@ const Index = () => {
           </div>
         </section>
 
+      </div>
+
+      {/* Investment Packages Section - Dark */}
+      <InvestmentPackages />
+
+      <div className="bg-background">
         {/* FAQ Section */}
         <section className="container mx-auto px-6 py-24">
           <div className="max-w-4xl mx-auto">
