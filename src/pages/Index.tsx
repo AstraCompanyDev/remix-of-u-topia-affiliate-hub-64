@@ -310,110 +310,113 @@ const Index = () => {
               </p>
             </div>
 
-            {/* FAQ Accordion */}
-            <Accordion 
-              type="single" 
-              defaultValue="item-1" 
-              collapsible 
-              className="space-y-4 opacity-0 animate-fade-in-up"
+            {/* FAQ Two Columns */}
+            <div
+              className="grid grid-cols-1 md:grid-cols-2 gap-6 opacity-0 animate-fade-in-up"
               style={{ animationDelay: '250ms' }}
             >
-              <AccordionItem 
-                value="item-1" 
-                className="glass-card border-none rounded-2xl overflow-hidden data-[state=open]:border-primary/30 transition-all duration-300 hover:border-primary/20"
-              >
-                <AccordionTrigger className="px-6 py-5 hover:no-underline group">
-                  <span className="text-left text-lg font-semibold text-foreground group-hover:text-primary transition-colors">
-                    Is this an investment or guaranteed income program?
-                  </span>
-                </AccordionTrigger>
-                <AccordionContent className="px-6 pb-6">
-                  <p className="text-muted-foreground leading-relaxed">
-                    No. The U-topia Affiliate Program is not an investment, and it does not offer guaranteed income. Rewards are performance-based and depend on real platform activity, eligibility, and compliance checks.
-                  </p>
-                </AccordionContent>
-              </AccordionItem>
+              {/* Left Column */}
+              <Accordion type="single" collapsible className="space-y-4">
+                <AccordionItem 
+                  value="item-1" 
+                  className="glass-card border-none rounded-2xl overflow-hidden data-[state=open]:border-primary/30 transition-all duration-300 hover:border-primary/20"
+                >
+                  <AccordionTrigger className="px-6 py-5 hover:no-underline group">
+                    <span className="text-left text-base font-semibold text-foreground group-hover:text-primary transition-colors">
+                      Is this an investment or guaranteed income program?
+                    </span>
+                  </AccordionTrigger>
+                  <AccordionContent className="px-6 pb-6">
+                    <p className="text-muted-foreground leading-relaxed text-sm">
+                      No. The U-topia Affiliate Program is not an investment, and it does not offer guaranteed income. Rewards are performance-based and depend on real platform activity, eligibility, and compliance checks.
+                    </p>
+                  </AccordionContent>
+                </AccordionItem>
 
-              <AccordionItem 
-                value="item-2" 
-                className="glass-card border-none rounded-2xl overflow-hidden data-[state=open]:border-primary/30 transition-all duration-300 hover:border-primary/20"
-              >
-                <AccordionTrigger className="px-6 py-5 hover:no-underline group">
-                  <span className="text-left text-lg font-semibold text-foreground group-hover:text-primary transition-colors">
-                    How are rewards generated?
-                  </span>
-                </AccordionTrigger>
-                <AccordionContent className="px-6 pb-6">
-                  <p className="text-muted-foreground leading-relaxed">
-                    Rewards are generated from verified activity on U-topia's platform, such as account usage, payments, subscriptions, and card activity. There are no rewards for sign-ups alone or inactive users.
-                  </p>
-                </AccordionContent>
-              </AccordionItem>
+                <AccordionItem 
+                  value="item-2" 
+                  className="glass-card border-none rounded-2xl overflow-hidden data-[state=open]:border-primary/30 transition-all duration-300 hover:border-primary/20"
+                >
+                  <AccordionTrigger className="px-6 py-5 hover:no-underline group">
+                    <span className="text-left text-base font-semibold text-foreground group-hover:text-primary transition-colors">
+                      How are rewards generated?
+                    </span>
+                  </AccordionTrigger>
+                  <AccordionContent className="px-6 pb-6">
+                    <p className="text-muted-foreground leading-relaxed text-sm">
+                      Rewards are generated from verified activity on U-topia's platform, such as account usage, payments, subscriptions, and card activity. There are no rewards for sign-ups alone or inactive users.
+                    </p>
+                  </AccordionContent>
+                </AccordionItem>
 
-              <AccordionItem 
-                value="item-3" 
-                className="glass-card border-none rounded-2xl overflow-hidden data-[state=open]:border-primary/30 transition-all duration-300 hover:border-primary/20"
-              >
-                <AccordionTrigger className="px-6 py-5 hover:no-underline group">
-                  <span className="text-left text-lg font-semibold text-foreground group-hover:text-primary transition-colors">
-                    Do I earn commissions when someone just signs up?
-                  </span>
-                </AccordionTrigger>
-                <AccordionContent className="px-6 pb-6">
-                  <p className="text-muted-foreground leading-relaxed">
-                    <strong>No.</strong> Commissions are earned only after the referred user purchases a package. Signing up alone does not generate commissions. The referred user must complete a package purchase (Bronze, Silver, Gold, Platinum, or Diamond) and the transaction must be confirmed.
-                  </p>
-                </AccordionContent>
-              </AccordionItem>
+                <AccordionItem 
+                  value="item-3" 
+                  className="glass-card border-none rounded-2xl overflow-hidden data-[state=open]:border-primary/30 transition-all duration-300 hover:border-primary/20"
+                >
+                  <AccordionTrigger className="px-6 py-5 hover:no-underline group">
+                    <span className="text-left text-base font-semibold text-foreground group-hover:text-primary transition-colors">
+                      Do I earn commissions when someone just signs up?
+                    </span>
+                  </AccordionTrigger>
+                  <AccordionContent className="px-6 pb-6">
+                    <p className="text-muted-foreground leading-relaxed text-sm">
+                      <strong>No.</strong> Commissions are earned only after the referred user purchases a package. Signing up alone does not generate commissions.
+                    </p>
+                  </AccordionContent>
+                </AccordionItem>
+              </Accordion>
 
-              <AccordionItem 
-                value="item-4" 
-                className="glass-card border-none rounded-2xl overflow-hidden data-[state=open]:border-primary/30 transition-all duration-300 hover:border-primary/20"
-              >
-                <AccordionTrigger className="px-6 py-5 hover:no-underline group">
-                  <span className="text-left text-lg font-semibold text-foreground group-hover:text-primary transition-colors">
-                    Do I need to sell products or handle payments?
-                  </span>
-                </AccordionTrigger>
-                <AccordionContent className="px-6 pb-6">
-                  <p className="text-muted-foreground leading-relaxed">
-                    No. You do not process transactions or handle customer funds. U-topia's core products handle all financial activity. Affiliates focus on introductions and growth.
-                  </p>
-                </AccordionContent>
-              </AccordionItem>
+              {/* Right Column */}
+              <Accordion type="single" collapsible className="space-y-4">
+                <AccordionItem 
+                  value="item-4" 
+                  className="glass-card border-none rounded-2xl overflow-hidden data-[state=open]:border-primary/30 transition-all duration-300 hover:border-primary/20"
+                >
+                  <AccordionTrigger className="px-6 py-5 hover:no-underline group">
+                    <span className="text-left text-base font-semibold text-foreground group-hover:text-primary transition-colors">
+                      Do I need to sell products or handle payments?
+                    </span>
+                  </AccordionTrigger>
+                  <AccordionContent className="px-6 pb-6">
+                    <p className="text-muted-foreground leading-relaxed text-sm">
+                      No. You do not process transactions or handle customer funds. U-topia's core products handle all financial activity. Affiliates focus on introductions and growth.
+                    </p>
+                  </AccordionContent>
+                </AccordionItem>
 
-              <AccordionItem 
-                value="item-5" 
-                className="glass-card border-none rounded-2xl overflow-hidden data-[state=open]:border-primary/30 transition-all duration-300 hover:border-primary/20"
-              >
-                <AccordionTrigger className="px-6 py-5 hover:no-underline group">
-                  <span className="text-left text-lg font-semibold text-foreground group-hover:text-primary transition-colors">
-                    Is there a limit to how much I can earn?
-                  </span>
-                </AccordionTrigger>
-                <AccordionContent className="px-6 pb-6">
-                  <p className="text-muted-foreground leading-relaxed">
-                    Yes. Earning capacity is defined by participation tiers, referral depth limits, and reward caps. This ensures the program remains fair, sustainable, and transparent.
-                  </p>
-                </AccordionContent>
-              </AccordionItem>
+                <AccordionItem 
+                  value="item-5" 
+                  className="glass-card border-none rounded-2xl overflow-hidden data-[state=open]:border-primary/30 transition-all duration-300 hover:border-primary/20"
+                >
+                  <AccordionTrigger className="px-6 py-5 hover:no-underline group">
+                    <span className="text-left text-base font-semibold text-foreground group-hover:text-primary transition-colors">
+                      Is there a limit to how much I can earn?
+                    </span>
+                  </AccordionTrigger>
+                  <AccordionContent className="px-6 pb-6">
+                    <p className="text-muted-foreground leading-relaxed text-sm">
+                      Yes. Earning capacity is defined by participation tiers, referral depth limits, and reward caps. This ensures the program remains fair, sustainable, and transparent.
+                    </p>
+                  </AccordionContent>
+                </AccordionItem>
 
-              <AccordionItem 
-                value="item-6" 
-                className="glass-card border-none rounded-2xl overflow-hidden data-[state=open]:border-primary/30 transition-all duration-300 hover:border-primary/20"
-              >
-                <AccordionTrigger className="px-6 py-5 hover:no-underline group">
-                  <span className="text-left text-lg font-semibold text-foreground group-hover:text-primary transition-colors">
-                    When and how are payouts made?
-                  </span>
-                </AccordionTrigger>
-                <AccordionContent className="px-6 pb-6">
-                  <p className="text-muted-foreground leading-relaxed">
-                    Payout timing depends on the reward type. Some commissions are processed quickly after validation, while bonuses and incentives may follow scheduled payout cycles. All payouts are subject to verification and compliance checks.
-                  </p>
-                </AccordionContent>
-              </AccordionItem>
-            </Accordion>
+                <AccordionItem 
+                  value="item-6" 
+                  className="glass-card border-none rounded-2xl overflow-hidden data-[state=open]:border-primary/30 transition-all duration-300 hover:border-primary/20"
+                >
+                  <AccordionTrigger className="px-6 py-5 hover:no-underline group">
+                    <span className="text-left text-base font-semibold text-foreground group-hover:text-primary transition-colors">
+                      When and how are payouts made?
+                    </span>
+                  </AccordionTrigger>
+                  <AccordionContent className="px-6 pb-6">
+                    <p className="text-muted-foreground leading-relaxed text-sm">
+                      Payout timing depends on the reward type. Some commissions are processed quickly after validation, while bonuses and incentives may follow scheduled payout cycles.
+                    </p>
+                  </AccordionContent>
+                </AccordionItem>
+              </Accordion>
+            </div>
 
           </div>
         </section>
