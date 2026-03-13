@@ -75,7 +75,7 @@ const Index = () => {
 
               {/* CTAs */}
               <div 
-                className="flex flex-row gap-2 sm:gap-4 opacity-0 animate-fade-in-up"
+                className="flex flex-row justify-center gap-2 sm:gap-4 opacity-0 animate-fade-in-up"
                 style={{ animationDelay: '400ms' }}
               >
                 <Link to="/auth">
