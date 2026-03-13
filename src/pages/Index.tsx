@@ -34,9 +34,8 @@ const Index = () => {
 
         {/* Hero Content */}
         <section className="relative z-10 container mx-auto px-4 sm:px-6 pt-8 sm:pt-16 pb-16 sm:pb-24">
-          <div className="flex flex-col lg:flex-row items-center gap-8 sm:gap-12">
-            {/* Left content */}
-            <div className="flex-1 max-w-2xl">
+          <div className="flex flex-col items-center text-center gap-8 sm:gap-12">
+            <div className="max-w-2xl">
               {/* Badge */}
               <div 
                 className="opacity-0 animate-fade-in-up"
