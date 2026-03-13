@@ -3,7 +3,6 @@ import { Button } from "@/components/ui/button";
 import Header from "@/components/Header";
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
 import { MembershipTiers } from "@/components/MembershipTiers";
-import TeamSection from "@/components/TeamSection";
 import logoLight from "@/assets/u-topia-logo-light.png";
 import logoDark from "@/assets/u-topia-logo-dark.png";
 import heroVisual from "@/assets/hero-visual-new.png";
