@@ -34,9 +34,8 @@ const Index = () => {
 
         {/* Hero Content */}
         <section className="relative z-10 container mx-auto px-4 sm:px-6 pt-8 sm:pt-16 pb-16 sm:pb-24">
-          <div className="flex flex-col lg:flex-row items-center gap-8 sm:gap-12">
-            {/* Left content */}
-            <div className="flex-1 max-w-2xl">
+          <div className="flex flex-col items-center text-center gap-8 sm:gap-12">
+            <div className="max-w-2xl">
               {/* Badge */}
               <div 
                 className="opacity-0 animate-fade-in-up"
@@ -59,7 +58,7 @@ const Index = () => {
               
               {/* Subheadline */}
               <p 
-                className="text-base sm:text-lg md:text-xl text-gray-400 mb-6 sm:mb-8 max-w-xl opacity-0 animate-fade-in-up"
+                className="text-base sm:text-lg md:text-xl text-gray-400 mb-6 sm:mb-8 max-w-xl mx-auto opacity-0 animate-fade-in-up"
                 style={{ animationDelay: '300ms' }}
               >
                 U-Center is a DAO dedicated to supporting the development of U-Topia — the future of banking. 
@@ -76,7 +75,7 @@ const Index = () => {
 
               {/* CTAs */}
               <div 
-                className="flex flex-row gap-2 sm:gap-4 opacity-0 animate-fade-in-up"
+                className="flex flex-row justify-center gap-2 sm:gap-4 opacity-0 animate-fade-in-up"
                 style={{ animationDelay: '400ms' }}
               >
                 <Link to="/auth">
@@ -100,7 +99,7 @@ const Index = () => {
 
               {/* Stats */}
               <div 
-                className="flex flex-wrap gap-6 sm:gap-8 md:gap-12 mt-10 sm:mt-16 pt-6 sm:pt-8 border-t border-white/10 opacity-0 animate-fade-in-up"
+                className="flex flex-wrap justify-center gap-6 sm:gap-8 md:gap-12 mt-10 sm:mt-16 pt-6 sm:pt-8 border-t border-white/10 opacity-0 animate-fade-in-up"
                 style={{ animationDelay: '500ms' }}
               >
                 <div>
@@ -120,19 +119,6 @@ const Index = () => {
               </div>
             </div>
 
-            {/* Right visual - Hero Image */}
-            <div 
-              className="flex-1 flex justify-center lg:justify-end opacity-0 animate-fade-in-up"
-              style={{ animationDelay: '300ms' }}
-            >
-              <div className="relative animate-hero-float group cursor-pointer">
-                <img 
-                  src={heroVisual} 
-                  alt="U-topia Financial Dashboard" 
-                  className="w-full max-w-xl lg:max-w-2xl xl:max-w-3xl drop-shadow-[0_20px_60px_rgba(59,130,246,0.3)] transition-all duration-500 group-hover:drop-shadow-[0_25px_80px_rgba(0,180,216,0.5)]"
-                />
-              </div>
-            </div>
           </div>
         </section>
       </div>
