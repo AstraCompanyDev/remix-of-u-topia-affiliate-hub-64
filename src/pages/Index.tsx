@@ -50,8 +50,8 @@ const Index = () => {
                 className="text-3xl sm:text-4xl md:text-5xl lg:text-7xl font-bold mb-6 opacity-0 animate-fade-in-up leading-tight whitespace-nowrap"
                 style={{ animationDelay: '200ms' }}
               >
-                <span className="text-white">Build with </span>
-                <span className="gradient-text">U-topia</span>
+                <span className="text-white">Welcome to </span>
+                <span className="gradient-text">U-Center</span>
               </h1>
               
               {/* Subheadline */}
