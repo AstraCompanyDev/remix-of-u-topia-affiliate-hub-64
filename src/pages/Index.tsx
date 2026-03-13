@@ -191,6 +191,96 @@ const Index = () => {
 
       </div>
 
+      {/* What is a Co-Operative DAO Section */}
+      <section className="relative bg-[#0a0f1a] py-28 overflow-hidden">
+        <div className="absolute inset-0 pointer-events-none overflow-hidden">
+          <div className="absolute w-[400px] h-[400px] -top-20 right-1/4 rounded-full blur-[120px] opacity-15 bg-primary/30 animate-float" />
+        </div>
+
+        <div className="relative container mx-auto px-6">
+          <div className="max-w-5xl mx-auto">
+            <div className="text-center mb-14">
+              <span
+                className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-primary/10 border border-primary/30 text-primary text-sm font-semibold mb-8 opacity-0 animate-fade-in-up"
+                style={{ animationDelay: '100ms' }}
+              >
+                Understanding the Model
+              </span>
+              <h2
+                className="text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-6 opacity-0 animate-fade-in-up tracking-tight"
+                style={{ animationDelay: '150ms' }}
+              >
+                What is a{" "}
+                <span className="bg-gradient-to-r from-primary via-blue-400 to-primary bg-clip-text text-transparent">
+                  Co-Operative DAO?
+                </span>
+              </h2>
+              <p
+                className="text-lg md:text-xl text-gray-400 max-w-3xl mx-auto opacity-0 animate-fade-in-up leading-relaxed"
+                style={{ animationDelay: '200ms' }}
+              >
+                A Co-Operative DAO (Decentralized Autonomous Organization) is a community-owned entity where members collectively govern, invest, and share in the rewards — with no central authority calling the shots.
+              </p>
+            </div>
+
+            <div
+              className="grid grid-cols-1 md:grid-cols-3 gap-6 opacity-0 animate-fade-in-up"
+              style={{ animationDelay: '300ms' }}
+            >
+              {/* Pillar 1 */}
+              <div className="rounded-2xl border border-white/10 bg-gradient-to-b from-[#0f1f35] to-[#0a1628] p-8 text-center hover:-translate-y-1 transition-transform duration-300">
+                <div className="w-14 h-14 rounded-2xl bg-primary/15 border border-primary/25 flex items-center justify-center mx-auto mb-5">
+                  <svg className="w-7 h-7 text-primary" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
+                    <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2" />
+                    <circle cx="9" cy="7" r="4" />
+                    <path d="M23 21v-2a4 4 0 0 0-3-3.87" />
+                    <path d="M16 3.13a4 4 0 0 1 0 7.75" />
+                  </svg>
+                </div>
+                <h3 className="text-xl font-bold text-white mb-3">Community Owned</h3>
+                <p className="text-gray-400 text-sm leading-relaxed">
+                  Every member has a voice. Decisions are made collectively through transparent on-chain governance — not by executives behind closed doors.
+                </p>
+              </div>
+
+              {/* Pillar 2 */}
+              <div className="rounded-2xl border border-white/10 bg-gradient-to-b from-[#0f1f35] to-[#0a1628] p-8 text-center hover:-translate-y-1 transition-transform duration-300">
+                <div className="w-14 h-14 rounded-2xl bg-primary/15 border border-primary/25 flex items-center justify-center mx-auto mb-5">
+                  <svg className="w-7 h-7 text-primary" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
+                    <rect x="2" y="7" width="20" height="14" rx="2" ry="2" />
+                    <path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16" />
+                  </svg>
+                </div>
+                <h3 className="text-xl font-bold text-white mb-3">Shared Rewards</h3>
+                <p className="text-gray-400 text-sm leading-relaxed">
+                  Profits don't go to shareholders on Wall Street. Revenue is distributed back to the members who contribute to and grow the ecosystem.
+                </p>
+              </div>
+
+              {/* Pillar 3 */}
+              <div className="rounded-2xl border border-white/10 bg-gradient-to-b from-[#0f1f35] to-[#0a1628] p-8 text-center hover:-translate-y-1 transition-transform duration-300">
+                <div className="w-14 h-14 rounded-2xl bg-primary/15 border border-primary/25 flex items-center justify-center mx-auto mb-5">
+                  <svg className="w-7 h-7 text-primary" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
+                    <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />
+                  </svg>
+                </div>
+                <h3 className="text-xl font-bold text-white mb-3">Fully Transparent</h3>
+                <p className="text-gray-400 text-sm leading-relaxed">
+                  All transactions, governance votes, and treasury movements are recorded on-chain. Complete transparency with no hidden fees or agendas.
+                </p>
+              </div>
+            </div>
+
+            <p
+              className="text-center text-gray-500 text-base mt-10 max-w-2xl mx-auto opacity-0 animate-fade-in-up leading-relaxed"
+              style={{ animationDelay: '400ms' }}
+            >
+              U-Center operates as a Co-Operative DAO — meaning when you invest, you're not just a customer. You're an owner, a decision-maker, and a beneficiary of the platform's success.
+            </p>
+          </div>
+        </div>
+      </section>
+
       {/* Investment Packages Section - Dark */}
       <InvestmentPackages />
 
