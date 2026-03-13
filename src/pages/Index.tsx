@@ -206,218 +206,91 @@ const Index = () => {
           </div>
         </section>
 
-        {/* How It Works Section */}
-        <section className="container mx-auto px-6 pb-24">
-          <div className="max-w-6xl mx-auto">
-            <div className="text-center mb-20">
-              <span 
-                className="inline-block px-4 py-2 rounded-full bg-primary/10 border border-primary/20 text-primary text-sm font-medium mb-6 opacity-0 animate-fade-in-up"
-                style={{ animationDelay: '100ms' }}
-              >
-                Simple Process
-              </span>
-              <h2 
-                className="text-3xl md:text-5xl font-bold text-foreground opacity-0 animate-fade-in-up"
-                style={{ animationDelay: '150ms' }}
-              >
-                How It <span className="gradient-text">Works</span>
-              </h2>
-            </div>
-
-            {/* Steps Container */}
-            <div className="relative">
-              <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-8">
-                {/* Step 1 */}
-                <div 
-                  className="group opacity-0 animate-fade-in-up"
-                  style={{ animationDelay: '200ms' }}
-                >
-                  <div className="relative step-card p-7 h-full">
-                    <div className="absolute -top-4 left-6">
-                      <div className="w-8 h-8 rounded-lg bg-primary text-primary-foreground flex items-center justify-center text-sm font-bold shadow-lg shadow-primary/25">
-                        1
-                      </div>
-                    </div>
-                    
-                    <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-primary/15 to-primary/5 border border-primary/20 flex items-center justify-center mt-4 mb-5 group-hover:scale-110 transition-transform duration-300">
-                      <svg className="w-6 h-6 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M18 9v3m0 0v3m0-3h3m-3 0h-3m-2-5a4 4 0 11-8 0 4 4 0 018 0zM3 20a6 6 0 0112 0v1H3v-1z" />
-                      </svg>
-                    </div>
-
-                    <h3 className="text-lg font-semibold text-foreground mb-3">
-                      Join the Program
-                    </h3>
-                    <p className="text-sm text-muted-foreground leading-relaxed">
-                      Activate your participation tier and gain access to referral and reward tools.
-                    </p>
-                  </div>
-                </div>
-
-                {/* Step 2 */}
-                <div 
-                  className="group opacity-0 animate-fade-in-up"
-                  style={{ animationDelay: '300ms' }}
-                >
-                  <div className="relative step-card p-7 h-full">
-                    <div className="absolute -top-4 left-6">
-                      <div className="w-8 h-8 rounded-lg bg-primary text-primary-foreground flex items-center justify-center text-sm font-bold shadow-lg shadow-primary/25">
-                        2
-                      </div>
-                    </div>
-                    
-                    <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-primary/15 to-primary/5 border border-primary/20 flex items-center justify-center mt-4 mb-5 group-hover:scale-110 transition-transform duration-300">
-                      <svg className="w-6 h-6 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z" />
-                      </svg>
-                    </div>
-
-                    <h3 className="text-lg font-semibold text-foreground mb-3">
-                      Introduce Users
-                    </h3>
-                    <p className="text-sm text-muted-foreground leading-relaxed">
-                      Share U-topia with individuals and merchants who benefit from our platform.
-                    </p>
-                  </div>
-                </div>
-
-                {/* Step 3 */}
-                <div 
-                  className="group opacity-0 animate-fade-in-up"
-                  style={{ animationDelay: '400ms' }}
-                >
-                  <div className="relative step-card p-7 h-full">
-                    <div className="absolute -top-4 left-6">
-                      <div className="w-8 h-8 rounded-lg bg-primary text-primary-foreground flex items-center justify-center text-sm font-bold shadow-lg shadow-primary/25">
-                        3
-                      </div>
-                    </div>
-                    
-                    <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-primary/15 to-primary/5 border border-primary/20 flex items-center justify-center mt-4 mb-5 group-hover:scale-110 transition-transform duration-300">
-                      <svg className="w-6 h-6 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M13 10V3L4 14h7v7l9-11h-7z" />
-                      </svg>
-                    </div>
-
-                    <h3 className="text-lg font-semibold text-foreground mb-3">
-                      Activity Happens
-                    </h3>
-                    <p className="text-sm text-muted-foreground leading-relaxed">
-                      Users transact, subscribe, and use real financial products.
-                    </p>
-                  </div>
-                </div>
-
-                {/* Step 4 */}
-                <div 
-                  className="group opacity-0 animate-fade-in-up"
-                  style={{ animationDelay: '500ms' }}
-                >
-                  <div className="relative step-card p-7 h-full">
-                    <div className="absolute -top-4 left-6">
-                      <div className="w-8 h-8 rounded-lg bg-primary text-primary-foreground flex items-center justify-center text-sm font-bold shadow-lg shadow-primary/25">
-                        4
-                      </div>
-                    </div>
-                    
-                    <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-primary/15 to-primary/5 border border-primary/20 flex items-center justify-center mt-4 mb-5 group-hover:scale-110 transition-transform duration-300">
-                      <svg className="w-6 h-6 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M9 7h6m0 10v-3m-3 3h.01M9 17h.01M9 14h.01M12 14h.01M15 11h.01M12 11h.01M9 11h.01M7 21h10a2 2 0 002-2V5a2 2 0 00-2-2H7a2 2 0 00-2 2v14a2 2 0 002 2z" />
-                      </svg>
-                    </div>
-
-                    <h3 className="text-lg font-semibold text-foreground mb-3">
-                      Rewards Calculated
-                    </h3>
-                    <p className="text-sm text-muted-foreground leading-relaxed">
-                      Commissions and bonuses are calculated from completed and verified activity.
-                    </p>
-                  </div>
-                </div>
-
-                {/* Step 5 - Final/Success */}
-                <div 
-                  className="group opacity-0 animate-fade-in-up"
-                  style={{ animationDelay: '600ms' }}
-                >
-                  <div className="relative step-card-success p-7 h-full">
-                    <div className="absolute -top-4 left-6">
-                      <div className="w-8 h-8 rounded-lg bg-emerald-500 text-white flex items-center justify-center shadow-lg shadow-emerald-500/25">
-                        <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M5 13l4 4L19 7" />
-                        </svg>
-                      </div>
-                    </div>
-                    
-                    <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-emerald-500/20 to-emerald-500/5 border border-emerald-500/25 flex items-center justify-center mt-4 mb-5 group-hover:scale-110 transition-transform duration-300">
-                      <svg className="w-6 h-6 text-emerald-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
-                      </svg>
-                    </div>
-
-                    <h3 className="text-lg font-semibold text-foreground mb-3">
-                      Get Paid
-                    </h3>
-                    <p className="text-sm text-muted-foreground leading-relaxed">
-                      Eligible rewards are distributed following validation and compliance checks.
-                    </p>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </section>
-
-        {/* Membership Tiers Section */}
-        <MembershipTiers />
-
-        {/* Who This Is For Section */}
-        <section className="relative py-28 overflow-hidden bg-background">
-          {/* Subtle background elements */}
+        {/* U-Topia Vision Section */}
+        <section className="relative py-28 overflow-hidden bg-gradient-to-b from-background via-background to-[#0a0f1a]">
           <div className="absolute inset-0 pointer-events-none">
-            <div className="absolute w-[500px] h-[500px] top-0 right-1/4 rounded-full blur-[150px] opacity-20 bg-primary/20" />
-            <div className="absolute w-[400px] h-[400px] bottom-0 left-1/4 rounded-full blur-[120px] opacity-15 bg-cyan-500/15" />
+            <div className="absolute w-[600px] h-[600px] top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 rounded-full blur-[150px] opacity-15 bg-gradient-to-r from-primary/30 to-cyan-500/30" />
           </div>
-          
+
           <div className="relative container mx-auto px-6">
-            {/* Header Content - Centered */}
-            <div className="text-center max-w-3xl mx-auto mb-16">
-              {/* Section Tag */}
+            <div className="max-w-4xl mx-auto text-center">
               <span 
                 className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-primary/10 border border-primary/20 text-primary text-sm font-semibold mb-8 opacity-0 animate-fade-in-up"
                 style={{ animationDelay: '100ms' }}
               >
                 <svg className="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                  <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/>
-                  <circle cx="9" cy="7" r="4"/>
-                  <path d="M23 21v-2a4 4 0 0 0-3-3.87"/>
-                  <path d="M16 3.13a4 4 0 0 1 0 7.75"/>
+                  <path d="M12 2L2 7l10 5 10-5-10-5z"/>
+                  <path d="M2 17l10 5 10-5"/>
+                  <path d="M2 12l10 5 10-5"/>
                 </svg>
-                Perfect For You
+                The Future of Banking
               </span>
-              
+
               <h2 
-                className="text-4xl md:text-5xl lg:text-6xl font-bold text-foreground mb-6 opacity-0 animate-fade-in-up tracking-tight"
+                className="text-4xl md:text-5xl lg:text-6xl font-bold text-foreground mb-8 opacity-0 animate-fade-in-up tracking-tight leading-tight"
                 style={{ animationDelay: '150ms' }}
               >
-                Who This <span className="bg-gradient-to-r from-primary via-orange-400 to-primary bg-clip-text text-transparent">Is For</span>
+                U-Topia — <span className="bg-gradient-to-r from-primary via-orange-400 to-primary bg-clip-text text-transparent">Your Bank, Your Rules</span>
               </h2>
-              
+
               <p 
-                className="text-lg md:text-xl text-muted-foreground mb-10 opacity-0 animate-fade-in-up leading-relaxed"
+                className="text-lg md:text-xl text-muted-foreground mb-6 opacity-0 animate-fade-in-up leading-relaxed max-w-3xl mx-auto"
                 style={{ animationDelay: '200ms' }}
               >
-                If you believe in building networks around real products and genuine value creation, this program is designed for you.
+                U-Topia is pioneering the future of banking through emerging technology — giving you true ownership of your funds and the ability to earn with your bank. No middlemen, no hidden fees, just you in control.
               </p>
-              
-              {/* CTA Button */}
+
+              <p 
+                className="text-xl md:text-2xl font-semibold text-foreground mb-10 opacity-0 animate-fade-in-up"
+                style={{ animationDelay: '250ms' }}
+              >
+                Secure your financial future. <span className="text-primary">Get your piece of the pie.</span>
+              </p>
+
+              <div 
+                className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-12 opacity-0 animate-fade-in-up"
+                style={{ animationDelay: '300ms' }}
+              >
+                <div className="p-6 rounded-2xl bg-card/50 border border-border/50 backdrop-blur-sm">
+                  <div className="w-12 h-12 rounded-xl bg-primary/10 border border-primary/20 flex items-center justify-center mx-auto mb-4">
+                    <svg className="w-6 h-6 text-primary" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                      <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+                    </svg>
+                  </div>
+                  <h3 className="text-lg font-bold text-foreground mb-2">True Ownership</h3>
+                  <p className="text-sm text-muted-foreground">Your assets remain yours. Non-custodial accounts and full transparency over every transaction.</p>
+                </div>
+
+                <div className="p-6 rounded-2xl bg-card/50 border border-border/50 backdrop-blur-sm">
+                  <div className="w-12 h-12 rounded-xl bg-primary/10 border border-primary/20 flex items-center justify-center mx-auto mb-4">
+                    <svg className="w-6 h-6 text-primary" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                      <circle cx="12" cy="12" r="10"/>
+                      <path d="M12 6v6l4 2"/>
+                    </svg>
+                  </div>
+                  <h3 className="text-lg font-bold text-foreground mb-2">Earn With Your Bank</h3>
+                  <p className="text-sm text-muted-foreground">Generate real rewards from everyday banking activity — payments, savings, and referrals.</p>
+                </div>
+
+                <div className="p-6 rounded-2xl bg-card/50 border border-border/50 backdrop-blur-sm">
+                  <div className="w-12 h-12 rounded-xl bg-primary/10 border border-primary/20 flex items-center justify-center mx-auto mb-4">
+                    <svg className="w-6 h-6 text-primary" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                      <polyline points="23 6 13.5 15.5 8.5 10.5 1 18"/>
+                      <polyline points="17 6 23 6 23 12"/>
+                    </svg>
+                  </div>
+                  <h3 className="text-lg font-bold text-foreground mb-2">Emerging Technology</h3>
+                  <p className="text-sm text-muted-foreground">Built on cutting-edge fintech and blockchain infrastructure for a borderless financial future.</p>
+                </div>
+              </div>
+
               <div 
                 className="opacity-0 animate-fade-in-up"
-                style={{ animationDelay: '250ms' }}
+                style={{ animationDelay: '350ms' }}
               >
                 <Link to="/auth">
                   <Button size="lg" className="group gap-2 text-base px-8 py-6 rounded-full shadow-xl shadow-primary/25 hover:shadow-primary/40 transition-all duration-300">
-                    Start Your Journey
+                    Join Today
                     <svg className="w-5 h-5 group-hover:translate-x-1 transition-transform" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
                       <path d="M5 12h14M12 5l7 7-7 7"/>
                     </svg>
@@ -425,85 +298,8 @@ const Index = () => {
                 </Link>
               </div>
             </div>
-            
-            {/* Cards Grid - 2x2 */}
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-4xl mx-auto">
-              {/* Row 1 */}
-              {/* Card 1 - Entrepreneurs */}
-              <div 
-                className="group opacity-0 animate-fade-in-up"
-                style={{ animationDelay: '300ms' }}
-              >
-                <div className="audience-card audience-card-primary p-8 h-full">
-                  <div className="w-14 h-14 rounded-2xl bg-gradient-to-br from-primary/15 to-primary/5 border border-primary/20 flex items-center justify-center mb-6 group-hover:scale-110 group-hover:bg-gradient-to-br group-hover:from-primary/25 group-hover:to-primary/10 transition-all duration-300">
-                    <svg className="w-7 h-7 text-primary" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                      <path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/>
-                    </svg>
-                  </div>
-                  <h3 className="text-xl font-bold text-foreground mb-3">Everyday Users</h3>
-                  <p className="text-muted-foreground leading-relaxed">Individuals looking for an easy way to earn rewards by referring friends and family. Share U-topia, get rewarded when they join and use the platform.</p>
-                </div>
-              </div>
-              
-              {/* Card 2 - Business Owners */}
-              <div 
-                className="group opacity-0 animate-fade-in-up"
-                style={{ animationDelay: '350ms' }}
-              >
-                <div className="audience-card audience-card-cyan p-8 h-full">
-                  <div className="w-14 h-14 rounded-2xl bg-gradient-to-br from-cyan-500/15 to-cyan-500/5 border border-cyan-500/20 flex items-center justify-center mb-6 group-hover:scale-110 group-hover:bg-gradient-to-br group-hover:from-cyan-500/25 group-hover:to-cyan-500/10 transition-all duration-300">
-                    <svg className="w-7 h-7 text-cyan-500" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                      <rect x="2" y="7" width="20" height="14" rx="2" ry="2"/>
-                      <path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/>
-                    </svg>
-                  </div>
-                  <h3 className="text-xl font-bold text-foreground mb-3">Web3 Enthusiasts</h3>
-                  <p className="text-muted-foreground leading-relaxed">Crypto-savvy users familiar with digital ecosystems who want to engage with a modern, rewarding referral system.</p>
-                </div>
-              </div>
-              
-              {/* Row 2 */}
-              {/* Card 3 - Community Builders */}
-              <div 
-                className="group opacity-0 animate-fade-in-up"
-                style={{ animationDelay: '400ms' }}
-              >
-                <div className="audience-card audience-card-amber p-8 h-full">
-                  <div className="w-14 h-14 rounded-2xl bg-gradient-to-br from-amber-500/15 to-amber-500/5 border border-amber-500/20 flex items-center justify-center mb-6 group-hover:scale-110 group-hover:bg-gradient-to-br group-hover:from-amber-500/25 group-hover:to-amber-500/10 transition-all duration-300">
-                    <svg className="w-7 h-7 text-amber-500" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                      <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/>
-                      <circle cx="9" cy="7" r="4"/>
-                      <path d="M23 21v-2a4 4 0 0 0-3-3.87"/>
-                      <path d="M16 3.13a4 4 0 0 1 0 7.75"/>
-                    </svg>
-                  </div>
-                  <h3 className="text-xl font-bold text-foreground mb-3">Community Builders</h3>
-                  <p className="text-muted-foreground leading-relaxed">People who love connecting with others and want to build a network while earning real rewards for each connection.</p>
-                </div>
-              </div>
-              
-              {/* Card 4 - Growth Partners */}
-              <div 
-                className="group opacity-0 animate-fade-in-up"
-                style={{ animationDelay: '450ms' }}
-              >
-                <div className="audience-card audience-card-emerald p-8 h-full">
-                  <div className="w-14 h-14 rounded-2xl bg-gradient-to-br from-emerald-500/15 to-emerald-500/5 border border-emerald-500/20 flex items-center justify-center mb-6 group-hover:scale-110 group-hover:bg-gradient-to-br group-hover:from-emerald-500/25 group-hover:to-emerald-500/10 transition-all duration-300">
-                    <svg className="w-7 h-7 text-emerald-500" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                      <polyline points="23 6 13.5 15.5 8.5 10.5 1 18"/>
-                      <polyline points="17 6 23 6 23 12"/>
-                    </svg>
-                  </div>
-                  <h3 className="text-xl font-bold text-foreground mb-3">Ambitious Referral Partners</h3>
-                  <p className="text-muted-foreground leading-relaxed">Users seeking a straightforward way to generate additional income by leveraging U-topia's simple referral program.</p>
-                </div>
-              </div>
-            </div>
           </div>
         </section>
-
-        {/* Team Section */}
-        <TeamSection />
 
         {/* FAQ Section */}
         <section className="container mx-auto px-6 py-24">
