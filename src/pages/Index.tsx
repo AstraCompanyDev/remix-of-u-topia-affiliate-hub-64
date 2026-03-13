@@ -168,7 +168,7 @@ const Index = () => {
                 className="text-lg md:text-xl text-muted-foreground mb-6 opacity-0 animate-fade-in-up leading-relaxed max-w-3xl mx-auto"
                 style={{ animationDelay: '200ms' }}
               >
-                U-Topia is pioneering the future of banking through emerging technology — giving you true ownership of your funds and the ability to earn with your bank. No middlemen, no hidden fees, just you in control.
+                U-Center is a DAO supporting the development of U-Topia — pioneering the future of banking through emerging technology. True ownership of your funds, the ability to earn with your bank, and no middlemen standing in your way.
               </p>
 
               <p 
