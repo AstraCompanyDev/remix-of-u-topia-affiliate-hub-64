@@ -6,12 +6,12 @@ import cardElite from "@/assets/card-elite.jpg";
 
 const packages = [
   {
-    name: "Starter",
-    price: "$100",
+    name: "Starter Pack",
+    price: "$25",
     image: cardStarter,
     popular: false,
     features: [
-      "3% Monthly Dividends",
+      "Entry-Level Access",
       "Basic Crypto Card",
       "Refer & Earn 5%",
       "Community Access",
@@ -20,19 +20,32 @@ const packages = [
   },
   {
     name: "Bronze",
-    price: "$250",
+    price: "$100",
     image: cardStarter,
     popular: false,
     features: [
-      "5% Monthly Dividends",
-      "Silver Crypto Card",
-      "Refer & Earn 10%",
+      "3% Monthly Dividends",
+      "Bronze Crypto Card",
+      "Refer & Earn 8%",
       "Community Access",
       "Monthly Reports",
     ],
   },
   {
-    name: "Builder",
+    name: "Silver",
+    price: "$200",
+    image: cardBuilder,
+    popular: false,
+    features: [
+      "5% Monthly Dividends",
+      "Silver Crypto Card",
+      "Refer & Earn 10%",
+      "Priority Support",
+      "Monthly Reports",
+    ],
+  },
+  {
+    name: "Gold",
     price: "$500",
     image: cardBuilder,
     popular: true,
@@ -45,7 +58,7 @@ const packages = [
     ],
   },
   {
-    name: "Elite",
+    name: "Platinum",
     price: "$1,000",
     image: cardElite,
     popular: false,
@@ -58,7 +71,7 @@ const packages = [
     ],
   },
   {
-    name: "VIP",
+    name: "Diamond",
     price: "$2,500",
     image: cardElite,
     popular: false,
@@ -120,7 +133,7 @@ export function InvestmentPackages() {
 
         {/* Cards Grid */}
         <div
-          className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-5 lg:gap-6 max-w-7xl mx-auto opacity-0 animate-fade-in-up"
+          className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-6 gap-4 lg:gap-5 max-w-[1400px] mx-auto opacity-0 animate-fade-in-up"
           style={{ animationDelay: "250ms" }}
         >
           {packages.map((pkg) => (
