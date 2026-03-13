@@ -79,7 +79,7 @@ export function InvestmentPackages() {
             style={{ animationDelay: "150ms" }}
           >
             Choose Your Path to{" "}
-            <span className="bg-gradient-to-r from-primary via-blue-400 to-primary bg-clip-text text-transparent">
+            <span className="gradient-text">
               Financial Freedom
             </span>
           </h2>
@@ -109,7 +109,7 @@ export function InvestmentPackages() {
               {/* Most Popular Badge */}
               {pkg.popular && (
                 <div className="absolute -top-4 left-1/2 -translate-x-1/2 z-10">
-                  <div className="px-5 py-1.5 bg-gradient-to-r from-primary to-blue-500 rounded-full shadow-lg shadow-primary/40">
+                  <div className="px-5 py-1.5 gradient-primary rounded-full shadow-lg shadow-primary/40">
                     <span className="text-xs font-bold text-white uppercase tracking-wider whitespace-nowrap">
                       Most Popular
                     </span>
@@ -145,7 +145,7 @@ export function InvestmentPackages() {
                   <button
                     className={`w-full py-3 rounded-xl font-semibold text-sm transition-all ${
                       pkg.popular
-                        ? "bg-gradient-to-r from-primary to-blue-500 text-white hover:shadow-lg hover:shadow-primary/30"
+                        ? "gradient-primary text-white hover:shadow-lg hover:shadow-primary/30"
                         : "bg-white/5 border border-white/10 text-white hover:bg-white/10"
                     }`}
                   >

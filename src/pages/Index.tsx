@@ -80,7 +80,7 @@ const Index = () => {
                 style={{ animationDelay: '400ms' }}
               >
                 <Link to="/auth">
-                  <Button className="bg-primary hover:bg-primary/90 text-white font-semibold px-4 sm:px-8 py-4 sm:py-6 text-sm sm:text-base rounded-full shadow-lg shadow-primary/25 hover:shadow-xl hover:shadow-primary/30 transition-all">
+                  <Button className="gradient-primary text-white font-semibold px-4 sm:px-8 py-4 sm:py-6 text-sm sm:text-base rounded-full shadow-lg shadow-primary/25 hover:shadow-xl hover:shadow-primary/30 hover:opacity-90 transition-all">
                     Get Started
                     <svg className="w-4 h-4 sm:w-5 sm:h-5 ml-1 sm:ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
@@ -211,7 +211,7 @@ const Index = () => {
                 style={{ animationDelay: '150ms' }}
               >
                 What is a{" "}
-                <span className="bg-gradient-to-r from-primary via-blue-400 to-primary bg-clip-text text-transparent">
+                <span className="gradient-text">
                   Co-Operative DAO?
                 </span>
               </h2>
@@ -445,7 +445,7 @@ const Index = () => {
               </span>
               
               <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-6 tracking-tight leading-tight">
-                Ready to <span className="bg-gradient-to-r from-primary via-orange-400 to-primary bg-clip-text text-transparent">Build</span> Your Future?
+                Ready to <span className="gradient-text">Build</span> Your Future?
               </h2>
               
               <p className="text-lg md:text-xl text-gray-400 mb-10 leading-relaxed max-w-2xl mx-auto">
