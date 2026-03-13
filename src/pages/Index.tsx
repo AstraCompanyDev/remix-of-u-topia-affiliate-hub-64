@@ -41,7 +41,7 @@ const Index = () => {
               >
                 <span className="inline-flex items-center gap-2 px-3 sm:px-4 py-1.5 sm:py-2 rounded-full bg-white/5 border border-white/10 text-gray-300 text-xs sm:text-sm font-medium mb-6 sm:mb-8">
                   <span className="w-1.5 sm:w-2 h-1.5 sm:h-2 rounded-full bg-primary animate-pulse"></span>
-                  Earn through real platform activity
+                  A DAO supporting the future of banking
                 </span>
               </div>
               
