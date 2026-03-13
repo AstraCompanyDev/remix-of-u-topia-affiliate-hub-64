@@ -11,7 +11,7 @@ import { useAdmin } from '@/hooks/useAdmin';
 import { useAdminStats } from '@/hooks/useAdminStats';
 import { useToast } from '@/hooks/use-toast';
 import { supabase } from '@/integrations/supabase/client';
-import logoLight from '@/assets/u-topia-logo-light.png';
+import logoLight from '@/assets/u-center-logo.png';
 import { 
   Users, 
   UserCheck, 

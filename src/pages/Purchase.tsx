@@ -12,7 +12,7 @@ import {
   AccordionTrigger,
 } from "@/components/ui/accordion";
 import { Loader2 } from "lucide-react";
-import logoLight from "@/assets/u-topia-logo-light.png";
+import logoLight from "@/assets/u-center-logo.png";
 import badgeBronze from "@/assets/badge-bronze.png";
 import badgeSilver from "@/assets/badge-silver.png";
 import badgeGold from "@/assets/badge-gold.png";

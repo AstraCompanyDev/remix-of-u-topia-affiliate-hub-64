@@ -5,7 +5,7 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { useToast } from "@/hooks/use-toast";
 import { supabase } from "@/integrations/supabase/client";
-import logoLight from "@/assets/u-topia-logo-light.png";
+import logoLight from "@/assets/u-center-logo.png";
 import { Eye, EyeOff, Lock, ArrowRight, Loader2, RefreshCw } from "lucide-react";
 
 type PageState = "loading" | "valid" | "invalid" | "success";

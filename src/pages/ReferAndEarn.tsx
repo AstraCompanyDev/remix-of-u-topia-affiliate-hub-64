@@ -2,7 +2,7 @@ import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import Header from "@/components/Header";
 import { ReferralToolsCard } from "@/components/ReferralToolsCard";
-import logoLight from "@/assets/u-topia-logo-light.png";
+import logoLight from "@/assets/u-center-logo.png";
 import { 
   Link2, 
   UserPlus, 

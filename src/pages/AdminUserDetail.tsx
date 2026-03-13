@@ -6,7 +6,7 @@ import Header from '@/components/Header';
 import { useAdmin } from '@/hooks/useAdmin';
 import { useToast } from '@/hooks/use-toast';
 import { supabase } from '@/integrations/supabase/client';
-import logoLight from '@/assets/u-topia-logo-light.png';
+import logoLight from '@/assets/u-center-logo.png';
 import { 
   ArrowLeft, 
   Loader2, 
