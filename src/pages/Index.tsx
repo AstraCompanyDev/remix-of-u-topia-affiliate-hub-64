@@ -4,13 +4,10 @@ import Header from "@/components/Header";
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
 import { MembershipTiers } from "@/components/MembershipTiers";
 import { InvestmentPackages } from "@/components/InvestmentPackages";
+import { VisionCardSelector } from "@/components/VisionCardSelector";
 import logoLight from "@/assets/u-center-logo.png";
 import logoDark from "@/assets/u-topia-logo-dark.png";
-import heroVisual from "@/assets/hero-visual-new.png";
 import membershipBadge from "@/assets/membership-badge.png";
-import visionOwnership from "@/assets/vision-ownership.jpg";
-import visionEarn from "@/assets/vision-earn.jpg";
-import visionTech from "@/assets/vision-tech.jpg";
 
 const Index = () => {
   return (
@@ -169,38 +166,10 @@ const Index = () => {
               </p>
 
               <div 
-                className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-12 opacity-0 animate-fade-in-up"
+                className="opacity-0 animate-fade-in-up"
                 style={{ animationDelay: '300ms' }}
               >
-                <div className="group rounded-2xl bg-card/50 border border-border/50 backdrop-blur-sm overflow-hidden hover:-translate-y-1 transition-transform duration-300">
-                  <div className="aspect-[4/3] overflow-hidden">
-                    <img src={visionOwnership} alt="True Ownership" className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
-                  </div>
-                  <div className="p-6">
-                    <h3 className="text-lg font-bold text-foreground mb-2">True Ownership</h3>
-                    <p className="text-sm text-muted-foreground">Your assets remain yours. Non-custodial accounts and full transparency over every transaction.</p>
-                  </div>
-                </div>
-
-                <div className="group rounded-2xl bg-card/50 border border-border/50 backdrop-blur-sm overflow-hidden hover:-translate-y-1 transition-transform duration-300">
-                  <div className="aspect-[4/3] overflow-hidden">
-                    <img src={visionEarn} alt="Earn With Your Bank" className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
-                  </div>
-                  <div className="p-6">
-                    <h3 className="text-lg font-bold text-foreground mb-2">Earn With Your Bank</h3>
-                    <p className="text-sm text-muted-foreground">Generate real rewards from everyday banking activity — payments, savings, and referrals.</p>
-                  </div>
-                </div>
-
-                <div className="group rounded-2xl bg-card/50 border border-border/50 backdrop-blur-sm overflow-hidden hover:-translate-y-1 transition-transform duration-300">
-                  <div className="aspect-[4/3] overflow-hidden">
-                    <img src={visionTech} alt="Emerging Technology" className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
-                  </div>
-                  <div className="p-6">
-                    <h3 className="text-lg font-bold text-foreground mb-2">Emerging Technology</h3>
-                    <p className="text-sm text-muted-foreground">Built on cutting-edge fintech and blockchain infrastructure for a borderless financial future.</p>
-                  </div>
-                </div>
+                <VisionCardSelector />
               </div>
 
               <div 
