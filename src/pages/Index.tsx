@@ -8,6 +8,9 @@ import logoLight from "@/assets/u-center-logo.png";
 import logoDark from "@/assets/u-topia-logo-dark.png";
 import heroVisual from "@/assets/hero-visual-new.png";
 import membershipBadge from "@/assets/membership-badge.png";
+import visionOwnership from "@/assets/vision-ownership.jpg";
+import visionEarn from "@/assets/vision-earn.jpg";
+import visionTech from "@/assets/vision-tech.jpg";
 
 const Index = () => {
   return (
