@@ -7,6 +7,19 @@ import cardElite from "@/assets/card-elite.jpg";
 const packages = [
   {
     name: "Starter",
+    price: "$100",
+    image: cardStarter,
+    popular: false,
+    features: [
+      "3% Monthly Dividends",
+      "Basic Crypto Card",
+      "Refer & Earn 5%",
+      "Community Access",
+      "Monthly Reports",
+    ],
+  },
+  {
+    name: "Bronze",
     price: "$250",
     image: cardStarter,
     popular: false,
@@ -37,11 +50,24 @@ const packages = [
     image: cardElite,
     popular: false,
     features: [
+      "10% Monthly Dividends",
+      "Platinum Crypto Card",
+      "Refer & Earn 18%",
+      "VIP Support",
+      "Global Retreats",
+    ],
+  },
+  {
+    name: "VIP",
+    price: "$2,500",
+    image: cardElite,
+    popular: false,
+    features: [
       "12% Monthly Dividends",
       "Black Crypto Card",
       "Refer & Earn 20%",
       "VIP Concierge",
-      "Global Retreats",
+      "Exclusive Retreats",
     ],
   },
 ];
