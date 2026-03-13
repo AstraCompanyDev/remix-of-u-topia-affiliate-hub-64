@@ -1,87 +1,48 @@
 import { Link } from "react-router-dom";
 
-import cardStarter from "@/assets/card-starter.jpg";
-import cardBuilder from "@/assets/card-builder.jpg";
-import cardElite from "@/assets/card-elite.jpg";
+import packStarter from "@/assets/pack-starter.jpg";
+import packBronze from "@/assets/pack-bronze.jpg";
+import packSilver from "@/assets/pack-silver.jpg";
+import packGold from "@/assets/pack-gold.jpg";
+import packPlatinum from "@/assets/pack-platinum.jpg";
+import packDiamond from "@/assets/pack-diamond.jpg";
 
 const packages = [
   {
     name: "Starter Pack",
     price: "$25",
-    image: cardStarter,
+    image: packStarter,
     popular: false,
-    features: [
-      "Entry-Level Access",
-      "Basic Crypto Card",
-      "Refer & Earn 5%",
-      "Community Access",
-      "Monthly Reports",
-    ],
   },
   {
     name: "Bronze",
     price: "$100",
-    image: cardStarter,
+    image: packBronze,
     popular: false,
-    features: [
-      "3% Monthly Dividends",
-      "Bronze Crypto Card",
-      "Refer & Earn 8%",
-      "Community Access",
-      "Monthly Reports",
-    ],
   },
   {
     name: "Silver",
     price: "$200",
-    image: cardBuilder,
+    image: packSilver,
     popular: false,
-    features: [
-      "5% Monthly Dividends",
-      "Silver Crypto Card",
-      "Refer & Earn 10%",
-      "Priority Support",
-      "Monthly Reports",
-    ],
   },
   {
     name: "Gold",
     price: "$500",
-    image: cardBuilder,
+    image: packGold,
     popular: true,
-    features: [
-      "8% Monthly Dividends",
-      "Gold Crypto Card",
-      "Refer & Earn 15%",
-      "Priority Support",
-      "Exclusive Events",
-    ],
   },
   {
     name: "Platinum",
     price: "$1,000",
-    image: cardElite,
+    image: packPlatinum,
     popular: false,
-    features: [
-      "10% Monthly Dividends",
-      "Platinum Crypto Card",
-      "Refer & Earn 18%",
-      "VIP Support",
-      "Global Retreats",
-    ],
   },
   {
     name: "Diamond",
     price: "$2,500",
-    image: cardElite,
+    image: packDiamond,
     popular: false,
-    features: [
-      "12% Monthly Dividends",
-      "Black Crypto Card",
-      "Refer & Earn 20%",
-      "VIP Concierge",
-      "Exclusive Retreats",
-    ],
   },
 ];
 
