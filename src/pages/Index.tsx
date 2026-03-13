@@ -287,7 +287,7 @@ const Index = () => {
       <div className="bg-background">
         {/* FAQ Section */}
         <section className="container mx-auto px-6 py-24">
-          <div className="max-w-4xl mx-auto">
+          <div className="max-w-6xl mx-auto">
             {/* Header */}
             <div className="text-center mb-16">
               <span 
