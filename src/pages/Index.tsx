@@ -164,7 +164,7 @@ const Index = () => {
                 className="text-4xl md:text-5xl lg:text-6xl font-bold text-foreground mb-8 opacity-0 animate-fade-in-up tracking-tight leading-tight"
                 style={{ animationDelay: '150ms' }}
               >
-                U-Topia — <span className="bg-gradient-to-r from-primary via-orange-400 to-primary bg-clip-text text-transparent">Your Bank, Your Rules</span>
+                U-Topia — Your Bank, Your Rules
               </h2>
 
               <p 
