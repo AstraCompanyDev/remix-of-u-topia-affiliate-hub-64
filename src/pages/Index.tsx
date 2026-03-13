@@ -211,7 +211,7 @@ const Index = () => {
                 style={{ animationDelay: '150ms' }}
               >
                 What is a{" "}
-                <span className="bg-gradient-to-r from-primary via-blue-400 to-primary bg-clip-text text-transparent">
+                <span className="gradient-text">
                   Co-Operative DAO?
                 </span>
               </h2>
