@@ -182,36 +182,34 @@ const Index = () => {
                 className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-12 opacity-0 animate-fade-in-up"
                 style={{ animationDelay: '300ms' }}
               >
-                <div className="p-6 rounded-2xl bg-card/50 border border-border/50 backdrop-blur-sm">
-                  <div className="w-12 h-12 rounded-xl bg-primary/10 border border-primary/20 flex items-center justify-center mx-auto mb-4">
-                    <svg className="w-6 h-6 text-primary" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                      <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
-                    </svg>
+                <div className="group rounded-2xl bg-card/50 border border-border/50 backdrop-blur-sm overflow-hidden hover:-translate-y-1 transition-transform duration-300">
+                  <div className="aspect-[4/3] overflow-hidden">
+                    <img src={visionOwnership} alt="True Ownership" className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
                   </div>
-                  <h3 className="text-lg font-bold text-foreground mb-2">True Ownership</h3>
-                  <p className="text-sm text-muted-foreground">Your assets remain yours. Non-custodial accounts and full transparency over every transaction.</p>
+                  <div className="p-6">
+                    <h3 className="text-lg font-bold text-foreground mb-2">True Ownership</h3>
+                    <p className="text-sm text-muted-foreground">Your assets remain yours. Non-custodial accounts and full transparency over every transaction.</p>
+                  </div>
                 </div>
 
-                <div className="p-6 rounded-2xl bg-card/50 border border-border/50 backdrop-blur-sm">
-                  <div className="w-12 h-12 rounded-xl bg-primary/10 border border-primary/20 flex items-center justify-center mx-auto mb-4">
-                    <svg className="w-6 h-6 text-primary" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                      <circle cx="12" cy="12" r="10"/>
-                      <path d="M12 6v6l4 2"/>
-                    </svg>
+                <div className="group rounded-2xl bg-card/50 border border-border/50 backdrop-blur-sm overflow-hidden hover:-translate-y-1 transition-transform duration-300">
+                  <div className="aspect-[4/3] overflow-hidden">
+                    <img src={visionEarn} alt="Earn With Your Bank" className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
                   </div>
-                  <h3 className="text-lg font-bold text-foreground mb-2">Earn With Your Bank</h3>
-                  <p className="text-sm text-muted-foreground">Generate real rewards from everyday banking activity — payments, savings, and referrals.</p>
+                  <div className="p-6">
+                    <h3 className="text-lg font-bold text-foreground mb-2">Earn With Your Bank</h3>
+                    <p className="text-sm text-muted-foreground">Generate real rewards from everyday banking activity — payments, savings, and referrals.</p>
+                  </div>
                 </div>
 
-                <div className="p-6 rounded-2xl bg-card/50 border border-border/50 backdrop-blur-sm">
-                  <div className="w-12 h-12 rounded-xl bg-primary/10 border border-primary/20 flex items-center justify-center mx-auto mb-4">
-                    <svg className="w-6 h-6 text-primary" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                      <polyline points="23 6 13.5 15.5 8.5 10.5 1 18"/>
-                      <polyline points="17 6 23 6 23 12"/>
-                    </svg>
+                <div className="group rounded-2xl bg-card/50 border border-border/50 backdrop-blur-sm overflow-hidden hover:-translate-y-1 transition-transform duration-300">
+                  <div className="aspect-[4/3] overflow-hidden">
+                    <img src={visionTech} alt="Emerging Technology" className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
                   </div>
-                  <h3 className="text-lg font-bold text-foreground mb-2">Emerging Technology</h3>
-                  <p className="text-sm text-muted-foreground">Built on cutting-edge fintech and blockchain infrastructure for a borderless financial future.</p>
+                  <div className="p-6">
+                    <h3 className="text-lg font-bold text-foreground mb-2">Emerging Technology</h3>
+                    <p className="text-sm text-muted-foreground">Built on cutting-edge fintech and blockchain infrastructure for a borderless financial future.</p>
+                  </div>
                 </div>
               </div>
 
