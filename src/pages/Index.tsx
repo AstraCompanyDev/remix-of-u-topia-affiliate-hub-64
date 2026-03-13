@@ -8,6 +8,9 @@ import logoLight from "@/assets/u-center-logo.png";
 import logoDark from "@/assets/u-topia-logo-dark.png";
 import heroVisual from "@/assets/hero-visual-new.png";
 import membershipBadge from "@/assets/membership-badge.png";
+import visionOwnership from "@/assets/vision-ownership.jpg";
+import visionEarn from "@/assets/vision-earn.jpg";
+import visionTech from "@/assets/vision-tech.jpg";
 
 const Index = () => {
   return (
@@ -41,7 +44,7 @@ const Index = () => {
               >
                 <span className="inline-flex items-center gap-2 px-3 sm:px-4 py-1.5 sm:py-2 rounded-full bg-white/5 border border-white/10 text-gray-300 text-xs sm:text-sm font-medium mb-6 sm:mb-8">
                   <span className="w-1.5 sm:w-2 h-1.5 sm:h-2 rounded-full bg-primary animate-pulse"></span>
-                  Earn through real platform activity
+                  A DAO supporting the future of banking
                 </span>
               </div>
               
@@ -50,8 +53,8 @@ const Index = () => {
                 className="text-3xl sm:text-4xl md:text-5xl lg:text-7xl font-bold mb-6 opacity-0 animate-fade-in-up leading-tight whitespace-nowrap"
                 style={{ animationDelay: '200ms' }}
               >
-                <span className="text-white">Build with </span>
-                <span className="gradient-text">U-topia</span>
+                <span className="text-white">Welcome to </span>
+                <span className="gradient-text">U-Center</span>
               </h1>
               
               {/* Subheadline */}
@@ -59,8 +62,8 @@ const Index = () => {
                 className="text-base sm:text-lg md:text-xl text-gray-400 mb-6 sm:mb-8 max-w-xl opacity-0 animate-fade-in-up"
                 style={{ animationDelay: '300ms' }}
               >
-                A digital financial ecosystem that rewards growth, usage, and contribution. 
-                Incentives aligned with real economic activity, not hype.
+                U-Center is a DAO dedicated to supporting the development of U-Topia — the future of banking. 
+                Join the community shaping a new financial era.
               </p>
 
               {/* Tagline */}
@@ -168,7 +171,7 @@ const Index = () => {
                 className="text-lg md:text-xl text-muted-foreground mb-6 opacity-0 animate-fade-in-up leading-relaxed max-w-3xl mx-auto"
                 style={{ animationDelay: '200ms' }}
               >
-                U-Topia is pioneering the future of banking through emerging technology — giving you true ownership of your funds and the ability to earn with your bank. No middlemen, no hidden fees, just you in control.
+                U-Center is a DAO supporting the development of U-Topia — pioneering the future of banking through emerging technology. True ownership of your funds, the ability to earn with your bank, and no middlemen standing in your way.
               </p>
 
               <p 
@@ -182,36 +185,34 @@ const Index = () => {
                 className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-12 opacity-0 animate-fade-in-up"
                 style={{ animationDelay: '300ms' }}
               >
-                <div className="p-6 rounded-2xl bg-card/50 border border-border/50 backdrop-blur-sm">
-                  <div className="w-12 h-12 rounded-xl bg-primary/10 border border-primary/20 flex items-center justify-center mx-auto mb-4">
-                    <svg className="w-6 h-6 text-primary" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                      <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
-                    </svg>
+                <div className="group rounded-2xl bg-card/50 border border-border/50 backdrop-blur-sm overflow-hidden hover:-translate-y-1 transition-transform duration-300">
+                  <div className="aspect-[4/3] overflow-hidden">
+                    <img src={visionOwnership} alt="True Ownership" className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
                   </div>
-                  <h3 className="text-lg font-bold text-foreground mb-2">True Ownership</h3>
-                  <p className="text-sm text-muted-foreground">Your assets remain yours. Non-custodial accounts and full transparency over every transaction.</p>
+                  <div className="p-6">
+                    <h3 className="text-lg font-bold text-foreground mb-2">True Ownership</h3>
+                    <p className="text-sm text-muted-foreground">Your assets remain yours. Non-custodial accounts and full transparency over every transaction.</p>
+                  </div>
                 </div>
 
-                <div className="p-6 rounded-2xl bg-card/50 border border-border/50 backdrop-blur-sm">
-                  <div className="w-12 h-12 rounded-xl bg-primary/10 border border-primary/20 flex items-center justify-center mx-auto mb-4">
-                    <svg className="w-6 h-6 text-primary" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                      <circle cx="12" cy="12" r="10"/>
-                      <path d="M12 6v6l4 2"/>
-                    </svg>
+                <div className="group rounded-2xl bg-card/50 border border-border/50 backdrop-blur-sm overflow-hidden hover:-translate-y-1 transition-transform duration-300">
+                  <div className="aspect-[4/3] overflow-hidden">
+                    <img src={visionEarn} alt="Earn With Your Bank" className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
                   </div>
-                  <h3 className="text-lg font-bold text-foreground mb-2">Earn With Your Bank</h3>
-                  <p className="text-sm text-muted-foreground">Generate real rewards from everyday banking activity — payments, savings, and referrals.</p>
+                  <div className="p-6">
+                    <h3 className="text-lg font-bold text-foreground mb-2">Earn With Your Bank</h3>
+                    <p className="text-sm text-muted-foreground">Generate real rewards from everyday banking activity — payments, savings, and referrals.</p>
+                  </div>
                 </div>
 
-                <div className="p-6 rounded-2xl bg-card/50 border border-border/50 backdrop-blur-sm">
-                  <div className="w-12 h-12 rounded-xl bg-primary/10 border border-primary/20 flex items-center justify-center mx-auto mb-4">
-                    <svg className="w-6 h-6 text-primary" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                      <polyline points="23 6 13.5 15.5 8.5 10.5 1 18"/>
-                      <polyline points="17 6 23 6 23 12"/>
-                    </svg>
+                <div className="group rounded-2xl bg-card/50 border border-border/50 backdrop-blur-sm overflow-hidden hover:-translate-y-1 transition-transform duration-300">
+                  <div className="aspect-[4/3] overflow-hidden">
+                    <img src={visionTech} alt="Emerging Technology" className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
                   </div>
-                  <h3 className="text-lg font-bold text-foreground mb-2">Emerging Technology</h3>
-                  <p className="text-sm text-muted-foreground">Built on cutting-edge fintech and blockchain infrastructure for a borderless financial future.</p>
+                  <div className="p-6">
+                    <h3 className="text-lg font-bold text-foreground mb-2">Emerging Technology</h3>
+                    <p className="text-sm text-muted-foreground">Built on cutting-edge fintech and blockchain infrastructure for a borderless financial future.</p>
+                  </div>
                 </div>
               </div>
 
