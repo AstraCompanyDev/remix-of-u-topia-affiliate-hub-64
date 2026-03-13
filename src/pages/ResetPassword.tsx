@@ -23,7 +23,7 @@ const ResetPassword = () => {
 
   useEffect(() => {
     let isSubscribed = true;
-    let timeoutId: NodeJS.Timeout;
+    let timeoutId: ReturnType<typeof setTimeout>;
 
     // Listen for auth state changes - PASSWORD_RECOVERY event is the key
     const { data: { subscription } } = supabase.auth.onAuthStateChange((event, session) => {
