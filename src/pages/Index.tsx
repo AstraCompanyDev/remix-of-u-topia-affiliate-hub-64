@@ -58,7 +58,7 @@ const Index = () => {
               
               {/* Subheadline */}
               <p 
-                className="text-base sm:text-lg md:text-xl text-gray-400 mb-6 sm:mb-8 max-w-xl opacity-0 animate-fade-in-up"
+                className="text-base sm:text-lg md:text-xl text-gray-400 mb-6 sm:mb-8 max-w-xl mx-auto opacity-0 animate-fade-in-up"
                 style={{ animationDelay: '300ms' }}
               >
                 U-Center is a DAO dedicated to supporting the development of U-Topia — the future of banking. 
