@@ -7,6 +7,19 @@ import cardElite from "@/assets/card-elite.jpg";
 const packages = [
   {
     name: "Starter",
+    price: "$100",
+    image: cardStarter,
+    popular: false,
+    features: [
+      "3% Monthly Dividends",
+      "Basic Crypto Card",
+      "Refer & Earn 5%",
+      "Community Access",
+      "Monthly Reports",
+    ],
+  },
+  {
+    name: "Bronze",
     price: "$250",
     image: cardStarter,
     popular: false,
@@ -37,11 +50,24 @@ const packages = [
     image: cardElite,
     popular: false,
     features: [
+      "10% Monthly Dividends",
+      "Platinum Crypto Card",
+      "Refer & Earn 18%",
+      "VIP Support",
+      "Global Retreats",
+    ],
+  },
+  {
+    name: "VIP",
+    price: "$2,500",
+    image: cardElite,
+    popular: false,
+    features: [
       "12% Monthly Dividends",
       "Black Crypto Card",
       "Refer & Earn 20%",
       "VIP Concierge",
-      "Global Retreats",
+      "Exclusive Retreats",
     ],
   },
 ];
@@ -94,7 +120,7 @@ export function InvestmentPackages() {
 
         {/* Cards Grid */}
         <div
-          className="grid grid-cols-1 md:grid-cols-3 gap-6 lg:gap-8 max-w-5xl mx-auto opacity-0 animate-fade-in-up"
+          className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-5 lg:gap-6 max-w-7xl mx-auto opacity-0 animate-fade-in-up"
           style={{ animationDelay: "250ms" }}
         >
           {packages.map((pkg) => (
