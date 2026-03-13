@@ -109,7 +109,7 @@ export function InvestmentPackages() {
               {/* Most Popular Badge */}
               {pkg.popular && (
                 <div className="absolute -top-4 left-1/2 -translate-x-1/2 z-10">
-                  <div className="px-5 py-1.5 bg-gradient-to-r from-primary to-blue-500 rounded-full shadow-lg shadow-primary/40">
+                  <div className="px-5 py-1.5 gradient-primary rounded-full shadow-lg shadow-primary/40">
                     <span className="text-xs font-bold text-white uppercase tracking-wider whitespace-nowrap">
                       Most Popular
                     </span>
