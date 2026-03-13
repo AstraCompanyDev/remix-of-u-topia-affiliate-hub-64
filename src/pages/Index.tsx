@@ -141,10 +141,7 @@ const Index = () => {
       <div className="bg-background">
 
         {/* U-Topia Vision Section */}
-        <section className="relative py-28 overflow-hidden bg-gradient-to-b from-background via-background to-[#0a0f1a]">
-          <div className="absolute inset-0 pointer-events-none">
-            <div className="absolute w-[600px] h-[600px] top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 rounded-full blur-[150px] opacity-15 bg-gradient-to-r from-primary/30 to-cyan-500/30" />
-          </div>
+        <section className="relative py-28 overflow-hidden bg-background">
 
           <div className="relative container mx-auto px-6">
             <div className="max-w-4xl mx-auto text-center">
