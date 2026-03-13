@@ -3,7 +3,7 @@ import { Link, useSearchParams } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { CheckCircle2, Loader2, Mail } from "lucide-react";
 import { supabase } from "@/integrations/supabase/client";
-import logoLight from "@/assets/u-topia-logo-light.png";
+import logoLight from "@/assets/u-center-logo.png";
 
 const PurchaseSuccess = () => {
   const [searchParams] = useSearchParams();

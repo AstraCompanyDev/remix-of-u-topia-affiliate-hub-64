@@ -3,7 +3,7 @@ import { Link, useLocation, useNavigate } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { supabase } from "@/integrations/supabase/client";
 import { LogOut, Menu, X, User, Settings } from "lucide-react";
-import logoLight from "@/assets/u-topia-logo-light.png";
+import logoLight from "@/assets/u-center-logo.png";
 import {
   DropdownMenu,
   DropdownMenuContent,
