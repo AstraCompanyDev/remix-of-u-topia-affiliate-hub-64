@@ -133,7 +133,7 @@ export function InvestmentPackages() {
 
         {/* Cards Grid */}
         <div
-          className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-5 lg:gap-6 max-w-7xl mx-auto opacity-0 animate-fade-in-up"
+          className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-6 gap-4 lg:gap-5 max-w-[1400px] mx-auto opacity-0 animate-fade-in-up"
           style={{ animationDelay: "250ms" }}
         >
           {packages.map((pkg) => (
