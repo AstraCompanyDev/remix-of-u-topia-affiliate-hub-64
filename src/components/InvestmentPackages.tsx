@@ -145,7 +145,7 @@ export function InvestmentPackages() {
                   <button
                     className={`w-full py-3 rounded-xl font-semibold text-sm transition-all ${
                       pkg.popular
-                        ? "bg-gradient-to-r from-primary to-blue-500 text-white hover:shadow-lg hover:shadow-primary/30"
+                        ? "gradient-primary text-white hover:shadow-lg hover:shadow-primary/30"
                         : "bg-white/5 border border-white/10 text-white hover:bg-white/10"
                     }`}
                   >
