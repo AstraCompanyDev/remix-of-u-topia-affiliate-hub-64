@@ -445,7 +445,7 @@ const Index = () => {
               </span>
               
               <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-6 tracking-tight leading-tight">
-                Ready to <span className="bg-gradient-to-r from-primary via-orange-400 to-primary bg-clip-text text-transparent">Build</span> Your Future?
+                Ready to <span className="gradient-text">Build</span> Your Future?
               </h2>
               
               <p className="text-lg md:text-xl text-gray-400 mb-10 leading-relaxed max-w-2xl mx-auto">
