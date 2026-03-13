@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import { Check } from "lucide-react";
+
 import cardStarter from "@/assets/card-starter.jpg";
 import cardBuilder from "@/assets/card-builder.jpg";
 import cardElite from "@/assets/card-elite.jpg";
