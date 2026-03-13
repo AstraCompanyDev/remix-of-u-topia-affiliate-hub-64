@@ -7,7 +7,7 @@
 @layer base {
   :root {
     /* Light backgrounds matching u-topia.com */
-    --background: 0 0% 100%;
+    --background: 220 14% 97%;
     --foreground: 220 30% 15%;
 
     /* Card surfaces */
