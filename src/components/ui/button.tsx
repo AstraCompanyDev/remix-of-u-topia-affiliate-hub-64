@@ -29,7 +29,7 @@ const buttonVariants = cva(
         glass:
           "bg-secondary border border-border text-foreground hover:bg-secondary/80 hover:border-primary/30",
         glow:
-          "bg-primary text-primary-foreground glow-primary hover:shadow-xl hover:shadow-primary/40 font-bold",
+          "gradient-primary text-primary-foreground hover:shadow-xl hover:shadow-primary/40 font-bold",
       },
       size: {
         default: "h-11 px-6 py-2",
