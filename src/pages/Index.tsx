@@ -59,8 +59,8 @@ const Index = () => {
                 className="text-base sm:text-lg md:text-xl text-gray-400 mb-6 sm:mb-8 max-w-xl opacity-0 animate-fade-in-up"
                 style={{ animationDelay: '300ms' }}
               >
-                A digital financial ecosystem that rewards growth, usage, and contribution. 
-                Incentives aligned with real economic activity, not hype.
+                U-Center is a DAO dedicated to supporting the development of U-Topia — the future of banking. 
+                Join the community shaping a new financial era.
               </p>
 
               {/* Tagline */}
