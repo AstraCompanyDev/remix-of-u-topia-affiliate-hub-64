@@ -79,7 +79,7 @@ export function InvestmentPackages() {
             style={{ animationDelay: "150ms" }}
           >
             Choose Your Path to{" "}
-            <span className="bg-gradient-to-r from-primary via-blue-400 to-primary bg-clip-text text-transparent">
+            <span className="gradient-text">
               Financial Freedom
             </span>
           </h2>
