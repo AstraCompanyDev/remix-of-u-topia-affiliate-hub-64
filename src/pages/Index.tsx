@@ -99,7 +99,7 @@ const Index = () => {
 
               {/* Stats */}
               <div 
-                className="flex flex-wrap gap-6 sm:gap-8 md:gap-12 mt-10 sm:mt-16 pt-6 sm:pt-8 border-t border-white/10 opacity-0 animate-fade-in-up"
+                className="flex flex-wrap justify-center gap-6 sm:gap-8 md:gap-12 mt-10 sm:mt-16 pt-6 sm:pt-8 border-t border-white/10 opacity-0 animate-fade-in-up"
                 style={{ animationDelay: '500ms' }}
               >
                 <div>
