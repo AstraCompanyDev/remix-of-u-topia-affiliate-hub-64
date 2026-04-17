@@ -126,8 +126,7 @@ export function InvestmentPackages() {
             className="text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-6 opacity-0 animate-fade-in-up tracking-tight"
             style={{ animationDelay: "150ms" }}
           >
-            Choose Your Path to{" "}
-            <span className="gradient-text">Financial Freedom</span>
+            Choose Your <span className="gradient-text">Path</span>
           </h2>
           <p
             className="text-lg md:text-xl text-gray-400 max-w-2xl mx-auto opacity-0 animate-fade-in-up leading-relaxed"
