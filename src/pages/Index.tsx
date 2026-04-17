@@ -98,7 +98,7 @@ const Index = () => {
       </div>
 
       {/* ============================================================
-          MEET U-TOPIA — The Ecosystem (river / watershed)
+          MEET U-TOPIA — The Ecosystem + U-TOPIA, U CENTER, and You
          ============================================================ */}
       <section className="relative bg-[#0a0f1a] py-28 overflow-hidden border-t border-white/5">
         <div className="absolute inset-0 pointer-events-none overflow-hidden">
@@ -107,36 +107,62 @@ const Index = () => {
         </div>
 
         <div className="relative container mx-auto px-6">
-          <div className="max-w-4xl mx-auto text-center">
-            <span
-              className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-gradient-to-r from-primary/20 to-purple-500/20 border border-primary/30 text-primary text-sm font-semibold mb-8 opacity-0 animate-fade-in-up backdrop-blur-sm"
-              style={{ animationDelay: '100ms' }}
-            >
-              The Ecosystem
-            </span>
-            <h2
-              className="text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-6 opacity-0 animate-fade-in-up tracking-tight"
-              style={{ animationDelay: '150ms' }}
-            >
-              Meet <span className="gradient-text">U-TOPIA</span>
-            </h2>
-            <p
-              className="text-lg md:text-xl text-gray-400 mb-10 opacity-0 animate-fade-in-up leading-relaxed"
-              style={{ animationDelay: '200ms' }}
-            >
-              A family of companies built on one belief: business should serve everyone it touches. Each is its own tributary, all flowing into the same shared home — <span className="text-white font-semibold">U CENTER</span>.
-            </p>
+          <div className="max-w-5xl mx-auto">
+            <div className="text-center mb-14">
+              <span
+                className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-gradient-to-r from-primary/20 to-purple-500/20 border border-primary/30 text-primary text-sm font-semibold mb-8 opacity-0 animate-fade-in-up backdrop-blur-sm"
+                style={{ animationDelay: '100ms' }}
+              >
+                The Ecosystem
+              </span>
+              <h2
+                className="text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-6 opacity-0 animate-fade-in-up tracking-tight"
+                style={{ animationDelay: '150ms' }}
+              >
+                Meet <span className="gradient-text">U-TOPIA</span>
+              </h2>
+              <p
+                className="text-lg md:text-xl text-gray-400 max-w-3xl mx-auto mb-10 opacity-0 animate-fade-in-up leading-relaxed"
+                style={{ animationDelay: '200ms' }}
+              >
+                A family of companies built on one belief: business should serve everyone it touches. Each is its own tributary, all flowing into the same shared home — <span className="text-white font-semibold">U CENTER</span>.
+              </p>
 
-            <blockquote
-              className="relative max-w-3xl mx-auto opacity-0 animate-fade-in-up"
-              style={{ animationDelay: '300ms' }}
-            >
-              <div className="rounded-2xl border border-primary/20 bg-gradient-to-br from-primary/5 to-purple-500/5 backdrop-blur-sm p-8 md:p-10">
-                <p className="text-xl md:text-2xl text-white font-medium leading-relaxed italic">
-                  Built to flow value toward people — not extract it from them.
+              <blockquote
+                className="relative max-w-3xl mx-auto mb-14 opacity-0 animate-fade-in-up"
+                style={{ animationDelay: '300ms' }}
+              >
+                <div className="rounded-2xl border border-primary/20 bg-gradient-to-br from-primary/5 to-purple-500/5 backdrop-blur-sm p-8 md:p-10">
+                  <p className="text-xl md:text-2xl text-white font-medium leading-relaxed italic">
+                    Built to flow value toward people — not extract it from them.
+                  </p>
+                </div>
+              </blockquote>
+            </div>
+
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-6 opacity-0 animate-fade-in-up" style={{ animationDelay: '400ms' }}>
+              <div className="rounded-2xl border border-white/10 bg-gradient-to-b from-[#0f1f35] to-[#0a1628] p-8 text-center">
+                <div className="w-14 h-14 rounded-full gradient-primary mx-auto mb-5 flex items-center justify-center text-white font-bold text-xl shadow-lg shadow-primary/30">1</div>
+                <h3 className="text-xl font-bold text-white mb-3">U-TOPIA</h3>
+                <p className="text-gray-400 text-sm leading-relaxed">
+                  The <span className="text-white">ecosystem</span> — companies built to benefit everyone they touch.
                 </p>
               </div>
-            </blockquote>
+              <div className="rounded-2xl border border-primary/30 bg-gradient-to-b from-[#0f1f35] to-[#0a1628] p-8 text-center shadow-lg shadow-primary/10">
+                <div className="w-14 h-14 rounded-full gradient-primary mx-auto mb-5 flex items-center justify-center text-white font-bold text-xl shadow-lg shadow-primary/30">2</div>
+                <h3 className="text-xl font-bold text-white mb-3">U CENTER</h3>
+                <p className="text-gray-400 text-sm leading-relaxed">
+                  The <span className="text-white">shared home</span> — governance, education, and community infrastructure.
+                </p>
+              </div>
+              <div className="rounded-2xl border border-white/10 bg-gradient-to-b from-[#0f1f35] to-[#0a1628] p-8 text-center">
+                <div className="w-14 h-14 rounded-full gradient-primary mx-auto mb-5 flex items-center justify-center text-white font-bold text-xl shadow-lg shadow-primary/30">3</div>
+                <h3 className="text-xl font-bold text-white mb-3">You</h3>
+                <p className="text-gray-400 text-sm leading-relaxed">
+                  A <span className="text-white">stakeholder</span> with a real voice in how it grows.
+                </p>
+              </div>
+            </div>
           </div>
         </div>
       </section>
