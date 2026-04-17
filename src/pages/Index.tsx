@@ -227,9 +227,6 @@ const Index = () => {
           </div>
         </div>
       </section>
-          </div>
-        </div>
-      </section>
 
       {/* ============================================================
           THE BIG IDEA — Stakeholder Capitalism
