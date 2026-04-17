@@ -220,17 +220,13 @@ const Index = () => {
                 </div>
                 <h3 className="text-xl font-bold text-white mb-3">Permanent Record</h3>
                 <p className="text-gray-400 text-sm leading-relaxed">
-                  Every transaction and decision is recorded on a public blockchain that no one can erase or alter.
+                  Every transaction lives on a public blockchain — no one can erase or alter it.
                 </p>
               </div>
             </div>
-
-            <p
-              className="text-center text-gray-500 text-base mt-12 max-w-2xl mx-auto opacity-0 animate-fade-in-up leading-relaxed"
-              style={{ animationDelay: '400ms' }}
-            >
-              You don't need to be a software engineer to participate in a DAO. You only need to understand what it stands for: <span className="text-white">honest rules, an open process, and a community that holds the power.</span>
-            </p>
+          </div>
+        </div>
+      </section>
           </div>
         </div>
       </section>
