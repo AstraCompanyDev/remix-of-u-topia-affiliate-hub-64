@@ -68,15 +68,6 @@ const Index = () => {
                     </svg>
                   </Button>
                 </Link>
-                <a
-                  href="https://drive.google.com/file/d/1LGOKXC00DI94vpzfBhKNPhxGH0hmHNzj/view?usp=sharing"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
-                  <Button variant="outline" className="border-white/20 text-white hover:bg-white/10 hover:border-white/30 px-4 sm:px-8 py-4 sm:py-6 text-sm sm:text-base rounded-full transition-all">
-                    Learn More
-                  </Button>
-                </a>
               </div>
 
               <div
