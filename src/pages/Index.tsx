@@ -50,17 +50,10 @@ const Index = () => {
               </h1>
 
               <p
-                className="text-base sm:text-lg md:text-xl text-gray-400 mb-6 sm:mb-8 max-w-2xl mx-auto opacity-0 animate-fade-in-up leading-relaxed"
+                className="text-lg sm:text-xl md:text-2xl font-medium text-gray-300 mb-8 sm:mb-10 max-w-2xl mx-auto opacity-0 animate-fade-in-up leading-relaxed"
                 style={{ animationDelay: '300ms' }}
               >
-                Have you ever wondered why, no matter how hard most people work, wealth always seems to end up in the same few hands? You are not alone. U CENTER exists for everyone willing to learn, contribute, and grow together.
-              </p>
-
-              <p
-                className="text-lg sm:text-xl md:text-2xl font-semibold text-white mb-8 sm:mb-10 opacity-0 animate-fade-in-up"
-                style={{ animationDelay: '350ms' }}
-              >
-                Where understanding comes first — <span className="gradient-text">and everything else follows.</span>
+                Where understanding comes first — <span className="gradient-text font-semibold">and everything else follows.</span>
               </p>
 
               <div
@@ -134,16 +127,10 @@ const Index = () => {
               Meet <span className="gradient-text">U-TOPIA</span>
             </h2>
             <p
-              className="text-lg md:text-xl text-gray-400 mb-6 opacity-0 animate-fade-in-up leading-relaxed"
+              className="text-lg md:text-xl text-gray-400 mb-10 opacity-0 animate-fade-in-up leading-relaxed"
               style={{ animationDelay: '200ms' }}
             >
-              U-TOPIA is a family of companies united by a single belief: that business can be built to serve everyone it touches — not only its owners. Transparency in how value is created. Honesty about how it is shared. A genuine commitment to the wellbeing of its community.
-            </p>
-            <p
-              className="text-lg md:text-xl text-gray-400 mb-10 opacity-0 animate-fade-in-up leading-relaxed"
-              style={{ animationDelay: '250ms' }}
-            >
-              Think of U-TOPIA as a river system. Each company is its own tributary — with its own purpose, its own current, its own community. But they all flow into the same watershed. They share the same source principles, and they feed into the same shared infrastructure: <span className="text-white font-semibold">U CENTER</span>.
+              A family of companies built on one belief: business should serve everyone it touches. Each is its own tributary, all flowing into the same shared home — <span className="text-white font-semibold">U CENTER</span>.
             </p>
 
             <blockquote
@@ -151,11 +138,8 @@ const Index = () => {
               style={{ animationDelay: '300ms' }}
             >
               <div className="rounded-2xl border border-primary/20 bg-gradient-to-br from-primary/5 to-purple-500/5 backdrop-blur-sm p-8 md:p-10">
-                <svg className="w-10 h-10 text-primary/40 mx-auto mb-4" fill="currentColor" viewBox="0 0 24 24">
-                  <path d="M14.017 21v-7.391c0-5.704 3.731-9.57 8.983-10.609l.995 2.151c-2.432.917-3.995 3.638-3.995 5.849h4v10h-9.983zm-14.017 0v-7.391c0-5.704 3.748-9.57 9-10.609l.996 2.151c-2.433.917-3.996 3.638-3.996 5.849h3.983v10h-9.983z"/>
-                </svg>
                 <p className="text-xl md:text-2xl text-white font-medium leading-relaxed italic">
-                  U-TOPIA was not built to extract value from people. It was built to flow value toward them.
+                  Built to flow value toward people — not extract it from them.
                 </p>
               </div>
             </blockquote>
@@ -184,13 +168,13 @@ const Index = () => {
                 className="text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-6 opacity-0 animate-fade-in-up tracking-tight"
                 style={{ animationDelay: '150ms' }}
               >
-                What Is a <span className="gradient-text">DAO</span> — and Why Does It Matter?
+                What Is a <span className="gradient-text">DAO?</span>
               </h2>
               <p
                 className="text-lg md:text-xl text-gray-400 max-w-3xl mx-auto opacity-0 animate-fade-in-up leading-relaxed"
                 style={{ animationDelay: '200ms' }}
               >
-                DAO stands for <span className="text-white">Decentralized Autonomous Organization</span> — a community that runs itself, governed by shared rules that no single person can secretly change. No back room. No board quietly rewriting the terms.
+                A <span className="text-white">Decentralized Autonomous Organization</span> — a community that runs itself by shared, transparent rules.
               </p>
             </div>
 
@@ -208,7 +192,7 @@ const Index = () => {
                 </div>
                 <h3 className="text-xl font-bold text-white mb-3">Open Rules</h3>
                 <p className="text-gray-400 text-sm leading-relaxed">
-                  Every governance rule is written in transparent code — readable by anyone, changeable only by the community.
+                  Transparent code, readable by anyone — changeable only by the community.
                 </p>
               </div>
 
@@ -222,7 +206,7 @@ const Index = () => {
                 </div>
                 <h3 className="text-xl font-bold text-white mb-3">Community Votes</h3>
                 <p className="text-gray-400 text-sm leading-relaxed">
-                  Decisions about shared resources are made by members — not executives. Your voice is part of the system.
+                  Decisions are made by members, not executives. Your voice counts.
                 </p>
               </div>
 
@@ -236,17 +220,10 @@ const Index = () => {
                 </div>
                 <h3 className="text-xl font-bold text-white mb-3">Permanent Record</h3>
                 <p className="text-gray-400 text-sm leading-relaxed">
-                  Every transaction and decision is recorded on a public blockchain that no one can erase or alter.
+                  Every transaction lives on a public blockchain — no one can erase or alter it.
                 </p>
               </div>
             </div>
-
-            <p
-              className="text-center text-gray-500 text-base mt-12 max-w-2xl mx-auto opacity-0 animate-fade-in-up leading-relaxed"
-              style={{ animationDelay: '400ms' }}
-            >
-              You don't need to be a software engineer to participate in a DAO. You only need to understand what it stands for: <span className="text-white">honest rules, an open process, and a community that holds the power.</span>
-            </p>
           </div>
         </div>
       </section>
@@ -280,13 +257,10 @@ const Index = () => {
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-center mb-12">
               <div className="space-y-5 opacity-0 animate-fade-in-up" style={{ animationDelay: '200ms' }}>
                 <p className="text-base md:text-lg text-gray-400 leading-relaxed">
-                  For most of the last century, one idea dominated business thinking: that a company's only obligation is to make money for its shareholders. Employees, customers, communities, and the environment were treated as costs to be managed — not people to be valued.
+                  For decades, business served only its shareholders. Stakeholder capitalism is the alternative — a business is responsible to <span className="text-white">everyone it affects</span>.
                 </p>
                 <p className="text-base md:text-lg text-gray-400 leading-relaxed">
-                  Stakeholder capitalism is the alternative. A business has responsibilities to <span className="text-white">everyone it affects</span> — not only the people who own its shares.
-                </p>
-                <p className="text-base md:text-lg text-gray-400 leading-relaxed">
-                  But a statement is not a system. A signature is not infrastructure. <span className="text-white">U CENTER exists to provide that mechanism</span> — a transparent, community-governed system where shared value is not a promise someone can break, but a rule that runs automatically.
+                  But statements aren't systems. <span className="text-white">U CENTER is the mechanism</span> — transparent, community-governed, automatic.
                 </p>
               </div>
 
@@ -315,7 +289,7 @@ const Index = () => {
                     </div>
                   </div>
                   <p className="text-xs text-gray-500 mt-6 leading-relaxed">
-                    Wealth did not spread. It pooled — like water behind a dam, rising higher and higher at the top while the communities below ran dry.
+                    Wealth didn't spread. It pooled at the top.
                   </p>
                 </div>
               </div>
@@ -326,7 +300,7 @@ const Index = () => {
               style={{ animationDelay: '400ms' }}
             >
               <p className="text-xl md:text-2xl text-white font-medium leading-relaxed italic">
-                "The question was never whether businesses <span className="gradient-text not-italic font-bold">should</span> serve their communities. The question was always: how do you make sure they actually do?"
+                "Not whether business <span className="gradient-text not-italic font-bold">should</span> serve communities — but how we make sure it does."
               </p>
             </blockquote>
           </div>
@@ -354,14 +328,13 @@ const Index = () => {
                 className="text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-6 opacity-0 animate-fade-in-up tracking-tight leading-tight"
                 style={{ animationDelay: '150ms' }}
               >
-                Learning Is Not a Feature Here. <br className="hidden md:block" />
-                It Is the <span className="gradient-text">Foundation.</span>
+                Learning Is the <span className="gradient-text">Foundation.</span>
               </h2>
               <p
                 className="text-lg md:text-xl text-gray-400 opacity-0 animate-fade-in-up leading-relaxed"
                 style={{ animationDelay: '200ms' }}
               >
-                Most people arrive with the same honest admission: <span className="text-white italic">"I don't really understand how money works."</span> That is not a weakness. That is the starting line — and it's exactly where U CENTER meets you.
+                <span className="text-white italic">"I don't really understand how money works."</span> That's the starting line — and where U CENTER meets you.
               </p>
             </div>
 
@@ -372,7 +345,7 @@ const Index = () => {
               {[
                 {
                   title: "How Wealth Flows",
-                  desc: "Understand how value moves through economies, communities, and systems — and why it so often gets stuck.",
+                  desc: "How value moves through economies — and why it gets stuck.",
                   icon: (
                     <svg className="w-7 h-7 text-white" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8">
                       <path d="M2 12s3-7 10-7 10 7 10 7-3 7-10 7S2 12 2 12z"/>
@@ -382,7 +355,7 @@ const Index = () => {
                 },
                 {
                   title: "Governance & DAOs",
-                  desc: "Learn what decentralized governance really means and how communities can hold real power.",
+                  desc: "What decentralized governance means — and how communities hold power.",
                   icon: (
                     <svg className="w-7 h-7 text-white" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8">
                       <path d="M3 21h18"/>
@@ -393,7 +366,7 @@ const Index = () => {
                 },
                 {
                   title: "Stakeholder Thinking",
-                  desc: "Discover what it means to have a genuine stake in an ecosystem — not just as a customer, but as a co-owner.",
+                  desc: "What it means to be a co-owner, not just a customer.",
                   icon: (
                     <svg className="w-7 h-7 text-white" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8">
                       <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/>
@@ -405,7 +378,7 @@ const Index = () => {
                 },
                 {
                   title: "Blockchain Basics",
-                  desc: "Demystify the technology behind transparent, tamper-proof ledgers — in plain, human language.",
+                  desc: "Tamper-proof ledgers, explained in plain language.",
                   icon: (
                     <svg className="w-7 h-7 text-white" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8">
                       <rect x="3" y="3" width="7" height="7" rx="1"/>
@@ -429,12 +402,6 @@ const Index = () => {
               ))}
             </div>
 
-            <p
-              className="text-center text-gray-500 text-base mt-12 max-w-3xl mx-auto opacity-0 animate-fade-in-up leading-relaxed"
-              style={{ animationDelay: '400ms' }}
-            >
-              Every piece of education U CENTER offers returns to the same question: <span className="text-white">does this help you understand your world more clearly?</span> If yes, it belongs here. If it only serves to impress or confuse, it does not.
-            </p>
           </div>
         </div>
       </section>
@@ -469,21 +436,21 @@ const Index = () => {
                 <div className="w-14 h-14 rounded-full gradient-primary mx-auto mb-5 flex items-center justify-center text-white font-bold text-xl shadow-lg shadow-primary/30">1</div>
                 <h3 className="text-xl font-bold text-white mb-3">U-TOPIA</h3>
                 <p className="text-gray-400 text-sm leading-relaxed">
-                  The <span className="text-white">ecosystem</span> — a growing family of companies built on the principle that business should benefit everyone it touches.
+                  The <span className="text-white">ecosystem</span> — companies built to benefit everyone they touch.
                 </p>
               </div>
               <div className="rounded-2xl border border-primary/30 bg-gradient-to-b from-[#0f1f35] to-[#0a1628] p-8 text-center shadow-lg shadow-primary/10">
                 <div className="w-14 h-14 rounded-full gradient-primary mx-auto mb-5 flex items-center justify-center text-white font-bold text-xl shadow-lg shadow-primary/30">2</div>
                 <h3 className="text-xl font-bold text-white mb-3">U CENTER</h3>
                 <p className="text-gray-400 text-sm leading-relaxed">
-                  The <span className="text-white">shared home</span> of that ecosystem — the governance layer, the educational foundation, and the community infrastructure.
+                  The <span className="text-white">shared home</span> — governance, education, and community infrastructure.
                 </p>
               </div>
               <div className="rounded-2xl border border-white/10 bg-gradient-to-b from-[#0f1f35] to-[#0a1628] p-8 text-center">
                 <div className="w-14 h-14 rounded-full gradient-primary mx-auto mb-5 flex items-center justify-center text-white font-bold text-xl shadow-lg shadow-primary/30">3</div>
                 <h3 className="text-xl font-bold text-white mb-3">You</h3>
                 <p className="text-gray-400 text-sm leading-relaxed">
-                  A <span className="text-white">stakeholder</span>. Not a user. Not a customer number. A genuine participant with a voice in how the ecosystem grows.
+                  A <span className="text-white">stakeholder</span> with a real voice in how it grows.
                 </p>
               </div>
             </div>
@@ -492,13 +459,10 @@ const Index = () => {
               className="max-w-3xl mx-auto text-center opacity-0 animate-fade-in-up"
               style={{ animationDelay: '350ms' }}
             >
-              <p className="text-base md:text-lg text-gray-400 leading-relaxed mb-8">
-                The U CENTER community treasury — the shared pool of resources that belongs to all members — grows as the ecosystem grows. Decisions about how it is used are made openly, by the community, through transparent governance. <span className="text-white">It belongs to the watershed, and the watershed is all of us.</span>
-              </p>
 
               <blockquote className="rounded-2xl border border-primary/20 bg-gradient-to-br from-primary/5 to-purple-500/5 backdrop-blur-sm p-8">
                 <p className="text-lg md:text-xl text-white font-medium leading-relaxed italic">
-                  "You do not need to understand everything on day one. You only need to take the first step: <span className="gradient-text not-italic font-bold">come learn</span>. The river will do the rest."
+                  "Just take the first step: <span className="gradient-text not-italic font-bold">come learn</span>. The river will do the rest."
                 </p>
               </blockquote>
             </div>
@@ -555,7 +519,7 @@ const Index = () => {
                   </AccordionTrigger>
                   <AccordionContent className="px-6 pb-6">
                     <p className="text-gray-400 leading-relaxed text-sm">
-                      No. Participation in U CENTER does not constitute an investment. All content is provided for educational purposes only, and any rewards are performance-based and depend on real platform activity, eligibility, and compliance checks.
+                      No. All content is educational, and any rewards are performance-based.
                     </p>
                   </AccordionContent>
                 </AccordionItem>
@@ -571,7 +535,7 @@ const Index = () => {
                   </AccordionTrigger>
                   <AccordionContent className="px-6 pb-6">
                     <p className="text-gray-400 leading-relaxed text-sm">
-                      No. You don't need to be a software engineer or know anything about blockchain to start. U CENTER is built around education — we meet you where you are and walk you through every concept in plain language.
+                      No. We explain every concept in plain language, no expertise required.
                     </p>
                   </AccordionContent>
                 </AccordionItem>
@@ -587,7 +551,7 @@ const Index = () => {
                   </AccordionTrigger>
                   <AccordionContent className="px-6 pb-6">
                     <p className="text-gray-400 leading-relaxed text-sm">
-                      Decisions about shared resources are made through open votes proportional to each member's contribution and participation. Results are recorded permanently on a public blockchain — a shared, tamper-proof ledger that belongs to everyone and is controlled by no one.
+                      Open votes proportional to contribution, recorded permanently on a public blockchain.
                     </p>
                   </AccordionContent>
                 </AccordionItem>
@@ -606,7 +570,7 @@ const Index = () => {
                   </AccordionTrigger>
                   <AccordionContent className="px-6 pb-6">
                     <p className="text-gray-400 leading-relaxed text-sm">
-                      U-TOPIA is the broader ecosystem — a family of companies built on stakeholder principles. U CENTER is the shared home of that ecosystem: the governance layer, the educational foundation, and the community infrastructure that ties it all together.
+                      U-TOPIA is the ecosystem. U CENTER is its shared home — governance, education, community.
                     </p>
                   </AccordionContent>
                 </AccordionItem>
@@ -622,7 +586,7 @@ const Index = () => {
                   </AccordionTrigger>
                   <AccordionContent className="px-6 pb-6">
                     <p className="text-gray-400 leading-relaxed text-sm">
-                      The U CENTER community treasury is a shared pool of resources that belongs to all members. It grows as the ecosystem grows, and decisions about how it is used are made openly, by the community, through transparent on-chain governance — not by an executive or board.
+                      A shared pool that belongs to all members, governed openly on-chain.
                     </p>
                   </AccordionContent>
                 </AccordionItem>
@@ -638,7 +602,7 @@ const Index = () => {
                   </AccordionTrigger>
                   <AccordionContent className="px-6 pb-6">
                     <p className="text-gray-400 leading-relaxed text-sm">
-                      Create a free account and start exploring U CENTER's educational foundation. You don't need to understand everything on day one — you only need to come learn. The river will do the rest.
+                      Create a free account and start exploring. The river will do the rest.
                     </p>
                   </AccordionContent>
                 </AccordionItem>
@@ -673,7 +637,7 @@ const Index = () => {
             </h2>
 
             <p className="text-lg md:text-xl text-gray-400 mb-10 leading-relaxed max-w-2xl mx-auto">
-              Step into a community that is actively learning, actively building, and actively governing an economy designed to be worthy of the trust people place in it.
+              Join a community actively learning, building, and governing together.
             </p>
 
             <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
