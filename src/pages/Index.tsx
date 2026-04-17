@@ -637,7 +637,7 @@ const Index = () => {
             </h2>
 
             <p className="text-lg md:text-xl text-gray-400 mb-10 leading-relaxed max-w-2xl mx-auto">
-              Step into a community that is actively learning, actively building, and actively governing an economy designed to be worthy of the trust people place in it.
+              Join a community actively learning, building, and governing together.
             </p>
 
             <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
