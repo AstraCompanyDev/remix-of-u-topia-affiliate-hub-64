@@ -168,13 +168,13 @@ const Index = () => {
                 className="text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-6 opacity-0 animate-fade-in-up tracking-tight"
                 style={{ animationDelay: '150ms' }}
               >
-                What Is a <span className="gradient-text">DAO</span> — and Why Does It Matter?
+                What Is a <span className="gradient-text">DAO?</span>
               </h2>
               <p
                 className="text-lg md:text-xl text-gray-400 max-w-3xl mx-auto opacity-0 animate-fade-in-up leading-relaxed"
                 style={{ animationDelay: '200ms' }}
               >
-                DAO stands for <span className="text-white">Decentralized Autonomous Organization</span> — a community that runs itself, governed by shared rules that no single person can secretly change. No back room. No board quietly rewriting the terms.
+                A <span className="text-white">Decentralized Autonomous Organization</span> — a community that runs itself by shared, transparent rules.
               </p>
             </div>
 
