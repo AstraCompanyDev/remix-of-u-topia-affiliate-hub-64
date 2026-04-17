@@ -602,7 +602,7 @@ const Index = () => {
                   </AccordionTrigger>
                   <AccordionContent className="px-6 pb-6">
                     <p className="text-gray-400 leading-relaxed text-sm">
-                      Create a free account and start exploring U CENTER's educational foundation. You don't need to understand everything on day one — you only need to come learn. The river will do the rest.
+                      Create a free account and start exploring. The river will do the rest.
                     </p>
                   </AccordionContent>
                 </AccordionItem>
