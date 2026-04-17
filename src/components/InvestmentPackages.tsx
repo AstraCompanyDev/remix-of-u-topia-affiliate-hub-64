@@ -88,7 +88,7 @@ const packages: Pkg[] = [
       { label: "U-Events - Live/In Person", highlight: "120 Month" },
       { label: "U-AI", highlight: "12 Month" },
       { label: "Flow 5", highlight: "DAO" },
-      { label: "869.2 Shares" },
+      { label: "1,925 Shares" },
       { label: "U-AI Pre Sale Bonus", highlight: "6 Month" },
     ],
   },
