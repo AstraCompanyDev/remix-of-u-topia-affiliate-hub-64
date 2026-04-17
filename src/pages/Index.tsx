@@ -455,17 +455,6 @@ const Index = () => {
               </div>
             </div>
 
-            <div
-              className="max-w-3xl mx-auto text-center opacity-0 animate-fade-in-up"
-              style={{ animationDelay: '350ms' }}
-            >
-
-              <blockquote className="rounded-2xl border border-primary/20 bg-gradient-to-br from-primary/5 to-purple-500/5 backdrop-blur-sm p-8">
-                <p className="text-lg md:text-xl text-white font-medium leading-relaxed italic">
-                  "Just take the first step: <span className="gradient-text not-italic font-bold">come learn</span>. The river will do the rest."
-                </p>
-              </blockquote>
-            </div>
           </div>
         </div>
       </section>
