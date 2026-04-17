@@ -140,28 +140,8 @@ const Index = () => {
               </blockquote>
             </div>
 
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-6 opacity-0 animate-fade-in-up" style={{ animationDelay: '400ms' }}>
-              <div className="rounded-2xl border border-white/10 bg-gradient-to-b from-[#0f1f35] to-[#0a1628] p-8 text-center">
-                <div className="w-14 h-14 rounded-full gradient-primary mx-auto mb-5 flex items-center justify-center text-white font-bold text-xl shadow-lg shadow-primary/30">1</div>
-                <h3 className="text-xl font-bold text-white mb-3">U-TOPIA</h3>
-                <p className="text-gray-400 text-sm leading-relaxed">
-                  The <span className="text-white">ecosystem</span> — companies built to benefit everyone they touch.
-                </p>
-              </div>
-              <div className="rounded-2xl border border-primary/30 bg-gradient-to-b from-[#0f1f35] to-[#0a1628] p-8 text-center shadow-lg shadow-primary/10">
-                <div className="w-14 h-14 rounded-full gradient-primary mx-auto mb-5 flex items-center justify-center text-white font-bold text-xl shadow-lg shadow-primary/30">2</div>
-                <h3 className="text-xl font-bold text-white mb-3">U CENTER</h3>
-                <p className="text-gray-400 text-sm leading-relaxed">
-                  The <span className="text-white">shared home</span> — governance, education, and community infrastructure.
-                </p>
-              </div>
-              <div className="rounded-2xl border border-white/10 bg-gradient-to-b from-[#0f1f35] to-[#0a1628] p-8 text-center">
-                <div className="w-14 h-14 rounded-full gradient-primary mx-auto mb-5 flex items-center justify-center text-white font-bold text-xl shadow-lg shadow-primary/30">3</div>
-                <h3 className="text-xl font-bold text-white mb-3">You</h3>
-                <p className="text-gray-400 text-sm leading-relaxed">
-                  A <span className="text-white">stakeholder</span> with a real voice in how it grows.
-                </p>
-              </div>
+            <div className="opacity-0 animate-fade-in-up" style={{ animationDelay: '400ms' }}>
+              <EcosystemCards />
             </div>
           </div>
         </div>
