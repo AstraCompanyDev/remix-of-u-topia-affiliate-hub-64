@@ -288,6 +288,11 @@ const Index = () => {
       </section>
 
       {/* ============================================================
+          INVESTMENT PACKAGES (moved below What Is a DAO)
+         ============================================================ */}
+      <InvestmentPackages />
+
+      {/* ============================================================
           THE BIG IDEA — Stakeholder Capitalism
          ============================================================ */}
       <section className="relative bg-gradient-to-b from-[#0a0f1a] via-[#0d1526] to-[#0a0f1a] py-28 overflow-hidden border-t border-white/5">
@@ -464,12 +469,6 @@ const Index = () => {
           </div>
         </div>
       </section>
-
-      {/* ============================================================
-          INVESTMENT PACKAGES (kept)
-         ============================================================ */}
-      <InvestmentPackages />
-
       {/* ============================================================
           FAQ — kept, on dark background
          ============================================================ */}
