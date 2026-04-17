@@ -689,7 +689,7 @@ const Index = () => {
          ============================================================ */}
       <footer className="bg-[#0a0f1a] py-16 border-t border-white/5">
         <div className="container mx-auto px-6">
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-10 mb-12">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-10 mb-12">
             <div>
               <div className="flex items-center gap-2 mb-4">
                 <img src={logoLight} alt="U CENTER" className="h-8" />
@@ -697,17 +697,6 @@ const Index = () => {
               <p className="text-gray-400 text-sm leading-relaxed max-w-xs">
                 The Learning Home of the U-TOPIA Ecosystem — where understanding comes first, and everything else follows.
               </p>
-            </div>
-
-            <div>
-              <h4 className="text-white font-semibold mb-5">Follow U-TOPIA</h4>
-              <ul className="space-y-3">
-                <li><a href="https://t.me/+G6ntSwYCzjJkNzE0" target="_blank" rel="noopener noreferrer" className="text-gray-400 hover:text-primary transition-colors text-sm">Telegram</a></li>
-                <li><a href="https://x.com/UCoinOfficial" target="_blank" rel="noopener noreferrer" className="text-gray-400 hover:text-primary transition-colors text-sm">X (Twitter)</a></li>
-                <li><a href="https://www.linkedin.com/company/u-topia/" target="_blank" rel="noopener noreferrer" className="text-gray-400 hover:text-primary transition-colors text-sm">LinkedIn</a></li>
-                <li><a href="https://www.instagram.com/ucoinofficial" target="_blank" rel="noopener noreferrer" className="text-gray-400 hover:text-primary transition-colors text-sm">Instagram</a></li>
-                <li><a href="https://discord.gg/qZB83k5HmX" target="_blank" rel="noopener noreferrer" className="text-gray-400 hover:text-primary transition-colors text-sm">Discord</a></li>
-              </ul>
             </div>
 
             <div>
