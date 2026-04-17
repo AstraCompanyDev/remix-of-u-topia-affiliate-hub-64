@@ -586,7 +586,7 @@ const Index = () => {
                   </AccordionTrigger>
                   <AccordionContent className="px-6 pb-6">
                     <p className="text-gray-400 leading-relaxed text-sm">
-                      The U CENTER community treasury is a shared pool of resources that belongs to all members. It grows as the ecosystem grows, and decisions about how it is used are made openly, by the community, through transparent on-chain governance — not by an executive or board.
+                      A shared pool that belongs to all members, governed openly on-chain.
                     </p>
                   </AccordionContent>
                 </AccordionItem>
