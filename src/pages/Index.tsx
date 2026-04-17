@@ -402,12 +402,6 @@ const Index = () => {
               ))}
             </div>
 
-            <p
-              className="text-center text-gray-500 text-base mt-12 max-w-3xl mx-auto opacity-0 animate-fade-in-up leading-relaxed"
-              style={{ animationDelay: '400ms' }}
-            >
-              Every piece of education U CENTER offers returns to the same question: <span className="text-white">does this help you understand your world more clearly?</span> If yes, it belongs here. If it only serves to impress or confuse, it does not.
-            </p>
           </div>
         </div>
       </section>
