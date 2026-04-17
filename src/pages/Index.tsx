@@ -519,7 +519,7 @@ const Index = () => {
                   </AccordionTrigger>
                   <AccordionContent className="px-6 pb-6">
                     <p className="text-gray-400 leading-relaxed text-sm">
-                      No. Participation in U CENTER does not constitute an investment. All content is provided for educational purposes only, and any rewards are performance-based and depend on real platform activity, eligibility, and compliance checks.
+                      No. All content is educational, and any rewards are performance-based.
                     </p>
                   </AccordionContent>
                 </AccordionItem>
