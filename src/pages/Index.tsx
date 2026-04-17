@@ -436,21 +436,21 @@ const Index = () => {
                 <div className="w-14 h-14 rounded-full gradient-primary mx-auto mb-5 flex items-center justify-center text-white font-bold text-xl shadow-lg shadow-primary/30">1</div>
                 <h3 className="text-xl font-bold text-white mb-3">U-TOPIA</h3>
                 <p className="text-gray-400 text-sm leading-relaxed">
-                  The <span className="text-white">ecosystem</span> — a growing family of companies built on the principle that business should benefit everyone it touches.
+                  The <span className="text-white">ecosystem</span> — companies built to benefit everyone they touch.
                 </p>
               </div>
               <div className="rounded-2xl border border-primary/30 bg-gradient-to-b from-[#0f1f35] to-[#0a1628] p-8 text-center shadow-lg shadow-primary/10">
                 <div className="w-14 h-14 rounded-full gradient-primary mx-auto mb-5 flex items-center justify-center text-white font-bold text-xl shadow-lg shadow-primary/30">2</div>
                 <h3 className="text-xl font-bold text-white mb-3">U CENTER</h3>
                 <p className="text-gray-400 text-sm leading-relaxed">
-                  The <span className="text-white">shared home</span> of that ecosystem — the governance layer, the educational foundation, and the community infrastructure.
+                  The <span className="text-white">shared home</span> — governance, education, and community infrastructure.
                 </p>
               </div>
               <div className="rounded-2xl border border-white/10 bg-gradient-to-b from-[#0f1f35] to-[#0a1628] p-8 text-center">
                 <div className="w-14 h-14 rounded-full gradient-primary mx-auto mb-5 flex items-center justify-center text-white font-bold text-xl shadow-lg shadow-primary/30">3</div>
                 <h3 className="text-xl font-bold text-white mb-3">You</h3>
                 <p className="text-gray-400 text-sm leading-relaxed">
-                  A <span className="text-white">stakeholder</span>. Not a user. Not a customer number. A genuine participant with a voice in how the ecosystem grows.
+                  A <span className="text-white">stakeholder</span> with a real voice in how it grows.
                 </p>
               </div>
             </div>
@@ -459,9 +459,6 @@ const Index = () => {
               className="max-w-3xl mx-auto text-center opacity-0 animate-fade-in-up"
               style={{ animationDelay: '350ms' }}
             >
-              <p className="text-base md:text-lg text-gray-400 leading-relaxed mb-8">
-                The U CENTER community treasury — the shared pool of resources that belongs to all members — grows as the ecosystem grows. Decisions about how it is used are made openly, by the community, through transparent governance. <span className="text-white">It belongs to the watershed, and the watershed is all of us.</span>
-              </p>
 
               <blockquote className="rounded-2xl border border-primary/20 bg-gradient-to-br from-primary/5 to-purple-500/5 backdrop-blur-sm p-8">
                 <p className="text-lg md:text-xl text-white font-medium leading-relaxed italic">
