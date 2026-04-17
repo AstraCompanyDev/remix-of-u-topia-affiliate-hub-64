@@ -192,7 +192,7 @@ const Index = () => {
                 </div>
                 <h3 className="text-xl font-bold text-white mb-3">Open Rules</h3>
                 <p className="text-gray-400 text-sm leading-relaxed">
-                  Every governance rule is written in transparent code — readable by anyone, changeable only by the community.
+                  Transparent code, readable by anyone — changeable only by the community.
                 </p>
               </div>
 
