@@ -135,6 +135,16 @@ export function InvestmentPackages() {
             Select the package that fits your goals. Earn dividends, get
             rewarded for referrals, and unlock exclusive benefits.
           </p>
+          <div
+            className="mt-10 opacity-0 animate-fade-in-up"
+            style={{ animationDelay: "250ms" }}
+          >
+            <Link to="/purchase" className="inline-block">
+              <button className="px-10 py-4 rounded-2xl gradient-primary text-white font-bold text-sm tracking-widest hover:shadow-lg hover:shadow-primary/30 transition-all">
+                STARTING ON OCTOBER 2026
+              </button>
+            </Link>
+          </div>
         </div>
 
         {/* Cards Grid - 2 rows of 3 */}
@@ -224,14 +234,6 @@ export function InvestmentPackages() {
                 </ul>
               </div>
 
-              {/* CTA bar at bottom */}
-              <div className="p-5 pt-0">
-                <Link to="/purchase" className="block">
-                  <button className="w-full py-3.5 rounded-2xl gradient-primary text-white font-bold text-xs tracking-widest hover:shadow-lg hover:shadow-primary/30 transition-all">
-                    STARTING ON OCTOBER 2026
-                  </button>
-                </Link>
-              </div>
             </div>
           ))}
         </div>
