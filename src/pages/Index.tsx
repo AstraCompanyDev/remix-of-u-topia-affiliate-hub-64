@@ -127,16 +127,10 @@ const Index = () => {
               Meet <span className="gradient-text">U-TOPIA</span>
             </h2>
             <p
-              className="text-lg md:text-xl text-gray-400 mb-6 opacity-0 animate-fade-in-up leading-relaxed"
+              className="text-lg md:text-xl text-gray-400 mb-10 opacity-0 animate-fade-in-up leading-relaxed"
               style={{ animationDelay: '200ms' }}
             >
-              U-TOPIA is a family of companies united by a single belief: that business can be built to serve everyone it touches — not only its owners. Transparency in how value is created. Honesty about how it is shared. A genuine commitment to the wellbeing of its community.
-            </p>
-            <p
-              className="text-lg md:text-xl text-gray-400 mb-10 opacity-0 animate-fade-in-up leading-relaxed"
-              style={{ animationDelay: '250ms' }}
-            >
-              Think of U-TOPIA as a river system. Each company is its own tributary — with its own purpose, its own current, its own community. But they all flow into the same watershed. They share the same source principles, and they feed into the same shared infrastructure: <span className="text-white font-semibold">U CENTER</span>.
+              A family of companies built on one belief: business should serve everyone it touches. Each is its own tributary, all flowing into the same shared home — <span className="text-white font-semibold">U CENTER</span>.
             </p>
 
             <blockquote
@@ -144,11 +138,8 @@ const Index = () => {
               style={{ animationDelay: '300ms' }}
             >
               <div className="rounded-2xl border border-primary/20 bg-gradient-to-br from-primary/5 to-purple-500/5 backdrop-blur-sm p-8 md:p-10">
-                <svg className="w-10 h-10 text-primary/40 mx-auto mb-4" fill="currentColor" viewBox="0 0 24 24">
-                  <path d="M14.017 21v-7.391c0-5.704 3.731-9.57 8.983-10.609l.995 2.151c-2.432.917-3.995 3.638-3.995 5.849h4v10h-9.983zm-14.017 0v-7.391c0-5.704 3.748-9.57 9-10.609l.996 2.151c-2.433.917-3.996 3.638-3.996 5.849h3.983v10h-9.983z"/>
-                </svg>
                 <p className="text-xl md:text-2xl text-white font-medium leading-relaxed italic">
-                  U-TOPIA was not built to extract value from people. It was built to flow value toward them.
+                  Built to flow value toward people — not extract it from them.
                 </p>
               </div>
             </blockquote>
