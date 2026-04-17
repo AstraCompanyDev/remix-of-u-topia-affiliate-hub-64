@@ -289,7 +289,7 @@ const Index = () => {
                     </div>
                   </div>
                   <p className="text-xs text-gray-500 mt-6 leading-relaxed">
-                    Wealth did not spread. It pooled — like water behind a dam, rising higher and higher at the top while the communities below ran dry.
+                    Wealth didn't spread. It pooled at the top.
                   </p>
                 </div>
               </div>
