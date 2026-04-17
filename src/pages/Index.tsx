@@ -50,17 +50,10 @@ const Index = () => {
               </h1>
 
               <p
-                className="text-base sm:text-lg md:text-xl text-gray-400 mb-6 sm:mb-8 max-w-2xl mx-auto opacity-0 animate-fade-in-up leading-relaxed"
+                className="text-lg sm:text-xl md:text-2xl font-medium text-gray-300 mb-8 sm:mb-10 max-w-2xl mx-auto opacity-0 animate-fade-in-up leading-relaxed"
                 style={{ animationDelay: '300ms' }}
               >
-                Have you ever wondered why, no matter how hard most people work, wealth always seems to end up in the same few hands? You are not alone. U CENTER exists for everyone willing to learn, contribute, and grow together.
-              </p>
-
-              <p
-                className="text-lg sm:text-xl md:text-2xl font-semibold text-white mb-8 sm:mb-10 opacity-0 animate-fade-in-up"
-                style={{ animationDelay: '350ms' }}
-              >
-                Where understanding comes first — <span className="gradient-text">and everything else follows.</span>
+                Where understanding comes first — <span className="gradient-text font-semibold">and everything else follows.</span>
               </p>
 
               <div
