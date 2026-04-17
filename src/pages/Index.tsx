@@ -177,45 +177,84 @@ const Index = () => {
               style={{ animationDelay: '300ms' }}
             >
               {/* Open Rules */}
-              <div className="rounded-2xl border border-white/10 bg-gradient-to-b from-[#0f1f35] to-[#0a1628] p-8 hover:-translate-y-1 hover:border-primary/40 transition-all duration-300">
-                <div className="w-14 h-14 rounded-2xl gradient-primary flex items-center justify-center mb-5 shadow-lg shadow-primary/20">
-                  <svg className="w-7 h-7 text-white" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8">
-                    <path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/>
-                    <path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/>
-                  </svg>
+              <div className="rounded-2xl border border-white/10 bg-gradient-to-b from-[#0f1f35] to-[#0a1628] overflow-hidden hover:-translate-y-1 hover:border-primary/40 transition-all duration-300">
+                <div className="relative aspect-[16/10] overflow-hidden">
+                  <img
+                    src={daoOpenRules}
+                    alt="Open Rules — transparent governance code"
+                    loading="lazy"
+                    width={768}
+                    height={512}
+                    className="w-full h-full object-cover"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-[#0a1628] via-[#0a1628]/30 to-transparent" />
                 </div>
-                <h3 className="text-xl font-bold text-white mb-3">Open Rules</h3>
-                <p className="text-gray-400 text-sm leading-relaxed">
-                  Transparent code, readable by anyone — changeable only by the community.
-                </p>
+                <div className="p-8">
+                  <div className="w-12 h-12 rounded-xl gradient-primary flex items-center justify-center mb-4 shadow-lg shadow-primary/20 -mt-12 relative z-10 border-2 border-[#0a1628]">
+                    <svg className="w-6 h-6 text-white" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8">
+                      <path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/>
+                      <path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/>
+                    </svg>
+                  </div>
+                  <h3 className="text-xl font-bold text-white mb-3">Open Rules</h3>
+                  <p className="text-gray-400 text-sm leading-relaxed">
+                    Transparent code, readable by anyone — changeable only by the community.
+                  </p>
+                </div>
               </div>
 
               {/* Community Votes */}
-              <div className="rounded-2xl border border-white/10 bg-gradient-to-b from-[#0f1f35] to-[#0a1628] p-8 hover:-translate-y-1 hover:border-primary/40 transition-all duration-300">
-                <div className="w-14 h-14 rounded-2xl gradient-primary flex items-center justify-center mb-5 shadow-lg shadow-primary/20">
-                  <svg className="w-7 h-7 text-white" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8">
-                    <path d="M9 11l3 3L22 4"/>
-                    <path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/>
-                  </svg>
+              <div className="rounded-2xl border border-white/10 bg-gradient-to-b from-[#0f1f35] to-[#0a1628] overflow-hidden hover:-translate-y-1 hover:border-primary/40 transition-all duration-300">
+                <div className="relative aspect-[16/10] overflow-hidden">
+                  <img
+                    src={daoCommunityVotes}
+                    alt="Community Votes — members deciding together"
+                    loading="lazy"
+                    width={768}
+                    height={512}
+                    className="w-full h-full object-cover"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-[#0a1628] via-[#0a1628]/30 to-transparent" />
                 </div>
-                <h3 className="text-xl font-bold text-white mb-3">Community Votes</h3>
-                <p className="text-gray-400 text-sm leading-relaxed">
-                  Decisions are made by members, not executives. Your voice counts.
-                </p>
+                <div className="p-8">
+                  <div className="w-12 h-12 rounded-xl gradient-primary flex items-center justify-center mb-4 shadow-lg shadow-primary/20 -mt-12 relative z-10 border-2 border-[#0a1628]">
+                    <svg className="w-6 h-6 text-white" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8">
+                      <path d="M9 11l3 3L22 4"/>
+                      <path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/>
+                    </svg>
+                  </div>
+                  <h3 className="text-xl font-bold text-white mb-3">Community Votes</h3>
+                  <p className="text-gray-400 text-sm leading-relaxed">
+                    Decisions are made by members, not executives. Your voice counts.
+                  </p>
+                </div>
               </div>
 
               {/* Permanent Record */}
-              <div className="rounded-2xl border border-white/10 bg-gradient-to-b from-[#0f1f35] to-[#0a1628] p-8 hover:-translate-y-1 hover:border-primary/40 transition-all duration-300">
-                <div className="w-14 h-14 rounded-2xl gradient-primary flex items-center justify-center mb-5 shadow-lg shadow-primary/20">
-                  <svg className="w-7 h-7 text-white" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8">
-                    <path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/>
-                    <path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/>
-                  </svg>
+              <div className="rounded-2xl border border-white/10 bg-gradient-to-b from-[#0f1f35] to-[#0a1628] overflow-hidden hover:-translate-y-1 hover:border-primary/40 transition-all duration-300">
+                <div className="relative aspect-[16/10] overflow-hidden">
+                  <img
+                    src={daoPermanentRecord}
+                    alt="Permanent Record — public blockchain ledger"
+                    loading="lazy"
+                    width={768}
+                    height={512}
+                    className="w-full h-full object-cover"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-[#0a1628] via-[#0a1628]/30 to-transparent" />
                 </div>
-                <h3 className="text-xl font-bold text-white mb-3">Permanent Record</h3>
-                <p className="text-gray-400 text-sm leading-relaxed">
-                  Every transaction lives on a public blockchain — no one can erase or alter it.
-                </p>
+                <div className="p-8">
+                  <div className="w-12 h-12 rounded-xl gradient-primary flex items-center justify-center mb-4 shadow-lg shadow-primary/20 -mt-12 relative z-10 border-2 border-[#0a1628]">
+                    <svg className="w-6 h-6 text-white" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8">
+                      <path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/>
+                      <path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/>
+                    </svg>
+                  </div>
+                  <h3 className="text-xl font-bold text-white mb-3">Permanent Record</h3>
+                  <p className="text-gray-400 text-sm leading-relaxed">
+                    Every transaction lives on a public blockchain — no one can erase or alter it.
+                  </p>
+                </div>
               </div>
             </div>
           </div>
