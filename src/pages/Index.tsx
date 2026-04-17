@@ -3,6 +3,7 @@ import { Button } from "@/components/ui/button";
 import Header from "@/components/Header";
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
 import { InvestmentPackages } from "@/components/InvestmentPackages";
+import { EcosystemCards } from "@/components/EcosystemCards";
 import logoLight from "@/assets/u-center-logo.png";
 import daoOpenRules from "@/assets/dao-open-rules.jpg";
 import daoCommunityVotes from "@/assets/dao-community-votes.jpg";
