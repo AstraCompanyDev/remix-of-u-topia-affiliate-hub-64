@@ -328,14 +328,13 @@ const Index = () => {
                 className="text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-6 opacity-0 animate-fade-in-up tracking-tight leading-tight"
                 style={{ animationDelay: '150ms' }}
               >
-                Learning Is Not a Feature Here. <br className="hidden md:block" />
-                It Is the <span className="gradient-text">Foundation.</span>
+                Learning Is the <span className="gradient-text">Foundation.</span>
               </h2>
               <p
                 className="text-lg md:text-xl text-gray-400 opacity-0 animate-fade-in-up leading-relaxed"
                 style={{ animationDelay: '200ms' }}
               >
-                Most people arrive with the same honest admission: <span className="text-white italic">"I don't really understand how money works."</span> That is not a weakness. That is the starting line — and it's exactly where U CENTER meets you.
+                <span className="text-white italic">"I don't really understand how money works."</span> That's the starting line — and where U CENTER meets you.
               </p>
             </div>
 
