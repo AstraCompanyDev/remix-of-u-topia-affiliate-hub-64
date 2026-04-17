@@ -462,7 +462,7 @@ const Index = () => {
 
               <blockquote className="rounded-2xl border border-primary/20 bg-gradient-to-br from-primary/5 to-purple-500/5 backdrop-blur-sm p-8">
                 <p className="text-lg md:text-xl text-white font-medium leading-relaxed italic">
-                  "You do not need to understand everything on day one. You only need to take the first step: <span className="gradient-text not-italic font-bold">come learn</span>. The river will do the rest."
+                  "Just take the first step: <span className="gradient-text not-italic font-bold">come learn</span>. The river will do the rest."
                 </p>
               </blockquote>
             </div>
