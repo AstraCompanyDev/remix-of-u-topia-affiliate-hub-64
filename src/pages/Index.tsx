@@ -206,7 +206,7 @@ const Index = () => {
                 </div>
                 <h3 className="text-xl font-bold text-white mb-3">Community Votes</h3>
                 <p className="text-gray-400 text-sm leading-relaxed">
-                  Decisions about shared resources are made by members — not executives. Your voice is part of the system.
+                  Decisions are made by members, not executives. Your voice counts.
                 </p>
               </div>
 
