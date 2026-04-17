@@ -1,58 +1,106 @@
 import { Link } from "react-router-dom";
+import { Check } from "lucide-react";
 
-import packStarter from "@/assets/pack-starter.jpg";
-import packBronze from "@/assets/pack-bronze.jpg";
-import packSilver from "@/assets/pack-silver.jpg";
-import packGold from "@/assets/pack-gold.jpg";
-import packPlatinum from "@/assets/pack-platinum.jpg";
-import packDiamond from "@/assets/pack-diamond.jpg";
+type Pkg = {
+  name: string;
+  price: string;
+  medal: string; // emoji medal/icon
+  features: { label: string; highlight?: string }[];
+  popular?: boolean;
+  isEQ?: boolean;
+};
 
-const packages = [
+const packages: Pkg[] = [
   {
-    name: "Starter Pack",
+    name: "STARTER",
     price: "$25",
-    image: packStarter,
-    popular: false,
+    medal: "🥇",
+    features: [
+      { label: "Community Platform Access", highlight: "Lifetime" },
+      { label: "U Academy", highlight: "1 Month" },
+    ],
   },
   {
-    name: "Bronze",
+    name: "BRONZE",
     price: "$100",
-    image: packBronze,
-    popular: false,
+    medal: "🥉",
+    features: [
+      { label: "Community Platform Access", highlight: "Lifetime" },
+      { label: "U-Academy", highlight: "6 Month" },
+      { label: "Flow 1", highlight: "DAO" },
+      { label: "76.9 Shares" },
+      { label: "U-Academy Pre Sale Bonus", highlight: "1 Month" },
+    ],
   },
   {
-    name: "Silver",
-    price: "$200",
-    image: packSilver,
-    popular: false,
+    name: "SILVER",
+    price: "$250",
+    medal: "🥈",
+    features: [
+      { label: "Community Platform Access", highlight: "Lifetime" },
+      { label: "U-Academy", highlight: "12 Month" },
+      { label: "Flow 2", highlight: "DAO" },
+      { label: "201.9 Shares" },
+      { label: "U-Academy Pre Sale Bonus", highlight: "3 Month" },
+    ],
   },
   {
-    name: "Gold",
+    name: "GOLD",
     price: "$500",
-    image: packGold,
+    medal: "🥇",
     popular: true,
+    features: [
+      { label: "Community Platform Access", highlight: "Lifetime" },
+      { label: "U-Center Access", highlight: "36 Month" },
+      { label: "U-Academy", highlight: "18 Month" },
+      { label: "U-Network - Webinars", highlight: "18 Month" },
+      { label: "Flow 3", highlight: "DAO" },
+      { label: "415.3 Shares" },
+      { label: "U-Academy Pre Sale Bonus", highlight: "6 Month" },
+    ],
   },
   {
-    name: "Platinum",
+    name: "PLATINUM",
     price: "$1,000",
-    image: packPlatinum,
-    popular: false,
+    medal: "🏆",
+    features: [
+      { label: "Community Platform Access", highlight: "Lifetime" },
+      { label: "U-Center Access", highlight: "120 Month" },
+      { label: "U-Academy", highlight: "36 Month" },
+      { label: "U-Network - Webinars", highlight: "36 Month" },
+      { label: "U-Events - Live/In Person", highlight: "2 Tickets" },
+      { label: "U-AI", highlight: "6 Month" },
+      { label: "Flow 4", highlight: "DAO" },
+      { label: "869.2 Shares" },
+      { label: "U-Academy Pre Sale Bonus", highlight: "12 Month" },
+    ],
   },
   {
-    name: "Diamond",
+    name: "DIAMOND",
     price: "$2,500",
-    image: packDiamond,
-    popular: false,
+    medal: "💎",
+    isEQ: true,
+    features: [
+      { label: "Community Platform Access", highlight: "Lifetime" },
+      { label: "U-Center Access", highlight: "Lifetime" },
+      { label: "U-Academy", highlight: "120 Month" },
+      { label: "U-Network - Webinars", highlight: "120 Month" },
+      { label: "U-Events - Live/In Person", highlight: "120 Month" },
+      { label: "U-AI", highlight: "12 Month" },
+      { label: "Flow 5", highlight: "DAO" },
+      { label: "869.2 Shares" },
+      { label: "U-AI Pre Sale Bonus", highlight: "6 Month" },
+    ],
   },
 ];
 
 export function InvestmentPackages() {
   return (
-    <section className="relative bg-[#0a0f1a] py-28 overflow-hidden">
+    <section className="relative bg-[#0a0f1a] py-28 overflow-hidden border-t border-white/5">
       {/* Background effects */}
       <div className="absolute inset-0 pointer-events-none overflow-hidden">
         <div className="absolute w-[500px] h-[500px] -top-32 left-1/4 rounded-full blur-[120px] opacity-20 bg-primary/40 animate-float" />
-        <div className="absolute w-[400px] h-[400px] bottom-0 right-1/4 rounded-full blur-[100px] opacity-15 bg-cyan-500/30 animate-float animation-delay-2000" />
+        <div className="absolute w-[400px] h-[400px] bottom-0 right-1/4 rounded-full blur-[100px] opacity-15 bg-purple-500/30 animate-float animation-delay-2000" />
       </div>
 
       {/* Grid pattern */}
@@ -69,19 +117,17 @@ export function InvestmentPackages() {
         {/* Header */}
         <div className="text-center mb-16">
           <span
-            className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-gradient-to-r from-primary/20 to-cyan-500/20 border border-primary/30 text-primary text-sm font-semibold mb-8 opacity-0 animate-fade-in-up backdrop-blur-sm"
+            className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-gradient-to-r from-primary/20 to-purple-500/20 border border-primary/30 text-primary text-sm font-semibold mb-8 opacity-0 animate-fade-in-up backdrop-blur-sm"
             style={{ animationDelay: "100ms" }}
           >
-            Investment Packages
+            Membership Packages
           </span>
           <h2
             className="text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-6 opacity-0 animate-fade-in-up tracking-tight"
             style={{ animationDelay: "150ms" }}
           >
             Choose Your Path to{" "}
-            <span className="gradient-text">
-              Financial Freedom
-            </span>
+            <span className="gradient-text">Financial Freedom</span>
           </h2>
           <p
             className="text-lg md:text-xl text-gray-400 max-w-2xl mx-auto opacity-0 animate-fade-in-up leading-relaxed"
@@ -94,62 +140,96 @@ export function InvestmentPackages() {
 
         {/* Cards Grid - 2 rows of 3 */}
         <div
-          className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5 lg:gap-6 max-w-5xl mx-auto opacity-0 animate-fade-in-up"
+          className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 max-w-6xl mx-auto opacity-0 animate-fade-in-up"
           style={{ animationDelay: "250ms" }}
         >
           {packages.map((pkg) => (
             <div
               key={pkg.name}
-              className={`group relative rounded-2xl border transition-all duration-500 hover:-translate-y-2 hover:shadow-2xl ${
+              className={`group relative rounded-3xl border bg-[#0d1424] flex flex-col overflow-hidden transition-all duration-500 hover:-translate-y-2 ${
                 pkg.popular
-                  ? "border-primary/60 shadow-lg shadow-primary/10"
+                  ? "border-primary/60 shadow-xl shadow-primary/20"
+                  : pkg.isEQ
+                  ? "border-purple-500/60 shadow-xl shadow-purple-500/20"
                   : "border-white/10 hover:border-white/20"
-              } bg-gradient-to-b from-[#0f1f35] to-[#0a1628]`}
+              }`}
             >
-              {/* Most Popular Badge */}
-              {pkg.popular && (
-                <div className="absolute -top-4 left-1/2 -translate-x-1/2 z-10">
-                  <div className="px-5 py-1.5 gradient-primary rounded-full shadow-lg shadow-primary/40">
-                    <span className="text-xs font-bold text-white uppercase tracking-wider whitespace-nowrap">
-                      Most Popular
-                    </span>
+              {/* EQ Badge (Diamond only) */}
+              {pkg.isEQ && (
+                <div className="absolute top-4 right-4 z-10">
+                  <div className="px-3 py-1 rounded-md bg-gradient-to-r from-purple-500 to-primary text-white text-xs font-bold tracking-wider">
+                    EQ
                   </div>
                 </div>
               )}
 
-              {/* Card Image */}
-              <div className="p-5 pb-0">
-                <div className="rounded-xl overflow-hidden aspect-[4/3] bg-[#080d18]">
-                  <img
-                    src={pkg.image}
-                    alt={`${pkg.name} card`}
-                    className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
-                  />
+              {/* Header section with gradient background */}
+              <div className="relative gradient-primary p-6 pb-8 overflow-hidden">
+                {/* Subtle pattern overlay */}
+                <div
+                  className="absolute inset-0 opacity-10"
+                  style={{
+                    backgroundImage:
+                      "radial-gradient(circle at 1px 1px, rgba(255,255,255,0.4) 1px, transparent 0)",
+                    backgroundSize: "16px 16px",
+                  }}
+                />
+
+                {/* Tier name pill */}
+                <div className="relative flex items-start justify-between mb-4">
+                  <div className="px-4 py-1.5 rounded-full bg-[#0d1424]/80 backdrop-blur-sm border border-white/10">
+                    <span className="text-xs font-bold text-white tracking-widest">
+                      {pkg.name}
+                    </span>
+                  </div>
+                  {/* Medal icon */}
+                  <div className="text-4xl drop-shadow-lg" aria-hidden="true">
+                    {pkg.medal}
+                  </div>
+                </div>
+
+                {/* Price */}
+                <div className="relative flex items-end gap-2">
+                  <span className="text-5xl font-black text-white leading-none tracking-tight">
+                    {pkg.price}
+                  </span>
+                  <span className="text-white/80 text-xs font-medium leading-tight pb-1">
+                    Package
+                    <br />
+                    Price
+                  </span>
                 </div>
               </div>
 
-              {/* Content */}
-              <div className="p-6 pt-5">
-                <h3 className="text-xl font-bold text-white mb-1">
-                  {pkg.name}
-                </h3>
-                <div className="flex items-baseline gap-2 mb-4">
-                  <span className="text-3xl font-bold text-white">
-                    {pkg.price}
-                  </span>
-                  <span className="text-gray-500 text-sm">one-time</span>
-                </div>
+              {/* Features list */}
+              <div className="flex-1 p-6 pt-6">
+                <ul className="space-y-3">
+                  {pkg.features.map((feature, idx) => (
+                    <li key={idx} className="flex items-start gap-3">
+                      <span className="flex-shrink-0 w-5 h-5 rounded-full border border-white/20 flex items-center justify-center mt-0.5">
+                        <Check className="w-3 h-3 text-white/80" strokeWidth={3} />
+                      </span>
+                      <span className="text-sm text-gray-300 leading-snug">
+                        {feature.label}
+                        {feature.highlight && (
+                          <>
+                            {" "}
+                            <span className="text-primary font-semibold">
+                              ({feature.highlight})
+                            </span>
+                          </>
+                        )}
+                      </span>
+                    </li>
+                  ))}
+                </ul>
+              </div>
 
-                {/* CTA */}
+              {/* CTA bar at bottom */}
+              <div className="p-5 pt-0">
                 <Link to="/purchase" className="block">
-                  <button
-                    className={`w-full py-3 rounded-xl font-semibold text-sm transition-all ${
-                      pkg.popular
-                        ? "gradient-primary text-white hover:shadow-lg hover:shadow-primary/30"
-                        : "bg-white/5 border border-white/10 text-white hover:bg-white/10"
-                    }`}
-                  >
-                    Get Started
+                  <button className="w-full py-3.5 rounded-2xl gradient-primary text-white font-bold text-xs tracking-widest hover:shadow-lg hover:shadow-primary/30 transition-all">
+                    STARTING ON OCTOBER 2026
                   </button>
                 </Link>
               </div>
