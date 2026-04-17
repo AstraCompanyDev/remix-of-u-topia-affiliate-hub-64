@@ -345,7 +345,7 @@ const Index = () => {
               {[
                 {
                   title: "How Wealth Flows",
-                  desc: "Understand how value moves through economies, communities, and systems — and why it so often gets stuck.",
+                  desc: "How value moves through economies — and why it gets stuck.",
                   icon: (
                     <svg className="w-7 h-7 text-white" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8">
                       <path d="M2 12s3-7 10-7 10 7 10 7-3 7-10 7S2 12 2 12z"/>
@@ -355,7 +355,7 @@ const Index = () => {
                 },
                 {
                   title: "Governance & DAOs",
-                  desc: "Learn what decentralized governance really means and how communities can hold real power.",
+                  desc: "What decentralized governance means — and how communities hold power.",
                   icon: (
                     <svg className="w-7 h-7 text-white" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8">
                       <path d="M3 21h18"/>
@@ -366,7 +366,7 @@ const Index = () => {
                 },
                 {
                   title: "Stakeholder Thinking",
-                  desc: "Discover what it means to have a genuine stake in an ecosystem — not just as a customer, but as a co-owner.",
+                  desc: "What it means to be a co-owner, not just a customer.",
                   icon: (
                     <svg className="w-7 h-7 text-white" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8">
                       <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/>
@@ -378,7 +378,7 @@ const Index = () => {
                 },
                 {
                   title: "Blockchain Basics",
-                  desc: "Demystify the technology behind transparent, tamper-proof ledgers — in plain, human language.",
+                  desc: "Tamper-proof ledgers, explained in plain language.",
                   icon: (
                     <svg className="w-7 h-7 text-white" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8">
                       <rect x="3" y="3" width="7" height="7" rx="1"/>
