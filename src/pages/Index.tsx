@@ -570,7 +570,7 @@ const Index = () => {
                   </AccordionTrigger>
                   <AccordionContent className="px-6 pb-6">
                     <p className="text-gray-400 leading-relaxed text-sm">
-                      U-TOPIA is the broader ecosystem — a family of companies built on stakeholder principles. U CENTER is the shared home of that ecosystem: the governance layer, the educational foundation, and the community infrastructure that ties it all together.
+                      U-TOPIA is the ecosystem. U CENTER is its shared home — governance, education, community.
                     </p>
                   </AccordionContent>
                 </AccordionItem>
