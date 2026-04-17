@@ -551,7 +551,7 @@ const Index = () => {
                   </AccordionTrigger>
                   <AccordionContent className="px-6 pb-6">
                     <p className="text-gray-400 leading-relaxed text-sm">
-                      Decisions about shared resources are made through open votes proportional to each member's contribution and participation. Results are recorded permanently on a public blockchain — a shared, tamper-proof ledger that belongs to everyone and is controlled by no one.
+                      Open votes proportional to contribution, recorded permanently on a public blockchain.
                     </p>
                   </AccordionContent>
                 </AccordionItem>
