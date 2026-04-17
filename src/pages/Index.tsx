@@ -257,13 +257,10 @@ const Index = () => {
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-center mb-12">
               <div className="space-y-5 opacity-0 animate-fade-in-up" style={{ animationDelay: '200ms' }}>
                 <p className="text-base md:text-lg text-gray-400 leading-relaxed">
-                  For most of the last century, one idea dominated business thinking: that a company's only obligation is to make money for its shareholders. Employees, customers, communities, and the environment were treated as costs to be managed — not people to be valued.
+                  For decades, business served only its shareholders. Stakeholder capitalism is the alternative — a business is responsible to <span className="text-white">everyone it affects</span>.
                 </p>
                 <p className="text-base md:text-lg text-gray-400 leading-relaxed">
-                  Stakeholder capitalism is the alternative. A business has responsibilities to <span className="text-white">everyone it affects</span> — not only the people who own its shares.
-                </p>
-                <p className="text-base md:text-lg text-gray-400 leading-relaxed">
-                  But a statement is not a system. A signature is not infrastructure. <span className="text-white">U CENTER exists to provide that mechanism</span> — a transparent, community-governed system where shared value is not a promise someone can break, but a rule that runs automatically.
+                  But statements aren't systems. <span className="text-white">U CENTER is the mechanism</span> — transparent, community-governed, automatic.
                 </p>
               </div>
 
