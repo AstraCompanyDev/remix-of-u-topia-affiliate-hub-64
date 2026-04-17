@@ -300,7 +300,7 @@ const Index = () => {
               style={{ animationDelay: '400ms' }}
             >
               <p className="text-xl md:text-2xl text-white font-medium leading-relaxed italic">
-                "The question was never whether businesses <span className="gradient-text not-italic font-bold">should</span> serve their communities. The question was always: how do you make sure they actually do?"
+                "Not whether business <span className="gradient-text not-italic font-bold">should</span> serve communities — but how we make sure it does."
               </p>
             </blockquote>
           </div>
