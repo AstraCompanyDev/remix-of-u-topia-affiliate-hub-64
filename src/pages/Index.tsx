@@ -535,7 +535,7 @@ const Index = () => {
                   </AccordionTrigger>
                   <AccordionContent className="px-6 pb-6">
                     <p className="text-gray-400 leading-relaxed text-sm">
-                      No. You don't need to be a software engineer or know anything about blockchain to start. U CENTER is built around education — we meet you where you are and walk you through every concept in plain language.
+                      No. We explain every concept in plain language, no expertise required.
                     </p>
                   </AccordionContent>
                 </AccordionItem>
